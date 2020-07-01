@@ -117,6 +117,7 @@ gen-types: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \

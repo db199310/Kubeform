@@ -378,7 +378,14 @@ func DownloadRepository(name, link, outputPath string) (string, error) {
 
 	zipPath := filepath.Join(tempDirPath, name+".zip")
 
-	resp, err := http.Get(link)
+	client := &http.Client{}
+
+	req, err := http.NewRequest("GET", link, nil)
+	if strings.Contains(link, "sede-ds-adp") {
+		req.SetBasicAuth("test", os.Getenv("GIT_READ_TOKEN"))
+	}
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
 	}
@@ -402,6 +409,9 @@ func DownloadRepository(name, link, outputPath string) (string, error) {
 	extractedRepoPath, err := Unzip(zipPath, outputPath)
 	if err != nil {
 		return "", err
+	}
+	if strings.Contains(link, "sede-ds-adp") {
+		return outputPath, nil
 	}
 	return extractedRepoPath[0], nil
 }

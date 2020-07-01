@@ -20,7 +20,10 @@ variables:
   value: '/opt/hostedtoolcache/go/1.12.12/x64'
 - name: GOPRIVATE
   value: 'dev.azure.com/sede-ds-adp'
+- name: REGISTRY
+  value: shellai.azurecr.io/sedp/kubeform
 - group: gogit
+- group: shellai_acr
 
 
 resources:
@@ -36,6 +39,8 @@ steps:
 - checkout: kfc
   displayName: Checkout kfc
   persistCredentials: true
+- script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+  displayName: Login to ShellAI ACR
 - task: GoTool@0
   inputs:
     version: '1.12.12'
