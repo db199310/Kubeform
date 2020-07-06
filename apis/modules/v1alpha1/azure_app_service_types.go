@@ -122,34 +122,67 @@ type AzureAppServiceSpec struct {
 	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
 }
 
-type AzureAppServiceAppServicePlan struct {
+type AzureAppServiceSiteConfig struct {
 	// +optional
 	//
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	AlwaysOn bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
 	// +optional
 	//
-	Kind string `json:"kind,omitempty" tf:"kind,omitempty"`
+	AppCommandLine string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
 	// +optional
 	//
-	MaximumElasticWorkerCount json.Number `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
+	DefaultDocuments []string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 	// +optional
 	//
-	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
+	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
 	// +optional
 	//
-	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 	// +optional
 	//
-	Reserved bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
+	Http2Enabled string `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 	// +optional
 	//
-	SkuCapacity json.Number `json:"skuCapacity,omitempty" tf:"sku_capacity,omitempty"`
+	JavaContainer string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
 	// +optional
 	//
-	SkuSize string `json:"skuSize,omitempty" tf:"sku_size,omitempty"`
+	JavaContainerVersion string `json:"javaContainerVersion,omitempty" tf:"java_container_version,omitempty"`
 	// +optional
 	//
-	SkuTier string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
+	JavaVersion string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
+	// +optional
+	//
+	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
+	// +optional
+	//
+	ManagedPipelineMode string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+	// +optional
+	//
+	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty"`
+	// +optional
+	//
+	PhpVersion string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
+	// +optional
+	//
+	PythonVersion string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
+	// +optional
+	//
+	RemoteDebuggingEnabled bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+	// +optional
+	//
+	RemoteDebuggingVersion string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+	// +optional
+	//
+	ScmType string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
+	// +optional
+	//
+	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
+	// +optional
+	//
+	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+	// +optional
+	//
+	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
 }
 
 type AzureAppServiceSiteConfigIPRestrictions struct {
@@ -233,85 +266,34 @@ type AzureAppServiceAppService struct {
 	UnauthenticatedClientAction string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
-type AzureAppServiceIdentity struct {
+type AzureAppServiceAppServicePlan struct {
 	// +optional
 	//
-	IdentityIDS string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id,omitempty"`
 	// +optional
 	//
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AzureAppServiceSiteConfig struct {
+	Kind string `json:"kind,omitempty" tf:"kind,omitempty"`
 	// +optional
 	//
-	AlwaysOn bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
+	MaximumElasticWorkerCount json.Number `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
 	// +optional
 	//
-	AppCommandLine string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
 	// +optional
 	//
-	DefaultDocuments []string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+	Prefix string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 	// +optional
 	//
-	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
+	Reserved bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
 	// +optional
 	//
-	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+	SkuCapacity json.Number `json:"skuCapacity,omitempty" tf:"sku_capacity,omitempty"`
 	// +optional
 	//
-	Http2Enabled string `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+	SkuSize string `json:"skuSize,omitempty" tf:"sku_size,omitempty"`
 	// +optional
 	//
-	JavaContainer string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
-	// +optional
-	//
-	JavaContainerVersion string `json:"javaContainerVersion,omitempty" tf:"java_container_version,omitempty"`
-	// +optional
-	//
-	JavaVersion string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
-	// +optional
-	//
-	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
-	// +optional
-	//
-	ManagedPipelineMode string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
-	// +optional
-	//
-	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty"`
-	// +optional
-	//
-	PhpVersion string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
-	// +optional
-	//
-	PythonVersion string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
-	// +optional
-	//
-	RemoteDebuggingEnabled bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
-	// +optional
-	//
-	RemoteDebuggingVersion string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
-	// +optional
-	//
-	ScmType string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
-	// +optional
-	//
-	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
-	// +optional
-	//
-	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
-	// +optional
-	//
-	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
-}
-
-type AzureAppServiceSiteConfigCors struct {
-	// +optional
-	//
-	AllowedOrigins []string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-	// +optional
-	//
-	SupportCredentials string `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+	SkuTier string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 }
 
 type AzureAppServiceConnectionStrings struct {
@@ -326,6 +308,15 @@ type AzureAppServiceConnectionStrings struct {
 	Value string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type AzureAppServiceIdentity struct {
+	// +optional
+	//
+	IdentityIDS string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
+	// +optional
+	//
+	Type string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type AzureAppServiceExistingAppServicePlan struct {
 	// +optional
 	//
@@ -333,6 +324,15 @@ type AzureAppServiceExistingAppServicePlan struct {
 	// +optional
 	//
 	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+}
+
+type AzureAppServiceSiteConfigCors struct {
+	// +optional
+	//
+	AllowedOrigins []string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	// +optional
+	//
+	SupportCredentials string `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
 type AzureAppServiceOutput struct {
