@@ -21,15 +21,14 @@ package externalversions
 import (
 	"fmt"
 
+	schema "k8s.io/apimachinery/pkg/runtime/schema"
+	cache "k8s.io/client-go/tools/cache"
 	v1alpha1 "kubeform.dev/kubeform/apis/aws/v1alpha1"
 	azurermv1alpha1 "kubeform.dev/kubeform/apis/azurerm/v1alpha1"
 	digitaloceanv1alpha1 "kubeform.dev/kubeform/apis/digitalocean/v1alpha1"
 	googlev1alpha1 "kubeform.dev/kubeform/apis/google/v1alpha1"
 	linodev1alpha1 "kubeform.dev/kubeform/apis/linode/v1alpha1"
 	modulesv1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
-
-	schema "k8s.io/apimachinery/pkg/runtime/schema"
-	cache "k8s.io/client-go/tools/cache"
 )
 
 // GenericInformer is type of SharedIndexInformer which will locate and delegate to other
@@ -1983,6 +1982,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Linode().V1alpha1().Volumes().Informer()}, nil
 
 		// Group=modules.kubeform.com, Version=v1alpha1
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("azureappservices"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().AzureAppServices().Informer()}, nil
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("googleserviceaccounts"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().GoogleServiceAccounts().Informer()}, nil
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("rdss"):

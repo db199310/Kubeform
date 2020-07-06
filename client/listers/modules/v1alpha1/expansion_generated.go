@@ -18,6 +18,14 @@ limitations under the License.
 
 package v1alpha1
 
+// AzureAppServiceListerExpansion allows custom methods to be added to
+// AzureAppServiceLister.
+type AzureAppServiceListerExpansion interface{}
+
+// AzureAppServiceNamespaceListerExpansion allows custom methods to be added to
+// AzureAppServiceNamespaceLister.
+type AzureAppServiceNamespaceListerExpansion interface{}
+
 // GoogleServiceAccountListerExpansion allows custom methods to be added to
 // GoogleServiceAccountLister.
 type GoogleServiceAccountListerExpansion interface{}

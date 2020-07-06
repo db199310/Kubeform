@@ -18,6 +18,8 @@ limitations under the License.
 
 package v1alpha1
 
+type AzureAppServiceExpansion interface{}
+
 type GoogleServiceAccountExpansion interface{}
 
 type RDSExpansion interface{}
