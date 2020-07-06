@@ -152,13 +152,85 @@ type AzureAppServiceAppServicePlan struct {
 	SkuTier string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 }
 
-type AzureAppServiceExistingAppServicePlan struct {
+type AzureAppServiceSiteConfigIPRestrictions struct {
+	// +optional
+	//
+	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	// +optional
+	//
+	VirtualNetworkSubnetIDS string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+}
+
+type AzureAppServiceStorageAccounts struct {
+	// +optional
+	//
+	AccessKey string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+	// +optional
+	//
+	AccountName string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	// +optional
+	//
+	MountPath string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 	// +optional
 	//
 	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	//
-	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+	ShareName string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+	// +optional
+	//
+	Type string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type AzureAppServiceActiveDirectory struct {
+	// +optional
+	//
+	ClientID string `json:"clientID,omitempty" tf:"client_id,omitempty"`
+	// +optional
+	//
+	ClientSecret string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
+}
+
+type AzureAppServiceAppService struct {
+	// +optional
+	//
+	AdditionalLoginParams map[string]string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
+	// +optional
+	//
+	AllowedExternalRedirectUrls []string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+	// +optional
+	//
+	ClientAffinityEnabled bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
+	// +optional
+	//
+	ClientCertEnabled bool `json:"clientCertEnabled,omitempty" tf:"client_cert_enabled,omitempty"`
+	// +optional
+	//
+	DefaultProvider string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+	// +optional
+	//
+	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +optional
+	//
+	HttpsOnly bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
+	// +optional
+	//
+	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	// +optional
+	//
+	Issuer string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	// +optional
+	//
+	RuntimeVersion string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+	// +optional
+	//
+	TokenRefreshExtensionHours string `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+	// +optional
+	//
+	TokenStoreEnabled bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+	// +optional
+	//
+	UnauthenticatedClientAction string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
 type AzureAppServiceIdentity struct {
@@ -233,22 +305,13 @@ type AzureAppServiceSiteConfig struct {
 	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
 }
 
-type AzureAppServiceSiteConfigIPRestrictions struct {
+type AzureAppServiceSiteConfigCors struct {
 	// +optional
 	//
-	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+	AllowedOrigins []string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 	// +optional
 	//
-	VirtualNetworkSubnetIDS string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
-}
-
-type AzureAppServiceActiveDirectory struct {
-	// +optional
-	//
-	ClientID string `json:"clientID,omitempty" tf:"client_id,omitempty"`
-	// +optional
-	//
-	ClientSecret string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
+	SupportCredentials string `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
 type AzureAppServiceConnectionStrings struct {
@@ -263,76 +326,13 @@ type AzureAppServiceConnectionStrings struct {
 	Value string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type AzureAppServiceSiteConfigCors struct {
-	// +optional
-	//
-	AllowedOrigins []string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-	// +optional
-	//
-	SupportCredentials string `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type AzureAppServiceStorageAccounts struct {
-	// +optional
-	//
-	AccessKey string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
-	// +optional
-	//
-	AccountName string `json:"accountName,omitempty" tf:"account_name,omitempty"`
-	// +optional
-	//
-	MountPath string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+type AzureAppServiceExistingAppServicePlan struct {
 	// +optional
 	//
 	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	//
-	ShareName string `json:"shareName,omitempty" tf:"share_name,omitempty"`
-	// +optional
-	//
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type AzureAppServiceAppService struct {
-	// +optional
-	//
-	AdditionalLoginParams map[string]string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
-	// +optional
-	//
-	AllowedExternalRedirectUrls []string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-	// +optional
-	//
-	ClientAffinityEnabled bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
-	// +optional
-	//
-	ClientCertEnabled bool `json:"clientCertEnabled,omitempty" tf:"client_cert_enabled,omitempty"`
-	// +optional
-	//
-	DefaultProvider string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-	// +optional
-	//
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
-	//
-	HttpsOnly bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
-	// +optional
-	//
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
-	// +optional
-	//
-	Issuer string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-	// +optional
-	//
-	RuntimeVersion string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-	// +optional
-	//
-	TokenRefreshExtensionHours string `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-	// +optional
-	//
-	TokenStoreEnabled bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-	// +optional
-	//
-	UnauthenticatedClientAction string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type AzureAppServiceOutput struct {

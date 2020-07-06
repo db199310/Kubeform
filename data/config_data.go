@@ -26,6 +26,6 @@ var ModuleConfig = []Config{
 		"GoogleServiceAccount", "terraform-google-modules/service-accounts/google", "google", "", "",
 	},
 	{
-		"AzureAppService", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.2.0", "azurerm", "", "",
+		"AzureAppService", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.2.1", "azurerm", "", "",
 	},
 }
