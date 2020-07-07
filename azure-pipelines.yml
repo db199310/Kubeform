@@ -72,7 +72,7 @@ steps:
   workingDirectory: kfc
 - script: |
     git add -A
-    git commit -m "[auto] Update Terraform modules"
+    git commit -m "[skip-ci] Update Terraform modules"
     git push -f origin HEAD:${BUILD_SOURCEBRANCH}
   displayName: Commit & push changes to kfc
   workingDirectory: kfc
