@@ -455,12 +455,12 @@ func DownloadRepository(name, link, outputPath string) (string, error) {
 		return "", err
 	}
 
-	extractedRepoPath, err := Unzip(zipPath, outputPath)
+	extractedRepoPath, err := Unzip(zipPath, filepath.Join(outputPath, name))
 	if err != nil {
 		return "", err
 	}
 	if strings.Contains(link, "sede-ds-adp") {
-		return outputPath, nil
+		return filepath.Join(outputPath, name), nil
 	}
 	return extractedRepoPath[0], nil
 }
