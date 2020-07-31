@@ -308,7 +308,8 @@ func terraformVariablesToStatement(name string, variables map[string]*tfconfig.V
 		} else if variable.Type == "string" {
 			specStatements = append(specStatements, Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
 		} else if variable.Type == "bool" {
-			specStatements = append(specStatements, Id(id).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+			//Making bool a pointer to preserve optional false values during json marshalling
+			specStatements = append(specStatements, Id(id).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 		} else if strings.HasPrefix(variable.Type, "object") {
 			specStatements = append(specStatements, Id(id).Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
 			objectVars := parseObjectVariables(variable.Type)
@@ -326,7 +327,7 @@ func terraformVariablesToStatement(name string, variables map[string]*tfconfig.V
 			}
 
 			if typ[1] == "bool" {
-				specStatements = append(specStatements, Id(id).Index().Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+				specStatements = append(specStatements, Id(id).Index().Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 			} else if typ[1] == "number" {
 				specStatements = append(specStatements, Id(id).Index().Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
 			} else if typ[1] == "string" {
@@ -351,7 +352,7 @@ func terraformVariablesToStatement(name string, variables map[string]*tfconfig.V
 			}
 
 			if typ[1] == "bool" {
-				specStatements = append(specStatements, Id(id).Map(String()).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+				specStatements = append(specStatements, Id(id).Map(String()).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 			} else if typ[1] == "number" {
 				specStatements = append(specStatements, Id(id).Map(String()).Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
 			} else if typ[1] == "string" {
