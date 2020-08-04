@@ -26,11 +26,7 @@ import (
 	"github.com/gobuffalo/flect"
 	"github.com/hashicorp/terraform/helper/schema"
 	"github.com/hashicorp/terraform/terraform"
-	"github.com/terraform-providers/terraform-provider-aws/aws"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm"
-	"github.com/terraform-providers/terraform-provider-digitalocean/digitalocean"
-	"github.com/terraform-providers/terraform-provider-google/google"
-	"github.com/terraform-providers/terraform-provider-linode/linode"
 )
 
 var licenseHeaderFile string
@@ -54,11 +50,7 @@ func main() {
 	version := "v1alpha1"
 
 	providersMap := map[string]terraform.ResourceProvider{
-		"linode":       linode.Provider(),
-		"digitalocean": digitalocean.Provider(),
-		"aws":          aws.Provider(),
-		"google":       google.Provider(),
-		"azurerm":      azurerm.Provider(),
+		"azurerm": azurerm.Provider(),
 	}
 
 	for key, provider := range providersMap {
