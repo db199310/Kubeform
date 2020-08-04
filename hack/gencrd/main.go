@@ -20,8 +20,6 @@ import (
 	"os"
 	"path/filepath"
 
-	awsinstall "kubeform.dev/kubeform/apis/aws/install"
-	awsv1alpha1 "kubeform.dev/kubeform/apis/aws/v1alpha1"
 	basev1alpha1 "kubeform.dev/kubeform/apis/base/v1alpha1"
 
 	gort "github.com/appscode/go/runtime"
@@ -38,8 +36,6 @@ func generateSwaggerJson() {
 		Scheme = runtime.NewScheme()
 		Codecs = serializer.NewCodecFactory(Scheme)
 	)
-
-	awsinstall.Install(Scheme)
 
 	apispec, err := openapi.RenderOpenAPISpec(openapi.Config{
 		Scheme: Scheme,
@@ -58,13 +54,10 @@ func generateSwaggerJson() {
 			},
 		},
 		OpenAPIDefinitions: []common.GetOpenAPIDefinitions{
-			awsv1alpha1.GetOpenAPIDefinitions,
 			basev1alpha1.GetOpenAPIDefinitions,
 		},
 		//nolint:govet
-		Resources: []openapi.TypeInfo{
-			{awsv1alpha1.SchemeGroupVersion, "albs", "Alb", true},
-		},
+		Resources: []openapi.TypeInfo{},
 	})
 	if err != nil {
 		glog.Fatal(err)
