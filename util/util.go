@@ -34,7 +34,7 @@ import (
 
 	"kubeform.dev/kubeform/data"
 
-	. "github.com/dave/jennifer/jen"
+	"github.com/dave/jennifer/jen"
 	"github.com/gobuffalo/flect"
 	"github.com/hashicorp/terraform-config-inspect/tfconfig"
 	"github.com/hashicorp/terraform/helper/schema"
@@ -131,7 +131,7 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 }
 
 func TerraformSchemaToStruct(s map[string]*schema.Schema, structName, providerName string, genProviderRef bool, genSecret *bool, out *string) {
-	var statements Statement
+	var statements jen.Statement
 	var keys []string
 	for k := range s {
 		keys = append(keys, k)
@@ -143,7 +143,7 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName, providerNa
 		value := s[key]
 		id := flect.Capitalize(flect.Camelize(key))
 		if value.Description != "" {
-			statements = append(statements, Comment("// "+value.Description))
+			statements = append(statements, jen.Comment("// "+value.Description))
 		}
 		if value.Removed != "" {
 			continue
@@ -152,76 +152,76 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName, providerNa
 		jk := flect.Camelize(key) // json key
 		tk := key                 // terraform key
 		if value.Optional || value.Computed {
-			statements = append(statements, Comment("// +optional"))
+			statements = append(statements, jen.Comment("// +optional"))
 			jk = jk + ",omitempty"
 			tk = tk + ",omitempty"
 		}
 
 		if value.MaxItems != 0 {
-			statements = append(statements, Comment("// +kubebuilder:validation:MaxItems="+strconv.Itoa(value.MaxItems)))
+			statements = append(statements, jen.Comment("// +kubebuilder:validation:MaxItems="+strconv.Itoa(value.MaxItems)))
 		}
 
 		if value.MinItems != 0 {
-			statements = append(statements, Comment("// +kubebuilder:validation:MinItems="+strconv.Itoa(value.MinItems)))
+			statements = append(statements, jen.Comment("// +kubebuilder:validation:MinItems="+strconv.Itoa(value.MinItems)))
 		}
 
 		if value.Sensitive {
 			if value.Type == schema.TypeString {
-				statements = append(statements, Id(id).String().Tag(map[string]string{"json": "-", "tf": tk, "sensitive": "true"}))
+				statements = append(statements, jen.Id(id).String().Tag(map[string]string{"json": "-", "tf": tk, "sensitive": "true"}))
 			} else if value.Type == schema.TypeMap {
-				statements = append(statements, Id(id).Map(String()).String().Tag(map[string]string{"json": "-", "tf": tk, "sensitive": "true"}))
+				statements = append(statements, jen.Id(id).Map(jen.String()).String().Tag(map[string]string{"json": "-", "tf": tk, "sensitive": "true"}))
 			}
 			*genSecret = true
 			continue
 		}
 
 		if value.Deprecated != "" {
-			statements = append(statements, Comment("// Deprecated"))
+			statements = append(statements, jen.Comment("// Deprecated"))
 		}
 
 		switch value.Type {
 		case schema.TypeString:
-			statements = append(statements, Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
+			statements = append(statements, jen.Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
 		case schema.TypeInt:
-			statements = append(statements, Id(id).Int64().Tag(map[string]string{"json": jk, "tf": tk}))
+			statements = append(statements, jen.Id(id).Int64().Tag(map[string]string{"json": jk, "tf": tk}))
 		case schema.TypeBool:
-			statements = append(statements, Id(id).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+			statements = append(statements, jen.Id(id).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 		case schema.TypeFloat:
-			statements = append(statements, Id(id).Float64().Tag(map[string]string{"json": jk, "tf": tk}))
+			statements = append(statements, jen.Id(id).Float64().Tag(map[string]string{"json": jk, "tf": tk}))
 		case schema.TypeMap:
 			switch value.Elem.(type) {
 			case *schema.Schema:
 				switch value.Elem.(*schema.Schema).Type {
 				case schema.TypeInt:
-					statements = append(statements, Id(id).Map(String()).Int64().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Map(jen.String()).Int64().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeFloat:
-					statements = append(statements, Id(id).Map(String()).Float64().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Map(jen.String()).Float64().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeBool:
-					statements = append(statements, Id(id).Map(String()).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Map(jen.String()).Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeString:
-					statements = append(statements, Id(id).Map(String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Map(jen.String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
 				}
 			case *schema.Resource:
-				statements = append(statements, Id(id).Map(String()).Id(structName+id).Tag(map[string]string{"json": jk, "tf": tk}))
+				statements = append(statements, jen.Id(id).Map(jen.String()).Id(structName+id).Tag(map[string]string{"json": jk, "tf": tk}))
 				TerraformSchemaToStruct(value.Elem.(*schema.Resource).Schema, structName+id, providerName, false, genSecret, out)
 			default:
-				statements = append(statements, Id(id).Map(String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
+				statements = append(statements, jen.Id(id).Map(jen.String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
 			}
 		default:
 			switch value.Elem.(type) {
 			case *schema.Schema:
 				switch value.Elem.(*schema.Schema).Type {
 				case schema.TypeInt:
-					statements = append(statements, Id(id).Index().Int64().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Index().Int64().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeFloat:
-					statements = append(statements, Id(id).Index().Float64().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Index().Float64().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeBool:
-					statements = append(statements, Id(id).Index().Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Index().Bool().Tag(map[string]string{"json": jk, "tf": tk}))
 				case schema.TypeString:
-					statements = append(statements, Id(id).Index().String().Tag(map[string]string{"json": jk, "tf": tk}))
+					statements = append(statements, jen.Id(id).Index().String().Tag(map[string]string{"json": jk, "tf": tk}))
 				}
 			case *schema.Resource:
-				statements = append(statements, Id(id).Index().Id(structName+id).Tag(map[string]string{"json": jk, "tf": tk}))
+				statements = append(statements, jen.Id(id).Index().Id(structName+id).Tag(map[string]string{"json": jk, "tf": tk}))
 				TerraformSchemaToStruct(value.Elem.(*schema.Resource).Schema, structName+id, providerName, false, genSecret, out)
 			default:
 				log.Fatalf("Provider %s has resource %s type %s.%s with unknown schema type %s", providerName, structName, structName, id, value.Elem)
@@ -232,17 +232,17 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName, providerNa
 
 	if genProviderRef {
 		if *genSecret {
-			statements = append(Statement{Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"}).Line()}, statements...)
+			statements = append(jen.Statement{jen.Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"}).Line()}, statements...)
 		}
-		statements = append(Statement{Id("ID").Id("string").Tag(map[string]string{"json": "id,omitempty", "tf": "id,omitempty"}).Line()}, statements...)
-		statements = append(Statement{Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"}).Line()}, statements...)
+		statements = append(jen.Statement{jen.Id("ID").Id("string").Tag(map[string]string{"json": "id,omitempty", "tf": "id,omitempty"}).Line()}, statements...)
+		statements = append(jen.Statement{jen.Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"}).Line()}, statements...)
 	}
 
 	if val, ok := execeptionList[structName]; ok {
 		structName = val
 	}
 
-	c := Type().Id(structName).Struct(statements...)
+	c := jen.Type().Id(structName).Struct(statements...)
 	*out = *out + fmt.Sprintf("%#v\n\n", c)
 }
 
@@ -260,26 +260,28 @@ func templateToGoFile(templateFile, generatedFilePath string, templateData inter
 	}
 }
 
-func parseObjectVariables(object string) map[string]*tfconfig.Variable {
-	typ := strings.FieldsFunc(object, func(r rune) bool {
-		return r == '{' || r == '}'
+func parseObjectVariables(objectVar *tfconfig.Variable) map[string]*tfconfig.Variable {
+	object := strings.TrimFunc(objectVar.Type, func(r rune) bool {
+		return r != '{' && r != '}'
 	})
-	objectValue := strings.ReplaceAll(typ[1], " ", "")
-	objectValue = strings.Trim(objectValue, "\n")
-	objectArray := strings.Split(objectValue, "\n")
-	tfvars := make(map[string]*tfconfig.Variable)
-	for _, e := range objectArray {
+	object = strings.Trim(object, "{}")
+	object = strings.ReplaceAll(object, " ", "")
+	object = strings.TrimSpace(object)
+	varsArray := strings.Split(object, "\n")
+	objectVars := make(map[string]*tfconfig.Variable)
+	for _, e := range varsArray {
 		parts := strings.Split(e, "=")
-		tfvars[parts[0]] = &tfconfig.Variable{
-			Name: parts[0],
-			Type: parts[1],
+		objectVars[parts[0]] = &tfconfig.Variable{
+			Name:     parts[0],
+			Type:     parts[1],
+			Required: objectVar.Required,
 		}
 	}
-	return tfvars
+	return objectVars
 }
 
-func terraformVariablesToStatement(name string, variables map[string]*tfconfig.Variable) (Statement, map[string]map[string]*tfconfig.Variable) {
-	var specStatements Statement
+func terraformVariablesToStatement(name string, variables map[string]*tfconfig.Variable) (jen.Statement, map[string]map[string]*tfconfig.Variable) {
+	var specStatements jen.Statement
 
 	var keys []string
 	for k := range variables {
@@ -292,80 +294,77 @@ func terraformVariablesToStatement(name string, variables map[string]*tfconfig.V
 
 	for _, key := range keys {
 		variable := variables[key]
-		varName := key
 		if variable.Type == "" {
 			variable.Type = "any"
 		}
-		tk := varName + ",omitempty"
-		jk := flect.Camelize(varName)
+		tk := key
+		jk := flect.Camelize(tk)
 		id := flect.Capitalize(jk)
-		jk = jk + ",omitempty"
-		specStatements = append(specStatements, Comment("// +optional"))
-		specStatements = append(specStatements, Comment(variable.Description))
+		if !variable.Required {
+			specStatements = append(specStatements, jen.Comment("// +optional"))
+			tk = tk + ",omitempty"
+			jk = jk + ",omitempty"
+		}
+		if variable.Description != "" {
+			specStatements = append(specStatements, jen.Comment(variable.Description))
+		}
 
-		if variable.Type == "number" {
-			specStatements = append(specStatements, Id(id).Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
-		} else if variable.Type == "string" {
-			specStatements = append(specStatements, Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
-		} else if variable.Type == "bool" {
+		switch {
+		case variable.Type == "number":
+			specStatements = append(specStatements, jen.Id(id).Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
+		case variable.Type == "string":
+			specStatements = append(specStatements, jen.Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
+		case variable.Type == "bool":
 			//Making bool a pointer to preserve optional false values during json marshalling
-			specStatements = append(specStatements, Id(id).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
-		} else if strings.HasPrefix(variable.Type, "object") {
-			specStatements = append(specStatements, Id(id).Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
-			objectVars := parseObjectVariables(variable.Type)
+			specStatements = append(specStatements, jen.Id(id).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+		case variable.Type == "any":
+			specStatements = append(specStatements, jen.Id(id).Qual("encoding/json", "RawMessage").Tag(map[string]string{"json": jk, "tf": tk}))
+		case strings.HasPrefix(variable.Type, "object"):
+			specStatements = append(specStatements, jen.Id(id).Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
+			objectVars := parseObjectVariables(variable)
 			objects[name+id] = objectVars
-		} else if variable.Type == "any" {
-			specStatements = append(specStatements, Id(id).Qual("encoding/json", "RawMessage").Tag(map[string]string{"json": jk, "tf": tk}))
-		} else if strings.Contains(variable.Type, "list") || strings.Contains(variable.Type, "set") {
-			typ := strings.FieldsFunc(variable.Type, func(r rune) bool {
-				return r == '(' || r == ')'
+		case strings.HasPrefix(variable.Type, "list") || strings.HasPrefix(variable.Type, "set"):
+			//try to extract the list type, fallback to default switch case if type's not set
+			listType := strings.TrimFunc(variable.Type, func(r rune) bool {
+				return r != '(' && r != ')'
 			})
+			listType = strings.Trim(listType, "()")
 
-			if len(typ) == 1 {
-				specStatements = append(specStatements, Id(id).Index().String().Tag(map[string]string{"json": jk, "tf": tk}))
-				continue
-			}
-
-			if typ[1] == "bool" {
-				specStatements = append(specStatements, Id(id).Index().Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "number" {
-				specStatements = append(specStatements, Id(id).Index().Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "string" {
-				specStatements = append(specStatements, Id(id).Index().String().Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "object" {
-				specStatements = append(specStatements, Id(id).Index().Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
-				objectVars := parseObjectVariables(variable.Type)
+			switch {
+			case listType == "bool":
+				specStatements = append(specStatements, jen.Id(id).Index().Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+			case listType == "number":
+				specStatements = append(specStatements, jen.Id(id).Index().Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
+			case listType == "string":
+				specStatements = append(specStatements, jen.Id(id).Index().String().Tag(map[string]string{"json": jk, "tf": tk}))
+			case strings.HasPrefix(listType, "object"):
+				specStatements = append(specStatements, jen.Id(id).Index().Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
+				objectVars := parseObjectVariables(variable)
 				objects[name+id] = objectVars
-			} else if strings.Contains(variable.Type, "map") {
-				specStatements = append(specStatements, Id(id).Qual("encoding/json", "RawMessage").Tag(map[string]string{"json": jk, "tf": tk}))
-			} else {
-				fmt.Println(name, variable.Name, variable.Type)
+			//type not set or "any"
+			default:
+				specStatements = append(specStatements, jen.Id(id).Index().Qual("encoding/json", "RawMessage").Tag(map[string]string{"json": jk, "tf": tk}))
 			}
-		} else if strings.Contains(variable.Type, "map") {
-			typ := strings.FieldsFunc(variable.Type, func(r rune) bool {
-				return r == '(' || r == ')'
+		case strings.HasPrefix(variable.Type, "map"):
+			mapType := strings.TrimFunc(variable.Type, func(r rune) bool {
+				return r != '(' && r != ')'
 			})
+			mapType = strings.Trim(mapType, "()")
 
-			if len(typ) == 1 {
-				specStatements = append(specStatements, Id(id).Index().Map(String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
-				continue
-			}
-
-			if typ[1] == "bool" {
-				specStatements = append(specStatements, Id(id).Map(String()).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "number" {
-				specStatements = append(specStatements, Id(id).Map(String()).Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "string" {
-				specStatements = append(specStatements, Id(id).Map(String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
-			} else if typ[1] == "object" {
-				specStatements = append(specStatements, Id(id).Map(String()).Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
-				objectVars := parseObjectVariables(variable.Type)
+			switch {
+			case mapType == "bool":
+				specStatements = append(specStatements, jen.Id(id).Map(jen.String()).Op("*").Bool().Tag(map[string]string{"json": jk, "tf": tk}))
+			case mapType == "number":
+				specStatements = append(specStatements, jen.Id(id).Map(jen.String()).Qual("encoding/json", "Number").Tag(map[string]string{"json": jk, "tf": tk}))
+			case mapType == "string":
+				specStatements = append(specStatements, jen.Id(id).Map(jen.String()).String().Tag(map[string]string{"json": jk, "tf": tk}))
+			case strings.HasPrefix(mapType, "object"):
+				specStatements = append(specStatements, jen.Id(id).Map(jen.String()).Id(name+id).Tag(map[string]string{"json": jk, "tf": tk}))
+				objectVars := parseObjectVariables(variable)
 				objects[name+id] = objectVars
-			} else {
-				fmt.Println(name, variable.Name, variable.Type)
+			default:
+				specStatements = append(specStatements, jen.Id(id).Map(jen.String()).Qual("encoding/json", "RawMessage").Tag(map[string]string{"json": jk, "tf": tk}))
 			}
-		} else {
-			fmt.Println(name, variable.Name, variable.Type)
 		}
 	}
 
@@ -380,20 +379,27 @@ func GenerateModuleCRD(path, name string) string {
 
 		specStatements, objects := terraformVariablesToStatement(name, variables)
 
-		specStatements = append(Statement{Id("Source").String().Tag(map[string]string{"json": "source", "tf": "source"}).Line()}, specStatements...)
-		specStatements = append(Statement{Comment("// +optional")}, specStatements...)
-		specStatements = append(Statement{Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"})}, specStatements...)
-		specStatements = append(Statement{Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"})}, specStatements...)
-		specStatements = append(Statement{Comment("// +optional")}, specStatements...)
+		specStatements = append(jen.Statement{jen.Id("Source").String().Tag(map[string]string{"json": "source", "tf": "source"}).Line()}, specStatements...)
+		specStatements = append(jen.Statement{jen.Comment("// +optional")}, specStatements...)
+		specStatements = append(jen.Statement{jen.Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"})}, specStatements...)
+		specStatements = append(jen.Statement{jen.Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"})}, specStatements...)
+		specStatements = append(jen.Statement{jen.Comment("// +optional")}, specStatements...)
 
-		out := fmt.Sprintf("%#v\n\n", Type().Id(name+"Spec").Struct(specStatements...))
+		out := fmt.Sprintf("%#v\n\n", jen.Type().Id(name+"Spec").Struct(specStatements...))
 
-		for objectName, objectVars := range objects {
-			objectStatements, _ := terraformVariablesToStatement(objectName, objectVars)
-			out = out + fmt.Sprintf("%#v\n\n", Type().Id(objectName).Struct(objectStatements...))
+		var objectNames []string
+		for k := range objects {
+			objectNames = append(objectNames, k)
 		}
 
-		var outputStatements Statement
+		sort.Strings(objectNames)
+
+		for _, name := range objectNames {
+			objectStatements, _ := terraformVariablesToStatement(name, objects[name])
+			out = out + fmt.Sprintf("%#v\n\n", jen.Type().Id(name).Struct(objectStatements...))
+		}
+
+		var outputStatements jen.Statement
 		keys := []string{}
 		for k := range outputs {
 			keys = append(keys, k)
@@ -407,11 +413,11 @@ func GenerateModuleCRD(path, name string) string {
 			tk := varName
 			jk := flect.Camelize(varName)
 			id := flect.Capitalize(jk)
-			outputStatements = append(outputStatements, Comment(out.Description))
-			outputStatements = append(outputStatements, Comment("// +optional"))
-			outputStatements = append(outputStatements, Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
+			outputStatements = append(outputStatements, jen.Comment(out.Description))
+			outputStatements = append(outputStatements, jen.Comment("// +optional"))
+			outputStatements = append(outputStatements, jen.Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
 		}
-		out = out + fmt.Sprintf("%#v\n", Type().Id(name+"Output").Struct(outputStatements...))
+		out = out + fmt.Sprintf("%#v\n", jen.Type().Id(name+"Output").Struct(outputStatements...))
 
 		return out
 	}
