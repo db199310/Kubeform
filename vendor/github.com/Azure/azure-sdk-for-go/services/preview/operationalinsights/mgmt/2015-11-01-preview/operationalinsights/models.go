@@ -99,6 +99,8 @@ func PossibleEntityStatusValues() []EntityStatus {
 type SkuNameEnum string
 
 const (
+	// CapacityReservation ...
+	CapacityReservation SkuNameEnum = "CapacityReservation"
 	// Free ...
 	Free SkuNameEnum = "Free"
 	// PerGB2018 ...
@@ -115,7 +117,7 @@ const (
 
 // PossibleSkuNameEnumValues returns an array of possible values for the SkuNameEnum const type.
 func PossibleSkuNameEnumValues() []SkuNameEnum {
-	return []SkuNameEnum{Free, PerGB2018, PerNode, Premium, Standalone, Standard}
+	return []SkuNameEnum{CapacityReservation, Free, PerGB2018, PerNode, Premium, Standalone, Standard}
 }
 
 // DataSource datasources under OMS Workspace.
@@ -305,6 +307,14 @@ func (page DataSourceListResultPage) Values() []DataSource {
 // Creates a new instance of the DataSourceListResultPage type.
 func NewDataSourceListResultPage(getNextPage func(context.Context, DataSourceListResult) (DataSourceListResult, error)) DataSourceListResultPage {
 	return DataSourceListResultPage{fn: getNextPage}
+}
+
+// ErrorResponse describes the format of Error response.
+type ErrorResponse struct {
+	// Code - Error code
+	Code *string `json:"code,omitempty"`
+	// Message - Error message indicating why the operation failed.
+	Message *string `json:"message,omitempty"`
 }
 
 // IntelligencePack intelligence Pack containing a string name and boolean indicating if it's enabled.
@@ -654,6 +664,23 @@ func NewOperationListResultPage(getNextPage func(context.Context, OperationListR
 	return OperationListResultPage{fn: getNextPage}
 }
 
+// OperationStatus the status of operation.
+type OperationStatus struct {
+	autorest.Response `json:"-"`
+	// ID - The operation Id.
+	ID *string `json:"id,omitempty"`
+	// Name - The operation name.
+	Name *string `json:"name,omitempty"`
+	// StartTime - The start time of the operation.
+	StartTime *string `json:"startTime,omitempty"`
+	// EndTime - The end time of the operation.
+	EndTime *string `json:"endTime,omitempty"`
+	// Status - The status of the operation.
+	Status *string `json:"status,omitempty"`
+	// Error - The error detail of the operation if any.
+	Error *ErrorResponse `json:"error,omitempty"`
+}
+
 // ProxyResource common properties of proxy resource.
 type ProxyResource struct {
 	// ID - READ-ONLY; Resource ID.
@@ -712,7 +739,7 @@ type SharedKeys struct {
 
 // Sku the SKU (tier) of a workspace.
 type Sku struct {
-	// Name - The name of the SKU. Possible values include: 'Free', 'Standard', 'Premium', 'PerNode', 'PerGB2018', 'Standalone'
+	// Name - The name of the SKU. Possible values include: 'Free', 'Standard', 'Premium', 'PerNode', 'PerGB2018', 'Standalone', 'CapacityReservation'
 	Name SkuNameEnum `json:"name,omitempty"`
 }
 
@@ -872,11 +899,11 @@ type WorkspaceListUsagesResult struct {
 type WorkspaceProperties struct {
 	// ProvisioningState - The provisioning state of the workspace. Possible values include: 'Creating', 'Succeeded', 'Failed', 'Canceled', 'Deleting', 'ProvisioningAccount'
 	ProvisioningState EntityStatus `json:"provisioningState,omitempty"`
-	// Source - The source of the workspace.  Source defines where the workspace was created. 'Azure' implies it was created in Azure.  'External' implies it was created via the Operational Insights Portal. This value is set on the service side and read-only on the client side.
+	// Source - READ-ONLY; This is a read-only legacy property. It is always set to 'Azure' by the service. Kept here for backward compatibility.
 	Source *string `json:"source,omitempty"`
-	// CustomerID - The ID associated with the workspace.  Setting this value at creation time allows the workspace being created to be linked to an existing workspace.
+	// CustomerID - READ-ONLY; This is a read-only property. Represents the ID associated with the workspace.
 	CustomerID *string `json:"customerId,omitempty"`
-	// PortalURL - The URL of the Operational Insights portal for this workspace.  This value is set on the service side and read-only on the client side.
+	// PortalURL - READ-ONLY; This is a legacy property and is not used anymore. Kept here for backward compatibility.
 	PortalURL *string `json:"portalUrl,omitempty"`
 	// Sku - The SKU of the workspace.
 	Sku *Sku `json:"sku,omitempty"`

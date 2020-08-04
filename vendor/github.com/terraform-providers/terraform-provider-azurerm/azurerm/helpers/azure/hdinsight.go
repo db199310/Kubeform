@@ -7,9 +7,11 @@ import (
 
 	"github.com/Azure/azure-sdk-for-go/services/preview/hdinsight/mgmt/2018-06-01-preview/hdinsight"
 	"github.com/hashicorp/go-getter/helper/url"
-	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/hashicorp/terraform/helper/validation"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/suppress"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/validate"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/location"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
 )
 
@@ -38,9 +40,22 @@ func SchemaHDInsightTier() *schema.Schema {
 		ValidateFunc: validation.StringInSlice([]string{
 			string(hdinsight.Standard),
 			string(hdinsight.Premium),
-		}, false),
+		}, true),
 		// TODO: file a bug about this
-		DiffSuppressFunc: SuppressLocationDiff,
+		DiffSuppressFunc: location.DiffSuppressFunc,
+	}
+}
+
+func SchemaHDInsightTls() *schema.Schema {
+	return &schema.Schema{
+		Type:     schema.TypeString,
+		Optional: true,
+		ForceNew: true,
+		ValidateFunc: validation.StringInSlice([]string{
+			"1.0",
+			"1.1",
+			"1.2",
+		}, false),
 	}
 }
 
@@ -54,7 +69,7 @@ func SchemaHDInsightClusterVersion() *schema.Schema {
 	}
 }
 
-func hdinsightClusterVersionDiffSuppressFunc(k, old, new string, d *schema.ResourceData) bool {
+func hdinsightClusterVersionDiffSuppressFunc(_, old, new string, _ *schema.ResourceData) bool {
 	// `3.6` gets converted to `3.6.1000.67`; so let's just compare major/minor if possible
 	o := strings.Split(old, ".")
 	n := strings.Split(new, ".")
@@ -94,6 +109,47 @@ func SchemaHDInsightsGateway() *schema.Schema {
 					Required:  true,
 					ForceNew:  true,
 					Sensitive: true,
+					// Azure returns the key as *****. We'll suppress that here.
+					DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+						return (new == d.Get(k).(string)) && (old == "*****")
+					},
+				},
+			},
+		},
+	}
+}
+
+func SchemaHDInsightsExternalMetastore() *schema.Schema {
+	return &schema.Schema{
+		Type:     schema.TypeList,
+		Optional: true,
+		MaxItems: 1,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"server": {
+					Type:     schema.TypeString,
+					Required: true,
+					ForceNew: true,
+				},
+				"database_name": {
+					Type:     schema.TypeString,
+					Required: true,
+					ForceNew: true,
+				},
+				"username": {
+					Type:     schema.TypeString,
+					Required: true,
+					ForceNew: true,
+				},
+				"password": {
+					Type:      schema.TypeString,
+					Required:  true,
+					ForceNew:  true,
+					Sensitive: true,
+					// Azure returns the key as *****. We'll suppress that here.
+					DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
+						return (new == d.Get(k).(string)) && (old == "*****")
+					},
 				},
 			},
 		},
@@ -113,6 +169,86 @@ func ExpandHDInsightsConfigurations(input []interface{}) map[string]interface{} 
 			"restAuthCredential.isEnabled": enabled,
 			"restAuthCredential.username":  username,
 			"restAuthCredential.password":  password,
+		},
+	}
+}
+
+func ExpandHDInsightsHiveMetastore(input []interface{}) map[string]interface{} {
+	if len(input) == 0 {
+		return nil
+	}
+	vs := input[0].(map[string]interface{})
+
+	server := vs["server"].(string)
+	database := vs["database_name"].(string)
+	username := vs["username"].(string)
+	password := vs["password"].(string)
+
+	return map[string]interface{}{
+		"hive-site": map[string]interface{}{
+			"javax.jdo.option.ConnectionDriverName": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+			"javax.jdo.option.ConnectionURL":        fmt.Sprintf("jdbc:sqlserver://%s;database=%s;encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300", server, database),
+			"javax.jdo.option.ConnectionUserName":   username,
+			"javax.jdo.option.ConnectionPassword":   password,
+		},
+		"hive-env": map[string]interface{}{
+			"hive_database":                       "Existing MSSQL Server database with SQL authentication",
+			"hive_database_name":                  database,
+			"hive_database_type":                  "mssql",
+			"hive_existing_mssql_server_database": database,
+			"hive_existing_mssql_server_host":     server,
+			"hive_hostname":                       server,
+		},
+	}
+}
+
+func ExpandHDInsightsOozieMetastore(input []interface{}) map[string]interface{} {
+	if len(input) == 0 {
+		return nil
+	}
+	vs := input[0].(map[string]interface{})
+
+	server := vs["server"].(string)
+	database := vs["database_name"].(string)
+	username := vs["username"].(string)
+	password := vs["password"].(string)
+
+	return map[string]interface{}{
+		"oozie-site": map[string]interface{}{
+			"oozie.service.JPAService.jdbc.driver":   "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+			"oozie.service.JPAService.jdbc.url":      fmt.Sprintf("jdbc:sqlserver://%s;database=%s;encrypt=true;trustServerCertificate=true;create=false;loginTimeout=300", server, database),
+			"oozie.service.JPAService.jdbc.username": username,
+			"oozie.service.JPAService.jdbc.password": password,
+			"oozie.db.schema.name":                   "oozie",
+		},
+		"oozie-env": map[string]interface{}{
+			"oozie_database":                       "Existing MSSQL Server database with SQL authentication",
+			"oozie_database_name":                  database,
+			"oozie_database_type":                  "mssql",
+			"oozie_existing_mssql_server_database": database,
+			"oozie_existing_mssql_server_host":     server,
+			"oozie_hostname":                       server,
+		},
+	}
+}
+
+func ExpandHDInsightsAmbariMetastore(input []interface{}) map[string]interface{} {
+	if len(input) == 0 {
+		return nil
+	}
+	vs := input[0].(map[string]interface{})
+
+	server := vs["server"].(string)
+	database := vs["database_name"].(string)
+	username := vs["username"].(string)
+	password := vs["password"].(string)
+
+	return map[string]interface{}{
+		"ambari-conf": map[string]interface{}{
+			"database-server":        server,
+			"database-name":          database,
+			"database-user-name":     username,
+			"database-user-password": password,
 		},
 	}
 }
@@ -145,10 +281,115 @@ func FlattenHDInsightsConfigurations(input map[string]*string) []interface{} {
 	}
 }
 
+func FlattenHDInsightsHiveMetastore(env map[string]*string, site map[string]*string) []interface{} {
+	server := ""
+	if v, exists := env["hive_hostname"]; exists && v != nil {
+		server = *v
+	}
+
+	database := ""
+	if v, exists := env["hive_database_name"]; exists && v != nil {
+		database = *v
+	}
+
+	username := ""
+	if v, exists := site["javax.jdo.option.ConnectionUserName"]; exists && v != nil {
+		username = *v
+	}
+
+	password := ""
+	if v, exists := site["javax.jdo.option.ConnectionPassword"]; exists && v != nil {
+		password = *v
+	}
+
+	if server != "" && database != "" {
+		return []interface{}{
+			map[string]interface{}{
+				"server":        server,
+				"database_name": database,
+				"username":      username,
+				"password":      password,
+			},
+		}
+	}
+
+	return nil
+}
+
+func FlattenHDInsightsOozieMetastore(env map[string]*string, site map[string]*string) []interface{} {
+	server := ""
+	if v, exists := env["oozie_hostname"]; exists && v != nil {
+		server = *v
+	}
+
+	database := ""
+	if v, exists := env["oozie_database_name"]; exists && v != nil {
+		database = *v
+	}
+
+	username := ""
+	if v, exists := site["oozie.service.JPAService.jdbc.username"]; exists && v != nil {
+		username = *v
+	}
+
+	password := ""
+	if v, exists := site["oozie.service.JPAService.jdbc.password"]; exists && v != nil {
+		password = *v
+	}
+
+	if server != "" && database != "" {
+		return []interface{}{
+			map[string]interface{}{
+				"server":        server,
+				"database_name": database,
+				"username":      username,
+				"password":      password,
+			},
+		}
+	}
+
+	return nil
+}
+
+func FlattenHDInsightsAmbariMetastore(conf map[string]*string) []interface{} {
+	server := ""
+	if v, exists := conf["database-server"]; exists && v != nil {
+		server = *v
+	}
+
+	database := ""
+	if v, exists := conf["database-name"]; exists && v != nil {
+		database = *v
+	}
+
+	username := ""
+	if v, exists := conf["database-user-name"]; exists && v != nil {
+		username = *v
+	}
+
+	password := ""
+	if v, exists := conf["database-user-password"]; exists && v != nil {
+		password = *v
+	}
+
+	if server != "" && database != "" {
+		return []interface{}{
+			map[string]interface{}{
+				"server":        server,
+				"database_name": database,
+				"username":      username,
+				"password":      password,
+			},
+		}
+	}
+
+	return nil
+}
+
 func SchemaHDInsightsStorageAccounts() *schema.Schema {
 	return &schema.Schema{
 		Type:     schema.TypeList,
-		Required: true,
+		Optional: true,
 		Elem: &schema.Resource{
 			Schema: map[string]*schema.Schema{
 				"storage_account_key": {
@@ -156,13 +397,13 @@ func SchemaHDInsightsStorageAccounts() *schema.Schema {
 					Required:     true,
 					ForceNew:     true,
 					Sensitive:    true,
-					ValidateFunc: validate.NoEmptyStrings,
+					ValidateFunc: validation.StringIsNotEmpty,
 				},
 				"storage_container_id": {
 					Type:         schema.TypeString,
 					Required:     true,
 					ForceNew:     true,
-					ValidateFunc: validate.NoEmptyStrings,
+					ValidateFunc: validation.StringIsNotEmpty,
 				},
 				"is_default": {
 					Type:     schema.TypeBool,
@@ -174,20 +415,60 @@ func SchemaHDInsightsStorageAccounts() *schema.Schema {
 	}
 }
 
-func ExpandHDInsightsStorageAccounts(input []interface{}) (*[]hdinsight.StorageAccount, error) {
+func SchemaHDInsightsGen2StorageAccounts() *schema.Schema {
+	return &schema.Schema{
+		Type:     schema.TypeList,
+		Optional: true,
+		// HDInsight doesn't seem to allow adding more than one gen2 cluster right now.
+		MaxItems: 1,
+		Elem: &schema.Resource{
+			Schema: map[string]*schema.Schema{
+				"storage_resource_id": {
+					Type:         schema.TypeString,
+					Required:     true,
+					ForceNew:     true,
+					ValidateFunc: ValidateResourceID,
+				},
+				"filesystem_id": {
+					Type:         schema.TypeString,
+					Required:     true,
+					ForceNew:     true,
+					ValidateFunc: validation.StringIsNotEmpty,
+				},
+				"managed_identity_resource_id": {
+					Type:         schema.TypeString,
+					Required:     true,
+					ForceNew:     true,
+					ValidateFunc: ValidateResourceID,
+				},
+				"is_default": {
+					Type:     schema.TypeBool,
+					Required: true,
+					ForceNew: true,
+				},
+			},
+		},
+	}
+}
+
+// ExpandHDInsightsStorageAccounts returns an array of StorageAccount structs, as well as a ClusterIdentity
+// populated with any managed identities required for accessing Data Lake Gen2 storage.
+func ExpandHDInsightsStorageAccounts(storageAccounts []interface{}, gen2storageAccounts []interface{}) (*[]hdinsight.StorageAccount, *hdinsight.ClusterIdentity, error) {
 	results := make([]hdinsight.StorageAccount, 0)
 
-	for _, vs := range input {
+	var clusterIndentity *hdinsight.ClusterIdentity
+
+	for _, vs := range storageAccounts {
 		v := vs.(map[string]interface{})
 
 		storageAccountKey := v["storage_account_key"].(string)
-		storageContainerId := v["storage_container_id"].(string)
+		storageContainerID := v["storage_container_id"].(string)
 		isDefault := v["is_default"].(bool)
 
-		// https://foo.blob.core.windows.net/example
-		uri, err := url.Parse(storageContainerId)
+		uri, err := url.Parse(storageContainerID)
+
 		if err != nil {
-			return nil, fmt.Errorf("Error parsing %q: %s", storageContainerId, err)
+			return nil, nil, fmt.Errorf("Error parsing %q: %s", storageContainerID, err)
 		}
 
 		result := hdinsight.StorageAccount{
@@ -199,7 +480,41 @@ func ExpandHDInsightsStorageAccounts(input []interface{}) (*[]hdinsight.StorageA
 		results = append(results, result)
 	}
 
-	return &results, nil
+	for _, vs := range gen2storageAccounts {
+		v := vs.(map[string]interface{})
+
+		fileSystemID := v["filesystem_id"].(string)
+		storageResourceID := v["storage_resource_id"].(string)
+		managedIdentityResourceID := v["managed_identity_resource_id"].(string)
+
+		isDefault := v["is_default"].(bool)
+
+		uri, err := url.Parse(fileSystemID)
+		if err != nil {
+			return nil, nil, fmt.Errorf("Error parsing %q: %s", fileSystemID, err)
+		}
+
+		if clusterIndentity == nil {
+			clusterIndentity = &hdinsight.ClusterIdentity{
+				Type:                   hdinsight.UserAssigned,
+				UserAssignedIdentities: make(map[string]*hdinsight.ClusterIdentityUserAssignedIdentitiesValue),
+			}
+		}
+
+		// ... API doesn't seem to require client_id or principal_id, so pass in an empty ClusterIdentityUserAssignedIdentitiesValue
+		clusterIndentity.UserAssignedIdentities[managedIdentityResourceID] = &hdinsight.ClusterIdentityUserAssignedIdentitiesValue{}
+
+		result := hdinsight.StorageAccount{
+			Name:          utils.String(uri.Host), // https://storageaccountname.dfs.core.windows.net/filesystemname -> storageaccountname.dfs.core.windows.net
+			ResourceID:    utils.String(storageResourceID),
+			FileSystem:    utils.String(uri.Path[1:]), // https://storageaccountname.dfs.core.windows.net/filesystemname -> filesystemname
+			MsiResourceID: utils.String(managedIdentityResourceID),
+			IsDefault:     utils.Bool(isDefault),
+		}
+		results = append(results, result)
+	}
+
+	return &results, clusterIndentity, nil
 }
 
 type HDInsightNodeDefinition struct {
@@ -212,97 +527,102 @@ type HDInsightNodeDefinition struct {
 	FixedTargetInstanceCount *int32
 }
 
+func ValidateSchemaHDInsightNodeDefinitionVMSize() schema.SchemaValidateFunc {
+	return validation.StringInSlice([]string{
+		// short of deploying every VM Sku for every node type for every HDInsight Cluster
+		// this is the list I've (@tombuildsstuff) found for valid SKU's from an endpoint in the Portal
+		// using another SKU causes a bad request from the API - as such this is a best effort UX
+		"ExtraSmall",
+		"Small",
+		"Medium",
+		"Large",
+		"ExtraLarge",
+		"A5",
+		"A6",
+		"A7",
+		"A8",
+		"A9",
+		"A10",
+		"A11",
+		"Standard_A1_V2",
+		"Standard_A2_V2",
+		"Standard_A2m_V2",
+		"Standard_A3",
+		"Standard_A4_V2",
+		"Standard_A4m_V2",
+		"Standard_A8_V2",
+		"Standard_A8m_V2",
+		"Standard_D1",
+		"Standard_D2",
+		"Standard_D3",
+		"Standard_D4",
+		"Standard_D11",
+		"Standard_D12",
+		"Standard_D13",
+		"Standard_D14",
+		"Standard_D1_V2",
+		"Standard_D2_V2",
+		"Standard_D3_V2",
+		"Standard_D4_V2",
+		"Standard_D5_V2",
+		"Standard_D11_V2",
+		"Standard_D12_V2",
+		"Standard_D13_V2",
+		"Standard_D14_V2",
+		"Standard_DS1_V2",
+		"Standard_DS2_V2",
+		"Standard_DS3_V2",
+		"Standard_DS4_V2",
+		"Standard_DS5_V2",
+		"Standard_DS11_V2",
+		"Standard_DS12_V2",
+		"Standard_DS13_V2",
+		"Standard_DS14_V2",
+		"Standard_E2_V3",
+		"Standard_E4_V3",
+		"Standard_E8_V3",
+		"Standard_E16_V3",
+		"Standard_E20_V3",
+		"Standard_E32_V3",
+		"Standard_E64_V3",
+		"Standard_E64i_V3",
+		"Standard_E2s_V3",
+		"Standard_E4s_V3",
+		"Standard_E8s_V3",
+		"Standard_E16s_V3",
+		"Standard_E20s_V3",
+		"Standard_E32s_V3",
+		"Standard_E64s_V3",
+		"Standard_E64is_V3",
+		"Standard_G1",
+		"Standard_G2",
+		"Standard_G3",
+		"Standard_G4",
+		"Standard_G5",
+		"Standard_F2s_V2",
+		"Standard_F4s_V2",
+		"Standard_F8s_V2",
+		"Standard_F16s_V2",
+		"Standard_F32s_V2",
+		"Standard_F64s_V2",
+		"Standard_F72s_V2",
+		"Standard_GS1",
+		"Standard_GS2",
+		"Standard_GS3",
+		"Standard_GS4",
+		"Standard_GS5",
+		"Standard_NC24",
+	}, true)
+}
+
 func SchemaHDInsightNodeDefinition(schemaLocation string, definition HDInsightNodeDefinition) *schema.Schema {
 	result := map[string]*schema.Schema{
 		"vm_size": {
-			Type:     schema.TypeString,
-			Required: true,
-			ForceNew: true,
-			ValidateFunc: validation.StringInSlice([]string{
-				// short of deploying every VM Sku for every node type for every HDInsight Cluster
-				// this is the list I've (@tombuildsstuff) found for valid SKU's from an endpoint in the Portal
-				// using another SKU causes a bad request from the API - as such this is a best effort UX
-				"ExtraSmall",
-				"Small",
-				"Medium",
-				"Large",
-				"ExtraLarge",
-				"A5",
-				"A6",
-				"A7",
-				"A8",
-				"A9",
-				"A10",
-				"A11",
-				"Standard_A1_V2",
-				"Standard_A2_V2",
-				"Standard_A2m_V2",
-				"Standard_A3",
-				"Standard_A4_V2",
-				"Standard_A4m_V2",
-				"Standard_A8_V2",
-				"Standard_A8m_V2",
-				"Standard_D1",
-				"Standard_D2",
-				"Standard_D3",
-				"Standard_D4",
-				"Standard_D11",
-				"Standard_D12",
-				"Standard_D13",
-				"Standard_D14",
-				"Standard_D1_V2",
-				"Standard_D2_V2",
-				"Standard_D3_V2",
-				"Standard_D4_V2",
-				"Standard_D5_V2",
-				"Standard_D11_V2",
-				"Standard_D12_V2",
-				"Standard_D13_V2",
-				"Standard_D14_V2",
-				"Standard_DS1_V2",
-				"Standard_DS2_V2",
-				"Standard_DS3_V2",
-				"Standard_DS4_V2",
-				"Standard_DS5_V2",
-				"Standard_DS11_V2",
-				"Standard_DS12_V2",
-				"Standard_DS13_V2",
-				"Standard_DS14_V2",
-				"Standard_E2_V3",
-				"Standard_E4_V3",
-				"Standard_E8_V3",
-				"Standard_E16_V3",
-				"Standard_E20_V3",
-				"Standard_E32_V3",
-				"Standard_E64_V3",
-				"Standard_E64i_V3",
-				"Standard_E2s_V3",
-				"Standard_E4s_V3",
-				"Standard_E8s_V3",
-				"Standard_E16s_V3",
-				"Standard_E20s_V3",
-				"Standard_E32s_V3",
-				"Standard_E64s_V3",
-				"Standard_E64is_V3",
-				"Standard_G1",
-				"Standard_G2",
-				"Standard_G3",
-				"Standard_G4",
-				"Standard_G5",
-				"Standard_F2s_V2",
-				"Standard_F4s_V2",
-				"Standard_F8s_V2",
-				"Standard_F16s_V2",
-				"Standard_F32s_V2",
-				"Standard_F64s_V2",
-				"Standard_F72s_V2",
-				"Standard_GS1",
-				"Standard_GS2",
-				"Standard_GS3",
-				"Standard_GS4",
-				"Standard_GS5",
-				"Standard_NC24",
-			}, true),
+			Type:             schema.TypeString,
+			Required:         true,
+			ForceNew:         true,
+			DiffSuppressFunc: suppress.CaseDifference,
+			ValidateFunc:     ValidateSchemaHDInsightNodeDefinitionVMSize(),
 		},
 		"username": {
 			Type:     schema.TypeString,
@@ -321,7 +641,7 @@ func SchemaHDInsightNodeDefinition(schemaLocation string, definition HDInsightNo
 			ForceNew: true,
 			Elem: &schema.Schema{
 				Type:         schema.TypeString,
-				ValidateFunc: validate.NoEmptyStrings,
+				ValidateFunc: validation.StringIsNotEmpty,
 			},
 			Set: schema.HashString,
 			ConflictsWith: []string{

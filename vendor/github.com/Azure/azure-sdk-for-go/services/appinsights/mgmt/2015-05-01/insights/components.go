@@ -36,7 +36,8 @@ func NewComponentsClient(subscriptionID string) ComponentsClient {
 	return NewComponentsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewComponentsClientWithBaseURI creates an instance of the ComponentsClient client.
+// NewComponentsClientWithBaseURI creates an instance of the ComponentsClient client using a custom endpoint.  Use this
+// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
 func NewComponentsClientWithBaseURI(baseURI string, subscriptionID string) ComponentsClient {
 	return ComponentsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -117,8 +118,7 @@ func (client ComponentsClient) CreateOrUpdatePreparer(ctx context.Context, resou
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateOrUpdateResponder handles the response to the CreateOrUpdate request. The method always
@@ -204,8 +204,7 @@ func (client ComponentsClient) DeletePreparer(ctx context.Context, resourceGroup
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -290,8 +289,7 @@ func (client ComponentsClient) GetPreparer(ctx context.Context, resourceGroupNam
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -379,8 +377,7 @@ func (client ComponentsClient) GetPurgeStatusPreparer(ctx context.Context, resou
 // GetPurgeStatusSender sends the GetPurgeStatus request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) GetPurgeStatusSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetPurgeStatusResponder handles the response to the GetPurgeStatus request. The method always
@@ -458,8 +455,7 @@ func (client ComponentsClient) ListPreparer(ctx context.Context) (*http.Request,
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -581,8 +577,7 @@ func (client ComponentsClient) ListByResourceGroupPreparer(ctx context.Context, 
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -636,6 +631,11 @@ func (client ComponentsClient) ListByResourceGroupComplete(ctx context.Context, 
 }
 
 // Purge purges data in an Application Insights component by a set of user-defined filters.
+//
+// In order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the
+// execution of purge requests by sending a single command whose predicate includes all user identities that require
+// purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge
+// request to verify that the results are expected.
 // Parameters:
 // resourceGroupName - the name of the resource group. The name is case insensitive.
 // resourceName - the name of the Application Insights component resource.
@@ -711,8 +711,7 @@ func (client ComponentsClient) PurgePreparer(ctx context.Context, resourceGroupN
 // PurgeSender sends the Purge request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) PurgeSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // PurgeResponder handles the response to the Purge request. The method always
@@ -801,8 +800,7 @@ func (client ComponentsClient) UpdateTagsPreparer(ctx context.Context, resourceG
 // UpdateTagsSender sends the UpdateTags request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentsClient) UpdateTagsSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // UpdateTagsResponder handles the response to the UpdateTags request. The method always

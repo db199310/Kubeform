@@ -22,6 +22,7 @@ import (
 	"encoding/json"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/azure"
+	"github.com/Azure/go-autorest/autorest/date"
 	"github.com/Azure/go-autorest/autorest/to"
 	"github.com/Azure/go-autorest/tracing"
 	"github.com/satori/go.uuid"
@@ -30,6 +31,23 @@ import (
 
 // The package's fully qualified name.
 const fqdn = "github.com/Azure/azure-sdk-for-go/services/databricks/mgmt/2018-04-01/databricks"
+
+// CustomParameterType enumerates the values for custom parameter type.
+type CustomParameterType string
+
+const (
+	// Bool ...
+	Bool CustomParameterType = "Bool"
+	// Object ...
+	Object CustomParameterType = "Object"
+	// String ...
+	String CustomParameterType = "String"
+)
+
+// PossibleCustomParameterTypeValues returns an array of possible values for the CustomParameterType const type.
+func PossibleCustomParameterTypeValues() []CustomParameterType {
+	return []CustomParameterType{Bool, Object, String}
+}
 
 // ProvisioningState enumerates the values for provisioning state.
 type ProvisioningState string
@@ -62,6 +80,16 @@ const (
 // PossibleProvisioningStateValues returns an array of possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
 	return []ProvisioningState{Accepted, Canceled, Created, Creating, Deleted, Deleting, Failed, Ready, Running, Succeeded, Updating}
+}
+
+// CreatedBy provides details of the entity that created/updated the workspace.
+type CreatedBy struct {
+	// Oid - READ-ONLY; The Object ID that created the workspace.
+	Oid *uuid.UUID `json:"oid,omitempty"`
+	// Puid - READ-ONLY; The Personal Object ID corresponding to the object ID above
+	Puid *string `json:"puid,omitempty"`
+	// ApplicationID - READ-ONLY; The application ID of the application that initiated the creation of the workspace. For example, Azure Portal.
+	ApplicationID *uuid.UUID `json:"applicationId,omitempty"`
 }
 
 // ErrorDetail ...
@@ -416,6 +444,42 @@ func (w *Workspace) UnmarshalJSON(body []byte) error {
 	return nil
 }
 
+// WorkspaceCustomBooleanParameter the value which should be used for this field.
+type WorkspaceCustomBooleanParameter struct {
+	// Type - The type of variable that this is. Possible values include: 'Bool', 'Object', 'String'
+	Type CustomParameterType `json:"type,omitempty"`
+	// Value - The value which should be used for this field.
+	Value *bool `json:"value,omitempty"`
+}
+
+// WorkspaceCustomObjectParameter the value which should be used for this field.
+type WorkspaceCustomObjectParameter struct {
+	// Type - The type of variable that this is. Possible values include: 'Bool', 'Object', 'String'
+	Type CustomParameterType `json:"type,omitempty"`
+	// Value - The value which should be used for this field.
+	Value interface{} `json:"value,omitempty"`
+}
+
+// WorkspaceCustomParameters custom Parameters used for Cluster Creation.
+type WorkspaceCustomParameters struct {
+	// CustomVirtualNetworkID - The ID of a Virtual Network where this Databricks Cluster should be created
+	CustomVirtualNetworkID *WorkspaceCustomStringParameter `json:"customVirtualNetworkId,omitempty"`
+	// CustomPublicSubnetName - The name of a Public Subnet within the Virtual Network
+	CustomPublicSubnetName *WorkspaceCustomStringParameter `json:"customPublicSubnetName,omitempty"`
+	// CustomPrivateSubnetName - The name of the Private Subnet within the Virtual Network
+	CustomPrivateSubnetName *WorkspaceCustomStringParameter `json:"customPrivateSubnetName,omitempty"`
+	// EnableNoPublicIP - Should the Public IP be Disabled?
+	EnableNoPublicIP *WorkspaceCustomBooleanParameter `json:"enableNoPublicIp,omitempty"`
+}
+
+// WorkspaceCustomStringParameter the Value.
+type WorkspaceCustomStringParameter struct {
+	// Type - The type of variable that this is. Possible values include: 'Bool', 'Object', 'String'
+	Type CustomParameterType `json:"type,omitempty"`
+	// Value - The value which should be used for this field.
+	Value *string `json:"value,omitempty"`
+}
+
 // WorkspaceListResult list of workspaces.
 type WorkspaceListResult struct {
 	autorest.Response `json:"-"`
@@ -566,14 +630,24 @@ func NewWorkspaceListResultPage(getNextPage func(context.Context, WorkspaceListR
 type WorkspaceProperties struct {
 	// ManagedResourceGroupID - The managed resource group Id.
 	ManagedResourceGroupID *string `json:"managedResourceGroupId,omitempty"`
-	// Parameters - Name and value pairs that define the workspace parameters.
-	Parameters interface{} `json:"parameters,omitempty"`
+	// Parameters - The workspace's custom parameters.
+	Parameters *WorkspaceCustomParameters `json:"parameters,omitempty"`
 	// ProvisioningState - READ-ONLY; The workspace provisioning state. Possible values include: 'Accepted', 'Running', 'Ready', 'Creating', 'Created', 'Deleting', 'Deleted', 'Canceled', 'Failed', 'Succeeded', 'Updating'
 	ProvisioningState ProvisioningState `json:"provisioningState,omitempty"`
 	// UIDefinitionURI - The blob URI where the UI definition file is located.
 	UIDefinitionURI *string `json:"uiDefinitionUri,omitempty"`
 	// Authorizations - The workspace provider authorizations.
 	Authorizations *[]WorkspaceProviderAuthorization `json:"authorizations,omitempty"`
+	// CreatedBy - Indicates the Object ID, PUID and Application ID of entity that created the workspace.
+	CreatedBy *CreatedBy `json:"createdBy,omitempty"`
+	// UpdatedBy - Indicates the Object ID, PUID and Application ID of entity that last updated the workspace.
+	UpdatedBy *CreatedBy `json:"updatedBy,omitempty"`
+	// CreatedDateTime - Specifies the date and time when the workspace is created.
+	CreatedDateTime *date.Time `json:"createdDateTime,omitempty"`
+	// WorkspaceID - READ-ONLY; The unique identifier of the databricks workspace in databricks control plane.
+	WorkspaceID *string `json:"workspaceId,omitempty"`
+	// WorkspaceURL - READ-ONLY; The workspace URL which is of the format 'adb-{workspaceId}.{random}.azuredatabricks.net'
+	WorkspaceURL *string `json:"workspaceUrl,omitempty"`
 }
 
 // WorkspaceProviderAuthorization the workspace provider authorization.

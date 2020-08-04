@@ -35,7 +35,9 @@ func NewVirtualNetworkLinksClient(subscriptionID string) VirtualNetworkLinksClie
 	return NewVirtualNetworkLinksClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewVirtualNetworkLinksClientWithBaseURI creates an instance of the VirtualNetworkLinksClient client.
+// NewVirtualNetworkLinksClientWithBaseURI creates an instance of the VirtualNetworkLinksClient client using a custom
+// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
+// stack).
 func NewVirtualNetworkLinksClientWithBaseURI(baseURI string, subscriptionID string) VirtualNetworkLinksClient {
 	return VirtualNetworkLinksClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -113,8 +115,7 @@ func (client VirtualNetworkLinksClient) CreateOrUpdatePreparer(ctx context.Conte
 // http.Response Body if it receives an error.
 func (client VirtualNetworkLinksClient) CreateOrUpdateSender(req *http.Request) (future VirtualNetworkLinksCreateOrUpdateFuture, err error) {
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -200,8 +201,7 @@ func (client VirtualNetworkLinksClient) DeletePreparer(ctx context.Context, reso
 // http.Response Body if it receives an error.
 func (client VirtualNetworkLinksClient) DeleteSender(req *http.Request) (future VirtualNetworkLinksDeleteFuture, err error) {
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}
@@ -283,8 +283,7 @@ func (client VirtualNetworkLinksClient) GetPreparer(ctx context.Context, resourc
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client VirtualNetworkLinksClient) GetSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -366,8 +365,7 @@ func (client VirtualNetworkLinksClient) ListPreparer(ctx context.Context, resour
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client VirtualNetworkLinksClient) ListSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -487,8 +485,7 @@ func (client VirtualNetworkLinksClient) UpdatePreparer(ctx context.Context, reso
 // http.Response Body if it receives an error.
 func (client VirtualNetworkLinksClient) UpdateSender(req *http.Request) (future VirtualNetworkLinksUpdateFuture, err error) {
 	var resp *http.Response
-	resp, err = autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
 	if err != nil {
 		return
 	}

@@ -1,19 +1,5 @@
 [
     {
-      "name": "RDS",
-      "source": "terraform-aws-modules/rds/aws",
-      "provider": "aws",
-      "url": "https://github.com/terraform-aws-modules/terraform-aws-rds/archive/master.zip",
-      "subDirectory": ""
-    },
-    {
-      "name": "GoogleServiceAccount",
-      "source": "terraform-google-modules/service-accounts/google",
-      "provider": "google",
-      "url": "https://github.com/terraform-google-modules/terraform-google-service-accounts/archive/master.zip",
-      "subDirectory": ""
-    },
-    {
       "name": "AzureAppService",
       "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.2.0",
       "provider": "azurerm",

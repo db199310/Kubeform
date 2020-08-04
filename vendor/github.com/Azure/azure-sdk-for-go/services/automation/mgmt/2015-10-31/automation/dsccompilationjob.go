@@ -37,7 +37,9 @@ func NewDscCompilationJobClient(subscriptionID string) DscCompilationJobClient {
 	return NewDscCompilationJobClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDscCompilationJobClientWithBaseURI creates an instance of the DscCompilationJobClient client.
+// NewDscCompilationJobClientWithBaseURI creates an instance of the DscCompilationJobClient client using a custom
+// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
+// stack).
 func NewDscCompilationJobClientWithBaseURI(baseURI string, subscriptionID string) DscCompilationJobClient {
 	return DscCompilationJobClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -46,7 +48,7 @@ func NewDscCompilationJobClientWithBaseURI(baseURI string, subscriptionID string
 // Parameters:
 // resourceGroupName - name of an Azure Resource group.
 // automationAccountName - the name of the automation account.
-// compilationJobID - the the DSC configuration Id.
+// compilationJobID - the DSC configuration Id.
 // parameters - the parameters supplied to the create compilation job operation.
 func (client DscCompilationJobClient) Create(ctx context.Context, resourceGroupName string, automationAccountName string, compilationJobID uuid.UUID, parameters DscCompilationJobCreateParameters) (result DscCompilationJob, err error) {
 	if tracing.IsEnabled() {
@@ -118,8 +120,7 @@ func (client DscCompilationJobClient) CreatePreparer(ctx context.Context, resour
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client DscCompilationJobClient) CreateSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // CreateResponder handles the response to the Create request. The method always
@@ -205,8 +206,7 @@ func (client DscCompilationJobClient) GetPreparer(ctx context.Context, resourceG
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DscCompilationJobClient) GetSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -294,8 +294,7 @@ func (client DscCompilationJobClient) GetStreamPreparer(ctx context.Context, res
 // GetStreamSender sends the GetStream request. The method will close the
 // http.Response Body if it receives an error.
 func (client DscCompilationJobClient) GetStreamSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // GetStreamResponder handles the response to the GetStream request. The method always
@@ -384,8 +383,7 @@ func (client DscCompilationJobClient) ListByAutomationAccountPreparer(ctx contex
 // ListByAutomationAccountSender sends the ListByAutomationAccount request. The method will close the
 // http.Response Body if it receives an error.
 func (client DscCompilationJobClient) ListByAutomationAccountSender(req *http.Request) (*http.Response, error) {
-	return autorest.SendWithSender(client, req,
-		azure.DoRetryWithRegistration(client.Client))
+	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
 }
 
 // ListByAutomationAccountResponder handles the response to the ListByAutomationAccount request. The method always
