@@ -25,3 +25,35 @@ type AzureAppServiceListerExpansion interface{}
 // AzureAppServiceNamespaceListerExpansion allows custom methods to be added to
 // AzureAppServiceNamespaceLister.
 type AzureAppServiceNamespaceListerExpansion interface{}
+
+// AzureFnAppListerExpansion allows custom methods to be added to
+// AzureFnAppLister.
+type AzureFnAppListerExpansion interface{}
+
+// AzureFnAppNamespaceListerExpansion allows custom methods to be added to
+// AzureFnAppNamespaceLister.
+type AzureFnAppNamespaceListerExpansion interface{}
+
+// F4dpAzFnv1ListerExpansion allows custom methods to be added to
+// F4dpAzFnv1Lister.
+type F4dpAzFnv1ListerExpansion interface{}
+
+// F4dpAzFnv1NamespaceListerExpansion allows custom methods to be added to
+// F4dpAzFnv1NamespaceLister.
+type F4dpAzFnv1NamespaceListerExpansion interface{}
+
+// F4dpAzSqlListerExpansion allows custom methods to be added to
+// F4dpAzSqlLister.
+type F4dpAzSqlListerExpansion interface{}
+
+// F4dpAzSqlNamespaceListerExpansion allows custom methods to be added to
+// F4dpAzSqlNamespaceLister.
+type F4dpAzSqlNamespaceListerExpansion interface{}
+
+// F4dpAzStgv1ListerExpansion allows custom methods to be added to
+// F4dpAzStgv1Lister.
+type F4dpAzStgv1ListerExpansion interface{}
+
+// F4dpAzStgv1NamespaceListerExpansion allows custom methods to be added to
+// F4dpAzStgv1NamespaceLister.
+type F4dpAzStgv1NamespaceListerExpansion interface{}

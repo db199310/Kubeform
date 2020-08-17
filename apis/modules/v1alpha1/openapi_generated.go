@@ -292,6 +292,36 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureAppServiceSpec":                     schema_kubeform_apis_modules_v1alpha1_AzureAppServiceSpec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureAppServiceStatus":                   schema_kubeform_apis_modules_v1alpha1_AzureAppServiceStatus(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureAppServiceStorageAccounts":          schema_kubeform_apis_modules_v1alpha1_AzureAppServiceStorageAccounts(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnApp":                              schema_kubeform_apis_modules_v1alpha1_AzureFnApp(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppAuthSettings":                  schema_kubeform_apis_modules_v1alpha1_AzureFnAppAuthSettings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppConnectionStrings":             schema_kubeform_apis_modules_v1alpha1_AzureFnAppConnectionStrings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppList":                          schema_kubeform_apis_modules_v1alpha1_AzureFnAppList(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppOutput":                        schema_kubeform_apis_modules_v1alpha1_AzureFnAppOutput(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfig":                    schema_kubeform_apis_modules_v1alpha1_AzureFnAppSiteConfig(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfigCors":                schema_kubeform_apis_modules_v1alpha1_AzureFnAppSiteConfigCors(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSpec":                          schema_kubeform_apis_modules_v1alpha1_AzureFnAppSpec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppStatus":                        schema_kubeform_apis_modules_v1alpha1_AzureFnAppStatus(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1":                              schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1AuthSettings":                  schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1AuthSettings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1ConnectionStrings":             schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1ConnectionStrings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1List":                          schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Output":                        schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfig":                    schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1SiteConfig(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfigCors":                schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1SiteConfigCors(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Spec":                          schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Status":                        schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSql":                               schema_kubeform_apis_modules_v1alpha1_F4dpAzSql(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlList":                           schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlList(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlOutput":                         schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlOutput(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlSpec":                           schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlSpec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlStatus":                         schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlStatus(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1":                             schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Blobs":                        schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Blobs(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1List":                         schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Output":                       schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Shares":                       schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Shares(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Spec":                         schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Status":                       schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Status(ref),
 	}
 }
 
@@ -13175,5 +13205,1879 @@ func schema_kubeform_apis_modules_v1alpha1_AzureAppServiceStorageAccounts(ref co
 				},
 			},
 		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnApp(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSpec", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppStatus"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppAuthSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"authEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppConnectionStrings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "AzureFnAppList is a list of AzureFnApps",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of AzureFnApp CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnApp"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnApp"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppOutput(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"appServicePlans": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map output of the App Service Plans",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fnApp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map output of the Fnapp Services",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppSiteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"alwaysOn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"ftpsState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"http2Enabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"linuxFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"use32BitWorkerProcess": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"websocketsEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppSiteConfigCors(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allowedOrigins": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"supportCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"activeDirectory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"appPrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App resourcess name prefix.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"appSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Settings. Package deploy configured",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"applicationInsightsType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App insights type",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"aspKind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App service plan kind. Should be able to accomodate the fn app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"aspMaxWorkerCnt": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Service plan max worker count",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"aspReserved": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Reserved field for App Service plan (Linux). Boolean",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"aspSkuCap": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Service plan capacity",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"aspSkuSize": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App service plan size",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"aspSkuTier": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Tier of the app service plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"authSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication Settings",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppAuthSettings"),
+									},
+								},
+							},
+						},
+					},
+					"clientAffinityEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Should client affinity be enabled?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"connectionStrings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "connection strings for fn app",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppConnectionStrings"),
+									},
+								},
+							},
+						},
+					},
+					"createApplicationInsightsResource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Require application insights resource?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspResGrpName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan resource Group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingServicePlanEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing service plan enabled?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fnAppAdditionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional tags for the App Service resources, in addition to the resource group tags.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"fnAppLocation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Function App location",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fnEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Should fn app be enabled?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fnRequired": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Is Fn app required?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fnappVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Run time version of the Fn app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "identity for fn app. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"integrationSubnetID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subnet IDS for VNet integration",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"osType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OS Type for the fn app. Should match with App Service plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"resGrpName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource Group name where the fn app needs to be created",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config block for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfig"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigCors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config core parameters for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfigCors"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigIPRestrictions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "site config ip restrictions block parameters for fn app",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"sourcezip": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Zip file location to be used to do the deployment. Should be publicly accessible",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"vnetIntegrationRequired": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Vnet integration required for the function app?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "appPrefix", "environment", "owner", "region", "resGrpName"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppAuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppSiteConfigCors"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_AzureFnAppStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppOutput"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.AzureFnAppOutput"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1AuthSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"authEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1ConnectionStrings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "F4dpAzFnv1List is a list of F4dpAzFnv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of F4dpAzFnv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"fnApp": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map output of the Fnapp Services",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1SiteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"alwaysOn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"ftpsState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"http2Enabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"linuxFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"use32BitWorkerProcess": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"websocketsEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1SiteConfigCors(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allowedOrigins": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"supportCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"activeDirectory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"appSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Settings. Package deploy configured",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"applicationInsightsType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App insights type",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"authSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication Settings",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1AuthSettings"),
+									},
+								},
+							},
+						},
+					},
+					"clientAffinityEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Should client affinity be enabled?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"connectionStrings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "connection strings for fn app",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1ConnectionStrings"),
+									},
+								},
+							},
+						},
+					},
+					"createApplicationInsightsResource": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Require application insights resource?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspResGrpName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan resource Group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fnAppName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the Fn App. Has to be unique worldwide",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fnAppAdditionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional tags for the App Service resources, in addition to the resource group tags.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"fnEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Should fn app be enabled?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fnRequired": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Is Fn app required?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"fnappVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Run time version of the Fn app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Description: "identity for fn app. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"integrationSubnetID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subnet IDS for VNet integration",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"osType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OS Type for the fn app. Should match with App Service plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"resGrpName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource Group name where the fn app needs to be created",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config block for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfig"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigCors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config core parameters for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfigCors"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigIPRestrictions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "site config ip restrictions block parameters for fn app",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"sourcezip": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Zip file location to be used to do the deployment. Should be publicly accessible",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"vnetIntegrationRequired": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Vnet integration required for the function app?",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "environment", "fnAppName", "owner", "region", "resGrpName"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1SiteConfigCors"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzFnv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzFnv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzSql(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlSpec", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlStatus"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "F4dpAzSqlList is a list of F4dpAzSqls",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of F4dpAzSql CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSql"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSql"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlOutput(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"sqlPassword": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"additionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional set of tags",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"commonTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to associate with assets",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"enableHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set to true, enable Failover Group",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"existingRg": {
+						SchemaProps: spec.SchemaProps{
+							Description: "if existing resource group need to be used",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"existingRgName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "existing resource group name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"locationPrimary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Location of primary server",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"locationSecondary": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Location of primary server",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"rgName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource Group Name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlAdminUsername": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SQL Server username",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbEdition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Edition of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbRequestedServiceObjectiveName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Requested Service Objective Name of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlFwRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n\n\t   Map of SQL Firewall Rules in the following format:\n\n\t     \"Name\" = [\"StartIP\", \"EndIP\"]",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "byte",
+									},
+								},
+							},
+						},
+					},
+					"sqlServerName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the SQL Server",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "sqlAdminUsername", "sqlDbName", "sqlServerName"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzSqlStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlOutput"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzSqlOutput"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Blobs(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "F4dpAzStgv1List is a list of F4dpAzStgv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of F4dpAzStgv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storageAccountContainerName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"storageAccountID": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"storageAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Shares(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"quota": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"accountKind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Account Kind",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"accountTier": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Account tier default is Standard",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"blobs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Blobs",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Blobs"),
+									},
+								},
+							},
+						},
+					},
+					"bypass": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of services to bypass network rules",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"containers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"ipRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Ip Rules",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"isHnsEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"location": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"queues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Storage Queues",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"replicationType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sepcify replication type default is LRS",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"shares": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Storage shares",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Shares"),
+									},
+								},
+							},
+						},
+					},
+					"storageAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subnetID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The vnet subnet id",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "byte",
+									},
+								},
+							},
+						},
+					},
+					"tables": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of storage tables",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to associate with assets",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"providerRef", "location", "resourceGroupName", "storageAccountName"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Blobs", "kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Shares"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Output"},
 	}
 }

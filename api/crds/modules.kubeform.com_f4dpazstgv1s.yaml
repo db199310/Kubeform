@@ -1,0 +1,176 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: f4dpazstgv1s.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: F4dpAzStgv1
+    listKind: F4dpAzStgv1List
+    plural: f4dpazstgv1s
+    singular: f4dpazstgv1
+  scope: ""
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            accountKind:
+              description: Account Kind
+              format: byte
+              type: string
+            accountTier:
+              description: Account tier default is Standard
+              type: string
+            blobs:
+              description: List of Blobs
+              items:
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              type: array
+            bypass:
+              description: List of services to bypass network rules
+              items:
+                type: string
+              type: array
+            containers:
+              description: The name of the resource group in which to create the storage
+                account. Changing this forces a new resource to be created.
+              items:
+                type: string
+              type: array
+            ipRules:
+              description: Ip Rules
+              items:
+                type: string
+              type: array
+            isHnsEnabled:
+              type: boolean
+            location:
+              description: Specifies the supported Azure location where the resource
+                exists. Changing this forces a new resource to be created.
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            queues:
+              description: List of Storage Queues
+              items:
+                type: string
+              type: array
+            replicationType:
+              description: Sepcify replication type default is LRS
+              type: string
+            resourceGroupName:
+              description: The name of the resource group in which to create the storage
+                account. Changing this forces a new resource to be created.
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            shares:
+              description: List of Storage shares
+              items:
+                properties:
+                  name:
+                    type: string
+                  quota:
+                    description: A Number represents a JSON number literal.
+                    type: string
+                type: object
+              type: array
+            source:
+              type: string
+            storageAccountName:
+              description: Specifies the storage account in which to create the storage
+                container. Changing this forces a new resource to be created.
+              type: string
+            subnetID:
+              description: The vnet subnet id
+              items:
+                description: RawMessage is a raw encoded JSON value. It implements
+                  Marshaler and Unmarshaler and can be used to delay JSON decoding
+                  or precompute a JSON encoding.
+                format: byte
+                type: string
+              type: array
+            tables:
+              description: List of storage tables
+              items:
+                type: string
+              type: array
+            tags:
+              additionalProperties:
+                type: string
+              description: The tags to associate with assets
+              type: object
+          required:
+          - location
+          - providerRef
+          - resourceGroupName
+          - storageAccountName
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              properties:
+                storageAccountContainerName:
+                  type: string
+                storageAccountID:
+                  type: string
+                storageAccountName:
+                  type: string
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

@@ -872,6 +872,14 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=modules.kubeform.com, Version=v1alpha1
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("azureappservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().AzureAppServices().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("azurefnapps"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().AzureFnApps().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazfnv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzFnv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazsqls"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzSqls().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazstgv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzStgv1s().Informer()}, nil
 
 	}
 

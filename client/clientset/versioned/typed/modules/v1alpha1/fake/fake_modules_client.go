@@ -32,6 +32,22 @@ func (c *FakeModulesV1alpha1) AzureAppServices(namespace string) v1alpha1.AzureA
 	return &FakeAzureAppServices{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) AzureFnApps(namespace string) v1alpha1.AzureFnAppInterface {
+	return &FakeAzureFnApps{c, namespace}
+}
+
+func (c *FakeModulesV1alpha1) F4dpAzFnv1s(namespace string) v1alpha1.F4dpAzFnv1Interface {
+	return &FakeF4dpAzFnv1s{c, namespace}
+}
+
+func (c *FakeModulesV1alpha1) F4dpAzSqls(namespace string) v1alpha1.F4dpAzSqlInterface {
+	return &FakeF4dpAzSqls{c, namespace}
+}
+
+func (c *FakeModulesV1alpha1) F4dpAzStgv1s(namespace string) v1alpha1.F4dpAzStgv1Interface {
+	return &FakeF4dpAzStgv1s{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeModulesV1alpha1) RESTClient() rest.Interface {

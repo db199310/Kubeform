@@ -22,4 +22,16 @@ var ModuleConfig = []Config{
 	{
 		"AzureAppService", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.2.0", "azurerm", "", "",
 	},
+	{
+		"AzureFnApp", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.2.2", "azurerm", "", "",
+	},
+	{
+		"F4dpAzSql", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.2.4", "azurerm", "", "",
+	},
+	{
+		"F4dpAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.3.0", "azurerm", "", "",
+	},
+	{
+		"F4dpAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.0", "azurerm", "", "",
+	},
 }

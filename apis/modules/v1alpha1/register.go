@@ -59,6 +59,18 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 		&AzureAppService{},
 		&AzureAppServiceList{},
+
+		&AzureFnApp{},
+		&AzureFnAppList{},
+
+		&F4dpAzFnv1{},
+		&F4dpAzFnv1List{},
+
+		&F4dpAzSql{},
+		&F4dpAzSqlList{},
+
+		&F4dpAzStgv1{},
+		&F4dpAzStgv1List{},
 	)
 
 	scheme.AddKnownTypes(SchemeGroupVersion,

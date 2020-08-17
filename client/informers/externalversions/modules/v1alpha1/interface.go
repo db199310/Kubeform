@@ -26,6 +26,14 @@ import (
 type Interface interface {
 	// AzureAppServices returns a AzureAppServiceInformer.
 	AzureAppServices() AzureAppServiceInformer
+	// AzureFnApps returns a AzureFnAppInformer.
+	AzureFnApps() AzureFnAppInformer
+	// F4dpAzFnv1s returns a F4dpAzFnv1Informer.
+	F4dpAzFnv1s() F4dpAzFnv1Informer
+	// F4dpAzSqls returns a F4dpAzSqlInformer.
+	F4dpAzSqls() F4dpAzSqlInformer
+	// F4dpAzStgv1s returns a F4dpAzStgv1Informer.
+	F4dpAzStgv1s() F4dpAzStgv1Informer
 }
 
 type version struct {
@@ -42,4 +50,24 @@ func New(f internalinterfaces.SharedInformerFactory, namespace string, tweakList
 // AzureAppServices returns a AzureAppServiceInformer.
 func (v *version) AzureAppServices() AzureAppServiceInformer {
 	return &azureAppServiceInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// AzureFnApps returns a AzureFnAppInformer.
+func (v *version) AzureFnApps() AzureFnAppInformer {
+	return &azureFnAppInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// F4dpAzFnv1s returns a F4dpAzFnv1Informer.
+func (v *version) F4dpAzFnv1s() F4dpAzFnv1Informer {
+	return &f4dpAzFnv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// F4dpAzSqls returns a F4dpAzSqlInformer.
+func (v *version) F4dpAzSqls() F4dpAzSqlInformer {
+	return &f4dpAzSqlInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// F4dpAzStgv1s returns a F4dpAzStgv1Informer.
+func (v *version) F4dpAzStgv1s() F4dpAzStgv1Informer {
+	return &f4dpAzStgv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
