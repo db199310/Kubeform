@@ -1363,11 +1363,6 @@ func (in *F4dpAzStgv1Spec) DeepCopyInto(out *F4dpAzStgv1Spec) {
 		**out = **in
 	}
 	out.ProviderRef = in.ProviderRef
-	if in.AccountKind != nil {
-		in, out := &in.AccountKind, &out.AccountKind
-		*out = make(json.RawMessage, len(*in))
-		copy(*out, *in)
-	}
 	if in.Blobs != nil {
 		in, out := &in.Blobs, &out.Blobs
 		*out = make([]F4dpAzStgv1Blobs, len(*in))

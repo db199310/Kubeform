@@ -50,7 +50,7 @@ type F4dpAzStgv1Spec struct {
 
 	// +optional
 	// Account Kind
-	AccountKind json.RawMessage `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
+	AccountKind string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 	// +optional
 	// Account tier default is Standard
 	AccountTier string `json:"accountTier,omitempty" tf:"account_tier,omitempty"`

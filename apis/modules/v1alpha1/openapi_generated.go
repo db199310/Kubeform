@@ -14866,7 +14866,7 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 						SchemaProps: spec.SchemaProps{
 							Description: "Account Kind",
 							Type:        []string{"string"},
-							Format:      "byte",
+							Format:      "",
 						},
 					},
 					"accountTier": {
