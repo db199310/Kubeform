@@ -880,6 +880,8 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzSqls().Informer()}, nil
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazstgv1s"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzStgv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazfnv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzFnv1s().Informer()}, nil
 
 	}
 
