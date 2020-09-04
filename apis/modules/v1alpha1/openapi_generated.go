@@ -15432,6 +15432,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 							},
 						},
 					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"integrationSubnetID": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Subnet IDS for VNet integration",
@@ -15552,7 +15559,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "resourceGroupName", "workStream"},
+				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{

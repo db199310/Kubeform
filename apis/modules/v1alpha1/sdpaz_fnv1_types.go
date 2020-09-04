@@ -75,6 +75,9 @@ type SDPAzFnv1Spec struct {
 	// Additional tags for the App Service resources, in addition to the resource group tags.
 	FnAppAdditionalTags map[string]string `json:"fnAppAdditionalTags,omitempty" tf:"fn_app_additional_tags,omitempty"`
 	// +optional
+	// Instance number
+	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
+	// +optional
 	// Subnet IDS for VNet integration
 	IntegrationSubnetID string `json:"integrationSubnetID,omitempty" tf:"integration_subnet_id,omitempty"`
 	// name suffix for the function app
@@ -97,8 +100,9 @@ type SDPAzFnv1Spec struct {
 	// +optional
 	// releaseVersion
 	ReleaseVersion json.RawMessage `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
+	// +optional
 	// Resource Group name where the fn app needs to be created
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	// +optional
 	// Run time version of the Fn app
 	RuntimeVersion string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`

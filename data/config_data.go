@@ -32,7 +32,7 @@ var ModuleConfig = []Config{
 		"F4dpAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.3.0", "azurerm", "", "",
 	},
 	{
-		"SDPAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.4.1", "azurerm", "", "",
+		"SDPAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.4.2", "azurerm", "", "",
 	},
 	{
 		"F4dpAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.1", "azurerm", "", "",

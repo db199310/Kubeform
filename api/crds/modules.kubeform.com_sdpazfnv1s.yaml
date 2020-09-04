@@ -83,6 +83,9 @@ spec:
               description: Additional tags for the App Service resources, in addition
                 to the resource group tags.
               type: object
+            instance:
+              description: Instance number
+              type: string
             integrationSubnetID:
               description: Subnet IDS for VNet integration
               type: string
@@ -181,7 +184,6 @@ spec:
           - projectStream
           - providerRef
           - region
-          - resourceGroupName
           - workStream
           type: object
         status:
