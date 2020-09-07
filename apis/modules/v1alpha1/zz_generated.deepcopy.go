@@ -1647,6 +1647,13 @@ func (in *SDPAzAppv1Spec) DeepCopyInto(out *SDPAzAppv1Spec) {
 			(*out)[key] = val
 		}
 	}
+	if in.AppsvcAdditionalTags != nil {
+		in, out := &in.AppsvcAdditionalTags, &out.AppsvcAdditionalTags
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	if in.AuthSettings != nil {
 		in, out := &in.AuthSettings, &out.AuthSettings
 		*out = make(map[string]SDPAzAppv1AuthSettings, len(*in))
@@ -1654,46 +1661,9 @@ func (in *SDPAzAppv1Spec) DeepCopyInto(out *SDPAzAppv1Spec) {
 			(*out)[key] = *val.DeepCopy()
 		}
 	}
-	if in.ClientAffinityEnabled != nil {
-		in, out := &in.ClientAffinityEnabled, &out.ClientAffinityEnabled
-		*out = new(bool)
-		**out = **in
-	}
 	if in.ConnectionStrings != nil {
 		in, out := &in.ConnectionStrings, &out.ConnectionStrings
 		*out = make([]SDPAzAppv1ConnectionStrings, len(*in))
-		copy(*out, *in)
-	}
-	if in.CreateApplicationInsightsResource != nil {
-		in, out := &in.CreateApplicationInsightsResource, &out.CreateApplicationInsightsResource
-		*out = new(bool)
-		**out = **in
-	}
-	if in.FnAppAdditionalTags != nil {
-		in, out := &in.FnAppAdditionalTags, &out.FnAppAdditionalTags
-		*out = make(map[string]string, len(*in))
-		for key, val := range *in {
-			(*out)[key] = val
-		}
-	}
-	if in.FnEnabled != nil {
-		in, out := &in.FnEnabled, &out.FnEnabled
-		*out = new(bool)
-		**out = **in
-	}
-	if in.FnRequired != nil {
-		in, out := &in.FnRequired, &out.FnRequired
-		*out = new(bool)
-		**out = **in
-	}
-	if in.Identity != nil {
-		in, out := &in.Identity, &out.Identity
-		*out = make(json.RawMessage, len(*in))
-		copy(*out, *in)
-	}
-	if in.ReleaseVersion != nil {
-		in, out := &in.ReleaseVersion, &out.ReleaseVersion
-		*out = make(json.RawMessage, len(*in))
 		copy(*out, *in)
 	}
 	if in.SiteConfig != nil {
@@ -1715,10 +1685,10 @@ func (in *SDPAzAppv1Spec) DeepCopyInto(out *SDPAzAppv1Spec) {
 		*out = make(json.RawMessage, len(*in))
 		copy(*out, *in)
 	}
-	if in.VnetIntegrationRequired != nil {
-		in, out := &in.VnetIntegrationRequired, &out.VnetIntegrationRequired
-		*out = new(bool)
-		**out = **in
+	if in.StorageAccount != nil {
+		in, out := &in.StorageAccount, &out.StorageAccount
+		*out = make(json.RawMessage, len(*in))
+		copy(*out, *in)
 	}
 	return
 }

@@ -15243,15 +15243,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Output(ref common.Reference
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"fnApp": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Map output of the Fnapp Services",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-				},
 			},
 		},
 	}
@@ -15278,12 +15269,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1SiteConfig(ref common.Refer
 					"http2Enabled": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"linuxFxVersion": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
 							Format: "",
 						},
 					},
@@ -15365,9 +15350,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							Format:      "byte",
 						},
 					},
+					"appCommandLine": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App command line",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"appSettings": {
 						SchemaProps: spec.SchemaProps{
-							Description: "App Settings. Package deploy configured",
+							Description: "App Settings",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,
@@ -15387,76 +15379,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
-					"authSettings": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Authentication Settings",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1AuthSettings"),
-									},
-								},
-							},
-						},
-					},
-					"clientAffinityEnabled": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Should client affinity be enabled?",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"connectionStrings": {
-						SchemaProps: spec.SchemaProps{
-							Description: "connection strings for fn app",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1ConnectionStrings"),
-									},
-								},
-							},
-						},
-					},
-					"createApplicationInsightsResource": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Require application insights resource?",
-							Type:        []string{"boolean"},
-							Format:      "",
-						},
-					},
-					"environment": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Environment",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"existingAspName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Existing App Service plan name",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"existingAspResGrpName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Existing App Service plan resource Group",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"fnAppName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the Fn App. Has to be unique worldwide",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"fnAppAdditionalTags": {
+					"appsvcAdditionalTags": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Additional tags for the App Service resources, in addition to the resource group tags.",
 							Type:        []string{"object"},
@@ -15471,37 +15394,106 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							},
 						},
 					},
-					"fnEnabled": {
+					"authSettings": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Should fn app be enabled?",
-							Type:        []string{"boolean"},
-							Format:      "",
+							Description: "Authentication Settings",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1AuthSettings"),
+									},
+								},
+							},
 						},
 					},
-					"fnRequired": {
+					"connectionStrings": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Is Fn app required?",
-							Type:        []string{"boolean"},
-							Format:      "",
+							Description: "connection strings for appsvc app",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1ConnectionStrings"),
+									},
+								},
+							},
 						},
 					},
-					"fnappVersion": {
+					"dotnetFrameworkVersion": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Run time version of the Fn app",
+							Description: "Dotnet framework version",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"identity": {
+					"environment": {
 						SchemaProps: spec.SchemaProps{
-							Description: "identity for fn app. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Description: "Environment. upto 5 Character. For e.g. dev, dev01, prd01",
 							Type:        []string{"string"},
-							Format:      "byte",
+							Format:      "",
+						},
+					},
+					"existingAspName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Services plan name.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan resource Group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"integrationSubnetID": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Subnet IDS for VNet integration",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"javaContainer": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Java container - JAVA ,JETTY, TOMCAT",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"javaContainerVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Java Container Version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"javaVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Java Version",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"linuxFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Linux Docker container image",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nameSuffix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Service resourcess name prefix.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15527,9 +15519,23 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"projectStream": {
 						SchemaProps: spec.SchemaProps{
 							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"pythonVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Python Version",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15545,19 +15551,19 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 						SchemaProps: spec.SchemaProps{
 							Description: "releaseVersion",
 							Type:        []string{"string"},
-							Format:      "byte",
+							Format:      "",
 						},
 					},
-					"resGrpName": {
+					"resourceGroupName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Resource Group name where the fn app needs to be created",
+							Description: "The App Service resources group name.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"siteConfig": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Site config block for Fn app",
+							Description: "Site config block for appsvc",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,
@@ -15571,7 +15577,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 					},
 					"siteConfigCors": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Site config core parameters for Fn app",
+							Description: "site config cors parameters for appsvc",
 							Type:        []string{"object"},
 							AdditionalProperties: &spec.SchemaOrBool{
 								Allows: true,
@@ -15585,27 +15591,34 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 					},
 					"siteConfigIPRestrictions": {
 						SchemaProps: spec.SchemaProps{
-							Description: "site config ip restrictions block parameters for fn app",
+							Description: "site config ip restrctions block parameters for appsvc",
 							Type:        []string{"string"},
 							Format:      "byte",
 						},
 					},
-					"sourcezip": {
+					"storageAccount": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Zip file location to be used to do the deployment. Should be publicly accessible",
+							Description: "Storage account to store app logs",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"windowsFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Windows Docker container image",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"vnetIntegrationRequired": {
+					"workStream": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Vnet integration required for the function app?",
-							Type:        []string{"boolean"},
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "fnAppName", "owner", "region", "resGrpName"},
+				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{

@@ -52,51 +52,54 @@ type SDPAzAppv1Spec struct {
 	// A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html
 	ActiveDirectory json.RawMessage `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 	// +optional
-	// App Settings. Package deploy configured
+	// App command line
+	AppCommandLine string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+	// +optional
+	// App Settings
 	AppSettings map[string]string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 	// +optional
 	// App insights type
 	ApplicationInsightsType string `json:"applicationInsightsType,omitempty" tf:"application_insights_type,omitempty"`
 	// +optional
+	// Additional tags for the App Service resources, in addition to the resource group tags.
+	AppsvcAdditionalTags map[string]string `json:"appsvcAdditionalTags,omitempty" tf:"appsvc_additional_tags,omitempty"`
+	// +optional
 	// Authentication Settings
 	AuthSettings map[string]SDPAzAppv1AuthSettings `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 	// +optional
-	// Should client affinity be enabled?
-	ClientAffinityEnabled *bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
-	// +optional
-	// connection strings for fn app
+	// connection strings for appsvc app
 	ConnectionStrings []SDPAzAppv1ConnectionStrings `json:"connectionStrings,omitempty" tf:"connection_strings,omitempty"`
 	// +optional
-	// Require application insights resource?
-	CreateApplicationInsightsResource *bool `json:"createApplicationInsightsResource,omitempty" tf:"create_application_insights_resource,omitempty"`
-	// Environment
+	// Dotnet framework version
+	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
+	// Environment. upto 5 Character. For e.g. dev, dev01, prd01
 	Environment string `json:"environment" tf:"environment"`
 	// +optional
-	// Existing App Service plan name
+	// Existing App Services plan name.
 	ExistingAspName string `json:"existingAspName,omitempty" tf:"existing_asp_name,omitempty"`
 	// +optional
 	// Existing App Service plan resource Group
-	ExistingAspResGrpName string `json:"existingAspResGrpName,omitempty" tf:"existing_asp_res_grp_name,omitempty"`
-	// Name of the Fn App. Has to be unique worldwide
-	FnAppName string `json:"fnAppName" tf:"fnAppName"`
+	ExistingAspResourceGroupName string `json:"existingAspResourceGroupName,omitempty" tf:"existing_asp_resource_group_name,omitempty"`
 	// +optional
-	// Additional tags for the App Service resources, in addition to the resource group tags.
-	FnAppAdditionalTags map[string]string `json:"fnAppAdditionalTags,omitempty" tf:"fn_app_additional_tags,omitempty"`
-	// +optional
-	// Should fn app be enabled?
-	FnEnabled *bool `json:"fnEnabled,omitempty" tf:"fn_enabled,omitempty"`
-	// +optional
-	// Is Fn app required?
-	FnRequired *bool `json:"fnRequired,omitempty" tf:"fn_required,omitempty"`
-	// +optional
-	// Run time version of the Fn app
-	FnappVersion string `json:"fnappVersion,omitempty" tf:"fnapp_version,omitempty"`
-	// +optional
-	// identity for fn app. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html
-	Identity json.RawMessage `json:"identity,omitempty" tf:"identity,omitempty"`
+	// Instance number
+	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
 	// +optional
 	// Subnet IDS for VNet integration
 	IntegrationSubnetID string `json:"integrationSubnetID,omitempty" tf:"integration_subnet_id,omitempty"`
+	// +optional
+	// Java container - JAVA ,JETTY, TOMCAT
+	JavaContainer string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
+	// +optional
+	// Java Container Version
+	JavaContainerVersion string `json:"javaContainerVersion,omitempty" tf:"java_container_version,omitempty"`
+	// +optional
+	// Java Version
+	JavaVersion string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
+	// +optional
+	// Linux Docker container image
+	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
+	// App Service resourcess name prefix.
+	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
 	// +optional
 	// OS Type for the fn app. Should match with App Service plan
 	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
@@ -107,29 +110,37 @@ type SDPAzAppv1Spec struct {
 	Placement string `json:"placement,omitempty" tf:"placement,omitempty"`
 	// +optional
 	// project stream name
-	ProjectStream string `json:"projectStream,omitempty" tf:"projectStream,omitempty"`
+	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	// project stream name
+	ProjectStream string `json:"projectStream" tf:"projectStream"`
+	// +optional
+	// Python Version
+	PythonVersion string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 	// region
 	Region string `json:"region" tf:"region"`
 	// +optional
 	// releaseVersion
-	ReleaseVersion json.RawMessage `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
-	// Resource Group name where the fn app needs to be created
-	ResGrpName string `json:"resGrpName" tf:"res_grp_name"`
+	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
 	// +optional
-	// Site config block for Fn app
+	// The App Service resources group name.
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+	// +optional
+	// Site config block for appsvc
 	SiteConfig map[string]SDPAzAppv1SiteConfig `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 	// +optional
-	// Site config core parameters for Fn app
+	// site config cors parameters for appsvc
 	SiteConfigCors map[string]SDPAzAppv1SiteConfigCors `json:"siteConfigCors,omitempty" tf:"site_config_cors,omitempty"`
 	// +optional
-	// site config ip restrictions block parameters for fn app
+	// site config ip restrctions block parameters for appsvc
 	SiteConfigIPRestrictions json.RawMessage `json:"siteConfigIPRestrictions,omitempty" tf:"site_config_ip_restrictions,omitempty"`
 	// +optional
-	// Zip file location to be used to do the deployment. Should be publicly accessible
-	Sourcezip string `json:"sourcezip,omitempty" tf:"sourcezip,omitempty"`
+	// Storage account to store app logs
+	StorageAccount json.RawMessage `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 	// +optional
-	// Vnet integration required for the function app?
-	VnetIntegrationRequired *bool `json:"vnetIntegrationRequired,omitempty" tf:"vnet_integration_required,omitempty"`
+	// Windows Docker container image
+	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
+	//  4 character project stream name/code
+	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
 type SDPAzAppv1AuthSettings struct {
@@ -154,8 +165,6 @@ type SDPAzAppv1SiteConfig struct {
 	// +optional
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 	// +optional
-	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
-	// +optional
 	Use32BitWorkerProcess *bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
 	// +optional
 	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
@@ -168,11 +177,7 @@ type SDPAzAppv1SiteConfigCors struct {
 	SupportCredentials string `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
-type SDPAzAppv1Output struct {
-	// Map output of the Fnapp Services
-	// +optional
-	FnApp string `json:"fnApp" tf:"fn_app"`
-}
+type SDPAzAppv1Output struct{}
 
 type SDPAzAppv1Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
