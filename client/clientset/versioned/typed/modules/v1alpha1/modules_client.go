@@ -32,6 +32,7 @@ type ModulesV1alpha1Interface interface {
 	F4dpAzFnv1sGetter
 	F4dpAzSqlsGetter
 	F4dpAzStgv1sGetter
+	SDPAzAppv1sGetter
 	SDPAzFnv1sGetter
 }
 
@@ -58,6 +59,10 @@ func (c *ModulesV1alpha1Client) F4dpAzSqls(namespace string) F4dpAzSqlInterface 
 
 func (c *ModulesV1alpha1Client) F4dpAzStgv1s(namespace string) F4dpAzStgv1Interface {
 	return newF4dpAzStgv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzAppv1s(namespace string) SDPAzAppv1Interface {
+	return newSDPAzAppv1s(c, namespace)
 }
 
 func (c *ModulesV1alpha1Client) SDPAzFnv1s(namespace string) SDPAzFnv1Interface {

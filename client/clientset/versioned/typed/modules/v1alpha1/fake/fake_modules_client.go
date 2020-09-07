@@ -48,6 +48,10 @@ func (c *FakeModulesV1alpha1) F4dpAzStgv1s(namespace string) v1alpha1.F4dpAzStgv
 	return &FakeF4dpAzStgv1s{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) SDPAzAppv1s(namespace string) v1alpha1.SDPAzAppv1Interface {
+	return &FakeSDPAzAppv1s{c, namespace}
+}
+
 func (c *FakeModulesV1alpha1) SDPAzFnv1s(namespace string) v1alpha1.SDPAzFnv1Interface {
 	return &FakeSDPAzFnv1s{c, namespace}
 }
