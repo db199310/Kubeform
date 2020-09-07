@@ -185,6 +185,7 @@ spec:
           - providerRef
           - region
           - workStream
+          - osType
           type: object
         status:
           properties:
