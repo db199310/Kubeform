@@ -340,6 +340,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfigCors":                 schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1SiteConfigCors(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Spec":                           schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1":                              schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1List":                          schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output":                        schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Spec":                          schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Status":                        schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Status(ref),
 	}
 }
 
@@ -16175,5 +16180,351 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref common.ReferenceC
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SDPAzSqlv1List is a list of SDPAzSqlv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of SDPAzSqlv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"additionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional set of tags",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"enableHA": {
+						SchemaProps: spec.SchemaProps{
+							Description: "If set to true, enable Failover Group",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingResourceGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "existing resource group name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault name to store SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault resource group name for SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region. Choose from australia, europe, asia, europe",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource Group Name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlAdminUsername": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SQL Server username",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbEdition": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Edition of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlDbRequestedServiceObjectiveName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Requested Service Objective Name of the SQL DB",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlFwRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n\n\t   Map of SQL Firewall Rules in the following format:\n\n\t     \"Name\" = [\"StartIP\", \"EndIP\"]",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "byte",
+									},
+								},
+							},
+						},
+					},
+					"sqlPasswordKeyname": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Key name of the secret to be stored in KeyVault for SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlServerName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name of the SQL Server",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"sqlVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Version of Azure SQL Server",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "environment", "owner", "projectStream", "region", "sqlAdminUsername", "sqlDbName", "sqlServerName", "workStream"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output"},
 	}
 }

@@ -40,4 +40,7 @@ var ModuleConfig = []Config{
 	{
 		"F4dpAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.1", "azurerm", "", "",
 	},
+	{
+		"SDPAzSqlv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.0", "azurerm", "", "",
+	},
 }
