@@ -47,6 +47,13 @@
       "provider": "azurerm",
       "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
       "subDirectory": ""
+    },
+    {
+      "name": "SDPAzSqlv1",
+      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.0",
+      "provider": "azurerm",
+      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-sqldb/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+      "subDirectory": ""
     }
 
 ]
