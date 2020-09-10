@@ -68,6 +68,8 @@ type SDPAzSqlv1Spec struct {
 	// +optional
 	// Azure Keyvault resource group name for SQL password
 	KvResourceGroupName string `json:"kvResourceGroupName,omitempty" tf:"kv_resource_group_name,omitempty"`
+	// Name suffix used for SQL server name and resource group
+	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional
@@ -83,9 +85,6 @@ type SDPAzSqlv1Spec struct {
 	// +optional
 	// releaseVersion
 	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
-	// +optional
-	// Resource Group Name
-	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	// SQL Server username
 	SqlAdminUsername string `json:"sqlAdminUsername" tf:"sql_admin_username"`
 	// +optional
@@ -104,11 +103,6 @@ type SDPAzSqlv1Spec struct {
 
 	*/
 	SqlFwRules map[string]json.RawMessage `json:"sqlFwRules,omitempty" tf:"sql_fw_rules,omitempty"`
-	// +optional
-	// Key name of the secret to be stored in KeyVault for SQL password
-	SqlPasswordKeyname string `json:"sqlPasswordKeyname,omitempty" tf:"sql_password_keyname,omitempty"`
-	// Name of the SQL Server
-	SqlServerName string `json:"sqlServerName" tf:"sql_server_name"`
 	// +optional
 	// Version of Azure SQL Server
 	SqlVersion string `json:"sqlVersion,omitempty" tf:"sql_version,omitempty"`

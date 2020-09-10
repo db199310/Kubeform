@@ -16362,6 +16362,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"nameSuffix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name suffix used for SQL server name and resource group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"owner": {
 						SchemaProps: spec.SchemaProps{
 							Description: "owner",
@@ -16400,13 +16407,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 					"releaseVersion": {
 						SchemaProps: spec.SchemaProps{
 							Description: "releaseVersion",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"resourceGroupName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Resource Group Name",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16454,20 +16454,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 							},
 						},
 					},
-					"sqlPasswordKeyname": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Key name of the secret to be stored in KeyVault for SQL password",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
-					"sqlServerName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Name of the SQL Server",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"sqlVersion": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Version of Azure SQL Server",
@@ -16483,7 +16469,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "owner", "projectStream", "region", "sqlAdminUsername", "sqlDbName", "sqlServerName", "workStream"},
+				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "sqlAdminUsername", "sqlDbName", "workStream"},
 			},
 		},
 		Dependencies: []string{

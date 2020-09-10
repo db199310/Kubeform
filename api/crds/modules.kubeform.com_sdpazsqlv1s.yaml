@@ -59,6 +59,9 @@ spec:
             kvResourceGroupName:
               description: Azure Keyvault resource group name for SQL password
               type: string
+            nameSuffix:
+              description: Name suffix used for SQL server name and resource group
+              type: string
             owner:
               description: owner
               type: string
@@ -85,9 +88,6 @@ spec:
               type: string
             releaseVersion:
               description: releaseVersion
-              type: string
-            resourceGroupName:
-              description: Resource Group Name
               type: string
             secretRef:
               description: LocalObjectReference contains enough information to let
@@ -122,13 +122,6 @@ spec:
               description: "\t   Map of SQL Firewall Rules in the following format:
                 \n \t     \"Name\" = [\"StartIP\", \"EndIP\"]"
               type: object
-            sqlPasswordKeyname:
-              description: Key name of the secret to be stored in KeyVault for SQL
-                password
-              type: string
-            sqlServerName:
-              description: Name of the SQL Server
-              type: string
             sqlVersion:
               description: Version of Azure SQL Server
               type: string
@@ -137,13 +130,13 @@ spec:
               type: string
           required:
           - environment
+          - nameSuffix
           - owner
           - projectStream
           - providerRef
           - region
           - sqlAdminUsername
           - sqlDbName
-          - sqlServerName
           - workStream
           type: object
         status:
