@@ -80,6 +80,9 @@ type SDPAzFnv1Spec struct {
 	// +optional
 	// Subnet IDS for VNet integration
 	IntegrationSubnetID string `json:"integrationSubnetID,omitempty" tf:"integration_subnet_id,omitempty"`
+	// +optional
+	// Linux Docker image to use
+	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
 	// name suffix for the function app
 	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
 	// +optional
@@ -99,7 +102,7 @@ type SDPAzFnv1Spec struct {
 	Region string `json:"region" tf:"region"`
 	// +optional
 	// releaseVersion
-	ReleaseVersion json.RawMessage `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
+	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
 	// +optional
 	// Resource Group name where the fn app needs to be created
 	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -140,8 +143,6 @@ type SDPAzFnv1SiteConfig struct {
 	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 	// +optional
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
-	// +optional
-	LinuxFxVersion string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
 	// +optional
 	Use32BitWorkerProcess *bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
 	// +optional

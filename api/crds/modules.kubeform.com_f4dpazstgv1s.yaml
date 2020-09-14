@@ -42,6 +42,11 @@ spec:
             accountTier:
               description: Account tier default is Standard
               type: string
+            additionalTags:
+              additionalProperties:
+                type: string
+              description: The tags to associate with assets
+              type: object
             blobs:
               description: List of Blobs
               items:
@@ -63,6 +68,16 @@ spec:
               items:
                 type: string
               type: array
+            environment:
+              description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+              type: string
+            existingResourceGroup:
+              description: The name of the resource group in which to create the storage
+                account. Changing this forces a new resource to be created.
+              type: string
+            instance:
+              description: Instance number
+              type: string
             ipRules:
               description: Ip Rules
               items:
@@ -70,9 +85,22 @@ spec:
               type: array
             isHnsEnabled:
               type: boolean
-            location:
-              description: Specifies the supported Azure location where the resource
-                exists. Changing this forces a new resource to be created.
+            nameSuffix:
+              description: Specifies the name suffix of storage account in which to
+                create the storage container. Changing this forces a new resource
+                to be created.
+              type: string
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            project:
+              description: project stream name
+              type: string
+            projectStream:
+              description: ' 4 character project stream name/code'
               type: string
             providerRef:
               description: LocalObjectReference contains enough information to let
@@ -88,12 +116,14 @@ spec:
               items:
                 type: string
               type: array
+            region:
+              description: region. Choose from australia, europe, asia, europe
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
             replicationType:
               description: Sepcify replication type default is LRS
-              type: string
-            resourceGroupName:
-              description: The name of the resource group in which to create the storage
-                account. Changing this forces a new resource to be created.
               type: string
             secretRef:
               description: LocalObjectReference contains enough information to let
@@ -117,10 +147,6 @@ spec:
               type: array
             source:
               type: string
-            storageAccountName:
-              description: Specifies the storage account in which to create the storage
-                container. Changing this forces a new resource to be created.
-              type: string
             subnetID:
               description: The vnet subnet id
               items:
@@ -135,16 +161,17 @@ spec:
               items:
                 type: string
               type: array
-            tags:
-              additionalProperties:
-                type: string
-              description: The tags to associate with assets
-              type: object
+            workStream:
+              description: ' 4 character project stream name/code'
+              type: string
           required:
-          - location
+          - environment
+          - nameSuffix
+          - owner
+          - projectStream
           - providerRef
-          - resourceGroupName
-          - storageAccountName
+          - region
+          - workStream
           type: object
         status:
           properties:
@@ -155,10 +182,6 @@ spec:
               type: integer
             output:
               properties:
-                storageAccountContainerName:
-                  type: string
-                storageAccountID:
-                  type: string
                 storageAccountName:
                   type: string
               type: object

@@ -14815,18 +14815,6 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Output(ref common.Referenc
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"storageAccountContainerName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"storageAccountID": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"storageAccountName": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -14899,6 +14887,21 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							Format:      "",
 						},
 					},
+					"additionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to associate with assets",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
 					"blobs": {
 						SchemaProps: spec.SchemaProps{
 							Description: "List of Blobs",
@@ -14940,6 +14943,27 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							},
 						},
 					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingResourceGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"ipRules": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Ip Rules",
@@ -14960,9 +14984,37 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							Format: "",
 						},
 					},
-					"location": {
+					"nameSuffix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.",
+							Description: "Specifies the name suffix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -14981,16 +15033,23 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							},
 						},
 					},
-					"replicationType": {
+					"region": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Sepcify replication type default is LRS",
+							Description: "region. Choose from australia, europe, asia, europe",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"resourceGroupName": {
+					"releaseVersion": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"replicationType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sepcify replication type default is LRS",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15006,13 +15065,6 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 									},
 								},
 							},
-						},
-					},
-					"storageAccountName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.",
-							Type:        []string{"string"},
-							Format:      "",
 						},
 					},
 					"subnetID": {
@@ -15043,23 +15095,15 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							},
 						},
 					},
-					"tags": {
+					"workStream": {
 						SchemaProps: spec.SchemaProps{
-							Description: "The tags to associate with assets",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 				},
-				Required: []string{"providerRef", "location", "resourceGroupName", "storageAccountName"},
+				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{
@@ -15841,12 +15885,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1SiteConfig(ref common.Refere
 							Format: "",
 						},
 					},
-					"linuxFxVersion": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
 					"use32BitWorkerProcess": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
@@ -16024,6 +16062,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 							Format:      "",
 						},
 					},
+					"linuxFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Linux Docker image to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"nameSuffix": {
 						SchemaProps: spec.SchemaProps{
 							Description: "name suffix for the function app",
@@ -16077,7 +16122,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 						SchemaProps: spec.SchemaProps{
 							Description: "releaseVersion",
 							Type:        []string{"string"},
-							Format:      "byte",
+							Format:      "",
 						},
 					},
 					"resourceGroupName": {
@@ -16318,6 +16363,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 									},
 								},
 							},
+						},
+					},
+					"collation": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Collation of SQL Database",
+							Type:        []string{"string"},
+							Format:      "",
 						},
 					},
 					"enableHA": {

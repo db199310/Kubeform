@@ -52,6 +52,9 @@ type SDPAzSqlv1Spec struct {
 	// Additional set of tags
 	AdditionalTags map[string]string `json:"additionalTags,omitempty" tf:"additional_tags,omitempty"`
 	// +optional
+	// Collation of SQL Database
+	Collation string `json:"collation,omitempty" tf:"collation,omitempty"`
+	// +optional
 	// If set to true, enable Failover Group
 	EnableHA *bool `json:"enableHA,omitempty" tf:"enable_HA,omitempty"`
 	// Environment. Upto 5 character. For e.g. dev, dev01 , prd01

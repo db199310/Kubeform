@@ -1363,6 +1363,13 @@ func (in *F4dpAzStgv1Spec) DeepCopyInto(out *F4dpAzStgv1Spec) {
 		**out = **in
 	}
 	out.ProviderRef = in.ProviderRef
+	if in.AdditionalTags != nil {
+		in, out := &in.AdditionalTags, &out.AdditionalTags
+		*out = make(map[string]string, len(*in))
+		for key, val := range *in {
+			(*out)[key] = val
+		}
+	}
 	if in.Blobs != nil {
 		in, out := &in.Blobs, &out.Blobs
 		*out = make([]F4dpAzStgv1Blobs, len(*in))
@@ -1413,13 +1420,6 @@ func (in *F4dpAzStgv1Spec) DeepCopyInto(out *F4dpAzStgv1Spec) {
 		in, out := &in.Tables, &out.Tables
 		*out = make([]string, len(*in))
 		copy(*out, *in)
-	}
-	if in.Tags != nil {
-		in, out := &in.Tags, &out.Tags
-		*out = make(map[string]string, len(*in))
-		for key, val := range *in {
-			(*out)[key] = val
-		}
 	}
 	return
 }
@@ -1939,11 +1939,6 @@ func (in *SDPAzFnv1Spec) DeepCopyInto(out *SDPAzFnv1Spec) {
 		for key, val := range *in {
 			(*out)[key] = val
 		}
-	}
-	if in.ReleaseVersion != nil {
-		in, out := &in.ReleaseVersion, &out.ReleaseVersion
-		*out = make(json.RawMessage, len(*in))
-		copy(*out, *in)
 	}
 	if in.SiteConfig != nil {
 		in, out := &in.SiteConfig, &out.SiteConfig

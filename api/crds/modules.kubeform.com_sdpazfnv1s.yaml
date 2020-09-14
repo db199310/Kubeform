@@ -89,6 +89,9 @@ spec:
             integrationSubnetID:
               description: Subnet IDS for VNet integration
               type: string
+            linuxFxVersion:
+              description: Linux Docker image to use
+              type: string
             nameSuffix:
               description: name suffix for the function app
               type: string
@@ -121,7 +124,6 @@ spec:
               type: string
             releaseVersion:
               description: releaseVersion
-              format: byte
               type: string
             resourceGroupName:
               description: Resource Group name where the fn app needs to be created
@@ -147,8 +149,6 @@ spec:
                     type: string
                   http2Enabled:
                     type: boolean
-                  linuxFxVersion:
-                    type: string
                   use32BitWorkerProcess:
                     type: boolean
                   websocketsEnabled:

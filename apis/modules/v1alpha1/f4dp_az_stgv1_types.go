@@ -55,6 +55,9 @@ type F4dpAzStgv1Spec struct {
 	// Account tier default is Standard
 	AccountTier string `json:"accountTier,omitempty" tf:"account_tier,omitempty"`
 	// +optional
+	// The tags to associate with assets
+	AdditionalTags map[string]string `json:"additionalTags,omitempty" tf:"additional_tags,omitempty"`
+	// +optional
 	// List of Blobs
 	Blobs []F4dpAzStgv1Blobs `json:"blobs,omitempty" tf:"blobs,omitempty"`
 	// +optional
@@ -63,35 +66,53 @@ type F4dpAzStgv1Spec struct {
 	// +optional
 	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
 	Containers []string `json:"containers,omitempty" tf:"containers,omitempty"`
+	// Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+	Environment string `json:"environment" tf:"environment"`
+	// +optional
+	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
+	ExistingResourceGroup string `json:"existingResourceGroup,omitempty" tf:"existing_resource_group,omitempty"`
+	// +optional
+	// Instance number
+	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
 	// +optional
 	// Ip Rules
 	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 	// +optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location string `json:"location" tf:"location"`
+	// Specifies the name suffix of storage account in which to create the storage container. Changing this forces a new resource to be created.
+	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
+	// owner
+	Owner string `json:"owner" tf:"owner"`
+	// +optional
+	// placement
+	Placement string `json:"placement,omitempty" tf:"placement,omitempty"`
+	// +optional
+	// project stream name
+	Project string `json:"project,omitempty" tf:"project,omitempty"`
+	//  4 character project stream name/code
+	ProjectStream string `json:"projectStream" tf:"projectStream"`
 	// +optional
 	// List of Storage Queues
 	Queues []string `json:"queues,omitempty" tf:"queues,omitempty"`
+	// region. Choose from australia, europe, asia, europe
+	Region string `json:"region" tf:"region"`
+	// +optional
+	// releaseVersion
+	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
 	// +optional
 	// Sepcify replication type default is LRS
 	ReplicationType string `json:"replicationType,omitempty" tf:"replication_type,omitempty"`
-	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	// List of Storage shares
 	Shares []F4dpAzStgv1Shares `json:"shares,omitempty" tf:"shares,omitempty"`
-	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 	// +optional
 	// The vnet subnet id
 	SubnetID []json.RawMessage `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
 	// +optional
 	// List of storage tables
 	Tables []string `json:"tables,omitempty" tf:"tables,omitempty"`
-	// +optional
-	// The tags to associate with assets
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	//  4 character project stream name/code
+	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
 type F4dpAzStgv1Blobs struct {
@@ -109,12 +130,6 @@ type F4dpAzStgv1Shares struct {
 }
 
 type F4dpAzStgv1Output struct {
-	//
-	// +optional
-	StorageAccountContainerName string `json:"storageAccountContainerName" tf:"storage_account_container_name"`
-	//
-	// +optional
-	StorageAccountID string `json:"storageAccountID" tf:"storage_account_id"`
 	//
 	// +optional
 	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
