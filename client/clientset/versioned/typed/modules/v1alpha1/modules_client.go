@@ -35,6 +35,7 @@ type ModulesV1alpha1Interface interface {
 	SDPAzAppv1sGetter
 	SDPAzFnv1sGetter
 	SDPAzSqlv1sGetter
+	SDPAzadfv1sGetter
 }
 
 // ModulesV1alpha1Client is used to interact with features provided by the modules.kubeform.com group.
@@ -72,6 +73,10 @@ func (c *ModulesV1alpha1Client) SDPAzFnv1s(namespace string) SDPAzFnv1Interface 
 
 func (c *ModulesV1alpha1Client) SDPAzSqlv1s(namespace string) SDPAzSqlv1Interface {
 	return newSDPAzSqlv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzadfv1s(namespace string) SDPAzadfv1Interface {
+	return newSDPAzadfv1s(c, namespace)
 }
 
 // NewForConfig creates a new ModulesV1alpha1Client for the given config.
