@@ -42,6 +42,8 @@ type Interface interface {
 	SDPAzSqlv1s() SDPAzSqlv1Informer
 	// SDPAzadfv1s returns a SDPAzadfv1Informer.
 	SDPAzadfv1s() SDPAzadfv1Informer
+	// SDPAzsbv1s returns a SDPAzsbv1Informer.
+	SDPAzsbv1s() SDPAzsbv1Informer
 }
 
 type version struct {
@@ -98,4 +100,9 @@ func (v *version) SDPAzSqlv1s() SDPAzSqlv1Informer {
 // SDPAzadfv1s returns a SDPAzadfv1Informer.
 func (v *version) SDPAzadfv1s() SDPAzadfv1Informer {
 	return &sDPAzadfv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// SDPAzsbv1s returns a SDPAzsbv1Informer.
+func (v *version) SDPAzsbv1s() SDPAzsbv1Informer {
+	return &sDPAzsbv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }

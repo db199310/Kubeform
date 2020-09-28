@@ -64,6 +64,10 @@ func (c *FakeModulesV1alpha1) SDPAzadfv1s(namespace string) v1alpha1.SDPAzadfv1I
 	return &FakeSDPAzadfv1s{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) SDPAzsbv1s(namespace string) v1alpha1.SDPAzsbv1Interface {
+	return &FakeSDPAzsbv1s{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeModulesV1alpha1) RESTClient() rest.Interface {
