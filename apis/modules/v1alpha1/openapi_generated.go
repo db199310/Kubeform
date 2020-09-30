@@ -17176,9 +17176,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"namespaceAuthRules": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Namespace Authorization rules",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules"),
@@ -17218,9 +17217,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"queueAuthRule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Queue authorization rules",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule"),
@@ -17232,9 +17230,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"queues": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Queues for the ServiceBus namespace",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues"),
@@ -17287,9 +17284,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"subscriptionRules": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Subscription rules.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules"),
@@ -17301,9 +17297,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"subscriptions": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Subscription for the Topic in the namespace",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Subscriptions"),
@@ -17330,9 +17325,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"topicAuthRule": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Topic Authorization Rule",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule"),
@@ -17344,9 +17338,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"topics": {
 						SchemaProps: spec.SchemaProps{
 							Description: "List of topics.",
-							Type:        []string{"object"},
-							AdditionalProperties: &spec.SchemaOrBool{
-								Allows: true,
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
 										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"),

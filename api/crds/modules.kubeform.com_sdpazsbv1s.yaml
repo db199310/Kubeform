@@ -49,7 +49,8 @@ spec:
               description: The name of the namespace.
               type: string
             namespaceAuthRules:
-              additionalProperties:
+              description: Namespace Authorization rules
+              items:
                 properties:
                   listen:
                     type: boolean
@@ -60,8 +61,7 @@ spec:
                   send:
                     type: boolean
                 type: object
-              description: Namespace Authorization rules
-              type: object
+              type: array
             owner:
               description: owner
               type: string
@@ -84,7 +84,8 @@ spec:
                   type: string
               type: object
             queueAuthRule:
-              additionalProperties:
+              description: Queue authorization rules
+              items:
                 properties:
                   listen:
                     type: boolean
@@ -97,10 +98,10 @@ spec:
                   send:
                     type: boolean
                 type: object
-              description: Queue authorization rules
-              type: object
+              type: array
             queues:
-              additionalProperties:
+              description: Queues for the ServiceBus namespace
+              items:
                 properties:
                   autoDeleteOnIdle:
                     type: string
@@ -129,8 +130,7 @@ spec:
                   requiresSession:
                     type: boolean
                 type: object
-              description: Queues for the ServiceBus namespace
-              type: object
+              type: array
             region:
               description: region. Choose from australia, europe, asia, europe
               type: string
@@ -160,7 +160,8 @@ spec:
                 type: string
               type: array
             subscriptionRules:
-              additionalProperties:
+              description: Subscription rules.
+              items:
                 properties:
                   correlationFilter:
                     description: RawMessage is a raw encoded JSON value. It implements
@@ -179,10 +180,10 @@ spec:
                   topicName:
                     type: string
                 type: object
-              description: Subscription rules.
-              type: object
+              type: array
             subscriptions:
-              additionalProperties:
+              description: Subscription for the Topic in the namespace
+              items:
                 properties:
                   autoDeleteOnIdle:
                     type: string
@@ -208,15 +209,15 @@ spec:
                   topicName:
                     type: string
                 type: object
-              description: Subscription for the Topic in the namespace
-              type: object
+              type: array
             tags:
               additionalProperties:
                 type: string
               description: ' Map of tags to assign to the resources.'
               type: object
             topicAuthRule:
-              additionalProperties:
+              description: Topic Authorization Rule
+              items:
                 properties:
                   listen:
                     type: boolean
@@ -229,10 +230,10 @@ spec:
                   topicName:
                     type: string
                 type: object
-              description: Topic Authorization Rule
-              type: object
+              type: array
             topics:
-              additionalProperties:
+              description: List of topics.
+              items:
                 properties:
                   autoDeleteOnIdle:
                     type: string
@@ -258,8 +259,7 @@ spec:
                   supportOrdering:
                     type: boolean
                 type: object
-              description: List of topics.
-              type: object
+              type: array
             workStream:
               description: ' 4 character project stream name/code'
               type: string

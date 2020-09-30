@@ -2463,23 +2463,23 @@ func (in *SDPAzsbv1Spec) DeepCopyInto(out *SDPAzsbv1Spec) {
 	out.ProviderRef = in.ProviderRef
 	if in.NamespaceAuthRules != nil {
 		in, out := &in.NamespaceAuthRules, &out.NamespaceAuthRules
-		*out = make(map[string]SDPAzsbv1NamespaceAuthRules, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1NamespaceAuthRules, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.QueueAuthRule != nil {
 		in, out := &in.QueueAuthRule, &out.QueueAuthRule
-		*out = make(map[string]SDPAzsbv1QueueAuthRule, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1QueueAuthRule, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Queues != nil {
 		in, out := &in.Queues, &out.Queues
-		*out = make(map[string]SDPAzsbv1Queues, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1Queues, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.SubnetIDS != nil {
@@ -2489,16 +2489,16 @@ func (in *SDPAzsbv1Spec) DeepCopyInto(out *SDPAzsbv1Spec) {
 	}
 	if in.SubscriptionRules != nil {
 		in, out := &in.SubscriptionRules, &out.SubscriptionRules
-		*out = make(map[string]SDPAzsbv1SubscriptionRules, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1SubscriptionRules, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Subscriptions != nil {
 		in, out := &in.Subscriptions, &out.Subscriptions
-		*out = make(map[string]SDPAzsbv1Subscriptions, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1Subscriptions, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Tags != nil {
@@ -2510,16 +2510,16 @@ func (in *SDPAzsbv1Spec) DeepCopyInto(out *SDPAzsbv1Spec) {
 	}
 	if in.TopicAuthRule != nil {
 		in, out := &in.TopicAuthRule, &out.TopicAuthRule
-		*out = make(map[string]SDPAzsbv1TopicAuthRule, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1TopicAuthRule, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Topics != nil {
 		in, out := &in.Topics, &out.Topics
-		*out = make(map[string]SDPAzsbv1Topics, len(*in))
-		for key, val := range *in {
-			(*out)[key] = *val.DeepCopy()
+		*out = make([]SDPAzsbv1Topics, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	return

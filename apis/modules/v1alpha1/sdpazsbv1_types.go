@@ -60,7 +60,7 @@ type SDPAzsbv1Spec struct {
 	Name string `json:"name" tf:"name"`
 	// +optional
 	// Namespace Authorization rules
-	NamespaceAuthRules map[string]SDPAzsbv1NamespaceAuthRules `json:"namespaceAuthRules,omitempty" tf:"namespace_auth_rules,omitempty"`
+	NamespaceAuthRules []SDPAzsbv1NamespaceAuthRules `json:"namespaceAuthRules,omitempty" tf:"namespace_auth_rules,omitempty"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional
@@ -73,10 +73,10 @@ type SDPAzsbv1Spec struct {
 	ProjectStream string `json:"projectStream" tf:"projectStream"`
 	// +optional
 	// Queue authorization rules
-	QueueAuthRule map[string]SDPAzsbv1QueueAuthRule `json:"queueAuthRule,omitempty" tf:"queue_auth_rule,omitempty"`
+	QueueAuthRule []SDPAzsbv1QueueAuthRule `json:"queueAuthRule,omitempty" tf:"queue_auth_rule,omitempty"`
 	// +optional
 	// Queues for the ServiceBus namespace
-	Queues map[string]SDPAzsbv1Queues `json:"queues,omitempty" tf:"queues,omitempty"`
+	Queues []SDPAzsbv1Queues `json:"queues,omitempty" tf:"queues,omitempty"`
 	// region. Choose from australia, europe, asia, europe
 	Region string `json:"region" tf:"region"`
 	// +optional
@@ -91,19 +91,19 @@ type SDPAzsbv1Spec struct {
 	SubnetIDS []string `json:"subnetIDS,omitempty" tf:"subnet_ids,omitempty"`
 	// +optional
 	// Subscription rules.
-	SubscriptionRules map[string]SDPAzsbv1SubscriptionRules `json:"subscriptionRules,omitempty" tf:"subscription_rules,omitempty"`
+	SubscriptionRules []SDPAzsbv1SubscriptionRules `json:"subscriptionRules,omitempty" tf:"subscription_rules,omitempty"`
 	// +optional
 	// Subscription for the Topic in the namespace
-	Subscriptions map[string]SDPAzsbv1Subscriptions `json:"subscriptions,omitempty" tf:"subscriptions,omitempty"`
+	Subscriptions []SDPAzsbv1Subscriptions `json:"subscriptions,omitempty" tf:"subscriptions,omitempty"`
 	// +optional
 	//  Map of tags to assign to the resources.
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	// +optional
 	// Topic Authorization Rule
-	TopicAuthRule map[string]SDPAzsbv1TopicAuthRule `json:"topicAuthRule,omitempty" tf:"topic_auth_rule,omitempty"`
+	TopicAuthRule []SDPAzsbv1TopicAuthRule `json:"topicAuthRule,omitempty" tf:"topic_auth_rule,omitempty"`
 	// +optional
 	// List of topics.
-	Topics map[string]SDPAzsbv1Topics `json:"topics,omitempty" tf:"topics,omitempty"`
+	Topics []SDPAzsbv1Topics `json:"topics,omitempty" tf:"topics,omitempty"`
 	//  4 character project stream name/code
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
