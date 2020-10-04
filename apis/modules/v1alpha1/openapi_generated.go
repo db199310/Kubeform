@@ -359,7 +359,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Spec":                           schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules":              schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1SubscriptionRules(ref),
-		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Subscriptions":                  schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Subscriptions(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule":                  schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1TopicAuthRule(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Topics(ref),
 	}
@@ -17296,15 +17295,9 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					},
 					"subscriptions": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Subscription for the Topic in the namespace",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Subscriptions"),
-									},
-								},
-							},
+							Description: "subscription for the Topic in the namespace",
+							Type:        []string{"string"},
+							Format:      "byte",
 						},
 					},
 					"tags": {
@@ -17360,7 +17353,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Subscriptions", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
 	}
 }
 
@@ -17435,84 +17428,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1SubscriptionRules(ref common
 					"subscriptionName": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"topicName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
-	}
-}
-
-func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Subscriptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"autoDeleteOnIdle": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"deadLetteringOnMessageExpiration": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"defaultMessageTtl": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"enableBatchedOperations": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
-						},
-					},
-					"forwardDeadLetteredMessagesTo": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"forwardTo": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"lockDuration": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"maxDeliveryCount": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"requiresSession": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
 							Format: "",
 						},
 					},

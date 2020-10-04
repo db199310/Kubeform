@@ -182,34 +182,9 @@ spec:
                 type: object
               type: array
             subscriptions:
-              description: Subscription for the Topic in the namespace
-              items:
-                properties:
-                  autoDeleteOnIdle:
-                    type: string
-                  deadLetteringOnMessageExpiration:
-                    type: boolean
-                  defaultMessageTtl:
-                    type: string
-                  enableBatchedOperations:
-                    type: boolean
-                  forwardDeadLetteredMessagesTo:
-                    type: string
-                  forwardTo:
-                    type: string
-                  lockDuration:
-                    type: string
-                  maxDeliveryCount:
-                    description: A Number represents a JSON number literal.
-                    type: string
-                  name:
-                    type: string
-                  requiresSession:
-                    type: boolean
-                  topicName:
-                    type: string
-                type: object
-              type: array
+              description: subscription for the Topic in the namespace
+              format: byte
+              type: string
             tags:
               additionalProperties:
                 type: string

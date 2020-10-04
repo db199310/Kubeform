@@ -93,8 +93,8 @@ type SDPAzsbv1Spec struct {
 	// Subscription rules.
 	SubscriptionRules []SDPAzsbv1SubscriptionRules `json:"subscriptionRules,omitempty" tf:"subscription_rules,omitempty"`
 	// +optional
-	// Subscription for the Topic in the namespace
-	Subscriptions []SDPAzsbv1Subscriptions `json:"subscriptions,omitempty" tf:"subscriptions,omitempty"`
+	// subscription for the Topic in the namespace
+	Subscriptions json.RawMessage `json:"subscriptions,omitempty" tf:"subscriptions,omitempty"`
 	// +optional
 	//  Map of tags to assign to the resources.
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -170,31 +170,6 @@ type SDPAzsbv1SubscriptionRules struct {
 	SqlFilter string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
 	// +optional
 	SubscriptionName string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
-	// +optional
-	TopicName string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
-}
-
-type SDPAzsbv1Subscriptions struct {
-	// +optional
-	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
-	// +optional
-	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
-	// +optional
-	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
-	// +optional
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
-	// +optional
-	ForwardDeadLetteredMessagesTo string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
-	// +optional
-	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
-	// +optional
-	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
-	// +optional
-	MaxDeliveryCount json.Number `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
-	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
-	// +optional
-	RequiresSession *bool `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
 	// +optional
 	TopicName string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
