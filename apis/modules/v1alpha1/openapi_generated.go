@@ -358,7 +358,6 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Queues(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Spec":                           schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref),
-		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules":              schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1SubscriptionRules(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule":                  schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1TopicAuthRule(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Topics(ref),
 	}
@@ -17283,14 +17282,8 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 					"subscriptionRules": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Subscription rules.",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules"),
-									},
-								},
-							},
+							Type:        []string{"string"},
+							Format:      "byte",
 						},
 					},
 					"subscriptions": {
@@ -17353,7 +17346,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1SubscriptionRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
 	}
 }
 
@@ -17392,54 +17385,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref common.ReferenceC
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Output"},
-	}
-}
-
-func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1SubscriptionRules(ref common.ReferenceCallback) common.OpenAPIDefinition {
-	return common.OpenAPIDefinition{
-		Schema: spec.Schema{
-			SchemaProps: spec.SchemaProps{
-				Type: []string{"object"},
-				Properties: map[string]spec.Schema{
-					"correlationFilter": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "byte",
-						},
-					},
-					"filterType": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"name": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"sqlFilter": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"subscriptionName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"topicName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-				},
-			},
-		},
 	}
 }
 

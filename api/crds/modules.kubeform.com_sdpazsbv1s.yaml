@@ -161,26 +161,8 @@ spec:
               type: array
             subscriptionRules:
               description: Subscription rules.
-              items:
-                properties:
-                  correlationFilter:
-                    description: RawMessage is a raw encoded JSON value. It implements
-                      Marshaler and Unmarshaler and can be used to delay JSON decoding
-                      or precompute a JSON encoding.
-                    format: byte
-                    type: string
-                  filterType:
-                    type: string
-                  name:
-                    type: string
-                  sqlFilter:
-                    type: string
-                  subscriptionName:
-                    type: string
-                  topicName:
-                    type: string
-                type: object
-              type: array
+              format: byte
+              type: string
             subscriptions:
               description: subscription for the Topic in the namespace
               format: byte

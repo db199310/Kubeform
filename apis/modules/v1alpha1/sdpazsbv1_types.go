@@ -91,7 +91,7 @@ type SDPAzsbv1Spec struct {
 	SubnetIDS []string `json:"subnetIDS,omitempty" tf:"subnet_ids,omitempty"`
 	// +optional
 	// Subscription rules.
-	SubscriptionRules []SDPAzsbv1SubscriptionRules `json:"subscriptionRules,omitempty" tf:"subscription_rules,omitempty"`
+	SubscriptionRules json.RawMessage `json:"subscriptionRules,omitempty" tf:"subscription_rules,omitempty"`
 	// +optional
 	// subscription for the Topic in the namespace
 	Subscriptions json.RawMessage `json:"subscriptions,omitempty" tf:"subscriptions,omitempty"`
@@ -157,21 +157,6 @@ type SDPAzsbv1Queues struct {
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 	// +optional
 	RequiresSession *bool `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
-}
-
-type SDPAzsbv1SubscriptionRules struct {
-	// +optional
-	CorrelationFilter json.RawMessage `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
-	// +optional
-	FilterType string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
-	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
-	// +optional
-	SqlFilter string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
-	// +optional
-	SubscriptionName string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
-	// +optional
-	TopicName string `json:"topicName,omitempty" tf:"topic_name,omitempty"`
 }
 
 type SDPAzsbv1TopicAuthRule struct {
