@@ -34,6 +34,8 @@ type SDPAzFnv1Expansion interface{}
 
 type SDPAzSqlv1Expansion interface{}
 
+type SDPAzStgv1Expansion interface{}
+
 type SDPAzadfv1Expansion interface{}
 
 type SDPAzsbv1Expansion interface{}

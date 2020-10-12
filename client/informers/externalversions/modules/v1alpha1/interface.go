@@ -40,6 +40,8 @@ type Interface interface {
 	SDPAzFnv1s() SDPAzFnv1Informer
 	// SDPAzSqlv1s returns a SDPAzSqlv1Informer.
 	SDPAzSqlv1s() SDPAzSqlv1Informer
+	// SDPAzStgv1s returns a SDPAzStgv1Informer.
+	SDPAzStgv1s() SDPAzStgv1Informer
 	// SDPAzadfv1s returns a SDPAzadfv1Informer.
 	SDPAzadfv1s() SDPAzadfv1Informer
 	// SDPAzsbv1s returns a SDPAzsbv1Informer.
@@ -95,6 +97,11 @@ func (v *version) SDPAzFnv1s() SDPAzFnv1Informer {
 // SDPAzSqlv1s returns a SDPAzSqlv1Informer.
 func (v *version) SDPAzSqlv1s() SDPAzSqlv1Informer {
 	return &sDPAzSqlv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// SDPAzStgv1s returns a SDPAzStgv1Informer.
+func (v *version) SDPAzStgv1s() SDPAzStgv1Informer {
+	return &sDPAzStgv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SDPAzadfv1s returns a SDPAzadfv1Informer.
