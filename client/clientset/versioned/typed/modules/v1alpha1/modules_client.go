@@ -28,6 +28,16 @@ import (
 type ModulesV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	AzureAppServicesGetter
+	AzureFnAppsGetter
+	F4dpAzFnv1sGetter
+	F4dpAzSqlsGetter
+	F4dpAzStgv1sGetter
+	SDPAzAppv1sGetter
+	SDPAzFnv1sGetter
+	SDPAzSqlv1sGetter
+	SDPAzStgv1sGetter
+	SDPAzadfv1sGetter
+	SDPAzsbv1sGetter
 }
 
 // ModulesV1alpha1Client is used to interact with features provided by the modules.kubeform.com group.
@@ -37,6 +47,46 @@ type ModulesV1alpha1Client struct {
 
 func (c *ModulesV1alpha1Client) AzureAppServices(namespace string) AzureAppServiceInterface {
 	return newAzureAppServices(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) AzureFnApps(namespace string) AzureFnAppInterface {
+	return newAzureFnApps(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) F4dpAzFnv1s(namespace string) F4dpAzFnv1Interface {
+	return newF4dpAzFnv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) F4dpAzSqls(namespace string) F4dpAzSqlInterface {
+	return newF4dpAzSqls(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) F4dpAzStgv1s(namespace string) F4dpAzStgv1Interface {
+	return newF4dpAzStgv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzAppv1s(namespace string) SDPAzAppv1Interface {
+	return newSDPAzAppv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzFnv1s(namespace string) SDPAzFnv1Interface {
+	return newSDPAzFnv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzSqlv1s(namespace string) SDPAzSqlv1Interface {
+	return newSDPAzSqlv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzStgv1s(namespace string) SDPAzStgv1Interface {
+	return newSDPAzStgv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzadfv1s(namespace string) SDPAzadfv1Interface {
+	return newSDPAzadfv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzsbv1s(namespace string) SDPAzsbv1Interface {
+	return newSDPAzsbv1s(c, namespace)
 }
 
 // NewForConfig creates a new ModulesV1alpha1Client for the given config.

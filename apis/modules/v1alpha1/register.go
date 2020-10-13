@@ -57,8 +57,26 @@ func Resource(resource string) schema.GroupResource {
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 
-		&AzureAppService{},
-		&AzureAppServiceList{},
+		&F4dpAzStgv1{},
+		&F4dpAzStgv1List{},
+
+		&SDPAzAppv1{},
+		&SDPAzAppv1List{},
+
+		&SDPAzFnv1{},
+		&SDPAzFnv1List{},
+
+		&SDPAzSqlv1{},
+		&SDPAzSqlv1List{},
+
+		&SDPAzStgv1{},
+		&SDPAzStgv1List{},
+
+		&SDPAzadfv1{},
+		&SDPAzadfv1List{},
+
+		&SDPAzsbv1{},
+		&SDPAzsbv1List{},
 	)
 
 	scheme.AddKnownTypes(SchemeGroupVersion,

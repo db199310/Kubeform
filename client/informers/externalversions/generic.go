@@ -872,6 +872,26 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		// Group=modules.kubeform.com, Version=v1alpha1
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("azureappservices"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().AzureAppServices().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("azurefnapps"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().AzureFnApps().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazfnv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzFnv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazsqls"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzSqls().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("f4dpazstgv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().F4dpAzStgv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazappv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzAppv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazfnv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzFnv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazsqlv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzSqlv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazstgv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzStgv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazadfv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzadfv1s().Informer()}, nil
+	case modulesv1alpha1.SchemeGroupVersion.WithResource("sdpazsbv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().SDPAzsbv1s().Informer()}, nil
 
 	}
 

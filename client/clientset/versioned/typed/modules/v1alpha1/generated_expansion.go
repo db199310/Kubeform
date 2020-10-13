@@ -19,3 +19,23 @@ limitations under the License.
 package v1alpha1
 
 type AzureAppServiceExpansion interface{}
+
+type AzureFnAppExpansion interface{}
+
+type F4dpAzFnv1Expansion interface{}
+
+type F4dpAzSqlExpansion interface{}
+
+type F4dpAzStgv1Expansion interface{}
+
+type SDPAzAppv1Expansion interface{}
+
+type SDPAzFnv1Expansion interface{}
+
+type SDPAzSqlv1Expansion interface{}
+
+type SDPAzStgv1Expansion interface{}
+
+type SDPAzadfv1Expansion interface{}
+
+type SDPAzsbv1Expansion interface{}
