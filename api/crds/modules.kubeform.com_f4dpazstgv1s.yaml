@@ -57,11 +57,6 @@ spec:
                     type: string
                 type: object
               type: array
-            bypass:
-              description: List of services to bypass network rules
-              items:
-                type: string
-              type: array
             containers:
               description: The name of the resource group in which to create the storage
                 account. Changing this forces a new resource to be created.
@@ -78,15 +73,16 @@ spec:
             instance:
               description: Instance number
               type: string
-            ipRules:
-              description: Ip Rules
-              items:
-                type: string
-              type: array
             isHnsEnabled:
               type: boolean
-            nameSuffix:
-              description: Specifies the name suffix of storage account in which to
+            kvName:
+              description: Azure Keyvault name to store SQL password
+              type: string
+            kvResourceGroupName:
+              description: Azure Keyvault resource group name for SQL password
+              type: string
+            namePrefix:
+              description: Specifies the name Prefix of storage account in which to
                 create the storage container. Changing this forces a new resource
                 to be created.
               type: string
@@ -166,7 +162,7 @@ spec:
               type: string
           required:
           - environment
-          - nameSuffix
+          - namePrefix
           - owner
           - projectStream
           - providerRef

@@ -61,9 +61,6 @@ type F4dpAzStgv1Spec struct {
 	// List of Blobs
 	Blobs []F4dpAzStgv1Blobs `json:"blobs,omitempty" tf:"blobs,omitempty"`
 	// +optional
-	// List of services to bypass network rules
-	Bypass []string `json:"bypass,omitempty" tf:"bypass,omitempty"`
-	// +optional
 	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
 	Containers []string `json:"containers,omitempty" tf:"containers,omitempty"`
 	// Environment. Upto 5 character. For e.g. dev, dev01 , prd01
@@ -75,12 +72,15 @@ type F4dpAzStgv1Spec struct {
 	// Instance number
 	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
 	// +optional
-	// Ip Rules
-	IpRules []string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
-	// +optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
-	// Specifies the name suffix of storage account in which to create the storage container. Changing this forces a new resource to be created.
-	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
+	// +optional
+	// Azure Keyvault name to store SQL password
+	KvName string `json:"kvName,omitempty" tf:"kv_name,omitempty"`
+	// +optional
+	// Azure Keyvault resource group name for SQL password
+	KvResourceGroupName string `json:"kvResourceGroupName,omitempty" tf:"kv_resource_group_name,omitempty"`
+	// Specifies the name Prefix of storage account in which to create the storage container. Changing this forces a new resource to be created.
+	NamePrefix string `json:"namePrefix" tf:"namePrefix"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional

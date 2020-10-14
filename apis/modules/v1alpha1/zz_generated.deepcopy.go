@@ -1375,18 +1375,8 @@ func (in *F4dpAzStgv1Spec) DeepCopyInto(out *F4dpAzStgv1Spec) {
 		*out = make([]F4dpAzStgv1Blobs, len(*in))
 		copy(*out, *in)
 	}
-	if in.Bypass != nil {
-		in, out := &in.Bypass, &out.Bypass
-		*out = make([]string, len(*in))
-		copy(*out, *in)
-	}
 	if in.Containers != nil {
 		in, out := &in.Containers, &out.Containers
-		*out = make([]string, len(*in))
-		copy(*out, *in)
-	}
-	if in.IpRules != nil {
-		in, out := &in.IpRules, &out.IpRules
 		*out = make([]string, len(*in))
 		copy(*out, *in)
 	}

@@ -14937,20 +14937,6 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							},
 						},
 					},
-					"bypass": {
-						SchemaProps: spec.SchemaProps{
-							Description: "List of services to bypass network rules",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
 					"containers": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
@@ -14986,29 +14972,29 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							Format:      "",
 						},
 					},
-					"ipRules": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Ip Rules",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
 					"isHnsEnabled": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",
 						},
 					},
-					"nameSuffix": {
+					"kvName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the name suffix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
+							Description: "Azure Keyvault name to store SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault resource group name for SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the name Prefix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15125,7 +15111,7 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
+				Required: []string{"providerRef", "environment", "namePrefix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{
