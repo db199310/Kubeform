@@ -57,9 +57,6 @@ func Resource(resource string) schema.GroupResource {
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 
-		&F4dpAzStgv1{},
-		&F4dpAzStgv1List{},
-
 		&SDPAzAppv1{},
 		&SDPAzAppv1List{},
 
@@ -74,6 +71,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 		&SDPAzsbv1{},
 		&SDPAzsbv1List{},
+
+		&StratosAzStgv1{},
+		&StratosAzStgv1List{},
 	)
 
 	scheme.AddKnownTypes(SchemeGroupVersion,

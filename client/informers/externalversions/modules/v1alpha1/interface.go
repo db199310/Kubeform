@@ -46,6 +46,8 @@ type Interface interface {
 	SDPAzadfv1s() SDPAzadfv1Informer
 	// SDPAzsbv1s returns a SDPAzsbv1Informer.
 	SDPAzsbv1s() SDPAzsbv1Informer
+	// StratosAzStgv1s returns a StratosAzStgv1Informer.
+	StratosAzStgv1s() StratosAzStgv1Informer
 }
 
 type version struct {
@@ -112,4 +114,9 @@ func (v *version) SDPAzadfv1s() SDPAzadfv1Informer {
 // SDPAzsbv1s returns a SDPAzsbv1Informer.
 func (v *version) SDPAzsbv1s() SDPAzsbv1Informer {
 	return &sDPAzsbv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// StratosAzStgv1s returns a StratosAzStgv1Informer.
+func (v *version) StratosAzStgv1s() StratosAzStgv1Informer {
+	return &stratosAzStgv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
