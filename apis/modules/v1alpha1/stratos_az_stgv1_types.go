@@ -106,9 +106,6 @@ type StratosAzStgv1Spec struct {
 	// List of Storage shares
 	Shares []StratosAzStgv1Shares `json:"shares,omitempty" tf:"shares,omitempty"`
 	// +optional
-	// The vnet subnet id
-	SubnetID []json.RawMessage `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
-	// +optional
 	// List of storage tables
 	Tables []string `json:"tables,omitempty" tf:"tables,omitempty"`
 	//  4 character project stream name/code

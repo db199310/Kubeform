@@ -18306,20 +18306,6 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref common.Referen
 							},
 						},
 					},
-					"subnetID": {
-						SchemaProps: spec.SchemaProps{
-							Description: "The vnet subnet id",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "byte",
-									},
-								},
-							},
-						},
-					},
 					"tables": {
 						SchemaProps: spec.SchemaProps{
 							Description: "List of storage tables",

@@ -2959,17 +2959,6 @@ func (in *StratosAzStgv1Spec) DeepCopyInto(out *StratosAzStgv1Spec) {
 		*out = make([]StratosAzStgv1Shares, len(*in))
 		copy(*out, *in)
 	}
-	if in.SubnetID != nil {
-		in, out := &in.SubnetID, &out.SubnetID
-		*out = make([]json.RawMessage, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = make(json.RawMessage, len(*in))
-				copy(*out, *in)
-			}
-		}
-	}
 	if in.Tables != nil {
 		in, out := &in.Tables, &out.Tables
 		*out = make([]string, len(*in))
