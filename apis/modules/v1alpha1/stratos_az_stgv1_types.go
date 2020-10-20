@@ -34,14 +34,14 @@ import (
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
 
-type F4dpAzStgv1 struct {
+type StratosAzStgv1 struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              F4dpAzStgv1Spec   `json:"spec,omitempty"`
-	Status            F4dpAzStgv1Status `json:"status,omitempty"`
+	Spec              StratosAzStgv1Spec   `json:"spec,omitempty"`
+	Status            StratosAzStgv1Status `json:"status,omitempty"`
 }
 
-type F4dpAzStgv1Spec struct {
+type StratosAzStgv1Spec struct {
 	// +optional
 	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
 	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
@@ -59,7 +59,7 @@ type F4dpAzStgv1Spec struct {
 	AdditionalTags map[string]string `json:"additionalTags,omitempty" tf:"additional_tags,omitempty"`
 	// +optional
 	// List of Blobs
-	Blobs []F4dpAzStgv1Blobs `json:"blobs,omitempty" tf:"blobs,omitempty"`
+	Blobs []StratosAzStgv1Blobs `json:"blobs,omitempty" tf:"blobs,omitempty"`
 	// +optional
 	// The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.
 	Containers []string `json:"containers,omitempty" tf:"containers,omitempty"`
@@ -104,10 +104,7 @@ type F4dpAzStgv1Spec struct {
 	ReplicationType string `json:"replicationType,omitempty" tf:"replication_type,omitempty"`
 	// +optional
 	// List of Storage shares
-	Shares []F4dpAzStgv1Shares `json:"shares,omitempty" tf:"shares,omitempty"`
-	// +optional
-	// The vnet subnet id
-	SubnetID []json.RawMessage `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
+	Shares []StratosAzStgv1Shares `json:"shares,omitempty" tf:"shares,omitempty"`
 	// +optional
 	// List of storage tables
 	Tables []string `json:"tables,omitempty" tf:"tables,omitempty"`
@@ -115,32 +112,32 @@ type F4dpAzStgv1Spec struct {
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
-type F4dpAzStgv1Blobs struct {
+type StratosAzStgv1Blobs struct {
 	// +optional
 	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	Type string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type F4dpAzStgv1Shares struct {
+type StratosAzStgv1Shares struct {
 	// +optional
 	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	Quota json.Number `json:"quota,omitempty" tf:"quota,omitempty"`
 }
 
-type F4dpAzStgv1Output struct {
+type StratosAzStgv1Output struct {
 	//
 	// +optional
 	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 }
 
-type F4dpAzStgv1Status struct {
+type StratosAzStgv1Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
 	// +optional
-	Output *F4dpAzStgv1Output `json:"output,omitempty"`
+	Output *StratosAzStgv1Output `json:"output,omitempty"`
 	// +optional
 	State string `json:"state,omitempty"`
 	// +optional
@@ -150,10 +147,10 @@ type F4dpAzStgv1Status struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 
-// F4dpAzStgv1List is a list of F4dpAzStgv1s
-type F4dpAzStgv1List struct {
+// StratosAzStgv1List is a list of StratosAzStgv1s
+type StratosAzStgv1List struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	// Items is a list of F4dpAzStgv1 CRD objects
-	Items []F4dpAzStgv1 `json:"items,omitempty"`
+	// Items is a list of StratosAzStgv1 CRD objects
+	Items []StratosAzStgv1 `json:"items,omitempty"`
 }

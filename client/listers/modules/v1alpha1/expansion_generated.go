@@ -105,3 +105,11 @@ type SDPAzsbv1ListerExpansion interface{}
 // SDPAzsbv1NamespaceListerExpansion allows custom methods to be added to
 // SDPAzsbv1NamespaceLister.
 type SDPAzsbv1NamespaceListerExpansion interface{}
+
+// StratosAzStgv1ListerExpansion allows custom methods to be added to
+// StratosAzStgv1Lister.
+type StratosAzStgv1ListerExpansion interface{}
+
+// StratosAzStgv1NamespaceListerExpansion allows custom methods to be added to
+// StratosAzStgv1NamespaceLister.
+type StratosAzStgv1NamespaceListerExpansion interface{}

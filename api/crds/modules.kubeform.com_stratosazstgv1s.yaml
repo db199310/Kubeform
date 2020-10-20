@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app.kubernetes.io/name: kubeform
-  name: f4dpazstgv1s.modules.kubeform.com
+  name: stratosazstgv1s.modules.kubeform.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .status.phase
@@ -12,10 +12,10 @@ spec:
     type: string
   group: modules.kubeform.com
   names:
-    kind: F4dpAzStgv1
-    listKind: F4dpAzStgv1List
-    plural: f4dpazstgv1s
-    singular: f4dpazstgv1
+    kind: StratosAzStgv1
+    listKind: StratosAzStgv1List
+    plural: stratosazstgv1s
+    singular: stratosazstgv1
   scope: ""
   subresources:
     status: {}
@@ -143,15 +143,6 @@ spec:
               type: array
             source:
               type: string
-            subnetID:
-              description: The vnet subnet id
-              items:
-                description: RawMessage is a raw encoded JSON value. It implements
-                  Marshaler and Unmarshaler and can be used to delay JSON decoding
-                  or precompute a JSON encoding.
-                format: byte
-                type: string
-              type: array
             tables:
               description: List of storage tables
               items:

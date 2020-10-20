@@ -367,6 +367,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule":                  schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1TopicAuthRule(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics":                         schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Topics(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1":                          schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Blobs":                     schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Blobs(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1List":                      schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Output":                    schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares":                    schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Shares(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Spec":                      schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Status":                    schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Status(ref),
 	}
 }
 
@@ -14937,20 +14944,6 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							},
 						},
 					},
-					"bypass": {
-						SchemaProps: spec.SchemaProps{
-							Description: "List of services to bypass network rules",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
 					"containers": {
 						SchemaProps: spec.SchemaProps{
 							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
@@ -14986,29 +14979,29 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 							Format:      "",
 						},
 					},
-					"ipRules": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Ip Rules",
-							Type:        []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
-									},
-								},
-							},
-						},
-					},
 					"isHnsEnabled": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",
 						},
 					},
-					"nameSuffix": {
+					"kvName": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Specifies the name suffix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
+							Description: "Azure Keyvault name to store SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault resource group name for SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the name Prefix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -15125,7 +15118,7 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref common.ReferenceC
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
+				Required: []string{"providerRef", "environment", "namePrefix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{
@@ -17952,5 +17945,431 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Topics(ref common.ReferenceC
 				},
 			},
 		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Blobs(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "StratosAzStgv1List is a list of StratosAzStgv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of StratosAzStgv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"storageAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Shares(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"quota": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"accountKind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Account Kind",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"accountTier": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Account tier default is Standard",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"additionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The tags to associate with assets",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"blobs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Blobs",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Blobs"),
+									},
+								},
+							},
+						},
+					},
+					"containers": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingResourceGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the resource group in which to create the storage account. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"isHnsEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"kvName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault name to store SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault resource group name for SQL password",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the name Prefix of storage account in which to create the storage container. Changing this forces a new resource to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"queues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Storage Queues",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region. Choose from australia, europe, asia, europe",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"replicationType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Sepcify replication type default is LRS",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"shares": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Storage shares",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares"),
+									},
+								},
+							},
+						},
+					},
+					"tables": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of storage tables",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "environment", "namePrefix", "owner", "projectStream", "region", "workStream"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Blobs", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Output"},
 	}
 }
