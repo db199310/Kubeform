@@ -357,6 +357,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output":                        schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Output(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Spec":                          schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Status":                        schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1":                   schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1List":               schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Output":             schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Spec":               schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Status":             schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1":                               schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1List":                           schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1List(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules":             schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1NamespaceAuthRules(ref),
@@ -17296,6 +17301,281 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref common.Reference
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SDPAzplatformeventsv1List is a list of SDPAzplatformeventsv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of SDPAzplatformeventsv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the Platform ServiceBus Namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region. Choose from australia, europe, asia, europe",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of an existing resource group for the Platform ServiceBus Namespace",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"subscriptionRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subscription rules.",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"subscriptions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subscription for the Topic in the namespace",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"tags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n Map of tags to assign to the resources.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "environment", "name", "owner", "projectStream", "region", "resourceGroupName", "workStream"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzplatformeventsv1Output"},
 	}
 }
 
