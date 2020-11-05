@@ -41,3 +41,5 @@ type SDPAzadfv1Expansion interface{}
 type SDPAzsbv1Expansion interface{}
 
 type StratosAzStgv1Expansion interface{}
+
+type ThomasStorageAccountExpansion interface{}

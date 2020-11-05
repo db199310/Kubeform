@@ -74,6 +74,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 		&StratosAzStgv1{},
 		&StratosAzStgv1List{},
+
+		&ThomasStorageAccount{},
+		&ThomasStorageAccountList{},
 	)
 
 	scheme.AddKnownTypes(SchemeGroupVersion,
