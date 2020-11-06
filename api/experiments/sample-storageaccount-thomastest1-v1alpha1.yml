@@ -1,0 +1,24 @@
+apiVersion: modules.kubeform.com/v1alpha1
+kind: ThomasStorageAccount
+metadata:
+  name: thomastest
+  namespace: exam-app-dev-pub
+spec:
+  accountKind: StorageV2
+  accountTier: Standard
+  namePrefix: thomastest
+  isHnsEnabled: false
+  placement: PUB
+  environment: dev
+  projectStream: exam
+  workStream: app
+  owner: thomastest
+  instance: "001"
+  releaseVersion: "100"
+  region: europe
+  containers:
+  - files
+  - newcontainer
+  replicationType: LRS
+  providerRef:
+    name: azure
