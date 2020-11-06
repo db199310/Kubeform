@@ -35,20 +35,7 @@ func init() {
 	flag.StringVar(&licenseHeaderFile, "license-header-file", "", "Path to the license file.")
 }
 
-func main() {
-	flag.Parse()
-
-	if licenseHeaderFile != "" {
-		byt, err := ioutil.ReadFile(licenseHeaderFile)
-		if err != nil {
-			log.Println(err.Error())
-		}
-
-		util.License = string(byt)
-	}
-
-	version := "v1alpha1"
-
+func buildVersion(version string) {
 	providersMap := map[string]terraform.ResourceProvider{
 		"azurerm": azurerm.Provider(),
 	}
@@ -76,4 +63,20 @@ func main() {
 	if err != nil {
 		log.Println(err.Error())
 	}
+}
+
+func main() {
+	flag.Parse()
+
+	if licenseHeaderFile != "" {
+		byt, err := ioutil.ReadFile(licenseHeaderFile)
+		if err != nil {
+			log.Println(err.Error())
+		}
+
+		util.License = string(byt)
+	}
+
+	buildVersion("v1alpha1")
+	buildVersion("v1alpha2")
 }

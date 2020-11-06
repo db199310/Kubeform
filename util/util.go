@@ -80,7 +80,8 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 	}
 	if providerName == "modules" {
 		var modulePaths []string
-		modulePaths, structNames, err = GenerateModuleData(filepath.Join(basePath, "module-sources.json"), filepath.Join(templatePath, "cfg_data.tmpl"), dataPath)
+		var moduleSourcesFileName := fmt.Sprintf("module-sources-%s.json", version)
+		modulePaths, structNames, err = GenerateModuleData(filepath.Join(basePath, moduleSourcesFileName), filepath.Join(templatePath, "cfg_data.tmpl"), dataPath)
 		if err != nil {
 			return err
 		}
