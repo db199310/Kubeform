@@ -16,7 +16,7 @@ limitations under the License.
 package install
 
 import (
-	"kubeform.dev/kubeform/apis/azurerm/v1alpha2"
+	"kubeform.dev/kubeform/apis/azurerm/v1alpha1"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"

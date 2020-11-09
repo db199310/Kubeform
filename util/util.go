@@ -63,7 +63,7 @@ var execeptionList = map[string]string{
 }
 
 func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*schema.Schema, structNames []string) error {
-	templatePath := "templates"
+	templatePath := fmt.Sprintf("templates/%s", version)
 	goPath := os.Getenv("GOPATH")
 	basePath := filepath.Join(goPath,
 		filepath.Join("src",
