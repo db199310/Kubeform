@@ -24,7 +24,6 @@ CRD_OPTIONS          ?= "crd:trivialVersions=true"
 # https://github.com/appscodelabs/gengo-builder
 CODE_GENERATOR_IMAGE ?= ibelikov/gengo:release-1.14
 API_GROUPS           ?= $(shell find $$(pwd)/apis -maxdepth 1 -mindepth 1 -type d -printf '%f:v1alpha1 ')
-API_GROUPS2          ?= $(shell find $$(pwd)/apis -maxdepth 1 -mindepth 1 -type d -printf '%f:v1alpha2 ')
 
 
 # This version-strategy uses git tags to set the version string
@@ -159,34 +158,6 @@ clientset:
 			$(GO_PKG)/$(REPO)/client                     \
 			$(GO_PKG)/$(REPO)/apis                       \
 			"$(subst base:v1alpha1,, $(API_GROUPS))"     \
-			--go-header-file "./hack/license/go.txt"
-	@docker run --rm                                     \
-		-u $$(id -u):$$(id -g)                           \
-		-v /tmp:/.cache                                  \
-		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
-		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
-		$(CODE_GENERATOR_IMAGE)                          \
-		/go/src/k8s.io/code-generator/generate-groups.sh \
-			deepcopy                                     \
-			$(GO_PKG)/$(REPO)/client                     \
-			$(GO_PKG)/$(REPO)/apis                       \
-			"base:v1alpha2"                              \
-			--go-header-file "./hack/license/go.txt"
-	@docker run --rm                                     \
-		-u $$(id -u):$$(id -g)                           \
-		-v /tmp:/.cache                                  \
-		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
-		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
-		$(CODE_GENERATOR_IMAGE)                          \
-		/go/src/k8s.io/code-generator/generate-groups.sh \
-			all                                          \
-			$(GO_PKG)/$(REPO)/client                     \
-			$(GO_PKG)/$(REPO)/apis                       \
-			"$(subst base:v1alpha2,, $(API_GROUPS2))"     \
 			--go-header-file "./hack/license/go.txt"
 
 # Generate openapi schema
