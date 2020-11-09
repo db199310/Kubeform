@@ -191,7 +191,7 @@ clientset:
 
 # Generate openapi schema
 .PHONY: openapi
-openapi: $(addprefix openapi-, $(subst :,_, $(API_GROUPS))) $(addprefix openapi-, $(subst :,_, $(API_GROUPS2))) 
+openapi: $(addprefix openapi-, $(subst :,_, $(API_GROUPS)))
 	@echo "Generating api/openapi-spec/swagger.json"
 	@docker run --rm                                     \
 		-u $$(id -u):$$(id -g)                           \
