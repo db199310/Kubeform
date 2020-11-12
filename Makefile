@@ -107,6 +107,8 @@ version:
 .PHONY: gen-types
 gen-types: $(BUILD_DIRS)
 	@echo "Generating Go types"
+	@echo "ARCH=$(ARCH)"
+	@echo "OS=$(OS)"
 	@docker run                                                 \
 	    -i                                                      \
 	    --rm                                                    \
@@ -118,7 +120,7 @@ gen-types: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
-		--env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
+	    --env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
