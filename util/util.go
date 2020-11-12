@@ -451,7 +451,7 @@ func DownloadRepository(name, link, outputPath string) (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return "", fmt.Errorf("%s is not a valid github url", link)
+		return "", fmt.Errorf("%s failed with HTTP error %d", link, resp.StatusCode)
 	}
 
 	out, err := os.Create(zipPath)
