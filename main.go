@@ -47,7 +47,7 @@ func main() {
 		util.License = string(byt)
 	}
 
-  version := "v1alpha1"
+	version := "v1alpha1"
 
 	providersMap := map[string]terraform.ResourceProvider{
 		"azurerm": azurerm.Provider(),
