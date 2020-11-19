@@ -69,6 +69,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SDPAzadfv1{},
 		&SDPAzadfv1List{},
 
+		&SDPAzdbv1{},
+		&SDPAzdbv1List{},
+
 		&SDPAzsbv1{},
 		&SDPAzsbv1List{},
 

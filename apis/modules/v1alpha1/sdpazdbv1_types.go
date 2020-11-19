@@ -19,6 +19,8 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"encoding/json"
+
 	base "kubeform.dev/kubeform/apis/base/v1alpha1"
 
 	core "k8s.io/api/core/v1"
@@ -32,14 +34,14 @@ import (
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
 
-type SDPAzadfv1 struct {
+type SDPAzdbv1 struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SDPAzadfv1Spec   `json:"spec,omitempty"`
-	Status            SDPAzadfv1Status `json:"status,omitempty"`
+	Spec              SDPAzdbv1Spec   `json:"spec,omitempty"`
+	Status            SDPAzdbv1Status `json:"status,omitempty"`
 }
 
-type SDPAzadfv1Spec struct {
+type SDPAzdbv1Spec struct {
 	// +optional
 	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
 	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
@@ -47,18 +49,18 @@ type SDPAzadfv1Spec struct {
 	Source string `json:"source" tf:"source"`
 
 	// +optional
-	// The tags to associate with your resource group.
+	// Additional set of tags
 	AdditionalTags map[string]string `json:"additionalTags,omitempty" tf:"additional_tags,omitempty"`
+	// +optional
+	// List of Admin Users
+	Admins []json.RawMessage `json:"admins,omitempty" tf:"admins,omitempty"`
 	// Environment. Upto 5 character. For e.g. dev, dev01 , prd01
 	Environment string `json:"environment" tf:"environment"`
 	// +optional
-	// List of Github Configuration
-	GithubConfiguration []SDPAzadfv1GithubConfiguration `json:"githubConfiguration,omitempty" tf:"github_configuration,omitempty"`
-	// +optional
-	// Instance number
-	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
-	// NamePrefix for the data factory
-	NamePrefix string `json:"namePrefix" tf:"namePrefix"`
+	// existing resource group name
+	ExistingResourceGroup string `json:"existingResourceGroup,omitempty" tf:"existing_resource_group,omitempty"`
+	// Name suffix used for resources
+	NameSuffix string `json:"nameSuffix" tf:"nameSuffix"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional
@@ -75,61 +77,20 @@ type SDPAzadfv1Spec struct {
 	// releaseVersion
 	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
 	// +optional
-	// Resource Group name where the Data Factory needs to be created
-	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
-	// +optional
-	// List of VSTS Configuration
-	VstsConfiguration []SDPAzadfv1VstsConfiguration `json:"vstsConfiguration,omitempty" tf:"vsts_configuration,omitempty"`
+	// databricks SKU
+	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
 	//  4 character project stream name/code
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
-type SDPAzadfv1GithubConfiguration struct {
-	// +optional
-	AccountName string `json:"accountName,omitempty" tf:"account_name,omitempty"`
-	// +optional
-	BranchName string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
-	// +optional
-	GitURL string `json:"gitURL,omitempty" tf:"git_url,omitempty"`
-	// +optional
-	RepositoryName string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
-	// +optional
-	RootFolder string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
-}
+type SDPAzdbv1Output struct{}
 
-type SDPAzadfv1VstsConfiguration struct {
-	// +optional
-	AccountName string `json:"accountName,omitempty" tf:"account_name,omitempty"`
-	// +optional
-	BranchName string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
-	// +optional
-	ProjectName string `json:"projectName,omitempty" tf:"project_name,omitempty"`
-	// +optional
-	RepositoryName string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
-	// +optional
-	RootFolder string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
-	// +optional
-	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
-}
-
-type SDPAzadfv1Output struct {
-	// ID of the DataFactory
-	// +optional
-	DatafactoryID string `json:"datafactoryID" tf:"datafactory_id"`
-	// Name of the DataFactory
-	// +optional
-	DatafactoryName string `json:"datafactoryName" tf:"datafactory_name"`
-	//
-	// +optional
-	Identity string `json:"identity" tf:"identity"`
-}
-
-type SDPAzadfv1Status struct {
+type SDPAzdbv1Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
 	// +optional
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
 	// +optional
-	Output *SDPAzadfv1Output `json:"output,omitempty"`
+	Output *SDPAzdbv1Output `json:"output,omitempty"`
 	// +optional
 	State string `json:"state,omitempty"`
 	// +optional
@@ -139,10 +100,10 @@ type SDPAzadfv1Status struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
 
-// SDPAzadfv1List is a list of SDPAzadfv1s
-type SDPAzadfv1List struct {
+// SDPAzdbv1List is a list of SDPAzdbv1s
+type SDPAzdbv1List struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	// Items is a list of SDPAzadfv1 CRD objects
-	Items []SDPAzadfv1 `json:"items,omitempty"`
+	// Items is a list of SDPAzdbv1 CRD objects
+	Items []SDPAzdbv1 `json:"items,omitempty"`
 }
