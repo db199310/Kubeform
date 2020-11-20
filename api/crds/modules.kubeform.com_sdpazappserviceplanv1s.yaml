@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app.kubernetes.io/name: kubeform
-  name: sdpazadfv1s.modules.kubeform.com
+  name: sdpazappserviceplanv1s.modules.kubeform.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .status.phase
@@ -12,10 +12,10 @@ spec:
     type: string
   group: modules.kubeform.com
   names:
-    kind: SDPAzadfv1
-    listKind: SDPAzadfv1List
-    plural: sdpazadfv1s
-    singular: sdpazadfv1
+    kind: SDPAzappserviceplanv1
+    listKind: SDPAzappserviceplanv1List
+    plural: sdpazappserviceplanv1s
+    singular: sdpazappserviceplanv1
   scope: ""
   subresources:
     status: {}
@@ -36,47 +36,32 @@ spec:
           type: object
         spec:
           properties:
-            additionalTags:
+            clientName:
+              description: Client name/account used in naming
+              type: string
+            customName:
+              description: Name of the App Service Plan, generated if not set.
+              type: string
+            environment:
+              description: Project environment
+              type: string
+            extraTags:
               additionalProperties:
                 type: string
-              description: The tags to associate with your resource group.
+              description: Extra tags to add
               type: object
-            environment:
-              description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+            kind:
+              description: The kind of the App Service Plan to create. See documentation
+                https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
               type: string
-            githubConfiguration:
-              description: List of Github Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  gitURL:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                type: object
-              type: array
-            instance:
-              description: Instance number
+            location:
+              description: Azure location.
+              type: string
+            locationShort:
+              description: Short string for Azure location.
               type: string
             namePrefix:
-              description: NamePrefix for the data factory
-              type: string
-            owner:
-              description: owner
-              type: string
-            placement:
-              description: placement
-              type: string
-            project:
-              description: project stream name
-              type: string
-            projectStream:
-              description: ' 4 character project stream name/code'
+              description: Optional prefix for the generated name
               type: string
             providerRef:
               description: LocalObjectReference contains enough information to let
@@ -87,15 +72,12 @@ spec:
                     TODO: Add other useful fields. apiVersion, kind, uid?'
                   type: string
               type: object
-            region:
-              description: region. Choose from australia, europe, asia, europe
-              type: string
-            releaseVersion:
-              description: releaseVersion
+            reserved:
+              description: Flag indicating if App Service Plan should be reserved.
+                Forced to true if "kind" is "Linux".
               type: string
             resourceGroupName:
-              description: Resource Group name where the Data Factory needs to be
-                created
+              description: Resource group name
               type: string
             secretRef:
               description: LocalObjectReference contains enough information to let
@@ -106,37 +88,26 @@ spec:
                     TODO: Add other useful fields. apiVersion, kind, uid?'
                   type: string
               type: object
+            sku:
+              additionalProperties:
+                type: string
+              description: A sku block. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#sku
+              type: object
             source:
               type: string
-            vstsConfiguration:
-              description: List of VSTS Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  projectName:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                  tenantID:
-                    type: string
-                type: object
-              type: array
-            workStream:
-              description: ' 4 character project stream name/code'
+            stack:
+              description: Project stack name
               type: string
           required:
+          - clientName
           - environment
-          - namePrefix
-          - owner
-          - projectStream
+          - kind
+          - location
+          - locationShort
           - providerRef
-          - region
-          - workStream
+          - resourceGroupName
+          - sku
+          - stack
           type: object
         status:
           properties:
@@ -147,13 +118,18 @@ spec:
               type: integer
             output:
               properties:
-                datafactoryID:
-                  description: ID of the DataFactory
+                appServicePlanID:
+                  description: Id of the created App Service Plan
                   type: string
-                datafactoryName:
-                  description: Name of the DataFactory
+                appServicePlanLocation:
+                  description: Azure location of the created App Service Plan
                   type: string
-                identity:
+                appServicePlanMaxWorkers:
+                  description: Maximum number of workers for the created App Service
+                    Plan
+                  type: string
+                appServicePlanName:
+                  description: Name of the created App Service Plan
                   type: string
               type: object
             phase:
