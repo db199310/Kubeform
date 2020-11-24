@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app.kubernetes.io/name: kubeform
-  name: sdpazadfv1s.modules.kubeform.com
+  name: sdpazdbv1s.modules.kubeform.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .status.phase
@@ -12,10 +12,10 @@ spec:
     type: string
   group: modules.kubeform.com
   names:
-    kind: SDPAzadfv1
-    listKind: SDPAzadfv1List
-    plural: sdpazadfv1s
-    singular: sdpazadfv1
+    kind: SDPAzdbv1
+    listKind: SDPAzdbv1List
+    plural: sdpazdbv1s
+    singular: sdpazdbv1
   scope: ""
   subresources:
     status: {}
@@ -39,32 +39,25 @@ spec:
             additionalTags:
               additionalProperties:
                 type: string
-              description: The tags to associate with your resource group.
+              description: Additional set of tags
               type: object
+            admins:
+              description: List of Admin Users
+              items:
+                description: RawMessage is a raw encoded JSON value. It implements
+                  Marshaler and Unmarshaler and can be used to delay JSON decoding
+                  or precompute a JSON encoding.
+                format: byte
+                type: string
+              type: array
             environment:
               description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
               type: string
-            githubConfiguration:
-              description: List of Github Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  gitURL:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                type: object
-              type: array
-            instance:
-              description: Instance number
+            existingResourceGroup:
+              description: existing resource group name
               type: string
-            namePrefix:
-              description: NamePrefix for the data factory
+            nameSuffix:
+              description: Name suffix used for resources
               type: string
             owner:
               description: owner
@@ -93,10 +86,6 @@ spec:
             releaseVersion:
               description: releaseVersion
               type: string
-            resourceGroupName:
-              description: Resource Group name where the Data Factory needs to be
-                created
-              type: string
             secretRef:
               description: LocalObjectReference contains enough information to let
                 you locate the referenced object inside the same namespace.
@@ -106,32 +95,17 @@ spec:
                     TODO: Add other useful fields. apiVersion, kind, uid?'
                   type: string
               type: object
+            sku:
+              description: databricks SKU
+              type: string
             source:
               type: string
-            vstsConfiguration:
-              description: List of VSTS Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  projectName:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                  tenantID:
-                    type: string
-                type: object
-              type: array
             workStream:
               description: ' 4 character project stream name/code'
               type: string
           required:
           - environment
-          - namePrefix
+          - nameSuffix
           - owner
           - projectStream
           - providerRef
@@ -146,15 +120,6 @@ spec:
               format: int64
               type: integer
             output:
-              properties:
-                datafactoryID:
-                  description: ID of the DataFactory
-                  type: string
-                datafactoryName:
-                  description: Name of the DataFactory
-                  type: string
-                identity:
-                  type: string
               type: object
             phase:
               type: string
