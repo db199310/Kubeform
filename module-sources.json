@@ -1,65 +1,72 @@
 [
-    {
-      "name": "SDPAzFnv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.4.3",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-fnapp/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.4.3&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzAppv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.3.0",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-appservice/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "StratosAzStgv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.2&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzSqlv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-sqldb/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzadfv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-datafactories?ref=v0.1.0",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-datafactories/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.1.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzsbv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=v0.2.1",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-servicebus/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzplatformeventsv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-platformevents?ref=v0.0.3",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-platformevents/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.0.3&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzappserviceplanv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.0.1",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-appserviceplan/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.0.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    },
-    {
-      "name": "SDPAzdbv1",
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/stratos-tf-az-databricks?ref=0.1.1",
-      "provider": "azurerm,databricks",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/stratos-tf-az-databricks/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=0.1.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    }
+  {
+    "name": "SDPAzFnv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.4.3",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-fnapp/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.4.3&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzAppv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.3.0",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-appservice/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "StratosAzStgv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.2&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzSqlv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-sqldb/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzadfv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-datafactories?ref=v0.1.0",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-datafactories/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.1.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzsbv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=v0.2.1",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-servicebus/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzplatformeventsv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-platformevents?ref=v0.0.3",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-platformevents/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.0.3&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzappserviceplanv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.0.1",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-appserviceplan/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.0.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzdbv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/stratos-tf-az-databricks?ref=0.1.1",
+    "provider": "azurerm,databricks",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/stratos-tf-az-databricks/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=0.1.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  },
+  {
+    "name": "SDPAzFnv2",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=add_ingress",
+    "provider": "azurerm",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-fnapp/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=brach&versionDescriptor%5Bversion%5D=add_ingress&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
+  }
 ]
