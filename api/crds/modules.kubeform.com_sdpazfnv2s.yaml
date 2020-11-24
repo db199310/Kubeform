@@ -1,0 +1,212 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: sdpazfnv2s.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: SDPAzFnv2
+    listKind: SDPAzFnv2List
+    plural: sdpazfnv2s
+    singular: sdpazfnv2
+  scope: ""
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            activeDirectory:
+              description: A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html
+              format: byte
+              type: string
+            appSettings:
+              additionalProperties:
+                type: string
+              description: App Settings. Package deploy configured
+              type: object
+            applicationInsightsType:
+              description: App insights type
+              type: string
+            authSettings:
+              additionalProperties:
+                properties:
+                  authEnabled:
+                    type: boolean
+                type: object
+              description: Authentication Settings
+              type: object
+            connectionStrings:
+              description: connection strings for fn app
+              items:
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            environment:
+              description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+              type: string
+            existingAspName:
+              description: Existing App Service plan name
+              type: string
+            existingAspResourceGroupName:
+              description: Existing App Service plan resource Group
+              type: string
+            fnAppAdditionalTags:
+              additionalProperties:
+                type: string
+              description: Additional tags for the App Service resources, in addition
+                to the resource group tags.
+              type: object
+            host:
+              description: Hostname without the stratos.shell/stratos.shell.com suffix
+              type: string
+            instance:
+              description: Instance number
+              type: string
+            integrationSubnetID:
+              description: Subnet IDS for VNet integration
+              type: string
+            linuxFxVersion:
+              description: Linux Docker image to use
+              type: string
+            nameSuffix:
+              description: name suffix for the function app
+              type: string
+            osType:
+              description: OS Type for the fn app. Should match with App Service plan
+              type: string
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            project:
+              description: project stream name
+              type: string
+            projectStream:
+              description: ' 4 character project stream name/code'
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            region:
+              description: region. Choose from australia, europe, asia, europe
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
+            resourceGroupName:
+              description: Resource Group name where the fn app needs to be created
+              type: string
+            runtimeVersion:
+              description: Run time version of the Fn app
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            siteConfig:
+              additionalProperties:
+                properties:
+                  alwaysOn:
+                    type: boolean
+                  ftpsState:
+                    type: string
+                  http2Enabled:
+                    type: boolean
+                  use32BitWorkerProcess:
+                    type: boolean
+                  websocketsEnabled:
+                    type: boolean
+                type: object
+              description: Site config block for Fn app
+              type: object
+            siteConfigCors:
+              additionalProperties:
+                properties:
+                  allowedOrigins:
+                    items:
+                      type: string
+                    type: array
+                  supportCredentials:
+                    type: boolean
+                type: object
+              description: Site config core parameters for Fn app
+              type: object
+            siteConfigIPRestrictions:
+              description: site config ip restrictions block parameters for fn app
+              format: byte
+              type: string
+            source:
+              type: string
+            workStream:
+              description: ' 4 character project stream name/code'
+              type: string
+          required:
+          - environment
+          - host
+          - nameSuffix
+          - owner
+          - projectStream
+          - providerRef
+          - region
+          - workStream
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

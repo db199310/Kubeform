@@ -74,6 +74,14 @@ type SDPAzFnv1ListerExpansion interface{}
 // SDPAzFnv1NamespaceLister.
 type SDPAzFnv1NamespaceListerExpansion interface{}
 
+// SDPAzFnv2ListerExpansion allows custom methods to be added to
+// SDPAzFnv2Lister.
+type SDPAzFnv2ListerExpansion interface{}
+
+// SDPAzFnv2NamespaceListerExpansion allows custom methods to be added to
+// SDPAzFnv2NamespaceLister.
+type SDPAzFnv2NamespaceListerExpansion interface{}
+
 // SDPAzSqlv1ListerExpansion allows custom methods to be added to
 // SDPAzSqlv1Lister.
 type SDPAzSqlv1ListerExpansion interface{}

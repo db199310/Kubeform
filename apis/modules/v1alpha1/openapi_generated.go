@@ -340,6 +340,15 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfigCors":                 schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1SiteConfigCors(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Spec":                           schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2":                               schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2AuthSettings":                   schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2AuthSettings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2ConnectionStrings":              schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2ConnectionStrings(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2List":                           schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Output":                         schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfig":                     schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2SiteConfig(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfigCors":                 schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2SiteConfigCors(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Spec":                           schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Status":                         schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1":                              schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1List":                          schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1List(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output":                        schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Output(ref),
@@ -16257,6 +16266,528 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref common.ReferenceC
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2AuthSettings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"authEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2ConnectionStrings(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"type": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"value": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SDPAzFnv2List is a list of SDPAzFnv2s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of SDPAzFnv2 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2SiteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"alwaysOn": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"ftpsState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"http2Enabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"use32BitWorkerProcess": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"websocketsEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2SiteConfigCors(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allowedOrigins": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"supportCredentials": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"activeDirectory": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"appSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App Settings. Package deploy configured",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"applicationInsightsType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "App insights type",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"authSettings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Authentication Settings",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2AuthSettings"),
+									},
+								},
+							},
+						},
+					},
+					"connectionStrings": {
+						SchemaProps: spec.SchemaProps{
+							Description: "connection strings for fn app",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2ConnectionStrings"),
+									},
+								},
+							},
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingAspResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Existing App Service plan resource Group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"fnAppAdditionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional tags for the App Service resources, in addition to the resource group tags.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostname without the stratos.shell/stratos.shell.com suffix",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"integrationSubnetID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Subnet IDS for VNet integration",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"linuxFxVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Linux Docker image to use",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"nameSuffix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "name suffix for the function app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"osType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "OS Type for the fn app. Should match with App Service plan",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region. Choose from australia, europe, asia, europe",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource Group name where the fn app needs to be created",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"runtimeVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Run time version of the Fn app",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"siteConfig": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config block for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfig"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigCors": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Site config core parameters for Fn app",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfigCors"),
+									},
+								},
+							},
+						},
+					},
+					"siteConfigIPRestrictions": {
+						SchemaProps: spec.SchemaProps{
+							Description: "site config ip restrictions block parameters for fn app",
+							Type:        []string{"string"},
+							Format:      "byte",
+						},
+					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "environment", "host", "nameSuffix", "owner", "projectStream", "region", "workStream"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2SiteConfigCors"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv2Output"},
 	}
 }
 

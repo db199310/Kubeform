@@ -56,6 +56,10 @@ func (c *FakeModulesV1alpha1) SDPAzFnv1s(namespace string) v1alpha1.SDPAzFnv1Int
 	return &FakeSDPAzFnv1s{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) SDPAzFnv2s(namespace string) v1alpha1.SDPAzFnv2Interface {
+	return &FakeSDPAzFnv2s{c, namespace}
+}
+
 func (c *FakeModulesV1alpha1) SDPAzSqlv1s(namespace string) v1alpha1.SDPAzSqlv1Interface {
 	return &FakeSDPAzSqlv1s{c, namespace}
 }
