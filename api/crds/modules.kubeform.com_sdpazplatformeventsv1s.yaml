@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app.kubernetes.io/name: kubeform
-  name: sdpazadfv1s.modules.kubeform.com
+  name: sdpazplatformeventsv1s.modules.kubeform.com
 spec:
   additionalPrinterColumns:
   - JSONPath: .status.phase
@@ -12,10 +12,10 @@ spec:
     type: string
   group: modules.kubeform.com
   names:
-    kind: SDPAzadfv1
-    listKind: SDPAzadfv1List
-    plural: sdpazadfv1s
-    singular: sdpazadfv1
+    kind: SDPAzplatformeventsv1
+    listKind: SDPAzplatformeventsv1List
+    plural: sdpazplatformeventsv1s
+    singular: sdpazplatformeventsv1
   scope: ""
   subresources:
     status: {}
@@ -36,44 +36,20 @@ spec:
           type: object
         spec:
           properties:
-            additionalTags:
-              additionalProperties:
-                type: string
-              description: The tags to associate with your resource group.
-              type: object
             environment:
               description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
               type: string
-            githubConfiguration:
-              description: List of Github Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  gitURL:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                type: object
-              type: array
             instance:
               description: Instance number
               type: string
-            namePrefix:
-              description: NamePrefix for the data factory
+            name:
+              description: The name of the Platform ServiceBus Namespace
               type: string
             owner:
               description: owner
               type: string
             placement:
-              description: placement
-              type: string
-            project:
-              description: project stream name
+              description: Public or Private placement
               type: string
             projectStream:
               description: ' 4 character project stream name/code'
@@ -93,10 +69,6 @@ spec:
             releaseVersion:
               description: releaseVersion
               type: string
-            resourceGroupName:
-              description: Resource Group name where the Data Factory needs to be
-                created
-              type: string
             secretRef:
               description: LocalObjectReference contains enough information to let
                 you locate the referenced object inside the same namespace.
@@ -108,34 +80,22 @@ spec:
               type: object
             source:
               type: string
-            vstsConfiguration:
-              description: List of VSTS Configuration
-              items:
-                properties:
-                  accountName:
-                    type: string
-                  branchName:
-                    type: string
-                  projectName:
-                    type: string
-                  repositoryName:
-                    type: string
-                  rootFolder:
-                    type: string
-                  tenantID:
-                    type: string
-                type: object
-              type: array
+            subscriptionRules:
+              description: Subscription rules.
+              format: byte
+              type: string
+            subscriptions:
+              description: Subscription for the Topic in the namespace
+              format: byte
+              type: string
             workStream:
               description: ' 4 character project stream name/code'
               type: string
           required:
           - environment
-          - namePrefix
-          - owner
+          - name
           - projectStream
           - providerRef
-          - region
           - workStream
           type: object
         status:
@@ -146,15 +106,6 @@ spec:
               format: int64
               type: integer
             output:
-              properties:
-                datafactoryID:
-                  description: ID of the DataFactory
-                  type: string
-                datafactoryName:
-                  description: Name of the DataFactory
-                  type: string
-                identity:
-                  type: string
               type: object
             phase:
               type: string
