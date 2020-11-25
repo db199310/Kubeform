@@ -65,6 +65,18 @@ type SDPAzappserviceplanv1Spec struct {
 	// +optional
 	// Optional prefix for the generated name
 	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	// owner
+	Owner string `json:"owner" tf:"owner"`
+	// +optional
+	// placement
+	Placement string `json:"placement,omitempty" tf:"placement,omitempty"`
+	// project stream name
+	ProjectStream string `json:"projectStream" tf:"projectStream"`
+	// region
+	Region string `json:"region" tf:"region"`
+	// +optional
+	// releaseVersion
+	ReleaseVersion string `json:"releaseVersion,omitempty" tf:"releaseVersion,omitempty"`
 	// +optional
 	// Flag indicating if App Service Plan should be reserved. Forced to true if "kind" is "Linux".
 	Reserved string `json:"reserved,omitempty" tf:"reserved,omitempty"`
@@ -74,6 +86,8 @@ type SDPAzappserviceplanv1Spec struct {
 	Sku map[string]string `json:"sku" tf:"sku"`
 	// Project stack name
 	Stack string `json:"stack" tf:"stack"`
+	//  4 character project stream name/code
+	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
 type SDPAzappserviceplanv1Output struct {

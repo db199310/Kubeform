@@ -17644,6 +17644,41 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Format:      "",
 						},
 					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"reserved": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Flag indicating if App Service Plan should be reserved. Forced to true if \"kind\" is \"Linux\".",
@@ -17680,8 +17715,15 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Format:      "",
 						},
 					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 				},
-				Required: []string{"providerRef", "clientName", "environment", "kind", "location", "locationShort", "resourceGroupName", "sku", "stack"},
+				Required: []string{"providerRef", "clientName", "environment", "kind", "location", "locationShort", "owner", "projectStream", "region", "resourceGroupName", "sku", "stack", "workStream"},
 			},
 		},
 		Dependencies: []string{
