@@ -278,6 +278,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"k8s.io/apimachinery/pkg/runtime.Unknown":                        schema_k8sio_apimachinery_pkg_runtime_Unknown(ref),
 		"k8s.io/apimachinery/pkg/util/intstr.IntOrString":                schema_apimachinery_pkg_util_intstr_IntOrString(ref),
 		"kubeform.dev/kubeform/apis/base/v1alpha1.State":                 schema_kubeform_apis_base_v1alpha1_State(ref),
+		"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormState":        schema_kubeform_apis_base_v1alpha1_TerraFormState(ref),
 	}
 }
 
@@ -12253,6 +12254,48 @@ func schema_kubeform_apis_base_v1alpha1_State(ref common.ReferenceCallback) comm
 					},
 				},
 				Required: []string{"version", "terraform_version", "serial", "lineage"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_base_v1alpha1_TerraFormState(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"initLogs": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"initErrLogs": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"applyLogs": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"applyErrLogs": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"plan": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
 			},
 		},
 	}

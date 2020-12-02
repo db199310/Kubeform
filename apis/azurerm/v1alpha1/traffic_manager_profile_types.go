@@ -96,6 +96,8 @@ type TrafficManagerProfileStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraFormState string `json:"terraformState,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

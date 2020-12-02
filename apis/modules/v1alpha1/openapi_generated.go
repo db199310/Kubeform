@@ -353,10 +353,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzStgv1Spec":                          schema_kubeform_apis_modules_v1alpha1_SDPAzStgv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzStgv1Status":                        schema_kubeform_apis_modules_v1alpha1_SDPAzStgv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1":                              schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1GithubConfiguration":           schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1GithubConfiguration(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1List":                          schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1List(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output":                        schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Output(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Spec":                          schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Status":                        schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration":             schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1VstsConfiguration(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1":                               schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1List":                           schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1List(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules":             schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1NamespaceAuthRules(ref),
@@ -15720,6 +15722,12 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Status(ref common.Reference
 							Format: "",
 						},
 					},
+					"terraformState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
@@ -16235,6 +16243,12 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref common.ReferenceC
 							Format: "",
 						},
 					},
+					"terraformState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
@@ -16569,6 +16583,12 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Status(ref common.Reference
 						},
 					},
 					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"terraformState": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -17065,6 +17085,48 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1(ref common.ReferenceCallba
 	}
 }
 
+func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1GithubConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"branchName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"gitURL": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"repositoryName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"rootFolder": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -17132,6 +17194,12 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Output(ref common.Reference
 							Format:      "",
 						},
 					},
+					"identity": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
@@ -17182,6 +17250,19 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"githubConfiguration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of Github Configuration",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1GithubConfiguration"),
+									},
+								},
+							},
+						},
+					},
 					"instance": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Instance number",
@@ -17189,11 +17270,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
-					"nameSuffix": {
+					"namePrefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "NameSuffix for the data factory",
+							Description: "NamePrefix for the data factory",
 							Type:        []string{"string"},
-							Format:      "byte",
+							Format:      "",
 						},
 					},
 					"owner": {
@@ -17245,6 +17326,19 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"vstsConfiguration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "List of VSTS Configuration",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration"),
+									},
+								},
+							},
+						},
+					},
 					"workStream": {
 						SchemaProps: spec.SchemaProps{
 							Description: "\n 4 character project stream name/code",
@@ -17253,11 +17347,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
+				Required: []string{"providerRef", "environment", "namePrefix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1GithubConfiguration", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration"},
 	}
 }
 
@@ -17291,11 +17385,65 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref common.Reference
 							Format: "",
 						},
 					},
+					"terraformState": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 				},
 			},
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1VstsConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"accountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"branchName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"projectName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"repositoryName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"rootFolder": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"tenantID": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
 	}
 }
 
@@ -17815,6 +17963,12 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref common.ReferenceC
 						},
 					},
 					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"terraformState": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -18361,6 +18515,12 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Status(ref common.Refer
 						},
 					},
 					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"terraformState": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
