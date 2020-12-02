@@ -22,13 +22,13 @@ package v1alpha1
 // +k8s:deepcopy-gen:interfaces
 type TerraFormState struct {
 	// +optional
-	InitLogs string `json:"init_logs,omitempty"`
+	InitLogs string `json:"initLogs,omitempty"`
 	// +optional
-	InitErrLogs string `json:"init_err_logs,omitempty"`
+	InitErrLogs string `json:"initErrLogs,omitempty"`
 	// +optional
-	ApplyLogs string `json:"apply_logs,omitempty"`
+	ApplyLogs string `json:"applyLogs,omitempty"`
 	// +optional
-	ApplyErrLogs string `json:"apply_err_logs,omitempty"`
+	ApplyErrLogs string `json:"applyErrLogs,omitempty"`
 	// +optional
 	Plan string `json:"plan,omitempty"`
 }
