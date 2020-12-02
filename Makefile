@@ -116,7 +116,11 @@ gen-types: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 		--env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
@@ -135,8 +139,12 @@ clientset:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		/go/src/k8s.io/code-generator/generate-groups.sh \
 			deepcopy                                     \
@@ -149,8 +157,12 @@ clientset:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		/go/src/k8s.io/code-generator/generate-groups.sh \
 			all                                          \
@@ -168,8 +180,12 @@ openapi: $(addprefix openapi-, $(subst :,_, $(API_GROUPS)))
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		go run hack/gencrd/main.go
 
@@ -181,8 +197,12 @@ openapi-%:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		openapi-gen                                      \
 			--v 1 --logtostderr                          \
@@ -200,8 +220,12 @@ gen-crds:
 		-v /tmp:/.cache                     \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)      \
 		-w $(DOCKER_REPO_ROOT)              \
-	    --env HTTP_PROXY=$(HTTP_PROXY)      \
-	    --env HTTPS_PROXY=$(HTTPS_PROXY)    \
+	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
+	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)             \
 		controller-gen                      \
 			$(CRD_OPTIONS)                  \
@@ -250,7 +274,11 @@ fmt: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        REPO_PKG=$(GO_PKG)                                  \
@@ -270,7 +298,11 @@ build: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
@@ -301,7 +333,11 @@ unit-tests: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
@@ -325,7 +361,11 @@ lint: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    --env GO111MODULE=on                                    \
 	    --env GOFLAGS="-mod=vendor"                             \
 	    $(BUILD_IMAGE)                                          \
@@ -362,8 +402,12 @@ add-license:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		ltag -t "./hack/license" --excludes "vendor contrib" -v
 
@@ -375,8 +419,12 @@ check-license:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		ltag -t "./hack/license" --excludes "vendor contrib" --check -v
 
