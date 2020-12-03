@@ -36,9 +36,6 @@ spec:
           type: object
         spec:
           properties:
-            clientName:
-              description: Client name/account used in naming
-              type: string
             customName:
               description: Name of the App Service Plan, generated if not set.
               type: string
@@ -54,14 +51,8 @@ spec:
               description: The kind of the App Service Plan to create. See documentation
                 https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
               type: string
-            location:
-              description: Azure location.
-              type: string
-            locationShort:
-              description: Short string for Azure location.
-              type: string
-            namePrefix:
-              description: Optional prefix for the generated name
+            nameprefix:
+              description: appserviceplan nameprefix
               type: string
             owner:
               description: owner
@@ -110,25 +101,19 @@ spec:
               type: object
             source:
               type: string
-            stack:
-              description: Project stack name
-              type: string
             workStream:
               description: ' 4 character project stream name/code'
               type: string
           required:
-          - clientName
           - environment
           - kind
-          - location
-          - locationShort
+          - nameprefix
           - owner
           - projectStream
           - providerRef
           - region
           - resourceGroupName
           - sku
-          - stack
           - workStream
           type: object
         status:

@@ -38,6 +38,6 @@ var ModuleConfig = []Config{
 		"SDPAzsbv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=v0.2.1", "azurerm", "", "",
 	},
 	{
-		"SDPAzappserviceplanv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.0.2", "azurerm", "", "",
+		"SDPAzappserviceplanv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.0.3", "azurerm", "", "",
 	},
 }

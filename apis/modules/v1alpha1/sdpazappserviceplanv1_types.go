@@ -46,8 +46,6 @@ type SDPAzappserviceplanv1Spec struct {
 	// +optional
 	Source string `json:"source" tf:"source"`
 
-	// Client name/account used in naming
-	ClientName string `json:"clientName" tf:"client_name"`
 	// +optional
 	// Name of the App Service Plan, generated if not set.
 	CustomName string `json:"customName,omitempty" tf:"custom_name,omitempty"`
@@ -58,13 +56,8 @@ type SDPAzappserviceplanv1Spec struct {
 	ExtraTags map[string]string `json:"extraTags,omitempty" tf:"extra_tags,omitempty"`
 	// The kind of the App Service Plan to create. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
 	Kind string `json:"kind" tf:"kind"`
-	// Azure location.
-	Location string `json:"location" tf:"location"`
-	// Short string for Azure location.
-	LocationShort string `json:"locationShort" tf:"location_short"`
-	// +optional
-	// Optional prefix for the generated name
-	NamePrefix string `json:"namePrefix,omitempty" tf:"name_prefix,omitempty"`
+	// appserviceplan nameprefix
+	Nameprefix string `json:"nameprefix" tf:"nameprefix"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional
@@ -84,8 +77,6 @@ type SDPAzappserviceplanv1Spec struct {
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// A sku block. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#sku
 	Sku map[string]string `json:"sku" tf:"sku"`
-	// Project stack name
-	Stack string `json:"stack" tf:"stack"`
 	//  4 character project stream name/code
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
