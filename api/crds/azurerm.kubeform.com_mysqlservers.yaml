@@ -253,8 +253,19 @@ spec:
               - terraform_version
               - version
               type: object
-            terraformState:
-              type: string
+            terraformLogs:
+              properties:
+                applyErrLogs:
+                  type: string
+                applyLogs:
+                  type: string
+                initErrLogs:
+                  type: string
+                initLogs:
+                  type: string
+                plan:
+                  type: string
+              type: object
           type: object
       type: object
   version: v1alpha1

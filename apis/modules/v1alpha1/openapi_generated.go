@@ -15722,17 +15722,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Status(ref common.Reference
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1Output"},
 	}
 }
 
@@ -16243,17 +16242,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Status(ref common.ReferenceC
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1Output"},
 	}
 }
 
@@ -16588,17 +16586,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Status(ref common.Reference
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzSqlv1Output"},
 	}
 }
 
@@ -17385,17 +17382,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref common.Reference
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Output"},
 	}
 }
 
@@ -17968,17 +17964,16 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Status(ref common.ReferenceC
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Output"},
 	}
 }
 
@@ -18520,16 +18515,15 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Status(ref common.Refer
 							Format: "",
 						},
 					},
-					"terraformState": {
+					"terraformLogs": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs"),
 						},
 					},
 				},
 			},
 		},
 		Dependencies: []string{
-			"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Output"},
+			"kubeform.dev/kubeform/apis/base/v1alpha1.TerraFormLogs", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Output"},
 	}
 }

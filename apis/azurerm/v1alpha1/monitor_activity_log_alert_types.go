@@ -99,7 +99,7 @@ type MonitorActivityLogAlertStatus struct {
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
 	// +optional
-	TerraFormState string `json:"terraformState,omitempty"`
+	TerraFormLogs *base.TerraFormLogs `json:"terraformLogs,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
