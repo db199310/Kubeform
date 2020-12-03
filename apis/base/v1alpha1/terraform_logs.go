@@ -20,7 +20,7 @@ package v1alpha1
 
 // +k8s:openapi-gen=true
 // +k8s:deepcopy-gen:interfaces
-type TerraFormState struct {
+type TerraFormLogs struct {
 	// +optional
 	InitLogs string `json:"initLogs,omitempty"`
 	// +optional
