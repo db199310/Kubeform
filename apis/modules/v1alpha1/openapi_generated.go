@@ -18121,13 +18121,6 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Format: "",
 						},
 					},
-					"clientName": {
-						SchemaProps: spec.SchemaProps{
-							Description: "Client name/account used in naming",
-							Type:        []string{"string"},
-							Format:      "",
-						},
-					},
 					"customName": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name of the App Service Plan, generated if not set.",
@@ -18164,23 +18157,44 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Format:      "",
 						},
 					},
-					"location": {
+					"nameprefix": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Azure location.",
+							Description: "appserviceplan nameprefix",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"locationShort": {
+					"owner": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Short string for Azure location.",
+							Description: "owner",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
-					"namePrefix": {
+					"placement": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Optional prefix for the generated name",
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -18214,15 +18228,15 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							},
 						},
 					},
-					"stack": {
+					"workStream": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Project stack name",
+							Description: "\n 4 character project stream name/code",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 				},
-				Required: []string{"providerRef", "clientName", "environment", "kind", "location", "locationShort", "resourceGroupName", "sku", "stack"},
+				Required: []string{"providerRef", "environment", "kind", "nameprefix", "owner", "projectStream", "region", "resourceGroupName", "sku", "workStream"},
 			},
 		},
 		Dependencies: []string{

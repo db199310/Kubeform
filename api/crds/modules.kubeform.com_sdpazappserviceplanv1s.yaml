@@ -36,9 +36,6 @@ spec:
           type: object
         spec:
           properties:
-            clientName:
-              description: Client name/account used in naming
-              type: string
             customName:
               description: Name of the App Service Plan, generated if not set.
               type: string
@@ -54,14 +51,17 @@ spec:
               description: The kind of the App Service Plan to create. See documentation
                 https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
               type: string
-            location:
-              description: Azure location.
+            nameprefix:
+              description: appserviceplan nameprefix
               type: string
-            locationShort:
-              description: Short string for Azure location.
+            owner:
+              description: owner
               type: string
-            namePrefix:
-              description: Optional prefix for the generated name
+            placement:
+              description: placement
+              type: string
+            projectStream:
+              description: project stream name
               type: string
             providerRef:
               description: LocalObjectReference contains enough information to let
@@ -72,6 +72,12 @@ spec:
                     TODO: Add other useful fields. apiVersion, kind, uid?'
                   type: string
               type: object
+            region:
+              description: region
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
             reserved:
               description: Flag indicating if App Service Plan should be reserved.
                 Forced to true if "kind" is "Linux".
@@ -95,19 +101,20 @@ spec:
               type: object
             source:
               type: string
-            stack:
-              description: Project stack name
+            workStream:
+              description: ' 4 character project stream name/code'
               type: string
           required:
-          - clientName
           - environment
           - kind
-          - location
-          - locationShort
+          - nameprefix
+          - owner
+          - projectStream
           - providerRef
+          - region
           - resourceGroupName
           - sku
-          - stack
+          - workStream
           type: object
         status:
           properties:
