@@ -57,7 +57,7 @@ type SDPAzappserviceplanv1Spec struct {
 	// The kind of the App Service Plan to create. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
 	Kind string `json:"kind" tf:"kind"`
 	// appserviceplan nameprefix
-	Nameprefix string `json:"nameprefix" tf:"nameprefix"`
+	NamePrefix string `json:"namePrefix" tf:"namePrefix"`
 	// owner
 	Owner string `json:"owner" tf:"owner"`
 	// +optional

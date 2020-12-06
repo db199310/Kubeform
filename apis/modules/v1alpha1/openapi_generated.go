@@ -18157,7 +18157,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Format:      "",
 						},
 					},
-					"nameprefix": {
+					"namePrefix": {
 						SchemaProps: spec.SchemaProps{
 							Description: "appserviceplan nameprefix",
 							Type:        []string{"string"},
@@ -18236,7 +18236,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "kind", "nameprefix", "owner", "projectStream", "region", "resourceGroupName", "sku", "workStream"},
+				Required: []string{"providerRef", "environment", "kind", "namePrefix", "owner", "projectStream", "region", "resourceGroupName", "sku", "workStream"},
 			},
 		},
 		Dependencies: []string{

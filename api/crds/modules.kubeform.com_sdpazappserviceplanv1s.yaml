@@ -51,7 +51,7 @@ spec:
               description: The kind of the App Service Plan to create. See documentation
                 https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
               type: string
-            nameprefix:
+            namePrefix:
               description: appserviceplan nameprefix
               type: string
             owner:
@@ -107,7 +107,7 @@ spec:
           required:
           - environment
           - kind
-          - nameprefix
+          - namePrefix
           - owner
           - projectStream
           - providerRef
