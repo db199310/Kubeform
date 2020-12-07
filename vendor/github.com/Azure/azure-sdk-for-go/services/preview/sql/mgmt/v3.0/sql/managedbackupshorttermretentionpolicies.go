@@ -39,8 +39,7 @@ func NewManagedBackupShortTermRetentionPoliciesClient(subscriptionID string) Man
 }
 
 // NewManagedBackupShortTermRetentionPoliciesClientWithBaseURI creates an instance of the
-// ManagedBackupShortTermRetentionPoliciesClient client using a custom endpoint.  Use this when interacting with an
-// Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// ManagedBackupShortTermRetentionPoliciesClient client.
 func NewManagedBackupShortTermRetentionPoliciesClientWithBaseURI(baseURI string, subscriptionID string) ManagedBackupShortTermRetentionPoliciesClient {
 	return ManagedBackupShortTermRetentionPoliciesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -106,8 +105,9 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) CreateOrUpdatePrepar
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedBackupShortTermRetentionPoliciesClient) CreateOrUpdateSender(req *http.Request) (future ManagedBackupShortTermRetentionPoliciesCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -192,7 +192,8 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) GetPreparer(ctx cont
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedBackupShortTermRetentionPoliciesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -272,7 +273,8 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) ListByDatabasePrepar
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedBackupShortTermRetentionPoliciesClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always
@@ -386,8 +388,9 @@ func (client ManagedBackupShortTermRetentionPoliciesClient) UpdatePreparer(ctx c
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedBackupShortTermRetentionPoliciesClient) UpdateSender(req *http.Request) (future ManagedBackupShortTermRetentionPoliciesUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

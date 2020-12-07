@@ -1,7 +1,6 @@
 package client
 
 import (
-	"github.com/Azure/azure-sdk-for-go/services/preview/alertsmanagement/mgmt/2019-05-05/alertsmanagement"
 	"github.com/Azure/azure-sdk-for-go/services/preview/monitor/mgmt/2019-06-01/insights"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/common"
 )
@@ -9,9 +8,6 @@ import (
 type Client struct {
 	// Autoscale Settings
 	AutoscaleSettingsClient *insights.AutoscaleSettingsClient
-
-	// alerts management
-	ActionRulesClient *alertsmanagement.ActionRulesClient
 
 	// Monitor
 	ActionGroupsClient               *insights.ActionGroupsClient
@@ -21,15 +17,11 @@ type Client struct {
 	DiagnosticSettingsCategoryClient *insights.DiagnosticSettingsCategoryClient
 	LogProfilesClient                *insights.LogProfilesClient
 	MetricAlertsClient               *insights.MetricAlertsClient
-	ScheduledQueryRulesClient        *insights.ScheduledQueryRulesClient
 }
 
 func NewClient(o *common.ClientOptions) *Client {
 	AutoscaleSettingsClient := insights.NewAutoscaleSettingsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&AutoscaleSettingsClient.Client, o.ResourceManagerAuthorizer)
-
-	ActionRulesClient := alertsmanagement.NewActionRulesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
-	o.ConfigureClient(&ActionRulesClient.Client, o.ResourceManagerAuthorizer)
 
 	ActionGroupsClient := insights.NewActionGroupsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&ActionGroupsClient.Client, o.ResourceManagerAuthorizer)
@@ -52,12 +44,8 @@ func NewClient(o *common.ClientOptions) *Client {
 	MetricAlertsClient := insights.NewMetricAlertsClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&MetricAlertsClient.Client, o.ResourceManagerAuthorizer)
 
-	ScheduledQueryRulesClient := insights.NewScheduledQueryRulesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
-	o.ConfigureClient(&ScheduledQueryRulesClient.Client, o.ResourceManagerAuthorizer)
-
 	return &Client{
 		AutoscaleSettingsClient:          &AutoscaleSettingsClient,
-		ActionRulesClient:                &ActionRulesClient,
 		ActionGroupsClient:               &ActionGroupsClient,
 		ActivityLogAlertsClient:          &ActivityLogAlertsClient,
 		AlertRulesClient:                 &AlertRulesClient,
@@ -65,6 +53,5 @@ func NewClient(o *common.ClientOptions) *Client {
 		DiagnosticSettingsCategoryClient: &DiagnosticSettingsCategoryClient,
 		LogProfilesClient:                &LogProfilesClient,
 		MetricAlertsClient:               &MetricAlertsClient,
-		ScheduledQueryRulesClient:        &ScheduledQueryRulesClient,
 	}
 }

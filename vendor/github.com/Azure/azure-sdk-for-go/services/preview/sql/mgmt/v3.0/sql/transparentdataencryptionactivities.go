@@ -39,8 +39,7 @@ func NewTransparentDataEncryptionActivitiesClient(subscriptionID string) Transpa
 }
 
 // NewTransparentDataEncryptionActivitiesClientWithBaseURI creates an instance of the
-// TransparentDataEncryptionActivitiesClient client using a custom endpoint.  Use this when interacting with an Azure
-// cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// TransparentDataEncryptionActivitiesClient client.
 func NewTransparentDataEncryptionActivitiesClientWithBaseURI(baseURI string, subscriptionID string) TransparentDataEncryptionActivitiesClient {
 	return TransparentDataEncryptionActivitiesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -109,7 +108,8 @@ func (client TransparentDataEncryptionActivitiesClient) ListByConfigurationPrepa
 // ListByConfigurationSender sends the ListByConfiguration request. The method will close the
 // http.Response Body if it receives an error.
 func (client TransparentDataEncryptionActivitiesClient) ListByConfigurationSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByConfigurationResponder handles the response to the ListByConfiguration request. The method always

@@ -84,7 +84,7 @@ func resourceArmBackupProtectedFileShareCreateUpdate(d *schema.ResourceData, met
 	fileShareName := d.Get("source_file_share_name").(string)
 	policyID := d.Get("backup_policy_id").(string)
 
-	// get storage account name from id
+	//get storage account name from id
 	parsedStorageAccountID, err := azure.ParseAzureResourceID(storageAccountID)
 	if err != nil {
 		return fmt.Errorf("[ERROR] Unable to parse source_storage_account_id '%s': %+v", storageAccountID, err)
@@ -246,7 +246,6 @@ func resourceArmBackupProtectedFileShareDelete(d *schema.ResourceData, meta inte
 	return nil
 }
 
-// nolint unused - linter mistakenly things this function isn't used?
 func resourceArmBackupProtectedFileShareWaitForOperation(ctx context.Context, client *backup.OperationStatusesClient, vaultName, resourceGroup, operationID string, d *schema.ResourceData) (backup.OperationStatus, error) {
 	state := &resource.StateChangeConf{
 		MinTimeout: 10 * time.Second,
@@ -256,10 +255,14 @@ func resourceArmBackupProtectedFileShareWaitForOperation(ctx context.Context, cl
 		Refresh:    resourceArmBackupProtectedFileShareCheckOperation(ctx, client, vaultName, resourceGroup, operationID),
 	}
 
-	if d.IsNewResource() {
-		state.Timeout = d.Timeout(schema.TimeoutCreate)
+	if features.SupportsCustomTimeouts() {
+		if d.IsNewResource() {
+			state.Timeout = d.Timeout(schema.TimeoutCreate)
+		} else {
+			state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		}
 	} else {
-		state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		state.Timeout = 30 * time.Minute
 	}
 
 	log.Printf("[DEBUG] Waiting for backup operation %s (Vault %s) to complete", operationID, vaultName)

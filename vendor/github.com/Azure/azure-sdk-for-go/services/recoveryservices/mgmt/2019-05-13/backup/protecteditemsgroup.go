@@ -35,9 +35,7 @@ func NewProtectedItemsGroupClient(subscriptionID string) ProtectedItemsGroupClie
 	return NewProtectedItemsGroupClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewProtectedItemsGroupClientWithBaseURI creates an instance of the ProtectedItemsGroupClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewProtectedItemsGroupClientWithBaseURI creates an instance of the ProtectedItemsGroupClient client.
 func NewProtectedItemsGroupClientWithBaseURI(baseURI string, subscriptionID string) ProtectedItemsGroupClient {
 	return ProtectedItemsGroupClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -111,7 +109,8 @@ func (client ProtectedItemsGroupClient) ListPreparer(ctx context.Context, vaultN
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ProtectedItemsGroupClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always

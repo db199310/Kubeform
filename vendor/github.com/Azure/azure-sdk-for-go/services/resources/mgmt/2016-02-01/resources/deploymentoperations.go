@@ -36,9 +36,7 @@ func NewDeploymentOperationsClient(subscriptionID string) DeploymentOperationsCl
 	return NewDeploymentOperationsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDeploymentOperationsClientWithBaseURI creates an instance of the DeploymentOperationsClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewDeploymentOperationsClientWithBaseURI creates an instance of the DeploymentOperationsClient client.
 func NewDeploymentOperationsClientWithBaseURI(baseURI string, subscriptionID string) DeploymentOperationsClient {
 	return DeploymentOperationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -113,7 +111,8 @@ func (client DeploymentOperationsClient) GetPreparer(ctx context.Context, resour
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DeploymentOperationsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -202,7 +201,8 @@ func (client DeploymentOperationsClient) ListPreparer(ctx context.Context, resou
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client DeploymentOperationsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always

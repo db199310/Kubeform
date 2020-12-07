@@ -37,8 +37,7 @@ func NewServerUsagesClient(subscriptionID string) ServerUsagesClient {
 	return NewServerUsagesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewServerUsagesClientWithBaseURI creates an instance of the ServerUsagesClient client using a custom endpoint.  Use
-// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewServerUsagesClientWithBaseURI creates an instance of the ServerUsagesClient client.
 func NewServerUsagesClientWithBaseURI(baseURI string, subscriptionID string) ServerUsagesClient {
 	return ServerUsagesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -104,7 +103,8 @@ func (client ServerUsagesClient) ListByServerPreparer(ctx context.Context, resou
 // ListByServerSender sends the ListByServer request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServerUsagesClient) ListByServerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByServerResponder handles the response to the ListByServer request. The method always

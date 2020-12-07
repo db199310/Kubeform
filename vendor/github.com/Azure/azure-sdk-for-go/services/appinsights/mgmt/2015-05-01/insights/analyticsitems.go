@@ -36,8 +36,7 @@ func NewAnalyticsItemsClient(subscriptionID string) AnalyticsItemsClient {
 	return NewAnalyticsItemsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewAnalyticsItemsClientWithBaseURI creates an instance of the AnalyticsItemsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewAnalyticsItemsClientWithBaseURI creates an instance of the AnalyticsItemsClient client.
 func NewAnalyticsItemsClientWithBaseURI(baseURI string, subscriptionID string) AnalyticsItemsClient {
 	return AnalyticsItemsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -123,7 +122,8 @@ func (client AnalyticsItemsClient) DeletePreparer(ctx context.Context, resourceG
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client AnalyticsItemsClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -219,7 +219,8 @@ func (client AnalyticsItemsClient) GetPreparer(ctx context.Context, resourceGrou
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client AnalyticsItemsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -326,7 +327,8 @@ func (client AnalyticsItemsClient) ListPreparer(ctx context.Context, resourceGro
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client AnalyticsItemsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -427,7 +429,8 @@ func (client AnalyticsItemsClient) PutPreparer(ctx context.Context, resourceGrou
 // PutSender sends the Put request. The method will close the
 // http.Response Body if it receives an error.
 func (client AnalyticsItemsClient) PutSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // PutResponder handles the response to the Put request. The method always

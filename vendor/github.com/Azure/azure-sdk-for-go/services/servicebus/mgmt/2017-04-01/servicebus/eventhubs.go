@@ -36,8 +36,7 @@ func NewEventHubsClient(subscriptionID string) EventHubsClient {
 	return NewEventHubsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewEventHubsClientWithBaseURI creates an instance of the EventHubsClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewEventHubsClientWithBaseURI creates an instance of the EventHubsClient client.
 func NewEventHubsClientWithBaseURI(baseURI string, subscriptionID string) EventHubsClient {
 	return EventHubsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -113,7 +112,8 @@ func (client EventHubsClient) ListByNamespacePreparer(ctx context.Context, resou
 // ListByNamespaceSender sends the ListByNamespace request. The method will close the
 // http.Response Body if it receives an error.
 func (client EventHubsClient) ListByNamespaceSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByNamespaceResponder handles the response to the ListByNamespace request. The method always

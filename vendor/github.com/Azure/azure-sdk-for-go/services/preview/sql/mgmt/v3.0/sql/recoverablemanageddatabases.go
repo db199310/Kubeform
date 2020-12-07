@@ -37,9 +37,7 @@ func NewRecoverableManagedDatabasesClient(subscriptionID string) RecoverableMana
 	return NewRecoverableManagedDatabasesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewRecoverableManagedDatabasesClientWithBaseURI creates an instance of the RecoverableManagedDatabasesClient client
-// using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewRecoverableManagedDatabasesClientWithBaseURI creates an instance of the RecoverableManagedDatabasesClient client.
 func NewRecoverableManagedDatabasesClientWithBaseURI(baseURI string, subscriptionID string) RecoverableManagedDatabasesClient {
 	return RecoverableManagedDatabasesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -106,7 +104,8 @@ func (client RecoverableManagedDatabasesClient) GetPreparer(ctx context.Context,
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecoverableManagedDatabasesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -184,7 +183,8 @@ func (client RecoverableManagedDatabasesClient) ListByInstancePreparer(ctx conte
 // ListByInstanceSender sends the ListByInstance request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecoverableManagedDatabasesClient) ListByInstanceSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByInstanceResponder handles the response to the ListByInstance request. The method always

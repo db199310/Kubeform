@@ -36,9 +36,7 @@ func NewDatabaseAccountsClient(subscriptionID string) DatabaseAccountsClient {
 	return NewDatabaseAccountsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDatabaseAccountsClientWithBaseURI creates an instance of the DatabaseAccountsClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewDatabaseAccountsClientWithBaseURI creates an instance of the DatabaseAccountsClient client.
 func NewDatabaseAccountsClientWithBaseURI(baseURI string, subscriptionID string) DatabaseAccountsClient {
 	return DatabaseAccountsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -109,7 +107,8 @@ func (client DatabaseAccountsClient) CheckNameExistsPreparer(ctx context.Context
 // CheckNameExistsSender sends the CheckNameExists request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CheckNameExistsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckNameExistsResponder handles the response to the CheckNameExists request. The method always
@@ -208,8 +207,9 @@ func (client DatabaseAccountsClient) CreateOrUpdatePreparer(ctx context.Context,
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateOrUpdateSender(req *http.Request) (future DatabaseAccountsCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -307,8 +307,9 @@ func (client DatabaseAccountsClient) CreateUpdateCassandraKeyspacePreparer(ctx c
 // CreateUpdateCassandraKeyspaceSender sends the CreateUpdateCassandraKeyspace request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateCassandraKeyspaceSender(req *http.Request) (future DatabaseAccountsCreateUpdateCassandraKeyspaceFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -408,8 +409,9 @@ func (client DatabaseAccountsClient) CreateUpdateCassandraTablePreparer(ctx cont
 // CreateUpdateCassandraTableSender sends the CreateUpdateCassandraTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateCassandraTableSender(req *http.Request) (future DatabaseAccountsCreateUpdateCassandraTableFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -507,8 +509,9 @@ func (client DatabaseAccountsClient) CreateUpdateGremlinDatabasePreparer(ctx con
 // CreateUpdateGremlinDatabaseSender sends the CreateUpdateGremlinDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateGremlinDatabaseSender(req *http.Request) (future DatabaseAccountsCreateUpdateGremlinDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -608,8 +611,9 @@ func (client DatabaseAccountsClient) CreateUpdateGremlinGraphPreparer(ctx contex
 // CreateUpdateGremlinGraphSender sends the CreateUpdateGremlinGraph request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateGremlinGraphSender(req *http.Request) (future DatabaseAccountsCreateUpdateGremlinGraphFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -709,8 +713,9 @@ func (client DatabaseAccountsClient) CreateUpdateMongoDBCollectionPreparer(ctx c
 // CreateUpdateMongoDBCollectionSender sends the CreateUpdateMongoDBCollection request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateMongoDBCollectionSender(req *http.Request) (future DatabaseAccountsCreateUpdateMongoDBCollectionFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -808,8 +813,9 @@ func (client DatabaseAccountsClient) CreateUpdateMongoDBDatabasePreparer(ctx con
 // CreateUpdateMongoDBDatabaseSender sends the CreateUpdateMongoDBDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateMongoDBDatabaseSender(req *http.Request) (future DatabaseAccountsCreateUpdateMongoDBDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -909,8 +915,9 @@ func (client DatabaseAccountsClient) CreateUpdateSQLContainerPreparer(ctx contex
 // CreateUpdateSQLContainerSender sends the CreateUpdateSQLContainer request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateSQLContainerSender(req *http.Request) (future DatabaseAccountsCreateUpdateSQLContainerFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1008,8 +1015,9 @@ func (client DatabaseAccountsClient) CreateUpdateSQLDatabasePreparer(ctx context
 // CreateUpdateSQLDatabaseSender sends the CreateUpdateSQLDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateSQLDatabaseSender(req *http.Request) (future DatabaseAccountsCreateUpdateSQLDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1107,8 +1115,9 @@ func (client DatabaseAccountsClient) CreateUpdateTablePreparer(ctx context.Conte
 // CreateUpdateTableSender sends the CreateUpdateTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) CreateUpdateTableSender(req *http.Request) (future DatabaseAccountsCreateUpdateTableFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1195,8 +1204,9 @@ func (client DatabaseAccountsClient) DeletePreparer(ctx context.Context, resourc
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteSender(req *http.Request) (future DatabaseAccountsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1284,8 +1294,9 @@ func (client DatabaseAccountsClient) DeleteCassandraKeyspacePreparer(ctx context
 // DeleteCassandraKeyspaceSender sends the DeleteCassandraKeyspace request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteCassandraKeyspaceSender(req *http.Request) (future DatabaseAccountsDeleteCassandraKeyspaceFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1375,8 +1386,9 @@ func (client DatabaseAccountsClient) DeleteCassandraTablePreparer(ctx context.Co
 // DeleteCassandraTableSender sends the DeleteCassandraTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteCassandraTableSender(req *http.Request) (future DatabaseAccountsDeleteCassandraTableFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1464,8 +1476,9 @@ func (client DatabaseAccountsClient) DeleteGremlinDatabasePreparer(ctx context.C
 // DeleteGremlinDatabaseSender sends the DeleteGremlinDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteGremlinDatabaseSender(req *http.Request) (future DatabaseAccountsDeleteGremlinDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1555,8 +1568,9 @@ func (client DatabaseAccountsClient) DeleteGremlinGraphPreparer(ctx context.Cont
 // DeleteGremlinGraphSender sends the DeleteGremlinGraph request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteGremlinGraphSender(req *http.Request) (future DatabaseAccountsDeleteGremlinGraphFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1646,8 +1660,9 @@ func (client DatabaseAccountsClient) DeleteMongoDBCollectionPreparer(ctx context
 // DeleteMongoDBCollectionSender sends the DeleteMongoDBCollection request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteMongoDBCollectionSender(req *http.Request) (future DatabaseAccountsDeleteMongoDBCollectionFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1735,8 +1750,9 @@ func (client DatabaseAccountsClient) DeleteMongoDBDatabasePreparer(ctx context.C
 // DeleteMongoDBDatabaseSender sends the DeleteMongoDBDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteMongoDBDatabaseSender(req *http.Request) (future DatabaseAccountsDeleteMongoDBDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1826,8 +1842,9 @@ func (client DatabaseAccountsClient) DeleteSQLContainerPreparer(ctx context.Cont
 // DeleteSQLContainerSender sends the DeleteSQLContainer request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteSQLContainerSender(req *http.Request) (future DatabaseAccountsDeleteSQLContainerFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -1915,8 +1932,9 @@ func (client DatabaseAccountsClient) DeleteSQLDatabasePreparer(ctx context.Conte
 // DeleteSQLDatabaseSender sends the DeleteSQLDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteSQLDatabaseSender(req *http.Request) (future DatabaseAccountsDeleteSQLDatabaseFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -2004,8 +2022,9 @@ func (client DatabaseAccountsClient) DeleteTablePreparer(ctx context.Context, re
 // DeleteTableSender sends the DeleteTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) DeleteTableSender(req *http.Request) (future DatabaseAccountsDeleteTableFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -2098,8 +2117,9 @@ func (client DatabaseAccountsClient) FailoverPriorityChangePreparer(ctx context.
 // FailoverPriorityChangeSender sends the FailoverPriorityChange request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) FailoverPriorityChangeSender(req *http.Request) (future DatabaseAccountsFailoverPriorityChangeFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -2191,7 +2211,8 @@ func (client DatabaseAccountsClient) GetPreparer(ctx context.Context, resourceGr
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -2282,7 +2303,8 @@ func (client DatabaseAccountsClient) GetCassandraKeyspacePreparer(ctx context.Co
 // GetCassandraKeyspaceSender sends the GetCassandraKeyspace request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetCassandraKeyspaceSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetCassandraKeyspaceResponder handles the response to the GetCassandraKeyspace request. The method always
@@ -2373,7 +2395,8 @@ func (client DatabaseAccountsClient) GetCassandraKeyspaceThroughputPreparer(ctx 
 // GetCassandraKeyspaceThroughputSender sends the GetCassandraKeyspaceThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetCassandraKeyspaceThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetCassandraKeyspaceThroughputResponder handles the response to the GetCassandraKeyspaceThroughput request. The method always
@@ -2465,7 +2488,8 @@ func (client DatabaseAccountsClient) GetCassandraTablePreparer(ctx context.Conte
 // GetCassandraTableSender sends the GetCassandraTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetCassandraTableSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetCassandraTableResponder handles the response to the GetCassandraTable request. The method always
@@ -2558,7 +2582,8 @@ func (client DatabaseAccountsClient) GetCassandraTableThroughputPreparer(ctx con
 // GetCassandraTableThroughputSender sends the GetCassandraTableThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetCassandraTableThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetCassandraTableThroughputResponder handles the response to the GetCassandraTableThroughput request. The method always
@@ -2649,7 +2674,8 @@ func (client DatabaseAccountsClient) GetGremlinDatabasePreparer(ctx context.Cont
 // GetGremlinDatabaseSender sends the GetGremlinDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetGremlinDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetGremlinDatabaseResponder handles the response to the GetGremlinDatabase request. The method always
@@ -2740,7 +2766,8 @@ func (client DatabaseAccountsClient) GetGremlinDatabaseThroughputPreparer(ctx co
 // GetGremlinDatabaseThroughputSender sends the GetGremlinDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetGremlinDatabaseThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetGremlinDatabaseThroughputResponder handles the response to the GetGremlinDatabaseThroughput request. The method always
@@ -2832,7 +2859,8 @@ func (client DatabaseAccountsClient) GetGremlinGraphPreparer(ctx context.Context
 // GetGremlinGraphSender sends the GetGremlinGraph request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetGremlinGraphSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetGremlinGraphResponder handles the response to the GetGremlinGraph request. The method always
@@ -2925,7 +2953,8 @@ func (client DatabaseAccountsClient) GetGremlinGraphThroughputPreparer(ctx conte
 // GetGremlinGraphThroughputSender sends the GetGremlinGraphThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetGremlinGraphThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetGremlinGraphThroughputResponder handles the response to the GetGremlinGraphThroughput request. The method always
@@ -3017,7 +3046,8 @@ func (client DatabaseAccountsClient) GetMongoDBCollectionPreparer(ctx context.Co
 // GetMongoDBCollectionSender sends the GetMongoDBCollection request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetMongoDBCollectionSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetMongoDBCollectionResponder handles the response to the GetMongoDBCollection request. The method always
@@ -3110,7 +3140,8 @@ func (client DatabaseAccountsClient) GetMongoDBCollectionThroughputPreparer(ctx 
 // GetMongoDBCollectionThroughputSender sends the GetMongoDBCollectionThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetMongoDBCollectionThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetMongoDBCollectionThroughputResponder handles the response to the GetMongoDBCollectionThroughput request. The method always
@@ -3201,7 +3232,8 @@ func (client DatabaseAccountsClient) GetMongoDBDatabasePreparer(ctx context.Cont
 // GetMongoDBDatabaseSender sends the GetMongoDBDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetMongoDBDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetMongoDBDatabaseResponder handles the response to the GetMongoDBDatabase request. The method always
@@ -3292,7 +3324,8 @@ func (client DatabaseAccountsClient) GetMongoDBDatabaseThroughputPreparer(ctx co
 // GetMongoDBDatabaseThroughputSender sends the GetMongoDBDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetMongoDBDatabaseThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetMongoDBDatabaseThroughputResponder handles the response to the GetMongoDBDatabaseThroughput request. The method always
@@ -3380,7 +3413,8 @@ func (client DatabaseAccountsClient) GetReadOnlyKeysPreparer(ctx context.Context
 // GetReadOnlyKeysSender sends the GetReadOnlyKeys request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetReadOnlyKeysSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetReadOnlyKeysResponder handles the response to the GetReadOnlyKeys request. The method always
@@ -3472,7 +3506,8 @@ func (client DatabaseAccountsClient) GetSQLContainerPreparer(ctx context.Context
 // GetSQLContainerSender sends the GetSQLContainer request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetSQLContainerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetSQLContainerResponder handles the response to the GetSQLContainer request. The method always
@@ -3565,7 +3600,8 @@ func (client DatabaseAccountsClient) GetSQLContainerThroughputPreparer(ctx conte
 // GetSQLContainerThroughputSender sends the GetSQLContainerThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetSQLContainerThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetSQLContainerThroughputResponder handles the response to the GetSQLContainerThroughput request. The method always
@@ -3655,7 +3691,8 @@ func (client DatabaseAccountsClient) GetSQLDatabasePreparer(ctx context.Context,
 // GetSQLDatabaseSender sends the GetSQLDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetSQLDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetSQLDatabaseResponder handles the response to the GetSQLDatabase request. The method always
@@ -3746,7 +3783,8 @@ func (client DatabaseAccountsClient) GetSQLDatabaseThroughputPreparer(ctx contex
 // GetSQLDatabaseThroughputSender sends the GetSQLDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetSQLDatabaseThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetSQLDatabaseThroughputResponder handles the response to the GetSQLDatabaseThroughput request. The method always
@@ -3836,7 +3874,8 @@ func (client DatabaseAccountsClient) GetTablePreparer(ctx context.Context, resou
 // GetTableSender sends the GetTable request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetTableSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetTableResponder handles the response to the GetTable request. The method always
@@ -3927,7 +3966,8 @@ func (client DatabaseAccountsClient) GetTableThroughputPreparer(ctx context.Cont
 // GetTableThroughputSender sends the GetTableThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) GetTableThroughputSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetTableThroughputResponder handles the response to the GetTableThroughput request. The method always
@@ -3998,7 +4038,8 @@ func (client DatabaseAccountsClient) ListPreparer(ctx context.Context) (*http.Re
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -4080,7 +4121,8 @@ func (client DatabaseAccountsClient) ListByResourceGroupPreparer(ctx context.Con
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -4168,7 +4210,8 @@ func (client DatabaseAccountsClient) ListCassandraKeyspacesPreparer(ctx context.
 // ListCassandraKeyspacesSender sends the ListCassandraKeyspaces request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListCassandraKeyspacesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListCassandraKeyspacesResponder handles the response to the ListCassandraKeyspaces request. The method always
@@ -4258,7 +4301,8 @@ func (client DatabaseAccountsClient) ListCassandraTablesPreparer(ctx context.Con
 // ListCassandraTablesSender sends the ListCassandraTables request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListCassandraTablesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListCassandraTablesResponder handles the response to the ListCassandraTables request. The method always
@@ -4346,7 +4390,8 @@ func (client DatabaseAccountsClient) ListConnectionStringsPreparer(ctx context.C
 // ListConnectionStringsSender sends the ListConnectionStrings request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListConnectionStringsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListConnectionStringsResponder handles the response to the ListConnectionStrings request. The method always
@@ -4434,7 +4479,8 @@ func (client DatabaseAccountsClient) ListGremlinDatabasesPreparer(ctx context.Co
 // ListGremlinDatabasesSender sends the ListGremlinDatabases request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListGremlinDatabasesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListGremlinDatabasesResponder handles the response to the ListGremlinDatabases request. The method always
@@ -4524,7 +4570,8 @@ func (client DatabaseAccountsClient) ListGremlinGraphsPreparer(ctx context.Conte
 // ListGremlinGraphsSender sends the ListGremlinGraphs request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListGremlinGraphsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListGremlinGraphsResponder handles the response to the ListGremlinGraphs request. The method always
@@ -4612,7 +4659,8 @@ func (client DatabaseAccountsClient) ListKeysPreparer(ctx context.Context, resou
 // ListKeysSender sends the ListKeys request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListKeysSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListKeysResponder handles the response to the ListKeys request. The method always
@@ -4700,7 +4748,8 @@ func (client DatabaseAccountsClient) ListMetricDefinitionsPreparer(ctx context.C
 // ListMetricDefinitionsSender sends the ListMetricDefinitions request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListMetricDefinitionsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListMetricDefinitionsResponder handles the response to the ListMetricDefinitions request. The method always
@@ -4792,7 +4841,8 @@ func (client DatabaseAccountsClient) ListMetricsPreparer(ctx context.Context, re
 // ListMetricsSender sends the ListMetrics request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListMetricsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListMetricsResponder handles the response to the ListMetrics request. The method always
@@ -4882,7 +4932,8 @@ func (client DatabaseAccountsClient) ListMongoDBCollectionsPreparer(ctx context.
 // ListMongoDBCollectionsSender sends the ListMongoDBCollections request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListMongoDBCollectionsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListMongoDBCollectionsResponder handles the response to the ListMongoDBCollections request. The method always
@@ -4970,7 +5021,8 @@ func (client DatabaseAccountsClient) ListMongoDBDatabasesPreparer(ctx context.Co
 // ListMongoDBDatabasesSender sends the ListMongoDBDatabases request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListMongoDBDatabasesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListMongoDBDatabasesResponder handles the response to the ListMongoDBDatabases request. The method always
@@ -5058,7 +5110,8 @@ func (client DatabaseAccountsClient) ListReadOnlyKeysPreparer(ctx context.Contex
 // ListReadOnlyKeysSender sends the ListReadOnlyKeys request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListReadOnlyKeysSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListReadOnlyKeysResponder handles the response to the ListReadOnlyKeys request. The method always
@@ -5148,7 +5201,8 @@ func (client DatabaseAccountsClient) ListSQLContainersPreparer(ctx context.Conte
 // ListSQLContainersSender sends the ListSQLContainers request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListSQLContainersSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListSQLContainersResponder handles the response to the ListSQLContainers request. The method always
@@ -5236,7 +5290,8 @@ func (client DatabaseAccountsClient) ListSQLDatabasesPreparer(ctx context.Contex
 // ListSQLDatabasesSender sends the ListSQLDatabases request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListSQLDatabasesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListSQLDatabasesResponder handles the response to the ListSQLDatabases request. The method always
@@ -5324,7 +5379,8 @@ func (client DatabaseAccountsClient) ListTablesPreparer(ctx context.Context, res
 // ListTablesSender sends the ListTables request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListTablesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListTablesResponder handles the response to the ListTables request. The method always
@@ -5417,7 +5473,8 @@ func (client DatabaseAccountsClient) ListUsagesPreparer(ctx context.Context, res
 // ListUsagesSender sends the ListUsages request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) ListUsagesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListUsagesResponder handles the response to the ListUsages request. The method always
@@ -5504,8 +5561,9 @@ func (client DatabaseAccountsClient) OfflineRegionPreparer(ctx context.Context, 
 // OfflineRegionSender sends the OfflineRegion request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) OfflineRegionSender(req *http.Request) (future DatabaseAccountsOfflineRegionFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -5596,8 +5654,9 @@ func (client DatabaseAccountsClient) OnlineRegionPreparer(ctx context.Context, r
 // OnlineRegionSender sends the OnlineRegion request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) OnlineRegionSender(req *http.Request) (future DatabaseAccountsOnlineRegionFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -5686,8 +5745,9 @@ func (client DatabaseAccountsClient) PatchPreparer(ctx context.Context, resource
 // PatchSender sends the Patch request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) PatchSender(req *http.Request) (future DatabaseAccountsPatchFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -5777,8 +5837,9 @@ func (client DatabaseAccountsClient) RegenerateKeyPreparer(ctx context.Context, 
 // RegenerateKeySender sends the RegenerateKey request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) RegenerateKeySender(req *http.Request) (future DatabaseAccountsRegenerateKeyFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -5875,8 +5936,9 @@ func (client DatabaseAccountsClient) UpdateCassandraKeyspaceThroughputPreparer(c
 // UpdateCassandraKeyspaceThroughputSender sends the UpdateCassandraKeyspaceThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateCassandraKeyspaceThroughputSender(req *http.Request) (future DatabaseAccountsUpdateCassandraKeyspaceThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -5976,8 +6038,9 @@ func (client DatabaseAccountsClient) UpdateCassandraTableThroughputPreparer(ctx 
 // UpdateCassandraTableThroughputSender sends the UpdateCassandraTableThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateCassandraTableThroughputSender(req *http.Request) (future DatabaseAccountsUpdateCassandraTableThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6075,8 +6138,9 @@ func (client DatabaseAccountsClient) UpdateGremlinDatabaseThroughputPreparer(ctx
 // UpdateGremlinDatabaseThroughputSender sends the UpdateGremlinDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateGremlinDatabaseThroughputSender(req *http.Request) (future DatabaseAccountsUpdateGremlinDatabaseThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6175,8 +6239,9 @@ func (client DatabaseAccountsClient) UpdateGremlinGraphThroughputPreparer(ctx co
 // UpdateGremlinGraphThroughputSender sends the UpdateGremlinGraphThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateGremlinGraphThroughputSender(req *http.Request) (future DatabaseAccountsUpdateGremlinGraphThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6276,8 +6341,9 @@ func (client DatabaseAccountsClient) UpdateMongoDBCollectionThroughputPreparer(c
 // UpdateMongoDBCollectionThroughputSender sends the UpdateMongoDBCollectionThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateMongoDBCollectionThroughputSender(req *http.Request) (future DatabaseAccountsUpdateMongoDBCollectionThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6375,8 +6441,9 @@ func (client DatabaseAccountsClient) UpdateMongoDBDatabaseThroughputPreparer(ctx
 // UpdateMongoDBDatabaseThroughputSender sends the UpdateMongoDBDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateMongoDBDatabaseThroughputSender(req *http.Request) (future DatabaseAccountsUpdateMongoDBDatabaseThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6475,8 +6542,9 @@ func (client DatabaseAccountsClient) UpdateSQLContainerThroughputPreparer(ctx co
 // UpdateSQLContainerThroughputSender sends the UpdateSQLContainerThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateSQLContainerThroughputSender(req *http.Request) (future DatabaseAccountsUpdateSQLContainerThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6573,8 +6641,9 @@ func (client DatabaseAccountsClient) UpdateSQLDatabaseThroughputPreparer(ctx con
 // UpdateSQLDatabaseThroughputSender sends the UpdateSQLDatabaseThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateSQLDatabaseThroughputSender(req *http.Request) (future DatabaseAccountsUpdateSQLDatabaseThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -6671,8 +6740,9 @@ func (client DatabaseAccountsClient) UpdateTableThroughputPreparer(ctx context.C
 // UpdateTableThroughputSender sends the UpdateTableThroughput request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseAccountsClient) UpdateTableThroughputSender(req *http.Request) (future DatabaseAccountsUpdateTableThroughputFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

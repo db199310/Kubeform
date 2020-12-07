@@ -13,6 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package main
 
 import (
@@ -44,13 +45,17 @@ func generateSwaggerJson() {
 			Title:   "Kubeform",
 			Version: "v0.0.1",
 			Contact: &spec.ContactInfo{
-				Name:  "AppsCode Inc.",
-				URL:   "https://appscode.com",
-				Email: "hello@appscode.com",
+				ContactInfoProps: spec.ContactInfoProps{
+					Name:  "AppsCode Inc.",
+					URL:   "https://appscode.com",
+					Email: "hello@appscode.com",
+				},
 			},
 			License: &spec.License{
-				Name: "Apache 2.0",
-				URL:  "https://www.apache.org/licenses/LICENSE-2.0.html",
+				LicenseProps: spec.LicenseProps{
+					Name: "Apache 2.0",
+					URL:  "https://www.apache.org/licenses/LICENSE-2.0.html",
+				},
 			},
 		},
 		OpenAPIDefinitions: []common.GetOpenAPIDefinitions{
@@ -63,7 +68,7 @@ func generateSwaggerJson() {
 		glog.Fatal(err)
 	}
 
-	filename := gort.GOPath() + "/src/kubeform.dev/kubeform/api/openapi-spec/swagger.json"
+	filename := gort.GOPath() + "/src/kubeform.dev/kubeform/openapi/swagger.json"
 	err = os.MkdirAll(filepath.Dir(filename), 0755)
 	if err != nil {
 		glog.Fatal(err)

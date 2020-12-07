@@ -35,8 +35,7 @@ func NewFeatureSupportClient(subscriptionID string) FeatureSupportClient {
 	return NewFeatureSupportClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewFeatureSupportClientWithBaseURI creates an instance of the FeatureSupportClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewFeatureSupportClientWithBaseURI creates an instance of the FeatureSupportClient client.
 func NewFeatureSupportClientWithBaseURI(baseURI string, subscriptionID string) FeatureSupportClient {
 	return FeatureSupportClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -102,7 +101,8 @@ func (client FeatureSupportClient) ValidatePreparer(ctx context.Context, azureRe
 // ValidateSender sends the Validate request. The method will close the
 // http.Response Body if it receives an error.
 func (client FeatureSupportClient) ValidateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ValidateResponder handles the response to the Validate request. The method always

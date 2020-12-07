@@ -37,8 +37,7 @@ func NewComponentCurrentBillingFeaturesClient(subscriptionID string) ComponentCu
 }
 
 // NewComponentCurrentBillingFeaturesClientWithBaseURI creates an instance of the ComponentCurrentBillingFeaturesClient
-// client using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI
-// (sovereign clouds, Azure stack).
+// client.
 func NewComponentCurrentBillingFeaturesClientWithBaseURI(baseURI string, subscriptionID string) ComponentCurrentBillingFeaturesClient {
 	return ComponentCurrentBillingFeaturesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -113,7 +112,8 @@ func (client ComponentCurrentBillingFeaturesClient) GetPreparer(ctx context.Cont
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentCurrentBillingFeaturesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -203,7 +203,8 @@ func (client ComponentCurrentBillingFeaturesClient) UpdatePreparer(ctx context.C
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ComponentCurrentBillingFeaturesClient) UpdateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // UpdateResponder handles the response to the Update request. The method always

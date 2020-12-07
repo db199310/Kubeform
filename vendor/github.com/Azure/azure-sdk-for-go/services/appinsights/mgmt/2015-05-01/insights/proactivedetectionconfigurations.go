@@ -37,8 +37,7 @@ func NewProactiveDetectionConfigurationsClient(subscriptionID string) ProactiveD
 }
 
 // NewProactiveDetectionConfigurationsClientWithBaseURI creates an instance of the
-// ProactiveDetectionConfigurationsClient client using a custom endpoint.  Use this when interacting with an Azure
-// cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// ProactiveDetectionConfigurationsClient client.
 func NewProactiveDetectionConfigurationsClientWithBaseURI(baseURI string, subscriptionID string) ProactiveDetectionConfigurationsClient {
 	return ProactiveDetectionConfigurationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -116,7 +115,8 @@ func (client ProactiveDetectionConfigurationsClient) GetPreparer(ctx context.Con
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ProactiveDetectionConfigurationsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -202,7 +202,8 @@ func (client ProactiveDetectionConfigurationsClient) ListPreparer(ctx context.Co
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ProactiveDetectionConfigurationsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -295,7 +296,8 @@ func (client ProactiveDetectionConfigurationsClient) UpdatePreparer(ctx context.
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ProactiveDetectionConfigurationsClient) UpdateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // UpdateResponder handles the response to the Update request. The method always

@@ -35,8 +35,7 @@ func NewRecoveryPointsClient(subscriptionID string, resourceGroupName string, re
 	return NewRecoveryPointsClientWithBaseURI(DefaultBaseURI, subscriptionID, resourceGroupName, resourceName)
 }
 
-// NewRecoveryPointsClientWithBaseURI creates an instance of the RecoveryPointsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewRecoveryPointsClientWithBaseURI creates an instance of the RecoveryPointsClient client.
 func NewRecoveryPointsClientWithBaseURI(baseURI string, subscriptionID string, resourceGroupName string, resourceName string) RecoveryPointsClient {
 	return RecoveryPointsClient{NewWithBaseURI(baseURI, subscriptionID, resourceGroupName, resourceName)}
 }
@@ -107,7 +106,8 @@ func (client RecoveryPointsClient) GetPreparer(ctx context.Context, fabricName s
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecoveryPointsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -188,7 +188,8 @@ func (client RecoveryPointsClient) ListByReplicationProtectedItemsPreparer(ctx c
 // ListByReplicationProtectedItemsSender sends the ListByReplicationProtectedItems request. The method will close the
 // http.Response Body if it receives an error.
 func (client RecoveryPointsClient) ListByReplicationProtectedItemsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByReplicationProtectedItemsResponder handles the response to the ListByReplicationProtectedItems request. The method always

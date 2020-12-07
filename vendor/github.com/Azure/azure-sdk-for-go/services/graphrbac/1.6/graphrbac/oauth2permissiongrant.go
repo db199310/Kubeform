@@ -36,9 +36,7 @@ func NewOAuth2PermissionGrantClient(tenantID string) OAuth2PermissionGrantClient
 	return NewOAuth2PermissionGrantClientWithBaseURI(DefaultBaseURI, tenantID)
 }
 
-// NewOAuth2PermissionGrantClientWithBaseURI creates an instance of the OAuth2PermissionGrantClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewOAuth2PermissionGrantClientWithBaseURI creates an instance of the OAuth2PermissionGrantClient client.
 func NewOAuth2PermissionGrantClientWithBaseURI(baseURI string, tenantID string) OAuth2PermissionGrantClient {
 	return OAuth2PermissionGrantClient{NewWithBaseURI(baseURI, tenantID)}
 }
@@ -105,7 +103,8 @@ func (client OAuth2PermissionGrantClient) CreatePreparer(ctx context.Context, bo
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client OAuth2PermissionGrantClient) CreateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateResponder handles the response to the Create request. The method always
@@ -179,7 +178,8 @@ func (client OAuth2PermissionGrantClient) DeletePreparer(ctx context.Context, ob
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client OAuth2PermissionGrantClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -260,7 +260,8 @@ func (client OAuth2PermissionGrantClient) ListPreparer(ctx context.Context, filt
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client OAuth2PermissionGrantClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -350,7 +351,8 @@ func (client OAuth2PermissionGrantClient) ListNextPreparer(ctx context.Context, 
 // ListNextSender sends the ListNext request. The method will close the
 // http.Response Body if it receives an error.
 func (client OAuth2PermissionGrantClient) ListNextSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListNextResponder handles the response to the ListNext request. The method always

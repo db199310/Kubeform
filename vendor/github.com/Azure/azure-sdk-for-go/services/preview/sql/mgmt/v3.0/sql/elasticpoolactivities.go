@@ -37,9 +37,7 @@ func NewElasticPoolActivitiesClient(subscriptionID string) ElasticPoolActivities
 	return NewElasticPoolActivitiesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewElasticPoolActivitiesClientWithBaseURI creates an instance of the ElasticPoolActivitiesClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewElasticPoolActivitiesClientWithBaseURI creates an instance of the ElasticPoolActivitiesClient client.
 func NewElasticPoolActivitiesClientWithBaseURI(baseURI string, subscriptionID string) ElasticPoolActivitiesClient {
 	return ElasticPoolActivitiesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -107,7 +105,8 @@ func (client ElasticPoolActivitiesClient) ListByElasticPoolPreparer(ctx context.
 // ListByElasticPoolSender sends the ListByElasticPool request. The method will close the
 // http.Response Body if it receives an error.
 func (client ElasticPoolActivitiesClient) ListByElasticPoolSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByElasticPoolResponder handles the response to the ListByElasticPool request. The method always

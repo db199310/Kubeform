@@ -7,7 +7,6 @@
 _obj
 _test
 
-# Architecture specific extensions/prefixes
 *.cgo1.go
 *.cgo2.c
 _cgo_defun.c

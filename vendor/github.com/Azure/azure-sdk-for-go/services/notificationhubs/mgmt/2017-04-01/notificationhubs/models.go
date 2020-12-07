@@ -39,13 +39,13 @@ const (
 	Listen AccessRights = "Listen"
 	// Manage ...
 	Manage AccessRights = "Manage"
-	// SendEnumValue ...
-	SendEnumValue AccessRights = "Send"
+	// Send ...
+	Send AccessRights = "Send"
 )
 
 // PossibleAccessRightsValues returns an array of possible values for the AccessRights const type.
 func PossibleAccessRightsValues() []AccessRights {
-	return []AccessRights{Listen, Manage, SendEnumValue}
+	return []AccessRights{Listen, Manage, Send}
 }
 
 // NamespaceType enumerates the values for namespace type.

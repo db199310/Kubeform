@@ -39,8 +39,7 @@ func NewExtendedDatabaseBlobAuditingPoliciesClient(subscriptionID string) Extend
 }
 
 // NewExtendedDatabaseBlobAuditingPoliciesClientWithBaseURI creates an instance of the
-// ExtendedDatabaseBlobAuditingPoliciesClient client using a custom endpoint.  Use this when interacting with an Azure
-// cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// ExtendedDatabaseBlobAuditingPoliciesClient client.
 func NewExtendedDatabaseBlobAuditingPoliciesClientWithBaseURI(baseURI string, subscriptionID string) ExtendedDatabaseBlobAuditingPoliciesClient {
 	return ExtendedDatabaseBlobAuditingPoliciesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -112,7 +111,8 @@ func (client ExtendedDatabaseBlobAuditingPoliciesClient) CreateOrUpdatePreparer(
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ExtendedDatabaseBlobAuditingPoliciesClient) CreateOrUpdateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateResponder handles the response to the CreateOrUpdate request. The method always
@@ -192,7 +192,8 @@ func (client ExtendedDatabaseBlobAuditingPoliciesClient) GetPreparer(ctx context
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ExtendedDatabaseBlobAuditingPoliciesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always

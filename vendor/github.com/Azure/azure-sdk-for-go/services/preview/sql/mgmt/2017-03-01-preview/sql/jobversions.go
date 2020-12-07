@@ -37,8 +37,7 @@ func NewJobVersionsClient(subscriptionID string) JobVersionsClient {
 	return NewJobVersionsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewJobVersionsClientWithBaseURI creates an instance of the JobVersionsClient client using a custom endpoint.  Use
-// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewJobVersionsClientWithBaseURI creates an instance of the JobVersionsClient client.
 func NewJobVersionsClientWithBaseURI(baseURI string, subscriptionID string) JobVersionsClient {
 	return JobVersionsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -110,7 +109,8 @@ func (client JobVersionsClient) GetPreparer(ctx context.Context, resourceGroupNa
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobVersionsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -192,7 +192,8 @@ func (client JobVersionsClient) ListByJobPreparer(ctx context.Context, resourceG
 // ListByJobSender sends the ListByJob request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobVersionsClient) ListByJobSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByJobResponder handles the response to the ListByJob request. The method always

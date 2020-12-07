@@ -38,8 +38,7 @@ func NewIntegrationRuntimeObjectMetadataClient(subscriptionID string) Integratio
 }
 
 // NewIntegrationRuntimeObjectMetadataClientWithBaseURI creates an instance of the
-// IntegrationRuntimeObjectMetadataClient client using a custom endpoint.  Use this when interacting with an Azure
-// cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// IntegrationRuntimeObjectMetadataClient client.
 func NewIntegrationRuntimeObjectMetadataClientWithBaseURI(baseURI string, subscriptionID string) IntegrationRuntimeObjectMetadataClient {
 	return IntegrationRuntimeObjectMetadataClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -128,7 +127,8 @@ func (client IntegrationRuntimeObjectMetadataClient) GetPreparer(ctx context.Con
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client IntegrationRuntimeObjectMetadataClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -216,8 +216,9 @@ func (client IntegrationRuntimeObjectMetadataClient) RefreshPreparer(ctx context
 // RefreshSender sends the Refresh request. The method will close the
 // http.Response Body if it receives an error.
 func (client IntegrationRuntimeObjectMetadataClient) RefreshSender(req *http.Request) (future IntegrationRuntimeObjectMetadataRefreshFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

@@ -1,5 +1,10 @@
 package features
 
+import (
+	"os"
+	"strings"
+)
+
 // ShouldResourcesBeImported returns whether the feature Requiring Resources to be Imported
 // should be enabled.
 //
@@ -20,5 +25,5 @@ func ShouldResourcesBeImported() bool {
 	// * MySQL|PostgreSQL Configuration
 	// since these resources can't support import
 	// in addition the virtual resources will need adjusting
-	return true
+	return strings.EqualFold(os.Getenv("ARM_PROVIDER_STRICT"), "true")
 }

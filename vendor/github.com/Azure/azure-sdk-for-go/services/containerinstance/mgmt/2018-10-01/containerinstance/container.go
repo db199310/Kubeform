@@ -35,8 +35,7 @@ func NewContainerClient(subscriptionID string) ContainerClient {
 	return NewContainerClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewContainerClientWithBaseURI creates an instance of the ContainerClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewContainerClientWithBaseURI creates an instance of the ContainerClient client.
 func NewContainerClientWithBaseURI(baseURI string, subscriptionID string) ContainerClient {
 	return ContainerClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -107,7 +106,8 @@ func (client ContainerClient) ExecuteCommandPreparer(ctx context.Context, resour
 // ExecuteCommandSender sends the ExecuteCommand request. The method will close the
 // http.Response Body if it receives an error.
 func (client ContainerClient) ExecuteCommandSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ExecuteCommandResponder handles the response to the ExecuteCommand request. The method always
@@ -190,7 +190,8 @@ func (client ContainerClient) ListLogsPreparer(ctx context.Context, resourceGrou
 // ListLogsSender sends the ListLogs request. The method will close the
 // http.Response Body if it receives an error.
 func (client ContainerClient) ListLogsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListLogsResponder handles the response to the ListLogs request. The method always

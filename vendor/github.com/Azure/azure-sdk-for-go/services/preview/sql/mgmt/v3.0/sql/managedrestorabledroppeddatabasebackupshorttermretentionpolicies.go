@@ -39,8 +39,7 @@ func NewManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient(s
 }
 
 // NewManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClientWithBaseURI creates an instance of the
-// ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient client.
 func NewManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClientWithBaseURI(baseURI string, subscriptionID string) ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient {
 	return ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -105,8 +104,9 @@ func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesCli
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient) CreateOrUpdateSender(req *http.Request) (future ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -190,7 +190,8 @@ func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesCli
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -269,7 +270,8 @@ func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesCli
 // ListByRestorableDroppedDatabaseSender sends the ListByRestorableDroppedDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient) ListByRestorableDroppedDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByRestorableDroppedDatabaseResponder handles the response to the ListByRestorableDroppedDatabase request. The method always
@@ -382,8 +384,9 @@ func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesCli
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesClient) UpdateSender(req *http.Request) (future ManagedRestorableDroppedDatabaseBackupShortTermRetentionPoliciesUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

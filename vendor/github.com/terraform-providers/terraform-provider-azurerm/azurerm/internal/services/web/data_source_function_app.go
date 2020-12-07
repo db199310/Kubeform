@@ -2,13 +2,11 @@ package web
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
-	webValidate "github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/web/validate"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tags"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/timeouts"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
@@ -26,7 +24,7 @@ func dataSourceArmFunctionApp() *schema.Resource {
 			"name": {
 				Type:         schema.TypeString,
 				Required:     true,
-				ValidateFunc: webValidate.AppServiceName,
+				ValidateFunc: validateAppServiceName,
 			},
 
 			"resource_group_name": azure.SchemaResourceGroupNameForDataSource(),
@@ -94,11 +92,6 @@ func dataSourceArmFunctionApp() *schema.Resource {
 						},
 					},
 				},
-			},
-
-			"os_type": {
-				Type:     schema.TypeString,
-				Computed: true,
 			},
 
 			"outbound_ip_addresses": {
@@ -174,12 +167,6 @@ func dataSourceArmFunctionAppRead(d *schema.ResourceData, meta interface{}) erro
 		d.Set("outbound_ip_addresses", props.OutboundIPAddresses)
 		d.Set("possible_outbound_ip_addresses", props.PossibleOutboundIPAddresses)
 	}
-
-	osType := ""
-	if v := resp.Kind; v != nil && strings.Contains(*v, "linux") {
-		osType = "linux"
-	}
-	d.Set("os_type", osType)
 
 	appSettings := flattenAppServiceAppSettings(appSettingsResp.Properties)
 
