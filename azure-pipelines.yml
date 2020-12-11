@@ -27,7 +27,7 @@ variables:
 resources:
   repositories:
   - repository: kfc
-    branch: tn-adding-dev-version
+    ref: refs/heads/feature/tn-adding-dev-version
     type: git
     name: Platform - General/kfc
 
@@ -79,7 +79,6 @@ stages:
         git diff
         git add -A
         git commit -m "[skip-ci] Update Terraform modules"
-        git pull origin ${BUILD_SOURCEBRANCH}
         git push -f origin HEAD:${BUILD_SOURCEBRANCH}
       displayName: Commit & push changes to kfc
       workingDirectory: kfc
