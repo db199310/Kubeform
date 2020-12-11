@@ -76,6 +76,7 @@ stages:
       displayName: Update vendored version of kubeform in kfc
       workingDirectory: kfc
     - script: |
+        git diff
         git add -A
         git commit -m "[skip-ci] Update Terraform modules"
         git pull origin ${BUILD_SOURCEBRANCH}
