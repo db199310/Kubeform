@@ -115,19 +115,25 @@ stages:
       artifact: kfc-state
 
     - script: |
-        ls -lR
+        ls -laR
         echo "BUILDDIRECTORY=$(Agent.BuildDirectory)"
       workingDirectory: $(Pipeline.Workspace)
       displayName: File listing
       
+    - task: CopyFiles@2
+      inputs:
+        contents: |
+          '**'
+        sourceFolder: $(Pipeline.Workspace)/kfc-state
+        targetFolder: $(Pipeline.Workspace)/s
+      displayName: Restore build state
 
     - task: CopyFiles@2
       inputs:
         contents: |
-          '*'
-          '.*'
+          bin/.container-*
         sourceFolder: $(Pipeline.Workspace)/kfc-state
-        targetFolder: bin
+        targetFolder: $(Pipeline.Workspace)/s
       displayName: Restore build state
 
     - script: make release-tag
