@@ -44,6 +44,20 @@ stages:
     - checkout: kfc
       displayName: Checkout kfc
       persistCredentials: true
+
+    # - task: Cache@2
+    #   inputs:
+    #     key: 'docker | "$(Agent.OS)" | caching-docker.yml'
+    #     path: $(Pipeline.Workspace)/docker
+    #     cacheHitVar: DOCKER_CACHE_RESTORED
+    #   displayName: Caching docker images
+    # - script: docker load < $(Pipeline.Workspace)/docker/cache.tar
+    #   condition: and(not(cancelled()), eq(variables.DOCKER_CACHE_RESTORED, 'true'))
+    # - script: |
+    #     mkdir -p $(Pipeline.Workspace)/docker
+    #     docker save appscode/goland-dev:1.14.6 > $(Pipeline.Workspace)/docker/cache.tar
+    #   condition: and(not(cancelled()), or(failed(), ne(variables.DOCKER_CACHE_RESTORED, 'true')))
+
     - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
       displayName: Login to ShellAI ACR
     - task: GoTool@0
@@ -54,6 +68,7 @@ stages:
         git config --global user.name "Azure Pipeline"
         git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
       displayName: Set git properties
+
     # - script: make build
     #   displayName: Build kubeform binaries
     #   workingDirectory: kubeform
@@ -82,6 +97,7 @@ stages:
     #     git push -f origin HEAD:${BUILD_SOURCEBRANCH}
     #   displayName: Commit & push changes to kfc
     #   workingDirectory: kfc
+
     - script: make build
       displayName: Build kfc binaries
       workingDirectory: kfc
@@ -132,5 +148,7 @@ stages:
         IMAGE=$(cat .image)
         TAG=$(cat .tag)
         TAG_PRD=$(sed -En 's/(.*)-dev_(.*)/\1-prd_\2/p' .tag)
-        docker tag $IMAGE:$TAG $IMAGE:TAG_PRD
+        docker pull $IMAGE:$TAG
+        docker tag $IMAGE:$TAG $IMAGE:$TAG_PRD
+        docker push $IMAGE_:$TAG_PRD
       displayName: Tag container for release
