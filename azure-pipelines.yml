@@ -124,34 +124,35 @@ stages:
       displayName: Publish kfc-state
 
 - stage: Production
-  variables:
-    ENVIRONMENT: prd
   jobs:
-  # use deployment task to register the released image in the environment
-  - job: ReleaseTag
-    steps:
-    - checkout: none
-    - download: current
-      artifact: kfc-state
+  - deployment: ReleaseTag
+    environment: npd # temporary to test approvals
+    # environment: prd
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: kfc-state
 
-    - task: CopyFiles@2
-      inputs:
-        contents: |
-          .image
-          .tag
-        sourceFolder: $(Pipeline.Workspace)/kfc-state
-        targetFolder: $(Pipeline.Workspace)/s
-      displayName: Restore build state
+          - task: CopyFiles@2
+            inputs:
+              contents: |
+                .image
+                .tag
+              sourceFolder: $(Pipeline.Workspace)/kfc-state
+              targetFolder: $(Pipeline.Workspace)/s
+            displayName: Restore build state
 
-    - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-      displayName: Login to ShellAI ACR
+          - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            displayName: Login to ShellAI ACR
 
-    - script: |
-        IMAGE=$(cat .image)
-        TAG=$(cat .tag)
-        TAG_PRD=$(sed -En 's/(.*)-dev_(.*)/\1-prd_\2/p' .tag)
-        docker pull $IMAGE:$TAG
-        echo "Tagging $IMAGE:$TAG to $IMAGE:$TAG_PRD..."
-        docker tag $IMAGE:$TAG $IMAGE:$TAG_PRD
-        docker push $IMAGE:$TAG_PRD
-      displayName: Tag container for release
+          - script: |
+              IMAGE=$(cat .image)
+              TAG=$(cat .tag)
+              TAG_PRD=$(sed -En 's/(.*)-dev_(.*)/\1-prd_\2/p' .tag)
+              docker pull $IMAGE:$TAG
+              echo "Tagging $IMAGE:$TAG to $IMAGE:$TAG_PRD..."
+              docker tag $IMAGE:$TAG $IMAGE:$TAG_PRD
+              docker push $IMAGE:$TAG_PRD
+            displayName: Tag container for release
