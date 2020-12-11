@@ -48,12 +48,12 @@ stages:
 
     - task: Cache@2
       inputs:
-        key: 'docker | "$(Agent.OS)" | golang-dev-*.tar'
+        key: 'docker'
         path: $(Pipeline.Workspace)/docker
         cacheHitVar: DOCKER_CACHE_RESTORED
       displayName: Caching docker images
     - script: docker load < $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar
-      condition: and(not(canceled()), eq(variables.DOCKER_CACHE_RESTORED, 'true'))
+      condition: eq(variables.DOCKER_CACHE_RESTORED, 'true')
 
     - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
       displayName: Login to ShellAI ACR
@@ -107,7 +107,7 @@ stages:
     - script: |
         mkdir -p $(Pipeline.Workspace)/docker
         docker save appscode/golang-dev:$(GoVersion) > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar
-      condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_RESTORED, 'true')))
+      condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
       displayName: Cache docker image
 
     - task: CopyFiles@2
