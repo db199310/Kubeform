@@ -95,8 +95,9 @@ stages:
     - task: CopyFiles@2
       inputs:
         contents: |
-          bin/.container-*
-        sourceFolder: kfc
+          .image
+          .tag
+        sourceFolder: kfc/bin
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: Copy build state files
 
@@ -110,31 +111,21 @@ stages:
   jobs:
   - job: ReleaseTag
     steps:
-    - checkout: kfc
     - download: current
       artifact: kfc-state
 
+    - task: CopyFiles@2
+      inputs:
+        contents: |
+          .image
+          .tag
+        sourceFolder: $(Pipeline.Workspace)/kfc-state
+        targetFolder: $(Pipeline.Workspace)/s
+      displayName: Restore build state
+
     - script: |
-        ls -laR
-        echo "BUILDDIRECTORY=$(Agent.BuildDirectory)"
-      workingDirectory: $(Pipeline.Workspace)
-      displayName: File listing
-      
-    - task: CopyFiles@2
-      inputs:
-        contents: |
-          '**'
-        sourceFolder: $(Pipeline.Workspace)/kfc-state
-        targetFolder: $(Pipeline.Workspace)/s
-      displayName: Restore build state
-
-    - task: CopyFiles@2
-      inputs:
-        contents: |
-          bin/.container-*
-        sourceFolder: $(Pipeline.Workspace)/kfc-state
-        targetFolder: $(Pipeline.Workspace)/s
-      displayName: Restore build state
-
-    - script: make release-tag
+        IMAGE=$(cat .image)
+        TAG=$(cat .tag)
+        TAG_PRD=$(sed -En 's/(.*)-dev_(.*)/\1-prd_\2/p' .tag)
+        docker tag $IMAGE:$TAG $IMAGE:TAG_PRD
       displayName: Tag container for release
