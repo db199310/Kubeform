@@ -111,9 +111,16 @@ stages:
   - job: ReleaseTag
     steps:
     - checkout: kfc
-      path: kfc
+      path: s/kfc
     - download: current
       artifact: kfc-state
+
+    - script: |
+        ls -lR
+        echo "BUILDDIRECTORY=$(Agent.BuildDirectory)"
+      workingDirectory: $(Pipeline.Workspace)
+      displayName: File listing
+      
 
     - task: CopyFiles@2
       inputs:
