@@ -94,7 +94,7 @@ stages:
 
     - task: CopyFiles@2
       inputs:
-        content: |
+        contents: |
           bin/.container-*
         sourceFolder: kfc
         targetFolder: $(Build.ArtifactStagingDirectory)
