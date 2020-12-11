@@ -111,7 +111,6 @@ stages:
   - job: ReleaseTag
     steps:
     - checkout: kfc
-      path: s/kfc
     - download: current
       artifact: kfc-state
 
@@ -128,9 +127,8 @@ stages:
           '*'
           '.*'
         sourceFolder: $(Pipeline.Workspace)/kfc-state
-        targetFolder: kfc/bin
+        targetFolder: bin
       displayName: Restore build state
 
     - script: make release-tag
       displayName: Tag container for release
-      workingDirectory: kfc
