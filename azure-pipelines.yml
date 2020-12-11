@@ -109,8 +109,10 @@ stages:
   variables:
     ENVIRONMENT: prd
   jobs:
+  # use deployment task to register the released image in the environment
   - job: ReleaseTag
     steps:
+    - checkout: none
     - download: current
       artifact: kfc-state
 
@@ -122,6 +124,9 @@ stages:
         sourceFolder: $(Pipeline.Workspace)/kfc-state
         targetFolder: $(Pipeline.Workspace)/s
       displayName: Restore build state
+
+    - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+      displayName: Login to ShellAI ACR
 
     - script: |
         IMAGE=$(cat .image)
