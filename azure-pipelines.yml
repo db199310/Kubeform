@@ -126,8 +126,7 @@ stages:
 - stage: Production
   jobs:
   - deployment: ReleaseTag
-    environment: npd # temporary to test approvals
-    # environment: prd
+    environment: prd
     strategy:
       runOnce:
         deploy:
