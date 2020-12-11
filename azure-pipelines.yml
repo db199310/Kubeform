@@ -62,7 +62,7 @@ stages:
       workingDirectory: kubeform
     - script: |
         git add -A
-        git commit -m "[skip-ci] Update Terraform modules"
+        git commit -m "[skip ci] Update Terraform modules"
         git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
       displayName: Commit & push results to kubeform
       workingDirectory: kubeform
@@ -78,7 +78,7 @@ stages:
     - script: |
         git diff
         git add -A
-        git commit -m "[skip-ci] Update Terraform modules"
+        git commit -m "[skip ci] Update Terraform modules"
         git push -f origin HEAD:${BUILD_SOURCEBRANCH}
       displayName: Commit & push changes to kfc
       workingDirectory: kfc
