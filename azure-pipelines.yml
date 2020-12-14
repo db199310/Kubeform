@@ -132,7 +132,7 @@ stages:
 
         cd $(FLUX_REPO)
         git add .
-        git commit "[kubeform] Update CRDs"
+        git commit -m "[kubeform] Update CRDs"
         git push origin
       displayName: Push CRDs to flux repo
 
@@ -212,6 +212,6 @@ stages:
 
               cd $(FLUX_REPO)
               git add .
-              git commit "[kubeform] Update CRDs"
+              git commit -m "[kubeform] Update CRDs"
               git push origin
             displayName: Push CRDs to flux repo
