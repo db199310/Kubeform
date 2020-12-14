@@ -55,7 +55,7 @@ stages:
 
     - task: Cache@2
       inputs:
-        key: 'docker'
+        key: 'docker-compressed'
         path: $(Pipeline.Workspace)/docker
         cacheHitVar: DOCKER_CACHE_RESTORED
       displayName: Caching docker images
