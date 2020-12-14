@@ -149,7 +149,7 @@ stages:
       inputs:
         contents: |
           api/crds/modules*.yaml
-        sourceFolder: kfc/bin
+        sourceFolder: kubeform
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: Copy CRDs
 
