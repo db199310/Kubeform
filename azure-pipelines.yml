@@ -102,20 +102,20 @@ stages:
     #   displayName: Commit & push changes to kfc
     #   workingDirectory: kfc
 
-    - script: make build
-      displayName: Build kfc binaries
-      workingDirectory: kfc
-    - script: make container
-      displayName: Build kfc containers
-      workingDirectory: kfc
-    - script: make push
-      displayName: Push kfc containers
-      workingDirectory: kfc
-    - script: |
-        mkdir -p $(Pipeline.Workspace)/docker
-        docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
-      condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
-      displayName: Cache docker image
+    # - script: make build
+    #   displayName: Build kfc binaries
+    #   workingDirectory: kfc
+    # - script: make container
+    #   displayName: Build kfc containers
+    #   workingDirectory: kfc
+    # - script: make push
+    #   displayName: Push kfc containers
+    #   workingDirectory: kfc
+    # - script: |
+    #     mkdir -p $(Pipeline.Workspace)/docker
+    #     docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
+    #   condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
+    #   displayName: Cache docker image
 
     - script: |
         git clone https://$(DP-PUB-SBX-azdevops-pat)@$(REPO_BASE_URL)/$(FLUX_REPO)
@@ -123,7 +123,8 @@ stages:
           exit 1
         fi
 
-        cp api/crds/modules*.yaml $(FLUX_REPO)/releases/stratos-crds
+        cp kubeform/api/crds/modules*.yaml \
+           $(FLUX_REPO)/releases/stratos-crds
         if [ $? -ne 0 ]; then
           echo "No CRDs copied. See the error above."
           exit 1
