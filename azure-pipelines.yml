@@ -22,6 +22,8 @@ variables:
   value: shellai.azurecr.io/sedp/kubeform
 - group: gogit
 - group: shellai_acr
+- name: REPO_BASE_URL
+  value: sede-ds-adp.visualstudio.com/Platform%20-%20General/_git
 
 
 resources:
@@ -34,8 +36,13 @@ resources:
 stages:
 - stage: Sandbox
   variables:
-    ENVIRONMENT: dev
-    GoVersion: 1.14.6
+    - group: STRATOS_HELM_DEV
+    - name: FLUX_REPO
+      value: thomas-flux-get-strated
+    - name: ENVIRONMENT
+      value: dev
+    - name: GoVersion
+      value: 1.14.6
   jobs:
   - job: Build
     steps:
@@ -48,11 +55,11 @@ stages:
 
     - task: Cache@2
       inputs:
-        key: 'docker'
+        key: 'docker-compressed'
         path: $(Pipeline.Workspace)/docker
         cacheHitVar: DOCKER_CACHE_RESTORED
       displayName: Caching docker images
-    - script: docker load < $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar
+    - script: docker load < $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
       condition: eq(variables.DOCKER_CACHE_RESTORED, 'true')
 
     - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
@@ -106,9 +113,27 @@ stages:
       workingDirectory: kfc
     - script: |
         mkdir -p $(Pipeline.Workspace)/docker
-        docker save appscode/golang-dev:$(GoVersion) > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar
+        docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
       condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
       displayName: Cache docker image
+
+    - script: |
+        git clone https://$(DP-PUB-SBX-azdevops-pat)@$(REPO_BASE_URL)/$(FLUX_REPO)
+        if [ $? -ne 0 ]; then
+          exit 1
+        fi
+
+        cp api/crds/modules*.yaml $(FLUX_REPO)/releases/stratos-crds
+        if [ $? -ne 0 ]; then
+          echo "No CRDs copied. See the error above."
+          exit 1
+        fi
+
+        cd $(FLUX_REPO)
+        git add .
+        git commit "[kubeform] Update CRDs"
+        git push origin
+      displayName: Push CRDs to flux repo
 
     - task: CopyFiles@2
       inputs:
@@ -119,11 +144,23 @@ stages:
         targetFolder: $(Build.ArtifactStagingDirectory)
       displayName: Copy build state files
 
+    - task: CopyFiles@2
+      inputs:
+        contents: |
+          api/crds/modules*.yaml
+        sourceFolder: kfc/bin
+        targetFolder: $(Build.ArtifactStagingDirectory)
+      displayName: Copy CRDs
+
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: kfc-state
       displayName: Publish kfc-state
 
 - stage: Production
+  variables:
+  - group: STRATOS_HELM_PRD
+  - name: FLUX_REPO
+    value: thomas-flux-get-started
   jobs:
   - deployment: ReleaseTag
     environment: prd
@@ -155,3 +192,25 @@ stages:
               docker tag $IMAGE:$TAG $IMAGE:$TAG_PRD
               docker push $IMAGE:$TAG_PRD
             displayName: Tag container for release
+
+          - script: |
+              git config --global user.email "sedp-ci@shell.com"
+              git config --global user.name "Azure Pipeline"
+
+              git clone https://$(DP-PUB-SBX-azdevops-pat)@$(REPO_BASE_URL)/$(FLUX_REPO)
+              if [ $? -ne 0 ]; then
+                exit 1
+              fi
+
+              cp $(Pipeline.Workspace)/kfc-state/api/crds/modules*.yaml \
+                 $(FLUX_REPO)/releases/stratos-crds
+              if [ $? -ne 0 ]; then
+                echo "No CRDs copied. See the error above."
+                exit 1
+              fi
+
+              cd $(FLUX_REPO)
+              git add .
+              git commit "[kubeform] Update CRDs"
+              git push origin
+            displayName: Push CRDs to flux repo
