@@ -25,6 +25,14 @@ variables:
 - name: REPO_BASE_URL
   value: sede-ds-adp.visualstudio.com/Platform%20-%20General/_git
 
+# Flux destination
+- name: FLUX_REPO
+  value: thomas-flux-get-started
+- name: FLUX_PATH_SBX
+  value: releases/stratos-crds
+- name: FLUX_PATH_PRD
+  value: releases/stratos-crds
+
 
 resources:
   repositories:
@@ -37,8 +45,6 @@ stages:
 - stage: Sandbox
   variables:
     - group: STRATOS_HELM_DEV
-    - name: FLUX_REPO
-      value: thomas-flux-get-started
     - name: ENVIRONMENT
       value: dev
     - name: GoVersion
@@ -128,7 +134,7 @@ stages:
         fi
 
         cp kubeform/api/crds/modules*.yaml \
-           $(FLUX_REPO)/releases/stratos-crds
+           $(FLUX_REPO)/$(FLUX_PATH_SBX)
         if [ $? -ne 0 ]; then
           echo "No CRDs copied. See the error above."
           exit 1
@@ -164,8 +170,6 @@ stages:
 - stage: Production
   variables:
   - group: STRATOS_HELM_PRD
-  - name: FLUX_REPO
-    value: thomas-flux-get-started
   jobs:
   - deployment: ReleaseTag
     # environment: prd
@@ -209,7 +213,7 @@ stages:
               fi
 
               cp $(Pipeline.Workspace)/kfc-state/api/crds/modules*.yaml \
-                 $(FLUX_REPO)/releases/stratos-crds
+                 $(FLUX_REPO)/$(FLUX_PATH_PRD)
               if [ $? -ne 0 ]; then
                 echo "No CRDs copied. See the error above."
                 exit 1
@@ -220,3 +224,15 @@ stages:
               git commit -m "[kubeform] Update CRDs"
               git push origin
             displayName: Push CRDs to flux repo
+
+            - script: |
+                TAG=release-1.0
+
+                # Find the TAG that does not exist yet by incrementing minor version number
+                while [ -n "$(git tag -l '$TAG')" ]; do
+                  TAG=$(echo $TAG | awk -F '.' '{ printf("%s.%d.%s\n", $1, $2+1) }')
+                done
+
+                git tag $TAG
+                git push origin $TAG
+              displayName: Tag master branch
