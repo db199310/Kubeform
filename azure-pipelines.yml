@@ -102,20 +102,20 @@ stages:
     #   displayName: Commit & push changes to kfc
     #   workingDirectory: kfc
 
-    # - script: make build
-    #   displayName: Build kfc binaries
-    #   workingDirectory: kfc
-    # - script: make container
-    #   displayName: Build kfc containers
-    #   workingDirectory: kfc
-    # - script: make push
-    #   displayName: Push kfc containers
-    #   workingDirectory: kfc
-    # - script: |
-    #     mkdir -p $(Pipeline.Workspace)/docker
-    #     docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
-    #   condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
-    #   displayName: Cache docker image
+    - script: make build
+      displayName: Build kfc binaries
+      workingDirectory: kfc
+    - script: make container
+      displayName: Build kfc containers
+      workingDirectory: kfc
+    - script: make push
+      displayName: Push kfc containers
+      workingDirectory: kfc
+    - script: |
+        mkdir -p $(Pipeline.Workspace)/docker
+        docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
+      condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
+      displayName: Cache docker image
 
     - script: |
         git clone https://$(DP-PUB-SBX-azdevops-pat)@$(REPO_BASE_URL)/$(FLUX_REPO)
@@ -136,14 +136,14 @@ stages:
         git push origin
       displayName: Push CRDs to flux repo
 
-    # - task: CopyFiles@2
-    #   inputs:
-    #     contents: |
-    #       .image
-    #       .tag
-    #     sourceFolder: kfc/bin
-    #     targetFolder: $(Build.ArtifactStagingDirectory)
-    #   displayName: Copy build state files
+    - task: CopyFiles@2
+      inputs:
+        contents: |
+          .image
+          .tag
+        sourceFolder: kfc/bin
+        targetFolder: $(Build.ArtifactStagingDirectory)
+      displayName: Copy build state files
 
     - task: CopyFiles@2
       inputs:
