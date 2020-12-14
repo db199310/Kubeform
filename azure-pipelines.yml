@@ -136,14 +136,14 @@ stages:
         git push origin
       displayName: Push CRDs to flux repo
 
-    - task: CopyFiles@2
-      inputs:
-        contents: |
-          .image
-          .tag
-        sourceFolder: kfc/bin
-        targetFolder: $(Build.ArtifactStagingDirectory)
-      displayName: Copy build state files
+    # - task: CopyFiles@2
+    #   inputs:
+    #     contents: |
+    #       .image
+    #       .tag
+    #     sourceFolder: kfc/bin
+    #     targetFolder: $(Build.ArtifactStagingDirectory)
+    #   displayName: Copy build state files
 
     - task: CopyFiles@2
       inputs:
