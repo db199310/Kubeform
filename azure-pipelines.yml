@@ -55,12 +55,15 @@ stages:
 
     - task: Cache@2
       inputs:
-        key: 'docker-compressed'
+        key: 'docker-v2'
         path: $(Pipeline.Workspace)/docker
         cacheHitVar: DOCKER_CACHE_RESTORED
       displayName: Caching docker images
-    - script: docker load < $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
+    - script: |
+        docker load < $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
+        docker load < $(Pipeline.Workspace)/docker/gengo-release-1.14.tar.gz
       condition: eq(variables.DOCKER_CACHE_RESTORED, 'true')
+      displayName: Load docker images
 
     - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
       displayName: Login to ShellAI ACR
@@ -114,6 +117,7 @@ stages:
     - script: |
         mkdir -p $(Pipeline.Workspace)/docker
         docker save appscode/golang-dev:$(GoVersion) | gzip > $(Pipeline.Workspace)/docker/golang-dev-$(GoVersion).tar.gz
+        docker save ibelikov/gengo:release-1.14 | gzip > $(Pipeline.Workspace)/docker/gengo-release-1.14.tar.gz
       condition: ne(variables.DOCKER_CACHE_RESTORED, 'true')
       displayName: Cache docker image
 
@@ -164,7 +168,8 @@ stages:
     value: thomas-flux-get-started
   jobs:
   - deployment: ReleaseTag
-    environment: prd
+    # environment: prd
+    environment: mgmtnpd
     strategy:
       runOnce:
         deploy:
