@@ -38,7 +38,7 @@ stages:
   variables:
     - group: STRATOS_HELM_DEV
     - name: FLUX_REPO
-      value: thomas-flux-get-strated
+      value: thomas-flux-get-started
     - name: ENVIRONMENT
       value: dev
     - name: GoVersion
@@ -55,7 +55,7 @@ stages:
 
     - task: Cache@2
       inputs:
-        key: 'docker-compressed'
+        key: 'docker'
         path: $(Pipeline.Workspace)/docker
         cacheHitVar: DOCKER_CACHE_RESTORED
       displayName: Caching docker images
