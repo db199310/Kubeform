@@ -16745,7 +16745,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv2Spec(ref common.ReferenceCal
 						},
 					},
 				},
-				Required: []string{"providerRef", "environment", "host", "nameSuffix", "owner", "projectStream", "region", "workStream"},
+				Required: []string{"providerRef", "environment", "nameSuffix", "owner", "projectStream", "region", "workStream"},
 			},
 		},
 		Dependencies: []string{

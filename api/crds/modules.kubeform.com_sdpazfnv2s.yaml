@@ -182,7 +182,6 @@ spec:
               type: string
           required:
           - environment
-          - host
           - nameSuffix
           - owner
           - projectStream

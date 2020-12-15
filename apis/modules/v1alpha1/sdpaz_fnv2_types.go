@@ -74,8 +74,9 @@ type SDPAzFnv2Spec struct {
 	// +optional
 	// Additional tags for the App Service resources, in addition to the resource group tags.
 	FnAppAdditionalTags map[string]string `json:"fnAppAdditionalTags,omitempty" tf:"fn_app_additional_tags,omitempty"`
+	// +optional
 	// Hostname without the stratos.shell/stratos.shell.com suffix
-	Host string `json:"host" tf:"host"`
+	Host string `json:"host,omitempty" tf:"host,omitempty"`
 	// +optional
 	// Instance number
 	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
