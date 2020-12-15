@@ -617,19 +617,10 @@ spec:
               - terraform_version
               - version
               type: object
-            terraformLogs:
-              properties:
-                applyErrLogs:
-                  type: string
-                applyLogs:
-                  type: string
-                initErrLogs:
-                  type: string
-                initLogs:
-                  type: string
-                plan:
-                  type: string
-              type: object
+            terraformErrors:
+              items:
+                type: string
+              type: array
           type: object
       type: object
   version: v1alpha1

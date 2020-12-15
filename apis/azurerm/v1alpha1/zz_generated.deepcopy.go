@@ -117,10 +117,10 @@ func (in *AdvancedThreatProtectionStatus) DeepCopyInto(out *AdvancedThreatProtec
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -264,10 +264,10 @@ func (in *AnalysisServicesServerStatus) DeepCopyInto(out *AnalysisServicesServer
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -523,10 +523,10 @@ func (in *ApiManagementAPIOperationPolicyStatus) DeepCopyInto(out *ApiManagement
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -831,10 +831,10 @@ func (in *ApiManagementAPIOperationStatus) DeepCopyInto(out *ApiManagementAPIOpe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -940,10 +940,10 @@ func (in *ApiManagementAPIPolicyStatus) DeepCopyInto(out *ApiManagementAPIPolicy
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1049,10 +1049,10 @@ func (in *ApiManagementAPISchemaStatus) DeepCopyInto(out *ApiManagementAPISchema
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1167,10 +1167,10 @@ func (in *ApiManagementAPIStatus) DeepCopyInto(out *ApiManagementAPIStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1276,10 +1276,10 @@ func (in *ApiManagementAPIVersionSetStatus) DeepCopyInto(out *ApiManagementAPIVe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1431,10 +1431,10 @@ func (in *ApiManagementAuthorizationServerStatus) DeepCopyInto(out *ApiManagemen
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1704,10 +1704,10 @@ func (in *ApiManagementBackendStatus) DeepCopyInto(out *ApiManagementBackendStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1818,10 +1818,10 @@ func (in *ApiManagementCertificateStatus) DeepCopyInto(out *ApiManagementCertifi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -1927,10 +1927,10 @@ func (in *ApiManagementDiagnosticStatus) DeepCopyInto(out *ApiManagementDiagnost
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2036,10 +2036,10 @@ func (in *ApiManagementGroupStatus) DeepCopyInto(out *ApiManagementGroupStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2145,10 +2145,10 @@ func (in *ApiManagementGroupUserStatus) DeepCopyInto(out *ApiManagementGroupUser
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2264,10 +2264,10 @@ func (in *ApiManagementIdentityProviderAadStatus) DeepCopyInto(out *ApiManagemen
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2378,10 +2378,10 @@ func (in *ApiManagementIdentityProviderFacebookStatus) DeepCopyInto(out *ApiMana
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2492,10 +2492,10 @@ func (in *ApiManagementIdentityProviderGoogleStatus) DeepCopyInto(out *ApiManage
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2606,10 +2606,10 @@ func (in *ApiManagementIdentityProviderMicrosoftStatus) DeepCopyInto(out *ApiMan
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2720,10 +2720,10 @@ func (in *ApiManagementIdentityProviderTwitterStatus) DeepCopyInto(out *ApiManag
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -2909,10 +2909,10 @@ func (in *ApiManagementLoggerStatus) DeepCopyInto(out *ApiManagementLoggerStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3023,10 +3023,10 @@ func (in *ApiManagementOpenidConnectProviderStatus) DeepCopyInto(out *ApiManagem
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3160,10 +3160,10 @@ func (in *ApiManagementProductAPIStatus) DeepCopyInto(out *ApiManagementProductA
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3269,10 +3269,10 @@ func (in *ApiManagementProductGroupStatus) DeepCopyInto(out *ApiManagementProduc
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3411,10 +3411,10 @@ func (in *ApiManagementProductPolicyStatus) DeepCopyInto(out *ApiManagementProdu
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3459,10 +3459,10 @@ func (in *ApiManagementProductStatus) DeepCopyInto(out *ApiManagementProductStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3573,10 +3573,10 @@ func (in *ApiManagementPropertyStatus) DeepCopyInto(out *ApiManagementPropertySt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -3964,10 +3964,10 @@ func (in *ApiManagementStatus) DeepCopyInto(out *ApiManagementStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4078,10 +4078,10 @@ func (in *ApiManagementSubscriptionStatus) DeepCopyInto(out *ApiManagementSubscr
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4192,10 +4192,10 @@ func (in *ApiManagementUserStatus) DeepCopyInto(out *ApiManagementUserStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4397,10 +4397,10 @@ func (in *AppConfigurationStatus) DeepCopyInto(out *AppConfigurationStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4534,10 +4534,10 @@ func (in *AppServiceActiveSlotStatus) DeepCopyInto(out *AppServiceActiveSlotStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4737,10 +4737,10 @@ func (in *AppServiceCertificateOrderStatus) DeepCopyInto(out *AppServiceCertific
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4802,10 +4802,10 @@ func (in *AppServiceCertificateStatus) DeepCopyInto(out *AppServiceCertificateSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -4911,10 +4911,10 @@ func (in *AppServiceCustomHostnameBindingStatus) DeepCopyInto(out *AppServiceCus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -5102,10 +5102,10 @@ func (in *AppServicePlanStatus) DeepCopyInto(out *AppServicePlanStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -5677,10 +5677,10 @@ func (in *AppServiceSlotStatus) DeepCopyInto(out *AppServiceSlotStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -5791,10 +5791,10 @@ func (in *AppServiceSourceControlTokenStatus) DeepCopyInto(out *AppServiceSource
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -6391,10 +6391,10 @@ func (in *AppServiceStatus) DeepCopyInto(out *AppServiceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -6500,10 +6500,10 @@ func (in *AppServiceVirtualNetworkSwiftConnectionStatus) DeepCopyInto(out *AppSe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7363,10 +7363,10 @@ func (in *ApplicationGatewayStatus) DeepCopyInto(out *ApplicationGatewayStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7515,10 +7515,10 @@ func (in *ApplicationInsightsAPIKeyStatus) DeepCopyInto(out *ApplicationInsights
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7624,10 +7624,10 @@ func (in *ApplicationInsightsAnalyticsItemStatus) DeepCopyInto(out *ApplicationI
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7717,10 +7717,10 @@ func (in *ApplicationInsightsStatus) DeepCopyInto(out *ApplicationInsightsStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7838,10 +7838,10 @@ func (in *ApplicationInsightsWebTestStatus) DeepCopyInto(out *ApplicationInsight
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -7954,10 +7954,10 @@ func (in *ApplicationSecurityGroupStatus) DeepCopyInto(out *ApplicationSecurityG
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8091,10 +8091,10 @@ func (in *AutomationAccountStatus) DeepCopyInto(out *AutomationAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8205,10 +8205,10 @@ func (in *AutomationCertificateStatus) DeepCopyInto(out *AutomationCertificateSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8319,10 +8319,10 @@ func (in *AutomationCredentialStatus) DeepCopyInto(out *AutomationCredentialStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8428,10 +8428,10 @@ func (in *AutomationDscConfigurationStatus) DeepCopyInto(out *AutomationDscConfi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8537,10 +8537,10 @@ func (in *AutomationDscNodeconfigurationStatus) DeepCopyInto(out *AutomationDscN
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8653,10 +8653,10 @@ func (in *AutomationJobScheduleStatus) DeepCopyInto(out *AutomationJobScheduleSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8806,10 +8806,10 @@ func (in *AutomationModuleStatus) DeepCopyInto(out *AutomationModuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -8966,10 +8966,10 @@ func (in *AutomationRunbookStatus) DeepCopyInto(out *AutomationRunbookStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9106,10 +9106,10 @@ func (in *AutomationScheduleStatus) DeepCopyInto(out *AutomationScheduleStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9215,10 +9215,10 @@ func (in *AutomationVariableBoolStatus) DeepCopyInto(out *AutomationVariableBool
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9324,10 +9324,10 @@ func (in *AutomationVariableDatetimeStatus) DeepCopyInto(out *AutomationVariable
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9433,10 +9433,10 @@ func (in *AutomationVariableIntStatus) DeepCopyInto(out *AutomationVariableIntSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9542,10 +9542,10 @@ func (in *AutomationVariableStringStatus) DeepCopyInto(out *AutomationVariableSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -9907,10 +9907,10 @@ func (in *AutoscaleSettingStatus) DeepCopyInto(out *AutoscaleSettingStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10023,10 +10023,10 @@ func (in *AvailabilitySetStatus) DeepCopyInto(out *AvailabilitySetStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10142,10 +10142,10 @@ func (in *AzureadApplicationStatus) DeepCopyInto(out *AzureadApplicationStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10317,10 +10317,10 @@ func (in *AzureadServicePrincipalPasswordStatus) DeepCopyInto(out *AzureadServic
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10365,10 +10365,10 @@ func (in *AzureadServicePrincipalStatus) DeepCopyInto(out *AzureadServicePrincip
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10474,10 +10474,10 @@ func (in *BackupContainerStorageAccountStatus) DeepCopyInto(out *BackupContainer
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10625,10 +10625,10 @@ func (in *BackupPolicyFileShareStatus) DeepCopyInto(out *BackupPolicyFileShareSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10889,10 +10889,10 @@ func (in *BackupPolicyVmStatus) DeepCopyInto(out *BackupPolicyVmStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -10998,10 +10998,10 @@ func (in *BackupProtectedFileShareStatus) DeepCopyInto(out *BackupProtectedFileS
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -11114,10 +11114,10 @@ func (in *BackupProtectedVmStatus) DeepCopyInto(out *BackupProtectedVmStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -11251,10 +11251,10 @@ func (in *BastionHostStatus) DeepCopyInto(out *BastionHostStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -11393,10 +11393,10 @@ func (in *BatchAccountStatus) DeepCopyInto(out *BatchAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -11502,10 +11502,10 @@ func (in *BatchApplicationStatus) DeepCopyInto(out *BatchApplicationStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -11616,10 +11616,10 @@ func (in *BatchCertificateStatus) DeepCopyInto(out *BatchCertificateStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12034,10 +12034,10 @@ func (in *BatchPoolStatus) DeepCopyInto(out *BatchPoolStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12148,10 +12148,10 @@ func (in *BotChannelEmailStatus) DeepCopyInto(out *BotChannelEmailStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12257,10 +12257,10 @@ func (in *BotChannelMsTeamsStatus) DeepCopyInto(out *BotChannelMsTeamsStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12371,10 +12371,10 @@ func (in *BotChannelSlackStatus) DeepCopyInto(out *BotChannelSlackStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12492,10 +12492,10 @@ func (in *BotChannelsRegistrationStatus) DeepCopyInto(out *BotChannelsRegistrati
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12620,10 +12620,10 @@ func (in *BotConnectionStatus) DeepCopyInto(out *BotConnectionStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12746,10 +12746,10 @@ func (in *BotWebAppStatus) DeepCopyInto(out *BotWebAppStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -12916,10 +12916,10 @@ func (in *CdnEndpointStatus) DeepCopyInto(out *CdnEndpointStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -13032,10 +13032,10 @@ func (in *CdnProfileStatus) DeepCopyInto(out *CdnProfileStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -13174,10 +13174,10 @@ func (in *CognitiveAccountStatus) DeepCopyInto(out *CognitiveAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -13332,10 +13332,10 @@ func (in *ConnectionMonitorStatus) DeepCopyInto(out *ConnectionMonitorStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -13758,10 +13758,10 @@ func (in *ContainerGroupStatus) DeepCopyInto(out *ContainerGroupStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -13970,10 +13970,10 @@ func (in *ContainerRegistryStatus) DeepCopyInto(out *ContainerRegistryStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14098,10 +14098,10 @@ func (in *ContainerRegistryWebhookStatus) DeepCopyInto(out *ContainerRegistryWeb
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14347,10 +14347,10 @@ func (in *ContainerServiceStatus) DeepCopyInto(out *ContainerServiceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14583,10 +14583,10 @@ func (in *CosmosdbAccountStatus) DeepCopyInto(out *CosmosdbAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14692,10 +14692,10 @@ func (in *CosmosdbCassandraKeyspaceStatus) DeepCopyInto(out *CosmosdbCassandraKe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14801,10 +14801,10 @@ func (in *CosmosdbGremlinDatabaseStatus) DeepCopyInto(out *CosmosdbGremlinDataba
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -14992,10 +14992,10 @@ func (in *CosmosdbGremlinGraphStatus) DeepCopyInto(out *CosmosdbGremlinGraphStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15122,10 +15122,10 @@ func (in *CosmosdbMongoCollectionStatus) DeepCopyInto(out *CosmosdbMongoCollecti
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15231,10 +15231,10 @@ func (in *CosmosdbMongoDatabaseStatus) DeepCopyInto(out *CosmosdbMongoDatabaseSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15368,10 +15368,10 @@ func (in *CosmosdbSQLContainerStatus) DeepCopyInto(out *CosmosdbSQLContainerStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15477,10 +15477,10 @@ func (in *CosmosdbSQLDatabaseStatus) DeepCopyInto(out *CosmosdbSQLDatabaseStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15586,10 +15586,10 @@ func (in *CosmosdbTableStatus) DeepCopyInto(out *CosmosdbTableStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15702,10 +15702,10 @@ func (in *DashboardStatus) DeepCopyInto(out *DashboardStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -15879,10 +15879,10 @@ func (in *DataFactoryDatasetMysqlStatus) DeepCopyInto(out *DataFactoryDatasetMys
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16028,10 +16028,10 @@ func (in *DataFactoryDatasetPostgresqlStatus) DeepCopyInto(out *DataFactoryDatas
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16177,10 +16177,10 @@ func (in *DataFactoryDatasetSQLServerTableStatus) DeepCopyInto(out *DataFactoryD
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16354,10 +16354,10 @@ func (in *DataFactoryIntegrationRuntimeManagedStatus) DeepCopyInto(out *DataFact
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16482,10 +16482,10 @@ func (in *DataFactoryLinkedServiceDataLakeStorageGen2Status) DeepCopyInto(out *D
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16610,10 +16610,10 @@ func (in *DataFactoryLinkedServiceMysqlStatus) DeepCopyInto(out *DataFactoryLink
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16738,10 +16738,10 @@ func (in *DataFactoryLinkedServicePostgresqlStatus) DeepCopyInto(out *DataFactor
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -16866,10 +16866,10 @@ func (in *DataFactoryLinkedServiceSQLServerStatus) DeepCopyInto(out *DataFactory
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17027,10 +17027,10 @@ func (in *DataFactoryPipelineStatus) DeepCopyInto(out *DataFactoryPipelineStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17145,10 +17145,10 @@ func (in *DataFactoryStatus) DeepCopyInto(out *DataFactoryStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17266,10 +17266,10 @@ func (in *DataFactoryTriggerScheduleStatus) DeepCopyInto(out *DataFactoryTrigger
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17382,10 +17382,10 @@ func (in *DataLakeAnalyticsAccountStatus) DeepCopyInto(out *DataLakeAnalyticsAcc
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17491,10 +17491,10 @@ func (in *DataLakeAnalyticsFirewallRuleStatus) DeepCopyInto(out *DataLakeAnalyti
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17628,10 +17628,10 @@ func (in *DataLakeStoreFileStatus) DeepCopyInto(out *DataLakeStoreFileStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17737,10 +17737,10 @@ func (in *DataLakeStoreFirewallRuleStatus) DeepCopyInto(out *DataLakeStoreFirewa
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17825,10 +17825,10 @@ func (in *DataLakeStoreStatus) DeepCopyInto(out *DataLakeStoreStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -17962,10 +17962,10 @@ func (in *DatabricksWorkspaceStatus) DeepCopyInto(out *DatabricksWorkspaceStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18083,10 +18083,10 @@ func (in *DdosProtectionPlanStatus) DeepCopyInto(out *DdosProtectionPlanStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18232,10 +18232,10 @@ func (in *DedicatedHostGroupStatus) DeepCopyInto(out *DedicatedHostGroupStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18320,10 +18320,10 @@ func (in *DedicatedHostStatus) DeepCopyInto(out *DedicatedHostStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18436,10 +18436,10 @@ func (in *DevTestLabStatus) DeepCopyInto(out *DevTestLabStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18599,10 +18599,10 @@ func (in *DevTestLinuxVirtualMachineStatus) DeepCopyInto(out *DevTestLinuxVirtua
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18715,10 +18715,10 @@ func (in *DevTestPolicyStatus) DeepCopyInto(out *DevTestPolicyStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -18922,10 +18922,10 @@ func (in *DevTestScheduleStatus) DeepCopyInto(out *DevTestScheduleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19059,10 +19059,10 @@ func (in *DevTestVirtualNetworkStatus) DeepCopyInto(out *DevTestVirtualNetworkSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19217,10 +19217,10 @@ func (in *DevTestWindowsVirtualMachineStatus) DeepCopyInto(out *DevTestWindowsVi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19359,10 +19359,10 @@ func (in *DevspaceControllerStatus) DeepCopyInto(out *DevspaceControllerStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19496,10 +19496,10 @@ func (in *DiskEncryptionSetStatus) DeepCopyInto(out *DiskEncryptionSetStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19617,10 +19617,10 @@ func (in *DnsARecordStatus) DeepCopyInto(out *DnsARecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19738,10 +19738,10 @@ func (in *DnsAaaaRecordStatus) DeepCopyInto(out *DnsAaaaRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19875,10 +19875,10 @@ func (in *DnsCaaRecordStatus) DeepCopyInto(out *DnsCaaRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -19991,10 +19991,10 @@ func (in *DnsCnameRecordStatus) DeepCopyInto(out *DnsCnameRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20128,10 +20128,10 @@ func (in *DnsMxRecordStatus) DeepCopyInto(out *DnsMxRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20270,10 +20270,10 @@ func (in *DnsNsRecordStatus) DeepCopyInto(out *DnsNsRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20391,10 +20391,10 @@ func (in *DnsPtrRecordStatus) DeepCopyInto(out *DnsPtrRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20528,10 +20528,10 @@ func (in *DnsSrvRecordStatus) DeepCopyInto(out *DnsSrvRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20665,10 +20665,10 @@ func (in *DnsTxtRecordStatus) DeepCopyInto(out *DnsTxtRecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20796,10 +20796,10 @@ func (in *DnsZoneStatus) DeepCopyInto(out *DnsZoneStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -20959,10 +20959,10 @@ func (in *EventgridDomainStatus) DeepCopyInto(out *EventgridDomainStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21225,10 +21225,10 @@ func (in *EventgridEventSubscriptionStatus) DeepCopyInto(out *EventgridEventSubs
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21346,10 +21346,10 @@ func (in *EventgridTopicStatus) DeepCopyInto(out *EventgridTopicStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21488,10 +21488,10 @@ func (in *EventhubAuthorizationRuleStatus) DeepCopyInto(out *EventhubAuthorizati
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21597,10 +21597,10 @@ func (in *EventhubConsumerGroupStatus) DeepCopyInto(out *EventhubConsumerGroupSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21744,10 +21744,10 @@ func (in *EventhubNamespaceAuthorizationRuleStatus) DeepCopyInto(out *EventhubNa
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -21853,10 +21853,10 @@ func (in *EventhubNamespaceDisasterRecoveryConfigStatus) DeepCopyInto(out *Event
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22039,10 +22039,10 @@ func (in *EventhubNamespace_Status) DeepCopyInto(out *EventhubNamespace_Status) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22136,10 +22136,10 @@ func (in *EventhubStatus) DeepCopyInto(out *EventhubStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22278,10 +22278,10 @@ func (in *ExpressRouteCircuitAuthorizationStatus) DeepCopyInto(out *ExpressRoute
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22453,10 +22453,10 @@ func (in *ExpressRouteCircuitPeeringStatus) DeepCopyInto(out *ExpressRouteCircui
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22534,10 +22534,10 @@ func (in *ExpressRouteCircuitStatus) DeepCopyInto(out *ExpressRouteCircuitStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22730,10 +22730,10 @@ func (in *FirewallApplicationRuleCollectionStatus) DeepCopyInto(out *FirewallApp
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -22915,10 +22915,10 @@ func (in *FirewallNATRuleCollectionStatus) DeepCopyInto(out *FirewallNATRuleColl
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -23067,10 +23067,10 @@ func (in *FirewallNetworkRuleCollectionStatus) DeepCopyInto(out *FirewallNetwork
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -23148,10 +23148,10 @@ func (in *FirewallStatus) DeepCopyInto(out *FirewallStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -23485,10 +23485,10 @@ func (in *FrontdoorFirewallPolicyStatus) DeepCopyInto(out *FrontdoorFirewallPoli
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -23783,10 +23783,10 @@ func (in *FrontdoorStatus) DeepCopyInto(out *FrontdoorStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -24221,10 +24221,10 @@ func (in *FunctionAppStatus) DeepCopyInto(out *FunctionAppStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -24577,10 +24577,10 @@ func (in *HdinsightHadoopClusterStatus) DeepCopyInto(out *HdinsightHadoopCluster
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -24889,10 +24889,10 @@ func (in *HdinsightHbaseClusterStatus) DeepCopyInto(out *HdinsightHbaseClusterSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -25201,10 +25201,10 @@ func (in *HdinsightInteractiveQueryClusterStatus) DeepCopyInto(out *HdinsightInt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -25513,10 +25513,10 @@ func (in *HdinsightKafkaClusterStatus) DeepCopyInto(out *HdinsightKafkaClusterSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -25811,10 +25811,10 @@ func (in *HdinsightMlServicesClusterStatus) DeepCopyInto(out *HdinsightMlService
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -26109,10 +26109,10 @@ func (in *HdinsightRserverClusterStatus) DeepCopyInto(out *HdinsightRserverClust
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -26421,10 +26421,10 @@ func (in *HdinsightSparkClusterStatus) DeepCopyInto(out *HdinsightSparkClusterSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -26712,10 +26712,10 @@ func (in *HdinsightStormClusterStatus) DeepCopyInto(out *HdinsightStormClusterSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -26892,10 +26892,10 @@ func (in *HealthcareServiceStatus) DeepCopyInto(out *HealthcareServiceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27050,10 +27050,10 @@ func (in *ImageStatus) DeepCopyInto(out *ImageStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27192,10 +27192,10 @@ func (in *IotDpsCertificateStatus) DeepCopyInto(out *IotDpsCertificateStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27327,10 +27327,10 @@ func (in *IotDpsStatus) DeepCopyInto(out *IotDpsStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27464,10 +27464,10 @@ func (in *IothubConsumerGroupStatus) DeepCopyInto(out *IothubConsumerGroupStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27606,10 +27606,10 @@ func (in *IothubDpsCertificateStatus) DeepCopyInto(out *IothubDpsCertificateStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27753,10 +27753,10 @@ func (in *IothubDpsSharedAccessPolicyStatus) DeepCopyInto(out *IothubDpsSharedAc
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27855,10 +27855,10 @@ func (in *IothubDpsStatus) DeepCopyInto(out *IothubDpsStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -27969,10 +27969,10 @@ func (in *IothubEndpointEventhubStatus) DeepCopyInto(out *IothubEndpointEventhub
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28083,10 +28083,10 @@ func (in *IothubEndpointServicebusQueueStatus) DeepCopyInto(out *IothubEndpointS
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28197,10 +28197,10 @@ func (in *IothubEndpointServicebusTopicStatus) DeepCopyInto(out *IothubEndpointS
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28311,10 +28311,10 @@ func (in *IothubEndpointStorageContainerStatus) DeepCopyInto(out *IothubEndpoint
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28425,10 +28425,10 @@ func (in *IothubFallbackRouteStatus) DeepCopyInto(out *IothubFallbackRouteStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28572,10 +28572,10 @@ func (in *IothubRouteStatus) DeepCopyInto(out *IothubRouteStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28686,10 +28686,10 @@ func (in *IothubSharedAccessPolicyStatus) DeepCopyInto(out *IothubSharedAccessPo
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -28907,10 +28907,10 @@ func (in *IothubStatus) DeepCopyInto(out *IothubStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -29064,10 +29064,10 @@ func (in *KeyVaultAccessPolicyStatus) DeepCopyInto(out *KeyVaultAccessPolicyStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -29428,10 +29428,10 @@ func (in *KeyVaultCertificateStatus) DeepCopyInto(out *KeyVaultCertificateStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -29549,10 +29549,10 @@ func (in *KeyVaultKeyStatus) DeepCopyInto(out *KeyVaultKeyStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -29703,10 +29703,10 @@ func (in *KeyVaultSecretStatus) DeepCopyInto(out *KeyVaultSecretStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -29855,10 +29855,10 @@ func (in *KeyVaultStatus) DeepCopyInto(out *KeyVaultStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -30035,10 +30035,10 @@ func (in *KubernetesClusterNodePoolStatus) DeepCopyInto(out *KubernetesClusterNo
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -30548,10 +30548,10 @@ func (in *KubernetesClusterStatus) DeepCopyInto(out *KubernetesClusterStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -30685,10 +30685,10 @@ func (in *KustoClusterStatus) DeepCopyInto(out *KustoClusterStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -30855,10 +30855,10 @@ func (in *KustoDatabasePrincipalStatus) DeepCopyInto(out *KustoDatabasePrincipal
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -30903,10 +30903,10 @@ func (in *KustoDatabaseStatus) DeepCopyInto(out *KustoDatabaseStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31012,10 +31012,10 @@ func (in *KustoEventhubDataConnectionStatus) DeepCopyInto(out *KustoEventhubData
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31159,10 +31159,10 @@ func (in *LbBackendAddressPoolStatus) DeepCopyInto(out *LbBackendAddressPoolStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31301,10 +31301,10 @@ func (in *LbNATPoolStatus) DeepCopyInto(out *LbNATPoolStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31410,10 +31410,10 @@ func (in *LbNATRuleStatus) DeepCopyInto(out *LbNATRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31540,10 +31540,10 @@ func (in *LbOutboundRuleStatus) DeepCopyInto(out *LbOutboundRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31654,10 +31654,10 @@ func (in *LbProbeStatus) DeepCopyInto(out *LbProbeStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31763,10 +31763,10 @@ func (in *LbRuleStatus) DeepCopyInto(out *LbRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -31866,10 +31866,10 @@ func (in *LbStatus) DeepCopyInto(out *LbStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32008,10 +32008,10 @@ func (in *LocalNetworkGatewayStatus) DeepCopyInto(out *LocalNetworkGatewayStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32145,10 +32145,10 @@ func (in *LogAnalyticsLinkedServiceStatus) DeepCopyInto(out *LogAnalyticsLinkedS
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32275,10 +32275,10 @@ func (in *LogAnalyticsSolutionStatus) DeepCopyInto(out *LogAnalyticsSolutionStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32440,10 +32440,10 @@ func (in *LogAnalyticsWorkspaceLinkedServiceStatus) DeepCopyInto(out *LogAnalyti
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32533,10 +32533,10 @@ func (in *LogAnalyticsWorkspaceStatus) DeepCopyInto(out *LogAnalyticsWorkspaceSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32642,10 +32642,10 @@ func (in *LogicAppActionCustomStatus) DeepCopyInto(out *LogicAppActionCustomStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32758,10 +32758,10 @@ func (in *LogicAppActionHTTPStatus) DeepCopyInto(out *LogicAppActionHTTPStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32867,10 +32867,10 @@ func (in *LogicAppTriggerCustomStatus) DeepCopyInto(out *LogicAppTriggerCustomSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -32976,10 +32976,10 @@ func (in *LogicAppTriggerHTTPRequestStatus) DeepCopyInto(out *LogicAppTriggerHTT
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33085,10 +33085,10 @@ func (in *LogicAppTriggerRecurrenceStatus) DeepCopyInto(out *LogicAppTriggerRecu
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33208,10 +33208,10 @@ func (in *LogicAppWorkflowStatus) DeepCopyInto(out *LogicAppWorkflowStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33394,10 +33394,10 @@ func (in *ManagedDiskStatus) DeepCopyInto(out *ManagedDiskStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33508,10 +33508,10 @@ func (in *ManagementGroupStatus) DeepCopyInto(out *ManagementGroupStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33617,10 +33617,10 @@ func (in *ManagementLockStatus) DeepCopyInto(out *ManagementLockStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33738,10 +33738,10 @@ func (in *MapsAccountStatus) DeepCopyInto(out *MapsAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33847,10 +33847,10 @@ func (in *MariadbConfigurationStatus) DeepCopyInto(out *MariadbConfigurationStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -33956,10 +33956,10 @@ func (in *MariadbDatabaseStatus) DeepCopyInto(out *MariadbDatabaseStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34065,10 +34065,10 @@ func (in *MariadbFirewallRuleStatus) DeepCopyInto(out *MariadbFirewallRuleStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34228,10 +34228,10 @@ func (in *MariadbServerStatus) DeepCopyInto(out *MariadbServerStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34337,10 +34337,10 @@ func (in *MariadbVirtualNetworkRuleStatus) DeepCopyInto(out *MariadbVirtualNetwo
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34446,10 +34446,10 @@ func (in *MarketplaceAgreementStatus) DeepCopyInto(out *MarketplaceAgreementStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34576,10 +34576,10 @@ func (in *MediaServicesAccountStatus) DeepCopyInto(out *MediaServicesAccountStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -34750,10 +34750,10 @@ func (in *MetricAlertruleStatus) DeepCopyInto(out *MetricAlertruleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -35076,10 +35076,10 @@ func (in *MonitorActionGroupStatus) DeepCopyInto(out *MonitorActionGroupStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -35248,10 +35248,10 @@ func (in *MonitorActivityLogAlertStatus) DeepCopyInto(out *MonitorActivityLogAle
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -35613,10 +35613,10 @@ func (in *MonitorAutoscaleSettingStatus) DeepCopyInto(out *MonitorAutoscaleSetti
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -35810,10 +35810,10 @@ func (in *MonitorDiagnosticSettingStatus) DeepCopyInto(out *MonitorDiagnosticSet
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -35950,10 +35950,10 @@ func (in *MonitorLogProfileStatus) DeepCopyInto(out *MonitorLogProfileStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36152,10 +36152,10 @@ func (in *MonitorMetricAlertStatus) DeepCopyInto(out *MonitorMetricAlertStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36326,10 +36326,10 @@ func (in *MonitorMetricAlertruleStatus) DeepCopyInto(out *MonitorMetricAlertrule
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36463,10 +36463,10 @@ func (in *MssqlDatabaseVulnerabilityAssessmentRuleBaselineStatus) DeepCopyInto(o
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36642,10 +36642,10 @@ func (in *MssqlElasticpoolStatus) DeepCopyInto(out *MssqlElasticpoolStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36766,10 +36766,10 @@ func (in *MssqlServerSecurityAlertPolicyStatus) DeepCopyInto(out *MssqlServerSec
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -36908,10 +36908,10 @@ func (in *MssqlServerVulnerabilityAssessmentStatus) DeepCopyInto(out *MssqlServe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37017,10 +37017,10 @@ func (in *MysqlConfigurationStatus) DeepCopyInto(out *MysqlConfigurationStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37126,10 +37126,10 @@ func (in *MysqlDatabaseStatus) DeepCopyInto(out *MysqlDatabaseStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37235,10 +37235,10 @@ func (in *MysqlFirewallRuleStatus) DeepCopyInto(out *MysqlFirewallRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37398,10 +37398,10 @@ func (in *MysqlServerStatus) DeepCopyInto(out *MysqlServerStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37507,10 +37507,10 @@ func (in *MysqlVirtualNetworkRuleStatus) DeepCopyInto(out *MysqlVirtualNetworkRu
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37638,10 +37638,10 @@ func (in *NatGatewayStatus) DeepCopyInto(out *NatGatewayStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37780,10 +37780,10 @@ func (in *NetappAccountStatus) DeepCopyInto(out *NetappAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37889,10 +37889,10 @@ func (in *NetappPoolStatus) DeepCopyInto(out *NetappPoolStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -37998,10 +37998,10 @@ func (in *NetappSnapshotStatus) DeepCopyInto(out *NetappSnapshotStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38135,10 +38135,10 @@ func (in *NetappVolumeStatus) DeepCopyInto(out *NetappVolumeStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38293,10 +38293,10 @@ func (in *NetworkConnectionMonitorStatus) DeepCopyInto(out *NetworkConnectionMon
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38414,10 +38414,10 @@ func (in *NetworkDdosProtectionPlanStatus) DeepCopyInto(out *NetworkDdosProtecti
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38551,10 +38551,10 @@ func (in *NetworkInterfaceApplicationGatewayBackendAddressPoolAssociationStatus)
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38660,10 +38660,10 @@ func (in *NetworkInterfaceApplicationSecurityGroupAssociationStatus) DeepCopyInt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38769,10 +38769,10 @@ func (in *NetworkInterfaceBackendAddressPoolAssociationStatus) DeepCopyInto(out 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -38911,10 +38911,10 @@ func (in *NetworkInterfaceNATRuleAssociationStatus) DeepCopyInto(out *NetworkInt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39024,10 +39024,10 @@ func (in *NetworkInterfaceStatus) DeepCopyInto(out *NetworkInterfaceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39175,10 +39175,10 @@ func (in *NetworkPacketCaptureStatus) DeepCopyInto(out *NetworkPacketCaptureStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39340,10 +39340,10 @@ func (in *NetworkProfileStatus) DeepCopyInto(out *NetworkProfileStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39509,10 +39509,10 @@ func (in *NetworkSecurityGroupStatus) DeepCopyInto(out *NetworkSecurityGroupStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39648,10 +39648,10 @@ func (in *NetworkSecurityRuleStatus) DeepCopyInto(out *NetworkSecurityRuleStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39827,10 +39827,10 @@ func (in *NetworkWatcherFlowLogStatus) DeepCopyInto(out *NetworkWatcherFlowLogSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -39915,10 +39915,10 @@ func (in *NetworkWatcherStatus) DeepCopyInto(out *NetworkWatcherStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40052,10 +40052,10 @@ func (in *NotificationHubAuthorizationRuleStatus) DeepCopyInto(out *Notification
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40215,10 +40215,10 @@ func (in *NotificationHubNamespace_Status) DeepCopyInto(out *NotificationHubName
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40310,10 +40310,10 @@ func (in *NotificationHubStatus) DeepCopyInto(out *NotificationHubStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40461,10 +40461,10 @@ func (in *PacketCaptureStatus) DeepCopyInto(out *PacketCaptureStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40628,10 +40628,10 @@ func (in *PointToSiteVPNGatewayStatus) DeepCopyInto(out *PointToSiteVPNGatewaySt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40763,10 +40763,10 @@ func (in *PolicyAssignmentStatus) DeepCopyInto(out *PolicyAssignmentStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40872,10 +40872,10 @@ func (in *PolicyDefinitionStatus) DeepCopyInto(out *PolicyDefinitionStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -40981,10 +40981,10 @@ func (in *PolicySetDefinitionStatus) DeepCopyInto(out *PolicySetDefinitionStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41090,10 +41090,10 @@ func (in *PostgresqlConfigurationStatus) DeepCopyInto(out *PostgresqlConfigurati
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41199,10 +41199,10 @@ func (in *PostgresqlDatabaseStatus) DeepCopyInto(out *PostgresqlDatabaseStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41308,10 +41308,10 @@ func (in *PostgresqlFirewallRuleStatus) DeepCopyInto(out *PostgresqlFirewallRule
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41471,10 +41471,10 @@ func (in *PostgresqlServerStatus) DeepCopyInto(out *PostgresqlServerStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41580,10 +41580,10 @@ func (in *PostgresqlVirtualNetworkRuleStatus) DeepCopyInto(out *PostgresqlVirtua
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41701,10 +41701,10 @@ func (in *PrivateDNSARecordStatus) DeepCopyInto(out *PrivateDNSARecordStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41822,10 +41822,10 @@ func (in *PrivateDNSAaaaRecordStatus) DeepCopyInto(out *PrivateDNSAaaaRecordStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -41938,10 +41938,10 @@ func (in *PrivateDNSCnameRecordStatus) DeepCopyInto(out *PrivateDNSCnameRecordSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42075,10 +42075,10 @@ func (in *PrivateDNSMxRecordStatus) DeepCopyInto(out *PrivateDNSMxRecordStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42196,10 +42196,10 @@ func (in *PrivateDNSPtrRecordStatus) DeepCopyInto(out *PrivateDNSPtrRecordStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42333,10 +42333,10 @@ func (in *PrivateDNSSrvRecordStatus) DeepCopyInto(out *PrivateDNSSrvRecordStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42449,10 +42449,10 @@ func (in *PrivateDNSZoneStatus) DeepCopyInto(out *PrivateDNSZoneStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42565,10 +42565,10 @@ func (in *PrivateDNSZoneVirtualNetworkLinkStatus) DeepCopyInto(out *PrivateDNSZo
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42702,10 +42702,10 @@ func (in *PrivateEndpointStatus) DeepCopyInto(out *PrivateEndpointStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42839,10 +42839,10 @@ func (in *PrivateLinkEndpointStatus) DeepCopyInto(out *PrivateLinkEndpointStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -42996,10 +42996,10 @@ func (in *PrivateLinkServiceStatus) DeepCopyInto(out *PrivateLinkServiceStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43112,10 +43112,10 @@ func (in *ProximityPlacementGroupStatus) DeepCopyInto(out *ProximityPlacementGro
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43294,10 +43294,10 @@ func (in *PublicIPPrefixStatus) DeepCopyInto(out *PublicIPPrefixStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43354,10 +43354,10 @@ func (in *PublicIPStatus) DeepCopyInto(out *PublicIPStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43463,10 +43463,10 @@ func (in *RecoveryNetworkMappingStatus) DeepCopyInto(out *RecoveryNetworkMapping
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43593,10 +43593,10 @@ func (in *RecoveryReplicatedVmStatus) DeepCopyInto(out *RecoveryReplicatedVmStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43702,10 +43702,10 @@ func (in *RecoveryServicesFabricStatus) DeepCopyInto(out *RecoveryServicesFabric
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43818,10 +43818,10 @@ func (in *RecoveryServicesProtectedVmStatus) DeepCopyInto(out *RecoveryServicesP
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -43988,10 +43988,10 @@ func (in *RecoveryServicesProtectionContainerMappingStatus) DeepCopyInto(out *Re
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44036,10 +44036,10 @@ func (in *RecoveryServicesProtectionContainerStatus) DeepCopyInto(out *RecoveryS
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44300,10 +44300,10 @@ func (in *RecoveryServicesProtectionPolicyVmStatus) DeepCopyInto(out *RecoverySe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44409,10 +44409,10 @@ func (in *RecoveryServicesReplicationPolicyStatus) DeepCopyInto(out *RecoverySer
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44525,10 +44525,10 @@ func (in *RecoveryServicesVaultStatus) DeepCopyInto(out *RecoveryServicesVaultSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44693,10 +44693,10 @@ func (in *RedisCacheStatus) DeepCopyInto(out *RedisCacheStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44802,10 +44802,10 @@ func (in *RedisFirewallRuleStatus) DeepCopyInto(out *RedisFirewallRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -44911,10 +44911,10 @@ func (in *RelayHybridConnectionStatus) DeepCopyInto(out *RelayHybridConnectionSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45053,10 +45053,10 @@ func (in *RelayNamespaceStatus) DeepCopyInto(out *RelayNamespaceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45169,10 +45169,10 @@ func (in *ResourceGroupStatus) DeepCopyInto(out *ResourceGroupStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45278,10 +45278,10 @@ func (in *RoleAssignmentStatus) DeepCopyInto(out *RoleAssignmentStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45435,10 +45435,10 @@ func (in *RoleDefinitionStatus) DeepCopyInto(out *RoleDefinitionStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45544,10 +45544,10 @@ func (in *RouteStatus) DeepCopyInto(out *RouteStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45686,10 +45686,10 @@ func (in *RouteTableStatus) DeepCopyInto(out *RouteTableStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -45851,10 +45851,10 @@ func (in *SchedulerJobCollectionStatus) DeepCopyInto(out *SchedulerJobCollection
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -46250,10 +46250,10 @@ func (in *SchedulerJobStatus) DeepCopyInto(out *SchedulerJobStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -46387,10 +46387,10 @@ func (in *SearchServiceStatus) DeepCopyInto(out *SearchServiceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -46496,10 +46496,10 @@ func (in *SecurityCenterContactStatus) DeepCopyInto(out *SecurityCenterContactSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -46605,10 +46605,10 @@ func (in *SecurityCenterSubscriptionPricingStatus) DeepCopyInto(out *SecurityCen
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -46714,10 +46714,10 @@ func (in *SecurityCenterWorkspaceStatus) DeepCopyInto(out *SecurityCenterWorkspa
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47093,10 +47093,10 @@ func (in *ServiceFabricClusterStatus) DeepCopyInto(out *ServiceFabricClusterStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47235,10 +47235,10 @@ func (in *ServicebusNamespaceAuthorizationRuleStatus) DeepCopyInto(out *Serviceb
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47328,10 +47328,10 @@ func (in *ServicebusNamespaceStatus) DeepCopyInto(out *ServicebusNamespaceStatus
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47470,10 +47470,10 @@ func (in *ServicebusQueueAuthorizationRuleStatus) DeepCopyInto(out *ServicebusQu
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47551,10 +47551,10 @@ func (in *ServicebusQueueStatus) DeepCopyInto(out *ServicebusQueueStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47742,10 +47742,10 @@ func (in *ServicebusSubscriptionRuleStatus) DeepCopyInto(out *ServicebusSubscrip
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47790,10 +47790,10 @@ func (in *ServicebusSubscriptionStatus) DeepCopyInto(out *ServicebusSubscription
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -47932,10 +47932,10 @@ func (in *ServicebusTopicAuthorizationRuleStatus) DeepCopyInto(out *ServicebusTo
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48013,10 +48013,10 @@ func (in *ServicebusTopicStatus) DeepCopyInto(out *ServicebusTopicStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48157,10 +48157,10 @@ func (in *SharedImageGalleryStatus) DeepCopyInto(out *SharedImageGalleryStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48266,10 +48266,10 @@ func (in *SharedImageStatus) DeepCopyInto(out *SharedImageStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48403,10 +48403,10 @@ func (in *SharedImageVersionStatus) DeepCopyInto(out *SharedImageVersionStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48594,10 +48594,10 @@ func (in *SignalrServiceStatus) DeepCopyInto(out *SignalrServiceStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48703,10 +48703,10 @@ func (in *SiteRecoveryFabricStatus) DeepCopyInto(out *SiteRecoveryFabricStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48812,10 +48812,10 @@ func (in *SiteRecoveryNetworkMappingStatus) DeepCopyInto(out *SiteRecoveryNetwor
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -48982,10 +48982,10 @@ func (in *SiteRecoveryProtectionContainerMappingStatus) DeepCopyInto(out *SiteRe
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49030,10 +49030,10 @@ func (in *SiteRecoveryProtectionContainerStatus) DeepCopyInto(out *SiteRecoveryP
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49160,10 +49160,10 @@ func (in *SiteRecoveryReplicatedVmStatus) DeepCopyInto(out *SiteRecoveryReplicat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49269,10 +49269,10 @@ func (in *SiteRecoveryReplicationPolicyStatus) DeepCopyInto(out *SiteRecoveryRep
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49450,10 +49450,10 @@ func (in *SnapshotStatus) DeepCopyInto(out *SnapshotStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49559,10 +49559,10 @@ func (in *SqlActiveDirectoryAdministratorStatus) DeepCopyInto(out *SqlActiveDire
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49734,10 +49734,10 @@ func (in *SqlDatabaseStatus) DeepCopyInto(out *SqlDatabaseStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -49850,10 +49850,10 @@ func (in *SqlElasticpoolStatus) DeepCopyInto(out *SqlElasticpoolStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50034,10 +50034,10 @@ func (in *SqlFailoverGroupStatus) DeepCopyInto(out *SqlFailoverGroupStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50143,10 +50143,10 @@ func (in *SqlFirewallRuleStatus) DeepCopyInto(out *SqlFirewallRuleStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50285,10 +50285,10 @@ func (in *SqlServerStatus) DeepCopyInto(out *SqlServerStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50394,10 +50394,10 @@ func (in *SqlVirtualNetworkRuleStatus) DeepCopyInto(out *SqlVirtualNetworkRuleSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50579,10 +50579,10 @@ func (in *StorageAccountNetworkRulesStatus) DeepCopyInto(out *StorageAccountNetw
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -50892,10 +50892,10 @@ func (in *StorageAccountStatus) DeepCopyInto(out *StorageAccountStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51008,10 +51008,10 @@ func (in *StorageBlobStatus) DeepCopyInto(out *StorageBlobStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51131,10 +51131,10 @@ func (in *StorageContainerStatus) DeepCopyInto(out *StorageContainerStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51247,10 +51247,10 @@ func (in *StorageDataLakeGen2FilesystemStatus) DeepCopyInto(out *StorageDataLake
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51477,10 +51477,10 @@ func (in *StorageManagementPolicyStatus) DeepCopyInto(out *StorageManagementPoli
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51593,10 +51593,10 @@ func (in *StorageQueueStatus) DeepCopyInto(out *StorageQueueStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51737,10 +51737,10 @@ func (in *StorageShareDirectoryStatus) DeepCopyInto(out *StorageShareDirectorySt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -51869,10 +51869,10 @@ func (in *StorageShareStatus) DeepCopyInto(out *StorageShareStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52013,10 +52013,10 @@ func (in *StorageTableEntityStatus) DeepCopyInto(out *StorageTableEntityStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52138,10 +52138,10 @@ func (in *StorageTableStatus) DeepCopyInto(out *StorageTableStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52289,10 +52289,10 @@ func (in *StreamAnalyticsFunctionJavascriptUdfStatus) DeepCopyInto(out *StreamAn
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52405,10 +52405,10 @@ func (in *StreamAnalyticsJobStatus) DeepCopyInto(out *StreamAnalyticsJobStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52540,10 +52540,10 @@ func (in *StreamAnalyticsOutputBlobStatus) DeepCopyInto(out *StreamAnalyticsOutp
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52675,10 +52675,10 @@ func (in *StreamAnalyticsOutputEventhubStatus) DeepCopyInto(out *StreamAnalytics
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52789,10 +52789,10 @@ func (in *StreamAnalyticsOutputMssqlStatus) DeepCopyInto(out *StreamAnalyticsOut
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -52924,10 +52924,10 @@ func (in *StreamAnalyticsOutputServicebusQueueStatus) DeepCopyInto(out *StreamAn
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53059,10 +53059,10 @@ func (in *StreamAnalyticsOutputServicebusTopicStatus) DeepCopyInto(out *StreamAn
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53194,10 +53194,10 @@ func (in *StreamAnalyticsReferenceInputBlobStatus) DeepCopyInto(out *StreamAnaly
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53329,10 +53329,10 @@ func (in *StreamAnalyticsStreamInputBlobStatus) DeepCopyInto(out *StreamAnalytic
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53464,10 +53464,10 @@ func (in *StreamAnalyticsStreamInputEventhubStatus) DeepCopyInto(out *StreamAnal
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53599,10 +53599,10 @@ func (in *StreamAnalyticsStreamInputIothubStatus) DeepCopyInto(out *StreamAnalyt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53769,10 +53769,10 @@ func (in *SubnetNATGatewayAssociationStatus) DeepCopyInto(out *SubnetNATGatewayA
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53878,10 +53878,10 @@ func (in *SubnetNetworkSecurityGroupAssociationStatus) DeepCopyInto(out *SubnetN
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -53987,10 +53987,10 @@ func (in *SubnetRouteTableAssociationStatus) DeepCopyInto(out *SubnetRouteTableA
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54096,10 +54096,10 @@ func (in *SubnetStatus) DeepCopyInto(out *SubnetStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54219,10 +54219,10 @@ func (in *TemplateDeploymentStatus) DeepCopyInto(out *TemplateDeploymentStatus) 
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54375,10 +54375,10 @@ func (in *TrafficManagerEndpointStatus) DeepCopyInto(out *TrafficManagerEndpoint
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54540,10 +54540,10 @@ func (in *TrafficManagerProfileStatus) DeepCopyInto(out *TrafficManagerProfileSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54656,10 +54656,10 @@ func (in *UserAssignedIdentityStatus) DeepCopyInto(out *UserAssignedIdentityStat
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54800,10 +54800,10 @@ func (in *VirtualHubStatus) DeepCopyInto(out *VirtualHubStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -54937,10 +54937,10 @@ func (in *VirtualMachineDataDiskAttachmentStatus) DeepCopyInto(out *VirtualMachi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -55058,10 +55058,10 @@ func (in *VirtualMachineExtensionStatus) DeepCopyInto(out *VirtualMachineExtensi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -55716,10 +55716,10 @@ func (in *VirtualMachineScaleSetStatus) DeepCopyInto(out *VirtualMachineScaleSet
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56114,10 +56114,10 @@ func (in *VirtualMachineStatus) DeepCopyInto(out *VirtualMachineStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56312,10 +56312,10 @@ func (in *VirtualNetworkGatewayConnectionStatus) DeepCopyInto(out *VirtualNetwor
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56517,10 +56517,10 @@ func (in *VirtualNetworkGatewayStatus) DeepCopyInto(out *VirtualNetworkGatewaySt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56659,10 +56659,10 @@ func (in *VirtualNetworkPeeringStatus) DeepCopyInto(out *VirtualNetworkPeeringSt
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56766,10 +56766,10 @@ func (in *VirtualNetworkStatus) DeepCopyInto(out *VirtualNetworkStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -56882,10 +56882,10 @@ func (in *VirtualWANStatus) DeepCopyInto(out *VirtualWANStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -57019,10 +57019,10 @@ func (in *VpnGatewayStatus) DeepCopyInto(out *VpnGatewayStatus) {
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -57299,10 +57299,10 @@ func (in *VpnServerConfigurationStatus) DeepCopyInto(out *VpnServerConfiguration
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
@@ -57508,10 +57508,10 @@ func (in *WebApplicationFirewallPolicyStatus) DeepCopyInto(out *WebApplicationFi
 		*out = new(basev1alpha1.State)
 		**out = **in
 	}
-	if in.TerraFormLogs != nil {
-		in, out := &in.TerraFormLogs, &out.TerraFormLogs
-		*out = new(basev1alpha1.TerraFormLogs)
-		**out = **in
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
