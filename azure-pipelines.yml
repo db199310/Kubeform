@@ -62,7 +62,7 @@ stages:
     - checkout: kfc
       displayName: Checkout kfc
       persistCredentials: true
-    - script: git checkout $(Build.SourceBranch)
+    - script: git checkout ${BUILD_SOURCEBRANCH#refs\/heads\/}
       workingDirectory: kfc
       displayName: Checkout kfc branch
 
