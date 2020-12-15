@@ -32,7 +32,7 @@ metadata:
   name: kubeform
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.operator: glob: new-feature*
+    fluxcd.io/tag.operator: glob: feature-new-feature-*
 ```
 In `azure-pipeline.yml`, change variables `FLUX_REPO` and `FLUX_PATH` and set `UpdateFluxOnFeatureBranch` to `true` value.
 
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: operator
-        image: shellai.azurecr.io/sedp/kubeform/kfc:new-feature_linux_amd64
+        image: shellai.azurecr.io/sedp/kubeform/kfc:feature-new-feature-abcdef_linux_amd64
 ```
 Also apply the built CRDs to the cluster `kubectl apply api/crds/modules*.yaml`.
 
