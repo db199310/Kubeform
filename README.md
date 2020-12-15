@@ -19,7 +19,47 @@ Kubeform by AppsCode is a Kubernetes operator for [Terraform](https://www.terraf
 
 ## Installation
 
-To install Kubeform, please follow the guide [here](https://kubeform.com/docs/latest/setup/install/).
+Kubeform pipeline is setup to automatically deploy the master branch in two stages. In the first stage, the deployment lands in staging (sandbox) cluster. The second stage, if approved on mgmtprd environment, deploys kubeform to production clusters that face users. It also tags master branch and increment minor version number.
+
+On feature branch, kubeform is disabled to deploy automatically.  It can be enabled easily by changing kueform deployment manifest on the target cluster where you want the feature build to deploy to.
+
+Assuming the feature is developed on a branch `feature/new-feature`. Then,
+
+* If the target cluster is managed by flux then set value of flux annotation attribute in the deployment manifest to deploy image named after the feature branch. Git clone the flux repository, change the kubeform deployment manifest, commit and push the change.
+```yaml
+kind: Deployment
+metadata:
+  name: kubeform
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.operator: glob: new-feature*
+```
+
+* If the target cluster is not managed by flux then manually change value of `spec.template.spec.containers[0].image` attribute to value named after your branch by editing the deployment manifest.
+```sh
+kubectl -n kubeform edit deployment kubeform
+```
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+      - name: operator
+        image: shellai.azurecr.io/sedp/kubeform/kfc:new-feature_linux_amd64
+```
+
+Verify that the deployment has the image set,
+```sh
+kubectl -n kubeform get deployment apiversiontest-sedp-kubeform -o jsonpath='{.spec.template.spec.containers[0].image}{"\n"}'
+shellai.azurecr.io/sedp/kubeform/kfc:new-feature_linux_amd64
+```
+And wait for the pod to restart,
+```sh
+kubectl -n kubeform get pods -w
+NAME                        READY   STATUS       RESTARTS   AGE
+kubeform-85655b597f-wxfpc   1/1     Terminating  0          20h
+kubeform-85655b597f-9vhl4   1/1     Running      0          21s
+```
 
 ## Using Kubeform
 
