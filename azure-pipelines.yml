@@ -37,7 +37,6 @@ variables:
 resources:
   repositories:
   - repository: kfc
-    ref: refs/heads/feature/tn-adding-dev-version
     type: git
     name: Platform - General/kfc
 
@@ -58,6 +57,9 @@ stages:
     - checkout: kfc
       displayName: Checkout kfc
       persistCredentials: true
+    - script: git checkout $(Build.SourceBranch)
+      workingDirectory: kfc
+      displayName: Checkout kfc branch
 
     - task: Cache@2
       inputs:
