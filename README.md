@@ -25,7 +25,7 @@ On feature branch, kubeform is disabled to deploy automatically.  It can be enab
 
 Assuming the feature is developed on a branch `feature/new-feature`. Then,
 
-* If the target cluster is managed by flux then set value of flux annotation attribute in the deployment manifest to deploy image named after the feature branch. Git clone the flux repository, change the kubeform deployment manifest, commit and push the change.
+* If the target cluster is managed by flux then set value of flux annotation attribute in the deployment manifest to deploy image named after the feature branch. Clone the flux repository, change the kubeform deployment manifest, commit and push the change.
 ```yaml
 kind: Deployment
 metadata:
@@ -34,8 +34,9 @@ metadata:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.operator: glob: new-feature*
 ```
+In `azure-pipeline.yml`, change variables `FLUX_REPO` and `FLUX_PATH` and set `UpdateFluxOnFeatureBranch` to `true` value.
 
-* If the target cluster is not managed by flux then manually change value of `spec.template.spec.containers[0].image` attribute to value named after your branch by editing the deployment manifest.
+* If the target cluster is not managed by flux then after each successfull build manually change value of `spec.template.spec.containers[0].image` attribute to value named after your branch by editing the deployment manifest.
 ```sh
 kubectl -n kubeform edit deployment kubeform
 ```
@@ -47,6 +48,7 @@ spec:
       - name: operator
         image: shellai.azurecr.io/sedp/kubeform/kfc:new-feature_linux_amd64
 ```
+Also apply the built CRDs to the cluster `kubectl apply api/crds/modules*.yaml`.
 
 Verify that the deployment has the image set,
 ```sh

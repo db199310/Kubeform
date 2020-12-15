@@ -25,7 +25,12 @@ variables:
 - name: REPO_BASE_URL
   value: sede-ds-adp.visualstudio.com/Platform%20-%20General/_git
 
+- name: IsMainBranch
+  value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/master') }}
+
 # Flux destination
+- name: UpdateFluxOnFeatureBranch
+  value: false
 - name: FLUX_REPO
   value: thomas-flux-get-started
 - name: FLUX_PATH_SBX
@@ -44,7 +49,7 @@ stages:
 - stage: Sandbox
   variables:
     - group: STRATOS_HELM_DEV
-    - name: ENVIRONMENT
+    - name: STAGE
       value: dev
     - name: GoVersion
       value: 1.14.6
@@ -146,6 +151,7 @@ stages:
         git add .
         git commit -m "[kubeform] Update CRDs"
         git push origin
+      condition: or(eq(variables.IsMainBranch, true), eq(variables.UpdateFluxOnFeatureBranch, True))
       displayName: Push CRDs to flux repo
 
     - task: CopyFiles@2
@@ -170,8 +176,13 @@ stages:
       displayName: Publish kfc-state
 
 - stage: Production
+  dependsOn:
+  - Sandbox
+  condition: and(succeeded(), eq(variables.IsMainBranch, true))
   variables:
   - group: STRATOS_HELM_PRD
+  - name: STAGE
+    value: prd
   jobs:
   - deployment: ReleaseTag
     # environment: prd
