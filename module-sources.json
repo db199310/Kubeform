@@ -68,5 +68,12 @@
     "provider": "azurerm",
     "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-fnapp/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=branch&versionDescriptor%5Bversion%5D=add_ingress&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
     "subDirectory": ""
+  },
+  {
+    "name": "SDPAzADLSv1",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-adls?ref=v0.0.1",
+    "provider": "restapi",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-adls/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.0.1&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "subDirectory": ""
   }
 ]
