@@ -58,6 +58,14 @@ type F4dpAzStgv1ListerExpansion interface{}
 // F4dpAzStgv1NamespaceLister.
 type F4dpAzStgv1NamespaceListerExpansion interface{}
 
+// SDPAzADLSv1ListerExpansion allows custom methods to be added to
+// SDPAzADLSv1Lister.
+type SDPAzADLSv1ListerExpansion interface{}
+
+// SDPAzADLSv1NamespaceListerExpansion allows custom methods to be added to
+// SDPAzADLSv1NamespaceLister.
+type SDPAzADLSv1NamespaceListerExpansion interface{}
+
 // SDPAzAppv1ListerExpansion allows custom methods to be added to
 // SDPAzAppv1Lister.
 type SDPAzAppv1ListerExpansion interface{}
