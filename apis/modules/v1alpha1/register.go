@@ -57,6 +57,9 @@ func Resource(resource string) schema.GroupResource {
 func addKnownTypes(scheme *runtime.Scheme) error {
 	scheme.AddKnownTypes(SchemeGroupVersion,
 
+		&SDPAzADLSv1{},
+		&SDPAzADLSv1List{},
+
 		&SDPAzAppv1{},
 		&SDPAzAppv1List{},
 

@@ -322,6 +322,11 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Shares":                       schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Shares(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Spec":                         schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Status":                       schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1":                             schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1List":                         schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Output":                       schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Spec":                         schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Status":                       schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1":                              schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1AuthSettings":                  schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1AuthSettings(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1ConnectionStrings":             schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1ConnectionStrings(ref),
@@ -15163,6 +15168,175 @@ func schema_kubeform_apis_modules_v1alpha1_F4dpAzStgv1Status(ref common.Referenc
 		},
 		Dependencies: []string{
 			"kubeform.dev/kubeform/apis/modules/v1alpha1.F4dpAzStgv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SDPAzADLSv1List is a list of SDPAzADLSv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of SDPAzADLSv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"providerRef"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzADLSv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzADLSv1Output"},
 	}
 }
 
