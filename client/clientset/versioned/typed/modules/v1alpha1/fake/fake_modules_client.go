@@ -76,6 +76,10 @@ func (c *FakeModulesV1alpha1) StratosAzStgv1s(namespace string) v1alpha1.Stratos
 	return &FakeStratosAzStgv1s{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) ThomasStorageAccounts(namespace string) v1alpha1.ThomasStorageAccountInterface {
+	return &FakeThomasStorageAccounts{c, namespace}
+}
+
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
 func (c *FakeModulesV1alpha1) RESTClient() rest.Interface {
