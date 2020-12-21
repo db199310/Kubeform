@@ -39,6 +39,10 @@ steps:
 - checkout: kfc
   displayName: Checkout kfc
   persistCredentials: true
+- script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
+  workingDirectory: kfc
+  displayName: Checkout kfc source branch
+
 - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
   displayName: Login to ShellAI ACR
 - task: GoTool@0
@@ -72,8 +76,8 @@ steps:
   workingDirectory: kfc
 - script: |
     git add -A
-    git commit -m "[skip-ci] Update Terraform modules"
-    git push -f origin HEAD:${BUILD_SOURCEBRANCH}
+    git commit -m "[skip ci] Update Terraform modules"
+    git push
   displayName: Commit & push changes to kfc
   workingDirectory: kfc
 - script: make build
