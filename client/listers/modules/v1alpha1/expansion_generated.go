@@ -113,3 +113,11 @@ type StratosAzStgv1ListerExpansion interface{}
 // StratosAzStgv1NamespaceListerExpansion allows custom methods to be added to
 // StratosAzStgv1NamespaceLister.
 type StratosAzStgv1NamespaceListerExpansion interface{}
+
+// ThomasStorageAccountListerExpansion allows custom methods to be added to
+// ThomasStorageAccountLister.
+type ThomasStorageAccountListerExpansion interface{}
+
+// ThomasStorageAccountNamespaceListerExpansion allows custom methods to be added to
+// ThomasStorageAccountNamespaceLister.
+type ThomasStorageAccountNamespaceListerExpansion interface{}

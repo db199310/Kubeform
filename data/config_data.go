@@ -29,6 +29,9 @@ var ModuleConfig = []Config{
 		"StratosAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2", "azurerm", "", "",
 	},
 	{
+		"ThomasStorageAccount", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?version=GCcac4eb703750006fa6c045578000b36b41d2bf66", "azurerm", "", "",
+	},
+	{
 		"SDPAzSqlv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1", "azurerm", "", "",
 	},
 	{
