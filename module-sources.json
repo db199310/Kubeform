@@ -21,6 +21,13 @@
       "subDirectory": ""
     },
     {
+      "name": "ThomasStorageAccount",
+      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?version=GCcac4eb703750006fa6c045578000b36b41d2bf66",
+      "provider": "azurerm",
+      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=commit&versionDescriptor%5Bversion%5D=GCcac4eb703750006fa6c045578000b36b41d2bf66&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+      "subDirectory": ""
+    },
+    {
       "name": "SDPAzSqlv1",
       "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1",
       "provider": "azurerm",
