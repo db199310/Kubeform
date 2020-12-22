@@ -1,0 +1,164 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: sdpazsqlv1s.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: SDPAzSqlv1
+    listKind: SDPAzSqlv1List
+    plural: sdpazsqlv1s
+    singular: sdpazsqlv1
+  scope: ""
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            additionalTags:
+              additionalProperties:
+                type: string
+              description: Additional set of tags
+              type: object
+            collation:
+              description: Collation of SQL Database
+              type: string
+            enableHA:
+              description: If set to true, enable Failover Group
+              type: boolean
+            environment:
+              description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+              type: string
+            existingResourceGroup:
+              description: existing resource group name
+              type: string
+            instance:
+              description: Instance number
+              type: string
+            kvName:
+              description: Azure Keyvault name to store SQL password
+              type: string
+            kvResourceGroupName:
+              description: Azure Keyvault resource group name for SQL password
+              type: string
+            nameSuffix:
+              description: Name suffix used for SQL server name and resource group
+              type: string
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            project:
+              description: project stream name
+              type: string
+            projectStream:
+              description: ' 4 character project stream name/code'
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            region:
+              description: region. Choose from australia, europe, asia, europe
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            source:
+              type: string
+            sqlAdminUsername:
+              description: SQL Server username
+              type: string
+            sqlDbEdition:
+              description: Edition of the SQL DB
+              type: string
+            sqlDbName:
+              description: Name of the SQL DB
+              type: string
+            sqlDbRequestedServiceObjectiveName:
+              description: Requested Service Objective Name of the SQL DB
+              type: string
+            sqlFwRules:
+              additionalProperties:
+                description: RawMessage is a raw encoded JSON value. It implements
+                  Marshaler and Unmarshaler and can be used to delay JSON decoding
+                  or precompute a JSON encoding.
+                format: byte
+                type: string
+              description: "\t   Map of SQL Firewall Rules in the following format:
+                \n \t     \"Name\" = [\"StartIP\", \"EndIP\"]"
+              type: object
+            sqlVersion:
+              description: Version of Azure SQL Server
+              type: string
+            workStream:
+              description: ' 4 character project stream name/code'
+              type: string
+          required:
+          - environment
+          - nameSuffix
+          - owner
+          - projectStream
+          - providerRef
+          - region
+          - sqlAdminUsername
+          - sqlDbName
+          - workStream
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
