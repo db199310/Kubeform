@@ -20,7 +20,7 @@ REPO     := $(notdir $(shell pwd))
 BIN      := kubeform
 
 # Produce CRDs that work back to Kubernetes 1.11 (no version conversion)
-CRD_OPTIONS          ?= "crd:trivialVersions=true"
+CRD_OPTIONS          ?= "crd:trivialVersions=false"
 # https://github.com/appscodelabs/gengo-builder
 CODE_GENERATOR_IMAGE ?= ibelikov/gengo:release-1.14
 API_GROUPS           ?= $(shell find $$(pwd)/apis -maxdepth 1 -mindepth 1 -type d -printf '%f:v1alpha1 ')

@@ -44,12 +44,27 @@ spec:
             environment:
               description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
               type: string
+            githubConfiguration:
+              description: List of Github Configuration
+              items:
+                properties:
+                  accountName:
+                    type: string
+                  branchName:
+                    type: string
+                  gitURL:
+                    type: string
+                  repositoryName:
+                    type: string
+                  rootFolder:
+                    type: string
+                type: object
+              type: array
             instance:
               description: Instance number
               type: string
-            nameSuffix:
-              description: NameSuffix for the data factory
-              format: byte
+            namePrefix:
+              description: NamePrefix for the data factory
               type: string
             owner:
               description: owner
@@ -93,12 +108,30 @@ spec:
               type: object
             source:
               type: string
+            vstsConfiguration:
+              description: List of VSTS Configuration
+              items:
+                properties:
+                  accountName:
+                    type: string
+                  branchName:
+                    type: string
+                  projectName:
+                    type: string
+                  repositoryName:
+                    type: string
+                  rootFolder:
+                    type: string
+                  tenantID:
+                    type: string
+                type: object
+              type: array
             workStream:
               description: ' 4 character project stream name/code'
               type: string
           required:
           - environment
-          - nameSuffix
+          - namePrefix
           - owner
           - projectStream
           - providerRef
@@ -120,6 +153,8 @@ spec:
                 datafactoryName:
                   description: Name of the DataFactory
                   type: string
+                identity:
+                  type: string
               type: object
             phase:
               type: string
@@ -130,5 +165,8 @@ spec:
   version: v1alpha1
   versions:
   - name: v1alpha1
+    served: true
+    storage: false
+  - name: v1alpha2
     served: true
     storage: true

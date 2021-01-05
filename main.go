@@ -77,8 +77,8 @@ func main() {
 		log.Println(err.Error())
 	}
 
-	// err = util.GenerateProviderAPIS("modules", "v1alpha2", nil, nil)
-	// if err != nil {
-	// 	log.Println(err.Error())
-	// }
+	err = util.GenerateProviderAPIS("modules", "v1alpha2", nil, nil)
+	if err != nil {
+		log.Println(err.Error())
+	}
 }
