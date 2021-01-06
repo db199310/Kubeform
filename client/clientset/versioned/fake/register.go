@@ -26,6 +26,7 @@ import (
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	azurermv1alpha1 "kubeform.dev/kubeform/apis/azurerm/v1alpha1"
 	modulesv1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
+	modulesv1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
 )
 
 var scheme = runtime.NewScheme()
@@ -33,6 +34,7 @@ var codecs = serializer.NewCodecFactory(scheme)
 var parameterCodec = runtime.NewParameterCodec(scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	azurermv1alpha1.AddToScheme,
+	modulesv1alpha2.AddToScheme,
 	modulesv1alpha1.AddToScheme,
 }
 

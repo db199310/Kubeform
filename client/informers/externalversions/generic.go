@@ -25,6 +25,7 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 	v1alpha1 "kubeform.dev/kubeform/apis/azurerm/v1alpha1"
 	modulesv1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
+	v1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
 )
 
 // GenericInformer is type of SharedIndexInformer which will locate and delegate to other
@@ -896,6 +897,22 @@ func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().StratosAzStgv1s().Informer()}, nil
 	case modulesv1alpha1.SchemeGroupVersion.WithResource("thomasstorageaccounts"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha1().ThomasStorageAccounts().Informer()}, nil
+
+		// Group=modules.kubeform.com, Version=v1alpha2
+	case v1alpha2.SchemeGroupVersion.WithResource("sdpazappv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().SDPAzAppv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("sdpazfnv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().SDPAzFnv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("sdpazsqlv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().SDPAzSqlv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("sdpazadfv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().SDPAzadfv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("sdpazsbv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().SDPAzsbv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("stratosazstgv1s"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().StratosAzStgv1s().Informer()}, nil
+	case v1alpha2.SchemeGroupVersion.WithResource("thomasstorageaccounts"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Modules().V1alpha2().ThomasStorageAccounts().Informer()}, nil
 
 	}
 
