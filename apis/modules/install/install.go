@@ -16,7 +16,7 @@ limitations under the License.
 package install
 
 import (
-	// "kubeform.dev/kubeform/apis/modules/v1alpha1"
+	"kubeform.dev/kubeform/apis/modules/v1alpha1"
 	"kubeform.dev/kubeform/apis/modules/v1alpha2"
 
 	"k8s.io/apimachinery/pkg/runtime"
@@ -25,8 +25,8 @@ import (
 
 // Install registers the API group and adds types to a scheme
 func Install(scheme *runtime.Scheme) {
-	// utilruntime.Must(v1alpha1.AddToScheme(scheme))
-	// utilruntime.Must(scheme.SetVersionPriority(v1alpha1.SchemeGroupVersion))
+	utilruntime.Must(v1alpha1.AddToScheme(scheme))
+	utilruntime.Must(scheme.SetVersionPriority(v1alpha1.SchemeGroupVersion))
 	utilruntime.Must(v1alpha2.AddToScheme(scheme))
 	utilruntime.Must(scheme.SetVersionPriority(v1alpha2.SchemeGroupVersion))
 }
