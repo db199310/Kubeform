@@ -28,6 +28,8 @@ type F4dpAzSqlExpansion interface{}
 
 type F4dpAzStgv1Expansion interface{}
 
+type SDPAzADLSv1Expansion interface{}
+
 type SDPAzAppv1Expansion interface{}
 
 type SDPAzFnv1Expansion interface{}
