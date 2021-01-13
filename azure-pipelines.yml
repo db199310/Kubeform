@@ -31,6 +31,9 @@ resources:
   - repository: kfc
     type: git
     name: Platform - General/kfc
+  - repository: flux
+    type: git
+    name: Platform - General/thomas-flux-get-started
 
 steps:
 - checkout: self
@@ -39,11 +42,15 @@ steps:
 - checkout: kfc
   displayName: Checkout kfc
   persistCredentials: true
+- checkout: flux
+  displayName: Checkout flux
+  persistCredentials: true
 - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
   displayName: Login to ShellAI ACR
 - task: GoTool@0
   inputs:
     version: '1.14.6'
+- task: NodeTool@0
 - script: |
     git config --global user.email "sedp-ci@shell.com"
     git config --global user.name "Azure Pipeline"
@@ -85,3 +92,19 @@ steps:
 - script: make push
   displayName: Push kfc containers
   workingDirectory: kfc
+
+# Update ConfigMap with CRD schemas in flux repository
+- script: checkout master
+  workingDirectory: thomas-flux-get-started
+- script: npm install js-yaml
+  workingDirectory: kubeform
+- script: node update-configmap-resource-schemas.js ../thomas-flux-get-started/releases/kubeform/crd-conversion-cm.yml
+  displayName: Update resource schemas in ConfigMap
+  workingDirectory: kubeform
+- script: |
+    git pull
+    git add releases/kubeform/crd-conversion-cm.yml
+    git commit -m "[kubeform] Update schemas of CRDs"
+    git push
+  displayName: Commit & push configmap to flux
+  workingDirectory: thomas-flux-get-started

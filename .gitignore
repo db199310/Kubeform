@@ -30,3 +30,7 @@ _testmain.go
 
 /bin
 /.go
+
+/node_modules
+package.json
+package-lock.json
