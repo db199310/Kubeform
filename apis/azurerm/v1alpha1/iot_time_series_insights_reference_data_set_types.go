@@ -31,6 +31,7 @@ import (
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
+// +kubebuilder:storageversion
 
 type IotTimeSeriesInsightsReferenceDataSet struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`

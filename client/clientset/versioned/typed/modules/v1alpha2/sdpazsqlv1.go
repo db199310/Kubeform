@@ -21,12 +21,13 @@ package v1alpha2
 import (
 	"time"
 
+	v1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
+	scheme "kubeform.dev/kubeform/client/clientset/versioned/scheme"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	watch "k8s.io/apimachinery/pkg/watch"
 	rest "k8s.io/client-go/rest"
-	v1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
-	scheme "kubeform.dev/kubeform/client/clientset/versioned/scheme"
 )
 
 // SDPAzSqlv1sGetter has a method to return a SDPAzSqlv1Interface.
