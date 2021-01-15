@@ -41,9 +41,11 @@ import (
 )
 
 type TypeData struct {
-	Name    string
-	Spec    string
-	License string
+	Name           string
+	Spec           string
+	License        string
+	StorageVersion bool
+	Version        string
 }
 
 type ApisData struct {
@@ -51,6 +53,12 @@ type ApisData struct {
 	Version      string
 	StructName   []string
 	License      string
+}
+
+type ModuleInfo struct {
+	path            string
+	name            string
+	isNewestVersion bool
 }
 
 var License string
@@ -63,7 +71,7 @@ var execeptionList = map[string]string{
 }
 
 func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*schema.Schema, structNames []string) error {
-	templatePath := fmt.Sprintf("templates/%s", version)
+	templatePath := "templates"
 	goPath := os.Getenv("GOPATH")
 	basePath := filepath.Join(goPath,
 		filepath.Join("src",
@@ -79,24 +87,34 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 		return err
 	}
 	if providerName == "modules" {
-		var modulePaths []string
-		var moduleSourcesFileName string
-
-		moduleSourcesFileName = fmt.Sprintf("module-sources-%s.json", version)
-		modulePaths, structNames, err = GenerateModuleData(filepath.Join(basePath, moduleSourcesFileName), filepath.Join(templatePath, "cfg_data.tmpl"), dataPath)
+		err = GenerateModulesConfig(
+			filepath.Join(basePath, "module-sources.json"),
+			filepath.Join(templatePath, "cfg_data.tmpl"),
+			dataPath)
 		if err != nil {
 			return err
 		}
-		for i, modulePath := range modulePaths {
-			name := structNames[i]
-			out := GenerateModuleCRD(modulePath, name)
+
+		var moduleInfos []ModuleInfo
+		moduleInfos, err = GenerateModuleData(
+			filepath.Join(basePath, "module-sources.json"),
+			version)
+		if err != nil {
+			return err
+		}
+
+		for _, moduleInfo := range moduleInfos {
+			crdSpec := GenerateModuleCRD(moduleInfo.path, moduleInfo.name)
 			typeData := TypeData{
-				Name:    name,
-				Spec:    out,
-				License: License,
+				Name:           moduleInfo.name,
+				Spec:           crdSpec,
+				License:        License,
+				Version:        version,
+				StorageVersion: moduleInfo.isNewestVersion,
 			}
-			modulePaths[i] = name
-			templateToGoFile(filepath.Join(templatePath, "module_types.tmpl"), filepath.Join(versionPath, flect.Underscore(name)+"_types.go"), typeData)
+			templateToGoFile(filepath.Join(templatePath, "module_types.tmpl"),
+				filepath.Join(versionPath, flect.Underscore(moduleInfo.name)+"_types.go"),
+				typeData)
 		}
 	} else {
 		for i, structName := range structNames {
@@ -108,9 +126,11 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 			genSecret := false
 			TerraformSchemaToStruct(schmeas[i], structName+"Spec", providerName, true, &genSecret, &out)
 			typeData := TypeData{
-				Name:    structName,
-				Spec:    out,
-				License: License,
+				Name:           structName,
+				Spec:           out,
+				License:        License,
+				Version:        version,
+				StorageVersion: true,
 			}
 
 			templateToGoFile(filepath.Join(templatePath, "types.tmpl"), filepath.Join(versionPath, flect.Underscore(structName)+"_types.go"), typeData)
@@ -524,31 +544,92 @@ func Unzip(src string, dest string) ([]string, error) {
 	return filenames, nil
 }
 
-func GenerateModuleData(fileName, templateFile, generatedFilePath string) (modulePaths []string, structNames []string, err error) {
+func GenerateModuleData(fileName, version string) (moduleInfos []ModuleInfo, err error) {
 	byt, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return
 	}
-	var config []data.Config
 
-	err = json.Unmarshal(byt, &config)
+	var moduleObjs map[string]interface{}
+
+	err = json.Unmarshal(byt, &moduleObjs)
+	if err != nil {
+		return
+	}
+
+	for moduleName, moduleObj := range moduleObjs {
+		if moduleCfg, ok := moduleObj.(map[string]interface{})[version]; ok {
+			moduleCfg.(map[string]interface{})["name"] = moduleName
+
+			var cfg data.Config
+			var cfgJson []byte
+			cfgJson, err = json.Marshal(moduleCfg)
+			err = json.Unmarshal(cfgJson, &cfg)
+			if err != nil {
+				return
+			}
+
+			path, err := DownloadRepository(cfg.Name, cfg.URL, "/tmp")
+			if err != nil {
+				fmt.Println(err)
+			}
+
+			var versions []string
+			for vers := range moduleObj.(map[string]interface{}) {
+				versions = append(versions, vers)
+			}
+			sort.Strings(versions)
+			newestVersion := versions[len(versions)-1]
+
+			moduleInfos = append(moduleInfos, ModuleInfo{
+				path:            filepath.Join(path, cfg.SubDirectory),
+				name:            cfg.Name,
+				isNewestVersion: (version == newestVersion),
+			})
+		}
+	}
+
+	return
+}
+
+func GenerateModulesConfig(fileName, templateFile, generatedFilePath string) (err error) {
+	byt, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return
+	}
+
+	var moduleObjs map[string]interface{}
+
+	err = json.Unmarshal(byt, &moduleObjs)
 	if err != nil {
 		return
 	}
 
 	var cfgStr string
-	for _, cfg := range config {
-		cfgStr = cfgStr + `{
-"` + cfg.Name + `","` + cfg.Source + `","` + cfg.Provider + `","","",
-},
-`
-		path, err := DownloadRepository(cfg.Name, cfg.URL, "/tmp")
+
+	for moduleName, moduleObj := range moduleObjs {
+		var versions []string
+		for version := range moduleObj.(map[string]interface{}) {
+			versions = append(versions, version)
+		}
+		sort.Strings(versions)
+
+		newestVersion := versions[len(versions)-1]
+		moduleCfg := moduleObj.(map[string]interface{})[newestVersion]
+		moduleCfg.(map[string]interface{})["name"] = moduleName
+
+		var cfg data.Config
+		var cfgJson []byte
+		cfgJson, err = json.Marshal(moduleCfg)
+		err = json.Unmarshal(cfgJson, &cfg)
 		if err != nil {
-			fmt.Println(err)
+			return
 		}
 
-		modulePaths = append(modulePaths, filepath.Join(path, cfg.SubDirectory))
-		structNames = append(structNames, cfg.Name)
+		cfgStr = cfgStr + `{
+      "` + cfg.Name + `","` + cfg.Source + `","` + cfg.Provider + `","","",
+    },
+    `
 	}
 
 	tmpl := template.Must(template.ParseFiles(templateFile))

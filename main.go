@@ -16,9 +16,12 @@ limitations under the License.
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"io/ioutil"
 	"log"
+	"sort"
+
 	"strings"
 
 	"kubeform.dev/kubeform/util"
@@ -33,6 +36,46 @@ var licenseHeaderFile string
 
 func init() {
 	flag.StringVar(&licenseHeaderFile, "license-header-file", "", "Path to the license file.")
+}
+
+func GenerateModuleApis() (err error) {
+	// Collect versions from the defined modules
+	var versions []string
+	modulesFileName := "module-sources.json"
+
+	byt, err := ioutil.ReadFile(modulesFileName)
+	if err != nil {
+		return
+	}
+
+	var moduleObjs map[string]interface{}
+	err = json.Unmarshal(byt, &moduleObjs)
+	if err != nil {
+		return
+	}
+
+	versionsSet := make(map[string]struct{})
+	for _, moduleObj := range moduleObjs {
+		for version := range moduleObj.(map[string]interface{}) {
+			versionsSet[version] = struct{}{}
+		}
+	}
+
+	for version := range versionsSet {
+		versions = append(versions, version)
+	}
+	sort.Strings(versions)
+	log.Printf("Module Versions: %v", versions)
+
+	// Generate apis for each version
+	for _, version := range versions {
+		err = util.GenerateProviderAPIS("modules", version, nil, nil)
+		if err != nil {
+			return
+		}
+	}
+
+	return
 }
 
 func main() {
@@ -72,12 +115,7 @@ func main() {
 		}
 	}
 
-	err := util.GenerateProviderAPIS("modules", version, nil, nil)
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	err = util.GenerateProviderAPIS("modules", "v1alpha2", nil, nil)
+	err := GenerateModuleApis()
 	if err != nil {
 		log.Println(err.Error())
 	}
