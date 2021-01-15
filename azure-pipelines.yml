@@ -45,6 +45,11 @@ steps:
 - checkout: flux
   displayName: Checkout flux
   persistCredentials: true
+
+- script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
+  workingDirectory: kfc
+  displayName: Checkout kfc source branch
+
 - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
   displayName: Login to ShellAI ACR
 - task: GoTool@0
@@ -94,9 +99,11 @@ steps:
   workingDirectory: kfc
 
 # Update ConfigMap with CRD schemas in flux repository
-- script: checkout master
+- script: git checkout master
+  displayName: Checkout flux master
   workingDirectory: thomas-flux-get-started
 - script: npm install js-yaml
+  displayName: Install node packages
   workingDirectory: kubeform
 - script: node update-configmap-resource-schemas.js ../thomas-flux-get-started/releases/kubeform/crd-conversion-cm.yml
   displayName: Update resource schemas in ConfigMap
