@@ -18,16 +18,4 @@ limitations under the License.
 
 package v1alpha2
 
-type SDPAzAppv1Expansion interface{}
-
-type SDPAzFnv1Expansion interface{}
-
-type SDPAzSqlv1Expansion interface{}
-
-type SDPAzadfv1Expansion interface{}
-
-type SDPAzsbv1Expansion interface{}
-
-type StratosAzStgv1Expansion interface{}
-
 type ThomasStorageAccountExpansion interface{}

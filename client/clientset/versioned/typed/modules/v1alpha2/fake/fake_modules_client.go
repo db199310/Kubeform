@@ -28,30 +28,6 @@ type FakeModulesV1alpha2 struct {
 	*testing.Fake
 }
 
-func (c *FakeModulesV1alpha2) SDPAzAppv1s(namespace string) v1alpha2.SDPAzAppv1Interface {
-	return &FakeSDPAzAppv1s{c, namespace}
-}
-
-func (c *FakeModulesV1alpha2) SDPAzFnv1s(namespace string) v1alpha2.SDPAzFnv1Interface {
-	return &FakeSDPAzFnv1s{c, namespace}
-}
-
-func (c *FakeModulesV1alpha2) SDPAzSqlv1s(namespace string) v1alpha2.SDPAzSqlv1Interface {
-	return &FakeSDPAzSqlv1s{c, namespace}
-}
-
-func (c *FakeModulesV1alpha2) SDPAzadfv1s(namespace string) v1alpha2.SDPAzadfv1Interface {
-	return &FakeSDPAzadfv1s{c, namespace}
-}
-
-func (c *FakeModulesV1alpha2) SDPAzsbv1s(namespace string) v1alpha2.SDPAzsbv1Interface {
-	return &FakeSDPAzsbv1s{c, namespace}
-}
-
-func (c *FakeModulesV1alpha2) StratosAzStgv1s(namespace string) v1alpha2.StratosAzStgv1Interface {
-	return &FakeStratosAzStgv1s{c, namespace}
-}
-
 func (c *FakeModulesV1alpha2) ThomasStorageAccounts(namespace string) v1alpha2.ThomasStorageAccountInterface {
 	return &FakeThomasStorageAccounts{c, namespace}
 }
