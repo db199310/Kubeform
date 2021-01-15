@@ -10,10 +10,6 @@ spec:
   - JSONPath: .status.phase
     name: Phase
     type: string
-  conversion:
-    clientConfig:
-      url: https://kexpandsbx.azurewebsites.net/api/convert_crd?code=UE5jX4fpwlEm/q9A4ygOW7kEaCHiKLoPjYlzUaZjtBHjCc0PtchO8A==
-    strategy: Webhook
   group: modules.kubeform.com
   names:
     kind: ThomasStorageAccount
@@ -23,6 +19,7 @@ spec:
   scope: ""
   subresources:
     status: {}
+  version: v1alpha1
   versions:
   - name: v1alpha1
     schema:
