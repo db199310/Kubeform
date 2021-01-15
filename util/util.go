@@ -103,6 +103,8 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 			return err
 		}
 
+		structNames = []string{}
+
 		for _, moduleInfo := range moduleInfos {
 			crdSpec := GenerateModuleCRD(moduleInfo.path, moduleInfo.name)
 			typeData := TypeData{
@@ -115,6 +117,7 @@ func GenerateProviderAPIS(providerName, version string, schmeas []map[string]*sc
 			templateToGoFile(filepath.Join(templatePath, "module_types.tmpl"),
 				filepath.Join(versionPath, flect.Underscore(moduleInfo.name)+"_types.go"),
 				typeData)
+			structNames = append(structNames, moduleInfo.name)
 		}
 	} else {
 		for i, structName := range structNames {

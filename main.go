@@ -21,7 +21,6 @@ import (
 	"io/ioutil"
 	"log"
 	"sort"
-
 	"strings"
 
 	"kubeform.dev/kubeform/util"
