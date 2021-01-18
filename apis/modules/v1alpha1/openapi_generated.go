@@ -15539,6 +15539,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							Format:      "",
 						},
 					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostname with the stratos.shell/stratos.shell.com suffix",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"instance": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Instance number",
@@ -15702,7 +15709,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 					},
 					"workStream": {
 						SchemaProps: spec.SchemaProps{
-							Description: "\n 4 character project stream name/code",
+							Description: "\n 3 character workstream name/code",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16089,6 +16096,13 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 							},
 						},
 					},
+					"host": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Hostname with the stratos.shell/stratos.shell.com suffix",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
 					"instance": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Instance number",
@@ -16140,7 +16154,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 					},
 					"project": {
 						SchemaProps: spec.SchemaProps{
-							Description: "project stream name",
+							Description: "project name",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16217,7 +16231,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 					},
 					"workStream": {
 						SchemaProps: spec.SchemaProps{
-							Description: "\n 4 character project stream name/code",
+							Description: "\n 3 character workstream name/code",
 							Type:        []string{"string"},
 							Format:      "",
 						},

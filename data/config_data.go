@@ -20,10 +20,10 @@ package data
 
 var ModuleConfig = []Config{
 	{
-		"SDPAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.4.3", "azurerm", "", "",
+		"SDPAzFnv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=v0.5.0", "azurerm", "", "",
 	},
 	{
-		"SDPAzAppv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.3.0", "azurerm", "", "",
+		"SDPAzAppv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.4.0", "azurerm", "", "",
 	},
 	{
 		"StratosAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2", "azurerm", "", "",
@@ -42,11 +42,5 @@ var ModuleConfig = []Config{
 	},
 	{
 		"SDPAzappserviceplanv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.1.0", "azurerm", "", "",
-	},
-	{
-		"SDPAzdbv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/stratos-tf-az-databricks?ref=v0.1.2", "azurerm", "", "",
-	},
-	{
-		"SDPAzFnv2", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-fnapp?ref=add_ingress", "azurerm", "", "",
 	},
 }

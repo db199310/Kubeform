@@ -63,9 +63,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SDPAzFnv1{},
 		&SDPAzFnv1List{},
 
-		&SDPAzFnv2{},
-		&SDPAzFnv2List{},
-
 		&SDPAzSqlv1{},
 		&SDPAzSqlv1List{},
 
@@ -74,9 +71,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 
 		&SDPAzappserviceplanv1{},
 		&SDPAzappserviceplanv1List{},
-
-		&SDPAzdbv1{},
-		&SDPAzdbv1List{},
 
 		&SDPAzplatformeventsv1{},
 		&SDPAzplatformeventsv1List{},
