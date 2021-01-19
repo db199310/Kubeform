@@ -1,0 +1,253 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: azurefnapps.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: AzureFnApp
+    listKind: AzureFnAppList
+    plural: azurefnapps
+    singular: azurefnapp
+  scope: ""
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            activeDirectory:
+              description: A map object for Active Directory. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html
+              format: byte
+              type: string
+            appPrefix:
+              description: App resourcess name prefix.
+              type: string
+            appSettings:
+              additionalProperties:
+                type: string
+              description: App Settings. Package deploy configured
+              type: object
+            applicationInsightsType:
+              description: App insights type
+              type: string
+            aspKind:
+              description: App service plan kind. Should be able to accomodate the
+                fn app
+              type: string
+            aspMaxWorkerCnt:
+              description: App Service plan max worker count
+              type: string
+            aspReserved:
+              description: Reserved field for App Service plan (Linux). Boolean
+              type: boolean
+            aspSkuCap:
+              description: App Service plan capacity
+              type: string
+            aspSkuSize:
+              description: App service plan size
+              type: string
+            aspSkuTier:
+              description: Tier of the app service plan
+              type: string
+            authSettings:
+              additionalProperties:
+                properties:
+                  authEnabled:
+                    type: boolean
+                type: object
+              description: Authentication Settings
+              type: object
+            clientAffinityEnabled:
+              description: Should client affinity be enabled?
+              type: boolean
+            connectionStrings:
+              description: connection strings for fn app
+              items:
+                properties:
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            createApplicationInsightsResource:
+              description: Require application insights resource?
+              type: boolean
+            environment:
+              description: Environment
+              type: string
+            existingAspName:
+              description: Existing App Service plan name
+              type: string
+            existingAspResGrpName:
+              description: Existing App Service plan resource Group
+              type: string
+            existingServicePlanEnabled:
+              description: Existing service plan enabled?
+              type: boolean
+            fnAppAdditionalTags:
+              additionalProperties:
+                type: string
+              description: Additional tags for the App Service resources, in addition
+                to the resource group tags.
+              type: object
+            fnAppLocation:
+              description: Function App location
+              type: string
+            fnEnabled:
+              description: Should fn app be enabled?
+              type: boolean
+            fnRequired:
+              description: Is Fn app required?
+              type: boolean
+            fnappVersion:
+              description: Run time version of the Fn app
+              type: string
+            identity:
+              description: identity for fn app. please refer https://www.terraform.io/docs/providers/azurerm/r/function_app.html
+              format: byte
+              type: string
+            integrationSubnetID:
+              description: Subnet IDS for VNet integration
+              type: string
+            osType:
+              description: OS Type for the fn app. Should match with App Service plan
+              type: string
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            projectStream:
+              description: project stream name
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            region:
+              description: region
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              format: byte
+              type: string
+            resGrpName:
+              description: Resource Group name where the fn app needs to be created
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            siteConfig:
+              additionalProperties:
+                properties:
+                  alwaysOn:
+                    type: boolean
+                  ftpsState:
+                    type: string
+                  http2Enabled:
+                    type: boolean
+                  linuxFxVersion:
+                    type: string
+                  use32BitWorkerProcess:
+                    type: boolean
+                  websocketsEnabled:
+                    type: boolean
+                type: object
+              description: Site config block for Fn app
+              type: object
+            siteConfigCors:
+              additionalProperties:
+                properties:
+                  allowedOrigins:
+                    items:
+                      type: string
+                    type: array
+                  supportCredentials:
+                    type: string
+                type: object
+              description: Site config core parameters for Fn app
+              type: object
+            siteConfigIPRestrictions:
+              description: site config ip restrictions block parameters for fn app
+              format: byte
+              type: string
+            source:
+              type: string
+            sourcezip:
+              description: Zip file location to be used to do the deployment. Should
+                be publicly accessible
+              type: string
+            vnetIntegrationRequired:
+              description: Vnet integration required for the function app?
+              type: boolean
+          required:
+          - appPrefix
+          - environment
+          - owner
+          - providerRef
+          - region
+          - resGrpName
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              properties:
+                appServicePlans:
+                  description: Map output of the App Service Plans
+                  type: string
+                fnApp:
+                  description: Map output of the Fnapp Services
+                  type: string
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
