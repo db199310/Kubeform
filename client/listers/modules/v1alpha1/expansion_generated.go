@@ -98,6 +98,14 @@ type SDPAzadfv1ListerExpansion interface{}
 // SDPAzadfv1NamespaceLister.
 type SDPAzadfv1NamespaceListerExpansion interface{}
 
+// SDPAzcosmosdbv1ListerExpansion allows custom methods to be added to
+// SDPAzcosmosdbv1Lister.
+type SDPAzcosmosdbv1ListerExpansion interface{}
+
+// SDPAzcosmosdbv1NamespaceListerExpansion allows custom methods to be added to
+// SDPAzcosmosdbv1NamespaceLister.
+type SDPAzcosmosdbv1NamespaceListerExpansion interface{}
+
 // SDPAzsbv1ListerExpansion allows custom methods to be added to
 // SDPAzsbv1Lister.
 type SDPAzsbv1ListerExpansion interface{}

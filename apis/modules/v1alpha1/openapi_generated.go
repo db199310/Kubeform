@@ -359,6 +359,12 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Spec":                          schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1Status":                        schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Status(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration":             schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1VstsConfiguration(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1":                         schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1List":                     schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1List(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Output":                   schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Output(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Spec":                     schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Spec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Status":                   schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1VirtualNetworkRule":       schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1VirtualNetworkRule(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1":                               schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1List":                           schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1List(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules":             schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1NamespaceAuthRules(ref),
@@ -17414,6 +17420,455 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1VstsConfiguration(ref commo
 					"tenantID": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Spec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Status"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Spec", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Status"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1List(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "SDPAzcosmosdbv1List is a list of SDPAzcosmosdbv1s",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Items is a list of SDPAzcosmosdbv1 CRD objects",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1"),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Output(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"cosmosdbEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The endpoint used to connect to the CosmosDB account.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cosmosdbID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The CosmosDB Account ID.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cosmosdbName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The CosmosDB Account Name.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cosmosdbReadEndpoints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of read endpoints available for this CosmosDB account.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"cosmosdbWriteEndpoints": {
+						SchemaProps: spec.SchemaProps{
+							Description: "A list of write endpoints available for this CosmosDB account.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Spec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"secretRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"providerRef": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
+						},
+					},
+					"source": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"additionalTags": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Additional set of tags",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"allowedCidrs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "CosmosDB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IP's for a given database account.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"capabilities": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n\n\t   Configures the capabilities to enable for this Cosmos DB account:\n\t   Possible values are\n\t     AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,\n\t     EnableAggregationPipeline, EnableCassandra, EnableGremlin,EnableMongo, EnableTable, EnableServerless,\n\t     MongoDBv3.4 and mongoEnableDocLevelTTL.",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"consistencyPolicyLevel": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Consistency policy level. Allowed values are `BoundedStaleness`, `Eventual`, `Session`, `Strong` or `ConsistentPrefix`",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"consistencyPolicyMaxIntervalInSeconds": {
+						SchemaProps: spec.SchemaProps{
+							Description: "When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. Accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"consistencyPolicyMaxStalenessPrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "When used with the Bounded Staleness consistency level, this value represents the number of stale requests tolerated. Accepted range for this value is 10 – 2147483647. Defaults to 100. Required when consistency_level is set to BoundedStaleness.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"databaseName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "This is the name of the database to be created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"databaseThroughput": {
+						SchemaProps: spec.SchemaProps{
+							Description: "This is the throughput to be set at the database level. Optional. Throughput can be set at the database level, or at the object level inside the database.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"environment": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Environment. Upto 5 character. For e.g. dev, dev01 , prd01",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"existingResourceGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "existing resource group name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"instance": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Instance number",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"isVirtualNetworkFilterEnabled": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Enables virtual network filtering for this Cosmos DB account",
+							Type:        []string{"boolean"},
+							Format:      "",
+						},
+					},
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the Kind of CosmosDB to create - possible values are `GlobalDocumentDB` and `MongoDB`.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault name to store Cosmos information",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"kvResourceGroupName": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Azure Keyvault resource group name for Cosmos information",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"locations": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the Azure region to host replicated data and their priority.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "byte",
+									},
+								},
+							},
+						},
+					},
+					"nameSuffix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Name suffix used for Cosmos account name and resource group",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"namePrefix": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Optional prefix for PostgreSQL server name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"offerType": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the Offer Type to use for this CosmosDB Account - currently this can only be set to Standard.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"owner": {
+						SchemaProps: spec.SchemaProps{
+							Description: "owner",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"placement": {
+						SchemaProps: spec.SchemaProps{
+							Description: "placement",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"project": {
+						SchemaProps: spec.SchemaProps{
+							Description: "project stream name",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"projectStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"region": {
+						SchemaProps: spec.SchemaProps{
+							Description: "region. Choose from australia, europe, asia, europe",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"releaseVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "releaseVersion",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"virtualNetworkRule": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifues a virtual_network_rules resource used to define which subnets are allowed to access this CosmosDB account",
+							Type:        []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1VirtualNetworkRule"),
+									},
+								},
+							},
+						},
+					},
+					"workStream": {
+						SchemaProps: spec.SchemaProps{
+							Description: "\n 4 character project stream name/code",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"providerRef", "databaseName", "environment", "owner", "projectStream", "region", "workStream"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1VirtualNetworkRule"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1Status(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"observedGeneration": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource generation, which is updated on mutation by the API Server.",
+							Type:        []string{"integer"},
+							Format:      "int64",
+						},
+					},
+					"output": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Output"),
+						},
+					},
+					"state": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzcosmosdbv1Output"},
+	}
+}
+
+func schema_kubeform_apis_modules_v1alpha1_SDPAzcosmosdbv1VirtualNetworkRule(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"ignoreMissingVnetServiceEndpoint": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
 							Format: "",
 						},
 					},
