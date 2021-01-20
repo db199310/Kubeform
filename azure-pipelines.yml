@@ -51,7 +51,7 @@ steps:
   persistCredentials: true
 - checkout: stratos
   displayName: Checkout stratos
-  persistCredentails: true
+  persistCredentials: true
 
 - script: ls -l
   displayName: Listing
