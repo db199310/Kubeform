@@ -34,6 +34,10 @@ resources:
   - repository: flux
     type: git
     name: Platform - General/thomas-flux-get-started
+  - repository: stratos
+    type: github
+    endpoint: 'Sede-x Github'
+    name: sede-x/stratos-core-bootstrap
 
 steps:
 - checkout: self
@@ -45,73 +49,87 @@ steps:
 - checkout: flux
   displayName: Checkout flux
   persistCredentials: true
+- checkout: stratos
+  displayName: Checkout stratos
+  persistCredentails: true
 
-- script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
-  workingDirectory: kfc
-  displayName: Checkout kfc source branch
+- script: ls -l
+  displayName: Listing
+  workingDirectory: stratos-core-bootstrap
 
-- script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-  displayName: Login to ShellAI ACR
-- task: GoTool@0
-  inputs:
-    version: '1.14.6'
-- task: NodeTool@0
-- script: |
-    git config --global user.email "sedp-ci@shell.com"
-    git config --global user.name "Azure Pipeline"
-    git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
-  displayName: Set git properties
-- script: make build
-  displayName: Build kubeform binaries
-  workingDirectory: kubeform
-- script: make gen
-  displayName: Run kubeform codegen
-  workingDirectory: kubeform
-- script: |
-    git add -A
-    git commit -m "[skip-ci] Update Terraform modules"
-    git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
-  displayName: Commit & push results to kubeform
-  workingDirectory: kubeform
-- script: git rev-parse HEAD > ../kubeform-sha
-  displayName: Store kubeform revision for kfc to use
-  workingDirectory: kubeform
-- script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
-  displayName: Point kfc to the right revision of kubeform
-  workingDirectory: kfc
-- script: go mod tidy && go mod vendor
-  displayName: Update vendored version of kubeform in kfc
-  workingDirectory: kfc
-- script: |
-    git add -A
-    git commit -m "[skip-ci] Update Terraform modules"
-    git push -f origin HEAD:${BUILD_SOURCEBRANCH}
-  displayName: Commit & push changes to kfc
-  workingDirectory: kfc
-- script: make build
-  displayName: Build kfc binaries
-  workingDirectory: kfc
-- script: make container
-  displayName: Build kfc containers
-  workingDirectory: kfc
-- script: make push
-  displayName: Push kfc containers
-  workingDirectory: kfc
-
-# Update ConfigMap with CRD schemas in flux repository
-- script: git checkout master
-  displayName: Checkout flux master
-  workingDirectory: thomas-flux-get-started
-- script: npm install js-yaml
-  displayName: Install node packages
-  workingDirectory: kubeform
-- script: node update-configmap-resource-schemas.js ../thomas-flux-get-started/releases/kubeform/crd-conversion-cm.yml
-  displayName: Update resource schemas in ConfigMap
-  workingDirectory: kubeform
-- script: |
-    git pull
-    git add releases/kubeform/crd-conversion-cm.yml
-    git commit -m "[kubeform] Update schemas of CRDs"
-    git push
-  displayName: Commit & push configmap to flux
-  workingDirectory: thomas-flux-get-started
+# - script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
+#   workingDirectory: kfc
+#   displayName: Checkout kfc source branch
+#
+# - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+#   displayName: Login to ShellAI ACR
+# - task: GoTool@0
+#   inputs:
+#     version: '1.14.6'
+# - task: NodeTool@0
+# - script: |
+#     git config --global user.email "sedp-ci@shell.com"
+#     git config --global user.name "Azure Pipeline"
+#     git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
+#   displayName: Set git properties
+# - script: make build
+#   displayName: Build kubeform binaries
+#   workingDirectory: kubeform
+# - script: make gen
+#   displayName: Run kubeform codegen
+#   environment:
+#     CRD_PATH: ../thomas-flux-get-started/releases/stratos-crds
+#   workingDirectory: kubeform
+# - script: |
+#     git add -A
+#     git commit -m "[skip-ci] Update Terraform modules"
+#     git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
+#   displayName: Commit & push results to kubeform
+#   workingDirectory: kubeform
+#
+# - script: git rev-parse HEAD > ../kubeform-sha
+#   displayName: Store kubeform revision for kfc to use
+#   workingDirectory: kubeform
+# - script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
+#   displayName: Point kfc to the right revision of kubeform
+#   workingDirectory: kfc
+# - script: go mod tidy && go mod vendor
+#   displayName: Update vendored version of kubeform in kfc
+#   workingDirectory: kfc
+# - script: |
+#     git add -A
+#     git commit -m "[skip-ci] Update Terraform modules"
+#     git push -f origin HEAD:${BUILD_SOURCEBRANCH}
+#   displayName: Commit & push changes to kfc
+#   workingDirectory: kfc
+# - script: make build
+#   displayName: Build kfc binaries
+#   workingDirectory: kfc
+# - script: make container
+#   displayName: Build kfc containers
+#   workingDirectory: kfc
+# - script: make push
+#   displayName: Push kfc containers
+#   workingDirectory: kfc
+#
+# # Update ConfigMap with CRD schemas in flux repository
+# - script: git checkout master
+#   displayName: Checkout flux master
+#   workingDirectory: thomas-flux-get-started
+# - script: npm install js-yaml
+#   displayName: Install node packages
+#   workingDirectory: kubeform/util
+# - script: node util/update-configmap-resource-schemas.js ../thomas-flux-get-started/releases/kubeform/crd-conversion-cm.yml
+#   displayName: Update resource schemas in ConfigMap
+#   workingDirectory: kubeform
+# - script: for crd in modules.kubeform.com_*.yaml; do sed -i '' -e '/^  version:/d' -e '/^  group:/r util/conversion-patch.yaml' $crd; done
+#   displayName: Patch CRDs with conversion config
+#   workingDirectory: thomas-flux-get-started/releases/stratos-crds
+# - script: |
+#     git pull
+#     git add releases/kubeform/crd-conversion-cm.yml
+#     git add releases/stratos-crds/modules.kubeform.com_*.yaml
+#     git commit -m "[kubeform] Update schemas of CRDs"
+#     git push
+#   displayName: Commit & push configmap to flux
+#   workingDirectory: thomas-flux-get-started
