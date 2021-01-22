@@ -38,6 +38,8 @@ type SDPAzStgv1Expansion interface{}
 
 type SDPAzadfv1Expansion interface{}
 
+type SDPAzcosmosdbv1Expansion interface{}
+
 type SDPAzsbv1Expansion interface{}
 
 type StratosAzStgv1Expansion interface{}
