@@ -24,6 +24,8 @@ variables:
   value: shellai.azurecr.io/sedp/kubeform
 - group: gogit
 - group: shellai_acr
+- name: IS_MASTER_BRANCH
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 
 resources:
@@ -31,105 +33,199 @@ resources:
   - repository: kfc
     type: git
     name: Platform - General/kfc
-  - repository: flux
-    type: git
-    name: Platform - General/thomas-flux-get-started
   - repository: stratos
     type: github
     endpoint: 'Sede-x Github'
     name: sede-x/stratos-core-bootstrap
 
-steps:
-- checkout: self
-  displayName: Checkout kubeform
-  persistCredentials: true
-- checkout: kfc
-  displayName: Checkout kfc
-  persistCredentials: true
-- checkout: flux
-  displayName: Checkout flux
-  persistCredentials: true
-- checkout: stratos
-  displayName: Checkout stratos
-  persistCredentials: true
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - checkout: self
+      displayName: Checkout kubeform
+      persistCredentials: true
+    - checkout: kfc
+      displayName: Checkout kfc
+      persistCredentials: true
 
-- script: ls -l
-  displayName: Listing
-  workingDirectory: stratos-core-bootstrap
+    - script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
+      workingDirectory: kfc
+      displayName: Checkout kfc source branch
 
-# - script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
-#   workingDirectory: kfc
-#   displayName: Checkout kfc source branch
-#
-# - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-#   displayName: Login to ShellAI ACR
-# - task: GoTool@0
-#   inputs:
-#     version: '1.14.6'
-# - task: NodeTool@0
-# - script: |
-#     git config --global user.email "sedp-ci@shell.com"
-#     git config --global user.name "Azure Pipeline"
-#     git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
-#   displayName: Set git properties
-# - script: make build
-#   displayName: Build kubeform binaries
-#   workingDirectory: kubeform
-# - script: make gen
-#   displayName: Run kubeform codegen
-#   environment:
-#     CRD_PATH: ../thomas-flux-get-started/releases/stratos-crds
-#   workingDirectory: kubeform
-# - script: |
-#     git add -A
-#     git commit -m "[skip-ci] Update Terraform modules"
-#     git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
-#   displayName: Commit & push results to kubeform
-#   workingDirectory: kubeform
-#
-# - script: git rev-parse HEAD > ../kubeform-sha
-#   displayName: Store kubeform revision for kfc to use
-#   workingDirectory: kubeform
-# - script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
-#   displayName: Point kfc to the right revision of kubeform
-#   workingDirectory: kfc
-# - script: go mod tidy && go mod vendor
-#   displayName: Update vendored version of kubeform in kfc
-#   workingDirectory: kfc
-# - script: |
-#     git add -A
-#     git commit -m "[skip-ci] Update Terraform modules"
-#     git push -f origin HEAD:${BUILD_SOURCEBRANCH}
-#   displayName: Commit & push changes to kfc
-#   workingDirectory: kfc
-# - script: make build
-#   displayName: Build kfc binaries
-#   workingDirectory: kfc
-# - script: make container
-#   displayName: Build kfc containers
-#   workingDirectory: kfc
-# - script: make push
-#   displayName: Push kfc containers
-#   workingDirectory: kfc
-#
-# # Update ConfigMap with CRD schemas in flux repository
-# - script: git checkout master
-#   displayName: Checkout flux master
-#   workingDirectory: thomas-flux-get-started
-# - script: npm install js-yaml
-#   displayName: Install node packages
-#   workingDirectory: kubeform/util
-# - script: node util/update-configmap-resource-schemas.js ../thomas-flux-get-started/releases/kubeform/crd-conversion-cm.yml
-#   displayName: Update resource schemas in ConfigMap
-#   workingDirectory: kubeform
-# - script: for crd in modules.kubeform.com_*.yaml; do sed -i '' -e '/^  version:/d' -e '/^  group:/r util/conversion-patch.yaml' $crd; done
-#   displayName: Patch CRDs with conversion config
-#   workingDirectory: thomas-flux-get-started/releases/stratos-crds
-# - script: |
-#     git pull
-#     git add releases/kubeform/crd-conversion-cm.yml
-#     git add releases/stratos-crds/modules.kubeform.com_*.yaml
-#     git commit -m "[kubeform] Update schemas of CRDs"
-#     git push
-#   displayName: Commit & push configmap to flux
-#   workingDirectory: thomas-flux-get-started
+    - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+      displayName: Login to ShellAI ACR
+    - task: GoTool@0
+      inputs:
+        version: '1.14.6'
+    - task: NodeTool@0
+    - script: |
+        git config --global user.email "sedp-ci@shell.com"
+        git config --global user.name "Azure Pipeline"
+        git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
+      displayName: Set git properties
+
+    # Build kubeform
+    - script: make build
+      displayName: Build kubeform binaries
+      workingDirectory: kubeform
+    - script: make gen
+      displayName: Run kubeform codegen
+      environment:
+        CRD_PATH: ../thomas-flux-get-started/releases/stratos-crds
+      workingDirectory: kubeform
+    - script: |
+        git add -A
+        git commit -m "[skip ci] Update Terraform modules"
+        git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
+      displayName: Commit & push results to kubeform
+      workingDirectory: kubeform
+
+    # Build kfc binary
+    - script: git rev-parse HEAD > ../kubeform-sha
+      displayName: Store kubeform revision for kfc to use
+      workingDirectory: kubeform
+    - script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
+      displayName: Point kfc to the right revision of kubeform
+      workingDirectory: kfc
+    - script: go mod tidy && go mod vendor
+      displayName: Update vendored version of kubeform in kfc
+      workingDirectory: kfc
+    - script: |
+        git add -A
+        git commit -m "[skip ci] Update Terraform modules"
+        git push -f origin HEAD:${BUILD_SOURCEBRANCH}
+      displayName: Commit & push changes to kfc
+      workingDirectory: kfc
+
+    # Build kfc container
+    - script: make build
+      displayName: Build kfc binaries
+      workingDirectory: kfc
+    - script: make container
+      displayName: Build kfc containers
+      workingDirectory: kfc
+    - script: make push
+      displayName: Push kfc containers
+      workingDirectory: kfc
+    # DOCKER_TAG has to be written by make push to a file so that the next script can set it as a variable
+    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]somevalue"
+      displayName: Set DOCKER_TAG
+      name: setDockerTag
+      workingDirectory: kfc
+    - script: echo $(setDockerTag.DOCKER_TAG)
+      displayName: Echo DOCKER_TAG
+
+- stage: Staging
+  condition: succeeded()
+  # condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
+  dependsOn:
+  - Build
+  variables:
+  - ComponentsPath: components/staging/AKS-Test
+  - DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+  jobs:
+  - deployment: Deploy
+    environment: staging
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: Checkout kubeform
+          - checkout: stratos
+            displayName: Checkout stratos
+            persistCredentials: true
+          - script: git checkout feature/tn-installing-aks-test
+            displayName: Checkout stratos branch
+            workingDirectory: stratos-core-bootstrap
+
+          # Update crd-conversion config
+          - script: npm install js-yaml
+            displayName: Install node packages
+            workingDirectory: kubeform/util
+          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+            displayName: Update schemas in ConfigMap
+            workingDirectory: kubeform
+          - script: |
+              git pull
+              git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
+              git commit -m "[kubeform] Update crd-conversion config"
+              git push
+            displayName: Push updates to crd-conversion config
+            workingDirectory: stratos-core-bootstrap
+
+          # Update stratos-crds
+          - script: for crd in stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml; do sed -i '' -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+            displayName: Patch CRDs with conversion config
+          - script: |
+              git pull
+              git add $(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
+              git commit -m "[kubeform] Update Stratos CRDs"
+              git push
+            displayName: Push updates to Stratos CRDs
+            workingDirectory: stratos-core-bootstrap
+
+- stage: Production
+  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
+  dependsOn:
+  - Build
+  - Staging
+  variables:
+  - DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+  - NpdComponentsPath: components/npd/f4dpnpd
+  - PrdComponentsPath: components/prd/f4dpprd
+  - StratosCrdsPaths: components/base/stratos-crds/modules.kubeform.com_*.yaml
+  jobs:
+  - deployment: Deploy
+    environment: prd
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: Checkout kubeform
+          - checkout: stratos
+            displayName: Checkout stratos
+            persistCredentials: true
+          - script: git checkout master
+            displayName: Checkout stratos branch
+            workingDirectory: stratos-core-bootstrap
+
+          # Update crd-conversion config
+          - script: npm install js-yaml
+            displayName: Install node packages
+            workingDirectory: kubeform/util
+          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+            displayName: Update schemas in Npd ConfigMap
+            workingDirectory: kubeform
+          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+            displayName: Update schemas in Prd ConfigMap
+            workingDirectory: kubeform
+          - script: |
+              git pull
+              git add $(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+              git add $(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+              git commit -m "[kubeform] Update crd-conversion config in NPD/PRD"
+              git push
+            displayName: Push updates to crd-conversion config
+            workingDirectory: stratos-core-bootstrap
+
+          # Update kubeform deployment
+          - script: |
+              sed -i.bak -e 's/^\(.*image: .*\):.*/\1:'$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-dp.yaml
+              sed -i.bak -e 's/^\(.*image: .*\):.*/\1:'$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-dp.yaml
+            displayName: Update deployment manifest
+            workingDirectory: stratos-core-bootstrap
+
+          # Update stratos-crds
+          - script: for crd in stratos-core-bootstrap/$(StratosCrdsPaths); do sed -i '' -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+            displayName: Patch CRDs with conversion config
+          - script: |
+              git pull
+              git add $(StratosCrdsPaths)
+              git commit -m "[kubeform] Update Stratos CRDs in NPD/PRD"
+              git push
+            displayName: Push updates to Stratos CRDs
+            workingDirectory: stratos-core-bootstrap

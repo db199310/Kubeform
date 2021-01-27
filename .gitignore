@@ -32,5 +32,6 @@ _testmain.go
 /.go
 
 /node_modules
+/util/node_modules
 package.json
 package-lock.json
