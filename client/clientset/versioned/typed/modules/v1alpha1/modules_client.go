@@ -37,6 +37,8 @@ type ModulesV1alpha1Interface interface {
 	SDPAzSqlv1sGetter
 	SDPAzStgv1sGetter
 	SDPAzadfv1sGetter
+	SDPAzappserviceplanv1sGetter
+	SDPAzplatformeventsv1sGetter
 	SDPAzsbv1sGetter
 	StratosAzStgv1sGetter
 }
@@ -84,6 +86,14 @@ func (c *ModulesV1alpha1Client) SDPAzStgv1s(namespace string) SDPAzStgv1Interfac
 
 func (c *ModulesV1alpha1Client) SDPAzadfv1s(namespace string) SDPAzadfv1Interface {
 	return newSDPAzadfv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzappserviceplanv1s(namespace string) SDPAzappserviceplanv1Interface {
+	return newSDPAzappserviceplanv1s(c, namespace)
+}
+
+func (c *ModulesV1alpha1Client) SDPAzplatformeventsv1s(namespace string) SDPAzplatformeventsv1Interface {
+	return newSDPAzplatformeventsv1s(c, namespace)
 }
 
 func (c *ModulesV1alpha1Client) SDPAzsbv1s(namespace string) SDPAzsbv1Interface {
