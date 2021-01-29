@@ -89,6 +89,9 @@ spec:
             existingAspResourceGroupName:
               description: Existing App Service plan resource Group
               type: string
+            host:
+              description: Hostname with the stratos.shell/stratos.shell.com suffix
+              type: string
             instance:
               description: Instance number
               type: string
@@ -197,7 +200,7 @@ spec:
               description: Windows Docker container image
               type: string
             workStream:
-              description: ' 4 character project stream name/code'
+              description: ' 3 character workstream name/code'
               type: string
           required:
           - environment
