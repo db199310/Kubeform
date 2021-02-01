@@ -179,7 +179,7 @@ stages:
   condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
   dependsOn:
   - Build
-  - Staging
+  - DeployStaging
   variables:
     DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
     NpdComponentsPath: components/npd/f4dpnpd
