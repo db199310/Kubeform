@@ -73,7 +73,7 @@ func (in *ThomasStorageAccountBlobs) DeepCopy() *ThomasStorageAccountBlobs {
 func (in *ThomasStorageAccountList) DeepCopyInto(out *ThomasStorageAccountList) {
 	*out = *in
 	out.TypeMeta = in.TypeMeta
-	out.ListMeta = in.ListMeta
+	in.ListMeta.DeepCopyInto(&out.ListMeta)
 	if in.Items != nil {
 		in, out := &in.Items, &out.Items
 		*out = make([]ThomasStorageAccount, len(*in))
@@ -200,6 +200,11 @@ func (in *ThomasStorageAccountStatus) DeepCopyInto(out *ThomasStorageAccountStat
 		in, out := &in.Output, &out.Output
 		*out = new(ThomasStorageAccountOutput)
 		**out = **in
+	}
+	if in.TerraformErrors != nil {
+		in, out := &in.TerraformErrors, &out.TerraformErrors
+		*out = make([]string, len(*in))
+		copy(*out, *in)
 	}
 	return
 }

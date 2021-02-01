@@ -31,6 +31,7 @@ import (
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="Phase",type=string,JSONPath=`.status.phase`
+// +kubebuilder:storageversion
 
 type RecoveryServicesProtectionPolicyVm struct {
 	metav1.TypeMeta   `json:",inline,omitempty"`
@@ -105,8 +106,9 @@ type RecoveryServicesProtectionPolicyVmStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase           base.Phase `json:"phase,omitempty"`
-	TerraformErrors []string   `json:"terraformErrors,omitempty"`
+	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

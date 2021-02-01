@@ -29,6 +29,8 @@ import (
 	fakeazurermv1alpha1 "kubeform.dev/kubeform/client/clientset/versioned/typed/azurerm/v1alpha1/fake"
 	modulesv1alpha1 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha1"
 	fakemodulesv1alpha1 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha1/fake"
+	modulesv1alpha2 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha2"
+	fakemodulesv1alpha2 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha2/fake"
 )
 
 // NewSimpleClientset returns a clientset that will respond with the provided objects.
@@ -81,6 +83,11 @@ var _ clientset.Interface = &Clientset{}
 // AzurermV1alpha1 retrieves the AzurermV1alpha1Client
 func (c *Clientset) AzurermV1alpha1() azurermv1alpha1.AzurermV1alpha1Interface {
 	return &fakeazurermv1alpha1.FakeAzurermV1alpha1{Fake: &c.Fake}
+}
+
+// ModulesV1alpha2 retrieves the ModulesV1alpha2Client
+func (c *Clientset) ModulesV1alpha2() modulesv1alpha2.ModulesV1alpha2Interface {
+	return &fakemodulesv1alpha2.FakeModulesV1alpha2{Fake: &c.Fake}
 }
 
 // ModulesV1alpha1 retrieves the ModulesV1alpha1Client

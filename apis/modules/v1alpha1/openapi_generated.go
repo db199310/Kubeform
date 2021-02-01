@@ -336,6 +336,13 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares":          schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Shares(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Spec":            schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref),
 		"kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Status":          schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Status(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccount":          schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccount(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountBlobs":     schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountBlobs(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountList":      schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountList(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountOutput":    schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountOutput(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountShares":    schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountShares(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountSpec":      schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountSpec(ref),
+		"kubeform.dev/kubeform/apis/modules/v1alpha1.ThomasStorageAccountStatus":    schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountStatus(ref),
 	}
 }
 
@@ -16418,14 +16425,14 @@ func schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccount(ref common.Refer
 				Properties: map[string]spec.Schema{
 					"kind": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"apiVersion": {
 						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16486,14 +16493,14 @@ func schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountList(ref common.R
 				Properties: map[string]spec.Schema{
 					"kind": {
 						SchemaProps: spec.SchemaProps{
-							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
 							Type:        []string{"string"},
 							Format:      "",
 						},
 					},
 					"apiVersion": {
 						SchemaProps: spec.SchemaProps{
-							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources",
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -16826,6 +16833,19 @@ func schema_kubeform_apis_modules_v1alpha1_ThomasStorageAccountStatus(ref common
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
+						},
+					},
+					"terraformErrors": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},

@@ -19,17 +19,17 @@ limitations under the License.
 package v1alpha2
 
 import (
+	"context"
 	time "time"
-
-	modulesv1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
-	versioned "kubeform.dev/kubeform/client/clientset/versioned"
-	internalinterfaces "kubeform.dev/kubeform/client/informers/externalversions/internalinterfaces"
-	v1alpha2 "kubeform.dev/kubeform/client/listers/modules/v1alpha2"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
+	modulesv1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
+	versioned "kubeform.dev/kubeform/client/clientset/versioned"
+	internalinterfaces "kubeform.dev/kubeform/client/informers/externalversions/internalinterfaces"
+	v1alpha2 "kubeform.dev/kubeform/client/listers/modules/v1alpha2"
 )
 
 // ThomasStorageAccountInformer provides access to a shared informer and lister for
@@ -62,13 +62,13 @@ func NewFilteredThomasStorageAccountInformer(client versioned.Interface, namespa
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ModulesV1alpha2().ThomasStorageAccounts(namespace).List(options)
+				return client.ModulesV1alpha2().ThomasStorageAccounts(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ModulesV1alpha2().ThomasStorageAccounts(namespace).Watch(options)
+				return client.ModulesV1alpha2().ThomasStorageAccounts(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&modulesv1alpha2.ThomasStorageAccount{},

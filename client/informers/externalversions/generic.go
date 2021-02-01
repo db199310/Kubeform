@@ -25,6 +25,7 @@ import (
 	cache "k8s.io/client-go/tools/cache"
 	v1alpha1 "kubeform.dev/kubeform/apis/azurerm/v1alpha1"
 	modulesv1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
+	v1alpha2 "kubeform.dev/kubeform/apis/modules/v1alpha2"
 )
 
 // GenericInformer is type of SharedIndexInformer which will locate and delegate to other
