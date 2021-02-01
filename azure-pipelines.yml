@@ -68,25 +68,16 @@ stages:
       displayName: Set git properties
 
     # Build kubeform
-    # - script: make gen
-    #   # Moving "make gen" before "make build" breaks the build sequence.
-    #   # Manifests generated in "make gen" will not be built by kubeform
-    #   # binaries corresponding to the committed code.
-    #   # The intent behind moving "make gen" before "make build" was to
-    #   # satisfy module requirements if any gets added to the module templates.
-    #   # For such a change two build runs need to be executed.
-    #   displayName: Run kubeform codegen
-    #   workingDirectory: kubeform
-    # - script: go mod tidy && go mod vendor
-    #   displayName: Update vendored packages in kubeform
-    #   workingDirectory: kubeform
-    - script: make build
-      displayName: Build kubeform binaries
-      workingDirectory: kubeform
     - script: make gen
       displayName: Run kubeform codegen
       env:
         CRD_PATH: crds
+      workingDirectory: kubeform
+    - script: go mod tidy && go mod vendor
+      displayName: Update vendored packages in kubeform
+      workingDirectory: kubeform
+    - script: make build
+      displayName: Build kubeform binaries
       workingDirectory: kubeform
     - script: |
         git add -A
