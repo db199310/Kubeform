@@ -65,13 +65,6 @@ type ServiceFabricClusterSpecCertificateCommonNames struct {
 	X509StoreName string                                                      `json:"x509StoreName" tf:"x509_store_name"`
 }
 
-type ServiceFabricClusterSpecClientCertificateCommonName struct {
-	CommonName string `json:"commonName" tf:"common_name"`
-	IsAdmin    bool   `json:"isAdmin" tf:"is_admin"`
-	// +optional
-	IssuerThumbprint string `json:"issuerThumbprint,omitempty" tf:"issuer_thumbprint,omitempty"`
-}
-
 type ServiceFabricClusterSpecClientCertificateThumbprint struct {
 	IsAdmin    bool   `json:"isAdmin" tf:"is_admin"`
 	Thumbprint string `json:"thumbprint" tf:"thumbprint"`
@@ -147,8 +140,6 @@ type ServiceFabricClusterSpec struct {
 	// +kubebuilder:validation:MaxItems=1
 	CertificateCommonNames []ServiceFabricClusterSpecCertificateCommonNames `json:"certificateCommonNames,omitempty" tf:"certificate_common_names,omitempty"`
 	// +optional
-	ClientCertificateCommonName []ServiceFabricClusterSpecClientCertificateCommonName `json:"clientCertificateCommonName,omitempty" tf:"client_certificate_common_name,omitempty"`
-	// +optional
 	// +kubebuilder:validation:MaxItems=2
 	ClientCertificateThumbprint []ServiceFabricClusterSpecClientCertificateThumbprint `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
 	// +optional
@@ -184,7 +175,8 @@ type ServiceFabricClusterStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

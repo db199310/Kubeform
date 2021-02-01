@@ -39,8 +39,7 @@ func NewRestorableDroppedManagedDatabasesClient(subscriptionID string) Restorabl
 }
 
 // NewRestorableDroppedManagedDatabasesClientWithBaseURI creates an instance of the
-// RestorableDroppedManagedDatabasesClient client using a custom endpoint.  Use this when interacting with an Azure
-// cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// RestorableDroppedManagedDatabasesClient client.
 func NewRestorableDroppedManagedDatabasesClientWithBaseURI(baseURI string, subscriptionID string) RestorableDroppedManagedDatabasesClient {
 	return RestorableDroppedManagedDatabasesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -107,7 +106,8 @@ func (client RestorableDroppedManagedDatabasesClient) GetPreparer(ctx context.Co
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client RestorableDroppedManagedDatabasesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -185,7 +185,8 @@ func (client RestorableDroppedManagedDatabasesClient) ListByInstancePreparer(ctx
 // ListByInstanceSender sends the ListByInstance request. The method will close the
 // http.Response Body if it receives an error.
 func (client RestorableDroppedManagedDatabasesClient) ListByInstanceSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByInstanceResponder handles the response to the ListByInstance request. The method always

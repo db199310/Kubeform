@@ -156,9 +156,9 @@ type FunctionAppSpecSiteConfig struct {
 	// +optional
 	MinTLSVersion string `json:"minTLSVersion,omitempty" tf:"min_tls_version,omitempty"`
 	// +optional
-	PreWarmedInstanceCount int64 `json:"preWarmedInstanceCount,omitempty" tf:"pre_warmed_instance_count,omitempty"`
-	// +optional
 	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
+	// +optional
+	VirtualNetworkName string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 	// +optional
 	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 }
@@ -188,8 +188,6 @@ type FunctionAppSpec struct {
 	// +optional
 	ConnectionString []FunctionAppSpecConnectionString `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 	// +optional
-	DailyMemoryTimeQuota int64 `json:"dailyMemoryTimeQuota,omitempty" tf:"daily_memory_time_quota,omitempty"`
-	// +optional
 	DefaultHostname string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
 	// +optional
 	EnableBuiltinLogging bool `json:"enableBuiltinLogging,omitempty" tf:"enable_builtin_logging,omitempty"`
@@ -205,8 +203,6 @@ type FunctionAppSpec struct {
 	Location string `json:"location" tf:"location"`
 	Name     string `json:"name" tf:"name"`
 	// +optional
-	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
-	// +optional
 	OutboundIPAddresses string `json:"outboundIPAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
 	// +optional
 	PossibleOutboundIPAddresses string `json:"possibleOutboundIPAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
@@ -215,13 +211,8 @@ type FunctionAppSpec struct {
 	// +kubebuilder:validation:MaxItems=1
 	SiteConfig []FunctionAppSpecSiteConfig `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 	// +optional
-	SiteCredential []FunctionAppSpecSiteCredential `json:"siteCredential,omitempty" tf:"site_credential,omitempty"`
-	// +optional
-	StorageAccountAccessKey string `json:"-" sensitive:"true" tf:"storage_account_access_key,omitempty"`
-	// +optional
-	StorageAccountName string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
-	// +optional
-	StorageConnectionString string `json:"-" sensitive:"true" tf:"storage_connection_string,omitempty"`
+	SiteCredential          []FunctionAppSpecSiteCredential `json:"siteCredential,omitempty" tf:"site_credential,omitempty"`
+	StorageConnectionString string                          `json:"-" sensitive:"true" tf:"storage_connection_string"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	// +optional
@@ -237,7 +228,8 @@ type FunctionAppStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -40,6 +40,11 @@ type CognitiveAccount struct {
 	Status            CognitiveAccountStatus `json:"status,omitempty"`
 }
 
+type CognitiveAccountSpecSku struct {
+	Name string `json:"name" tf:"name"`
+	Tier string `json:"tier" tf:"tier"`
+}
+
 type CognitiveAccountSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -53,13 +58,16 @@ type CognitiveAccountSpec struct {
 	Location string `json:"location" tf:"location"`
 	Name     string `json:"name" tf:"name"`
 	// +optional
-	PrimaryAccessKey string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
-	// +optional
-	QnaRuntimeEndpoint string `json:"qnaRuntimeEndpoint,omitempty" tf:"qna_runtime_endpoint,omitempty"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	PrimaryAccessKey  string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
-	SkuName            string `json:"skuName" tf:"sku_name"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []CognitiveAccountSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +optional
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -73,7 +81,8 @@ type CognitiveAccountStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

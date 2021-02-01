@@ -5,7 +5,10 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
 )
+
+// TODO: tests for this
 
 // ForCreate returns the context wrapped with the timeout for an Create operation
 //
@@ -52,5 +55,12 @@ func ForUpdate(ctx context.Context, d *schema.ResourceData) (context.Context, co
 }
 
 func buildWithTimeout(ctx context.Context, timeout time.Duration) (context.Context, context.CancelFunc) {
-	return context.WithTimeout(ctx, timeout)
+	if features.SupportsCustomTimeouts() {
+		return context.WithTimeout(ctx, timeout)
+	}
+
+	nullFunc := func() {
+		// do nothing on cancel since timeouts aren't enabled
+	}
+	return ctx, nullFunc
 }

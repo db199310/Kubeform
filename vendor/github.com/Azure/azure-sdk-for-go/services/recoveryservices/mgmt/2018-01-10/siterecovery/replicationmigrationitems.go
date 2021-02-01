@@ -36,9 +36,7 @@ func NewReplicationMigrationItemsClient(subscriptionID string, resourceGroupName
 	return NewReplicationMigrationItemsClientWithBaseURI(DefaultBaseURI, subscriptionID, resourceGroupName, resourceName)
 }
 
-// NewReplicationMigrationItemsClientWithBaseURI creates an instance of the ReplicationMigrationItemsClient client
-// using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewReplicationMigrationItemsClientWithBaseURI creates an instance of the ReplicationMigrationItemsClient client.
 func NewReplicationMigrationItemsClientWithBaseURI(baseURI string, subscriptionID string, resourceGroupName string, resourceName string) ReplicationMigrationItemsClient {
 	return ReplicationMigrationItemsClient{NewWithBaseURI(baseURI, subscriptionID, resourceGroupName, resourceName)}
 }
@@ -113,8 +111,9 @@ func (client ReplicationMigrationItemsClient) CreatePreparer(ctx context.Context
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) CreateSender(req *http.Request) (future ReplicationMigrationItemsCreateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -197,8 +196,9 @@ func (client ReplicationMigrationItemsClient) DeletePreparer(ctx context.Context
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) DeleteSender(req *http.Request) (future ReplicationMigrationItemsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -282,7 +282,8 @@ func (client ReplicationMigrationItemsClient) GetPreparer(ctx context.Context, f
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -365,7 +366,8 @@ func (client ReplicationMigrationItemsClient) ListPreparer(ctx context.Context, 
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -481,7 +483,8 @@ func (client ReplicationMigrationItemsClient) ListByReplicationProtectionContain
 // ListByReplicationProtectionContainersSender sends the ListByReplicationProtectionContainers request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) ListByReplicationProtectionContainersSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByReplicationProtectionContainersResponder handles the response to the ListByReplicationProtectionContainers request. The method always
@@ -602,8 +605,9 @@ func (client ReplicationMigrationItemsClient) MigratePreparer(ctx context.Contex
 // MigrateSender sends the Migrate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) MigrateSender(req *http.Request) (future ReplicationMigrationItemsMigrateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -614,96 +618,6 @@ func (client ReplicationMigrationItemsClient) MigrateSender(req *http.Request) (
 // MigrateResponder handles the response to the Migrate request. The method always
 // closes the http.Response Body.
 func (client ReplicationMigrationItemsClient) MigrateResponder(resp *http.Response) (result MigrationItem, err error) {
-	err = autorest.Respond(
-		resp,
-		client.ByInspecting(),
-		azure.WithErrorUnlessStatusCode(http.StatusOK, http.StatusAccepted),
-		autorest.ByUnmarshallingJSON(&result),
-		autorest.ByClosing())
-	result.Response = autorest.Response{Response: resp}
-	return
-}
-
-// Resync the operation to resynchronize replication of an ASR migration item.
-// Parameters:
-// fabricName - fabric name.
-// protectionContainerName - protection container name.
-// migrationItemName - migration item name.
-// input - resync input.
-func (client ReplicationMigrationItemsClient) Resync(ctx context.Context, fabricName string, protectionContainerName string, migrationItemName string, input ResyncInput) (result ReplicationMigrationItemsResyncFuture, err error) {
-	if tracing.IsEnabled() {
-		ctx = tracing.StartSpan(ctx, fqdn+"/ReplicationMigrationItemsClient.Resync")
-		defer func() {
-			sc := -1
-			if result.Response() != nil {
-				sc = result.Response().StatusCode
-			}
-			tracing.EndSpan(ctx, sc, err)
-		}()
-	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: input,
-			Constraints: []validation.Constraint{{Target: "input.Properties", Name: validation.Null, Rule: true,
-				Chain: []validation.Constraint{{Target: "input.Properties.ProviderSpecificDetails", Name: validation.Null, Rule: true, Chain: nil}}}}}}); err != nil {
-		return result, validation.NewError("siterecovery.ReplicationMigrationItemsClient", "Resync", err.Error())
-	}
-
-	req, err := client.ResyncPreparer(ctx, fabricName, protectionContainerName, migrationItemName, input)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "siterecovery.ReplicationMigrationItemsClient", "Resync", nil, "Failure preparing request")
-		return
-	}
-
-	result, err = client.ResyncSender(req)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "siterecovery.ReplicationMigrationItemsClient", "Resync", result.Response(), "Failure sending request")
-		return
-	}
-
-	return
-}
-
-// ResyncPreparer prepares the Resync request.
-func (client ReplicationMigrationItemsClient) ResyncPreparer(ctx context.Context, fabricName string, protectionContainerName string, migrationItemName string, input ResyncInput) (*http.Request, error) {
-	pathParameters := map[string]interface{}{
-		"fabricName":              autorest.Encode("path", fabricName),
-		"migrationItemName":       autorest.Encode("path", migrationItemName),
-		"protectionContainerName": autorest.Encode("path", protectionContainerName),
-		"resourceGroupName":       autorest.Encode("path", client.ResourceGroupName),
-		"resourceName":            autorest.Encode("path", client.ResourceName),
-		"subscriptionId":          autorest.Encode("path", client.SubscriptionID),
-	}
-
-	const APIVersion = "2018-01-10"
-	queryParameters := map[string]interface{}{
-		"api-version": APIVersion,
-	}
-
-	preparer := autorest.CreatePreparer(
-		autorest.AsContentType("application/json; charset=utf-8"),
-		autorest.AsPost(),
-		autorest.WithBaseURL(client.BaseURI),
-		autorest.WithPathParameters("/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/resync", pathParameters),
-		autorest.WithJSON(input),
-		autorest.WithQueryParameters(queryParameters))
-	return preparer.Prepare((&http.Request{}).WithContext(ctx))
-}
-
-// ResyncSender sends the Resync request. The method will close the
-// http.Response Body if it receives an error.
-func (client ReplicationMigrationItemsClient) ResyncSender(req *http.Request) (future ReplicationMigrationItemsResyncFuture, err error) {
-	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
-	if err != nil {
-		return
-	}
-	future.Future, err = azure.NewFutureFromResponse(resp)
-	return
-}
-
-// ResyncResponder handles the response to the Resync request. The method always
-// closes the http.Response Body.
-func (client ReplicationMigrationItemsClient) ResyncResponder(resp *http.Response) (result MigrationItem, err error) {
 	err = autorest.Respond(
 		resp,
 		client.ByInspecting(),
@@ -782,8 +696,9 @@ func (client ReplicationMigrationItemsClient) TestMigratePreparer(ctx context.Co
 // TestMigrateSender sends the TestMigrate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) TestMigrateSender(req *http.Request) (future ReplicationMigrationItemsTestMigrateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -823,10 +738,7 @@ func (client ReplicationMigrationItemsClient) TestMigrateCleanup(ctx context.Con
 	}
 	if err := validation.Validate([]validation.Validation{
 		{TargetValue: testMigrateCleanupInput,
-			Constraints: []validation.Constraint{{Target: "testMigrateCleanupInput.Properties", Name: validation.Null, Rule: true,
-				Chain: []validation.Constraint{{Target: "testMigrateCleanupInput.Properties.Comments", Name: validation.Null, Rule: false,
-					Chain: []validation.Constraint{{Target: "testMigrateCleanupInput.Properties.Comments", Name: validation.MaxLength, Rule: 1024, Chain: nil}}},
-				}}}}}); err != nil {
+			Constraints: []validation.Constraint{{Target: "testMigrateCleanupInput.Properties", Name: validation.Null, Rule: true, Chain: nil}}}}); err != nil {
 		return result, validation.NewError("siterecovery.ReplicationMigrationItemsClient", "TestMigrateCleanup", err.Error())
 	}
 
@@ -874,8 +786,9 @@ func (client ReplicationMigrationItemsClient) TestMigrateCleanupPreparer(ctx con
 // TestMigrateCleanupSender sends the TestMigrateCleanup request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) TestMigrateCleanupSender(req *http.Request) (future ReplicationMigrationItemsTestMigrateCleanupFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -957,8 +870,9 @@ func (client ReplicationMigrationItemsClient) UpdatePreparer(ctx context.Context
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ReplicationMigrationItemsClient) UpdateSender(req *http.Request) (future ReplicationMigrationItemsUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

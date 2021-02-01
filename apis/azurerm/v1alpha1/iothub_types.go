@@ -111,6 +111,9 @@ type IothubSpecSharedAccessPolicy struct {
 type IothubSpecSku struct {
 	Capacity int64  `json:"capacity" tf:"capacity"`
 	Name     string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	Tier string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type IothubSpec struct {
@@ -168,7 +171,8 @@ type IothubStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

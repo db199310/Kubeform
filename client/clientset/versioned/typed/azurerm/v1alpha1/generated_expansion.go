@@ -60,8 +60,6 @@ type ApiManagementIdentityProviderTwitterExpansion interface{}
 
 type ApiManagementLoggerExpansion interface{}
 
-type ApiManagementNamedValueExpansion interface{}
-
 type ApiManagementOpenidConnectProviderExpansion interface{}
 
 type ApiManagementProductExpansion interface{}
@@ -89,10 +87,6 @@ type AppServiceCertificateExpansion interface{}
 type AppServiceCertificateOrderExpansion interface{}
 
 type AppServiceCustomHostnameBindingExpansion interface{}
-
-type AppServiceEnvironmentExpansion interface{}
-
-type AppServiceHybridConnectionExpansion interface{}
 
 type AppServicePlanExpansion interface{}
 
@@ -140,7 +134,15 @@ type AutomationVariableIntExpansion interface{}
 
 type AutomationVariableStringExpansion interface{}
 
+type AutoscaleSettingExpansion interface{}
+
 type AvailabilitySetExpansion interface{}
+
+type AzureadApplicationExpansion interface{}
+
+type AzureadServicePrincipalExpansion interface{}
+
+type AzureadServicePrincipalPasswordExpansion interface{}
 
 type BackupContainerStorageAccountExpansion interface{}
 
@@ -162,10 +164,6 @@ type BatchCertificateExpansion interface{}
 
 type BatchPoolExpansion interface{}
 
-type BlueprintAssignmentExpansion interface{}
-
-type BotChannelDirectlineExpansion interface{}
-
 type BotChannelEmailExpansion interface{}
 
 type BotChannelMsTeamsExpansion interface{}
@@ -184,11 +182,15 @@ type CdnProfileExpansion interface{}
 
 type CognitiveAccountExpansion interface{}
 
+type ConnectionMonitorExpansion interface{}
+
 type ContainerGroupExpansion interface{}
 
 type ContainerRegistryExpansion interface{}
 
 type ContainerRegistryWebhookExpansion interface{}
+
+type ContainerServiceExpansion interface{}
 
 type CosmosdbAccountExpansion interface{}
 
@@ -208,10 +210,6 @@ type CosmosdbSQLDatabaseExpansion interface{}
 
 type CosmosdbTableExpansion interface{}
 
-type CostManagementExportResourceGroupExpansion interface{}
-
-type CustomProviderExpansion interface{}
-
 type DashboardExpansion interface{}
 
 type DataFactoryExpansion interface{}
@@ -225,8 +223,6 @@ type DataFactoryDatasetSQLServerTableExpansion interface{}
 type DataFactoryIntegrationRuntimeManagedExpansion interface{}
 
 type DataFactoryLinkedServiceDataLakeStorageGen2Expansion interface{}
-
-type DataFactoryLinkedServiceKeyVaultExpansion interface{}
 
 type DataFactoryLinkedServiceMysqlExpansion interface{}
 
@@ -248,21 +244,13 @@ type DataLakeStoreFileExpansion interface{}
 
 type DataLakeStoreFirewallRuleExpansion interface{}
 
-type DataShareExpansion interface{}
-
-type DataShareAccountExpansion interface{}
-
-type DatabaseMigrationProjectExpansion interface{}
-
-type DatabaseMigrationServiceExpansion interface{}
-
 type DatabricksWorkspaceExpansion interface{}
+
+type DdosProtectionPlanExpansion interface{}
 
 type DedicatedHostExpansion interface{}
 
 type DedicatedHostGroupExpansion interface{}
-
-type DevTestGlobalVmShutdownScheduleExpansion interface{}
 
 type DevTestLabExpansion interface{}
 
@@ -302,8 +290,6 @@ type DnsZoneExpansion interface{}
 
 type EventgridDomainExpansion interface{}
 
-type EventgridDomainTopicExpansion interface{}
-
 type EventgridEventSubscriptionExpansion interface{}
 
 type EventgridTopicExpansion interface{}
@@ -326,8 +312,6 @@ type ExpressRouteCircuitAuthorizationExpansion interface{}
 
 type ExpressRouteCircuitPeeringExpansion interface{}
 
-type ExpressRouteGatewayExpansion interface{}
-
 type FirewallExpansion interface{}
 
 type FirewallApplicationRuleCollectionExpansion interface{}
@@ -341,8 +325,6 @@ type FrontdoorExpansion interface{}
 type FrontdoorFirewallPolicyExpansion interface{}
 
 type FunctionAppExpansion interface{}
-
-type FunctionAppSlotExpansion interface{}
 
 type HdinsightHadoopClusterExpansion interface{}
 
@@ -362,21 +344,11 @@ type HdinsightStormClusterExpansion interface{}
 
 type HealthcareServiceExpansion interface{}
 
-type HpcCacheExpansion interface{}
-
-type HpcCacheBlobTargetExpansion interface{}
-
-type HpcCacheNfsTargetExpansion interface{}
-
 type ImageExpansion interface{}
 
-type IotTimeSeriesInsightsAccessPolicyExpansion interface{}
+type IotDpsExpansion interface{}
 
-type IotTimeSeriesInsightsReferenceDataSetExpansion interface{}
-
-type IotTimeSeriesInsightsStandardEnvironmentExpansion interface{}
-
-type IotcentralApplicationExpansion interface{}
+type IotDpsCertificateExpansion interface{}
 
 type IothubExpansion interface{}
 
@@ -438,15 +410,7 @@ type LbProbeExpansion interface{}
 
 type LbRuleExpansion interface{}
 
-type LinuxVirtualMachineExpansion interface{}
-
-type LinuxVirtualMachineScaleSetExpansion interface{}
-
 type LocalNetworkGatewayExpansion interface{}
-
-type LogAnalyticsDatasourceWindowsEventExpansion interface{}
-
-type LogAnalyticsDatasourceWindowsPerformanceCounterExpansion interface{}
 
 type LogAnalyticsLinkedServiceExpansion interface{}
 
@@ -454,11 +418,11 @@ type LogAnalyticsSolutionExpansion interface{}
 
 type LogAnalyticsWorkspaceExpansion interface{}
 
+type LogAnalyticsWorkspaceLinkedServiceExpansion interface{}
+
 type LogicAppActionCustomExpansion interface{}
 
 type LogicAppActionHTTPExpansion interface{}
-
-type LogicAppIntegrationAccountExpansion interface{}
 
 type LogicAppTriggerCustomExpansion interface{}
 
@@ -467,14 +431,6 @@ type LogicAppTriggerHTTPRequestExpansion interface{}
 type LogicAppTriggerRecurrenceExpansion interface{}
 
 type LogicAppWorkflowExpansion interface{}
-
-type MachineLearningWorkspaceExpansion interface{}
-
-type MaintenanceConfigurationExpansion interface{}
-
-type ManagedApplicationExpansion interface{}
-
-type ManagedApplicationDefinitionExpansion interface{}
 
 type ManagedDiskExpansion interface{}
 
@@ -498,11 +454,9 @@ type MarketplaceAgreementExpansion interface{}
 
 type MediaServicesAccountExpansion interface{}
 
+type MetricAlertruleExpansion interface{}
+
 type MonitorActionGroupExpansion interface{}
-
-type MonitorActionRuleActionGroupExpansion interface{}
-
-type MonitorActionRuleSuppressionExpansion interface{}
 
 type MonitorActivityLogAlertExpansion interface{}
 
@@ -514,23 +468,15 @@ type MonitorLogProfileExpansion interface{}
 
 type MonitorMetricAlertExpansion interface{}
 
-type MonitorScheduledQueryRulesAlertExpansion interface{}
-
-type MonitorScheduledQueryRulesLogExpansion interface{}
-
-type MssqlDatabaseExpansion interface{}
+type MonitorMetricAlertruleExpansion interface{}
 
 type MssqlDatabaseVulnerabilityAssessmentRuleBaselineExpansion interface{}
 
 type MssqlElasticpoolExpansion interface{}
 
-type MssqlServerExpansion interface{}
-
 type MssqlServerSecurityAlertPolicyExpansion interface{}
 
 type MssqlServerVulnerabilityAssessmentExpansion interface{}
-
-type MssqlVirtualMachineExpansion interface{}
 
 type MysqlConfigurationExpansion interface{}
 
@@ -543,8 +489,6 @@ type MysqlServerExpansion interface{}
 type MysqlVirtualNetworkRuleExpansion interface{}
 
 type NatGatewayExpansion interface{}
-
-type NatGatewayPublicIPAssociationExpansion interface{}
 
 type NetappAccountExpansion interface{}
 
@@ -568,8 +512,6 @@ type NetworkInterfaceBackendAddressPoolAssociationExpansion interface{}
 
 type NetworkInterfaceNATRuleAssociationExpansion interface{}
 
-type NetworkInterfaceSecurityGroupAssociationExpansion interface{}
-
 type NetworkPacketCaptureExpansion interface{}
 
 type NetworkProfileExpansion interface{}
@@ -588,8 +530,6 @@ type NotificationHubAuthorizationRuleExpansion interface{}
 
 type NotificationHubNamespace_Expansion interface{}
 
-type OrchestratedVirtualMachineScaleSetExpansion interface{}
-
 type PacketCaptureExpansion interface{}
 
 type PointToSiteVPNGatewayExpansion interface{}
@@ -597,8 +537,6 @@ type PointToSiteVPNGatewayExpansion interface{}
 type PolicyAssignmentExpansion interface{}
 
 type PolicyDefinitionExpansion interface{}
-
-type PolicyRemediationExpansion interface{}
 
 type PolicySetDefinitionExpansion interface{}
 
@@ -612,8 +550,6 @@ type PostgresqlServerExpansion interface{}
 
 type PostgresqlVirtualNetworkRuleExpansion interface{}
 
-type PowerbiEmbeddedExpansion interface{}
-
 type PrivateDNSARecordExpansion interface{}
 
 type PrivateDNSAaaaRecordExpansion interface{}
@@ -626,13 +562,13 @@ type PrivateDNSPtrRecordExpansion interface{}
 
 type PrivateDNSSrvRecordExpansion interface{}
 
-type PrivateDNSTxtRecordExpansion interface{}
-
 type PrivateDNSZoneExpansion interface{}
 
 type PrivateDNSZoneVirtualNetworkLinkExpansion interface{}
 
 type PrivateEndpointExpansion interface{}
+
+type PrivateLinkEndpointExpansion interface{}
 
 type PrivateLinkServiceExpansion interface{}
 
@@ -641,6 +577,22 @@ type ProximityPlacementGroupExpansion interface{}
 type PublicIPExpansion interface{}
 
 type PublicIPPrefixExpansion interface{}
+
+type RecoveryNetworkMappingExpansion interface{}
+
+type RecoveryReplicatedVmExpansion interface{}
+
+type RecoveryServicesFabricExpansion interface{}
+
+type RecoveryServicesProtectedVmExpansion interface{}
+
+type RecoveryServicesProtectionContainerExpansion interface{}
+
+type RecoveryServicesProtectionContainerMappingExpansion interface{}
+
+type RecoveryServicesProtectionPolicyVmExpansion interface{}
+
+type RecoveryServicesReplicationPolicyExpansion interface{}
 
 type RecoveryServicesVaultExpansion interface{}
 
@@ -662,6 +614,10 @@ type RouteExpansion interface{}
 
 type RouteTableExpansion interface{}
 
+type SchedulerJobExpansion interface{}
+
+type SchedulerJobCollectionExpansion interface{}
+
 type SearchServiceExpansion interface{}
 
 type SecurityCenterContactExpansion interface{}
@@ -670,17 +626,11 @@ type SecurityCenterSubscriptionPricingExpansion interface{}
 
 type SecurityCenterWorkspaceExpansion interface{}
 
-type SentinelAlertRuleMsSecurityIncidentExpansion interface{}
-
-type SentinelAlertRuleScheduledExpansion interface{}
-
 type ServiceFabricClusterExpansion interface{}
 
 type ServicebusNamespaceExpansion interface{}
 
 type ServicebusNamespaceAuthorizationRuleExpansion interface{}
-
-type ServicebusNamespaceNetworkRuleSetExpansion interface{}
 
 type ServicebusQueueExpansion interface{}
 
@@ -716,12 +666,6 @@ type SiteRecoveryReplicationPolicyExpansion interface{}
 
 type SnapshotExpansion interface{}
 
-type SpatialAnchorsAccountExpansion interface{}
-
-type SpringCloudAppExpansion interface{}
-
-type SpringCloudServiceExpansion interface{}
-
 type SqlActiveDirectoryAdministratorExpansion interface{}
 
 type SqlDatabaseExpansion interface{}
@@ -737,8 +681,6 @@ type SqlServerExpansion interface{}
 type SqlVirtualNetworkRuleExpansion interface{}
 
 type StorageAccountExpansion interface{}
-
-type StorageAccountCustomerManagedKeyExpansion interface{}
 
 type StorageAccountNetworkRulesExpansion interface{}
 
@@ -800,8 +742,6 @@ type UserAssignedIdentityExpansion interface{}
 
 type VirtualHubExpansion interface{}
 
-type VirtualHubConnectionExpansion interface{}
-
 type VirtualMachineExpansion interface{}
 
 type VirtualMachineDataDiskAttachmentExpansion interface{}
@@ -809,8 +749,6 @@ type VirtualMachineDataDiskAttachmentExpansion interface{}
 type VirtualMachineExtensionExpansion interface{}
 
 type VirtualMachineScaleSetExpansion interface{}
-
-type VirtualMachineScaleSetExtensionExpansion interface{}
 
 type VirtualNetworkExpansion interface{}
 
@@ -827,7 +765,3 @@ type VpnGatewayExpansion interface{}
 type VpnServerConfigurationExpansion interface{}
 
 type WebApplicationFirewallPolicyExpansion interface{}
-
-type WindowsVirtualMachineExpansion interface{}
-
-type WindowsVirtualMachineScaleSetExpansion interface{}

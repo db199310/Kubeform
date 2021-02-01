@@ -37,8 +37,7 @@ func NewDatabaseUsagesClient(subscriptionID string) DatabaseUsagesClient {
 	return NewDatabaseUsagesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDatabaseUsagesClientWithBaseURI creates an instance of the DatabaseUsagesClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewDatabaseUsagesClientWithBaseURI creates an instance of the DatabaseUsagesClient client.
 func NewDatabaseUsagesClientWithBaseURI(baseURI string, subscriptionID string) DatabaseUsagesClient {
 	return DatabaseUsagesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -106,7 +105,8 @@ func (client DatabaseUsagesClient) ListByDatabasePreparer(ctx context.Context, r
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DatabaseUsagesClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always

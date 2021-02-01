@@ -40,15 +40,23 @@ type DnsNsRecord struct {
 	Status            DnsNsRecordStatus `json:"status,omitempty"`
 }
 
+type DnsNsRecordSpecRecord struct {
+	Nsdname string `json:"nsdname" tf:"nsdname"`
+}
+
 type DnsNsRecordSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +optional
-	Fqdn              string   `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-	Name              string   `json:"name" tf:"name"`
-	Records           []string `json:"records" tf:"records"`
+	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Name string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	Record []DnsNsRecordSpecRecord `json:"record,omitempty" tf:"record,omitempty"`
+	// +optional
+	Records           []string `json:"records,omitempty" tf:"records,omitempty"`
 	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -65,7 +73,8 @@ type DnsNsRecordStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

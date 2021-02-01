@@ -40,15 +40,6 @@ type SqlDatabase struct {
 	Status            SqlDatabaseStatus `json:"status,omitempty"`
 }
 
-type SqlDatabaseSpecExtendedAuditingPolicy struct {
-	// +optional
-	RetentionInDays         int64  `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
-	StorageAccountAccessKey string `json:"-" sensitive:"true" tf:"storage_account_access_key"`
-	// +optional
-	StorageAccountAccessKeyIsSecondary bool   `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
-	StorageEndpoint                    string `json:"storageEndpoint" tf:"storage_endpoint"`
-}
-
 type SqlDatabaseSpecImport struct {
 	AdministratorLogin         string `json:"administratorLogin" tf:"administrator_login"`
 	AdministratorLoginPassword string `json:"-" sensitive:"true" tf:"administrator_login_password"`
@@ -102,16 +93,11 @@ type SqlDatabaseSpec struct {
 	Encryption string `json:"encryption,omitempty" tf:"encryption,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	ExtendedAuditingPolicy []SqlDatabaseSpecExtendedAuditingPolicy `json:"extendedAuditingPolicy,omitempty" tf:"extended_auditing_policy,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
 	Import   []SqlDatabaseSpecImport `json:"import,omitempty" tf:"import,omitempty"`
 	Location string                  `json:"location" tf:"location"`
 	// +optional
 	MaxSizeBytes string `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
-	// +optional
-	MaxSizeGb string `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
-	Name      string `json:"name" tf:"name"`
+	Name         string `json:"name" tf:"name"`
 	// +optional
 	ReadScale bool `json:"readScale,omitempty" tf:"read_scale,omitempty"`
 	// +optional
@@ -131,8 +117,6 @@ type SqlDatabaseSpec struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	ThreatDetectionPolicy []SqlDatabaseSpecThreatDetectionPolicy `json:"threatDetectionPolicy,omitempty" tf:"threat_detection_policy,omitempty"`
-	// +optional
-	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type SqlDatabaseStatus struct {
@@ -144,7 +128,8 @@ type SqlDatabaseStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

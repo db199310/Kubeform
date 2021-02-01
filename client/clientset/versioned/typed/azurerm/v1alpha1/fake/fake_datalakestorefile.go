@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var datalakestorefilesResource = schema.GroupVersionResource{Group: "azurerm.kub
 var datalakestorefilesKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "DataLakeStoreFile"}
 
 // Get takes name of the dataLakeStoreFile, and returns the corresponding dataLakeStoreFile object, and an error if there is any.
-func (c *FakeDataLakeStoreFiles) Get(name string, options v1.GetOptions) (result *v1alpha1.DataLakeStoreFile, err error) {
+func (c *FakeDataLakeStoreFiles) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.DataLakeStoreFile, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(datalakestorefilesResource, c.ns, name), &v1alpha1.DataLakeStoreFile{})
 
@@ -50,7 +52,7 @@ func (c *FakeDataLakeStoreFiles) Get(name string, options v1.GetOptions) (result
 }
 
 // List takes label and field selectors, and returns the list of DataLakeStoreFiles that match those selectors.
-func (c *FakeDataLakeStoreFiles) List(opts v1.ListOptions) (result *v1alpha1.DataLakeStoreFileList, err error) {
+func (c *FakeDataLakeStoreFiles) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.DataLakeStoreFileList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(datalakestorefilesResource, datalakestorefilesKind, c.ns, opts), &v1alpha1.DataLakeStoreFileList{})
 
@@ -72,14 +74,14 @@ func (c *FakeDataLakeStoreFiles) List(opts v1.ListOptions) (result *v1alpha1.Dat
 }
 
 // Watch returns a watch.Interface that watches the requested dataLakeStoreFiles.
-func (c *FakeDataLakeStoreFiles) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeDataLakeStoreFiles) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(datalakestorefilesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a dataLakeStoreFile and creates it.  Returns the server's representation of the dataLakeStoreFile, and an error, if there is any.
-func (c *FakeDataLakeStoreFiles) Create(dataLakeStoreFile *v1alpha1.DataLakeStoreFile) (result *v1alpha1.DataLakeStoreFile, err error) {
+func (c *FakeDataLakeStoreFiles) Create(ctx context.Context, dataLakeStoreFile *v1alpha1.DataLakeStoreFile, opts v1.CreateOptions) (result *v1alpha1.DataLakeStoreFile, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(datalakestorefilesResource, c.ns, dataLakeStoreFile), &v1alpha1.DataLakeStoreFile{})
 
@@ -90,7 +92,7 @@ func (c *FakeDataLakeStoreFiles) Create(dataLakeStoreFile *v1alpha1.DataLakeStor
 }
 
 // Update takes the representation of a dataLakeStoreFile and updates it. Returns the server's representation of the dataLakeStoreFile, and an error, if there is any.
-func (c *FakeDataLakeStoreFiles) Update(dataLakeStoreFile *v1alpha1.DataLakeStoreFile) (result *v1alpha1.DataLakeStoreFile, err error) {
+func (c *FakeDataLakeStoreFiles) Update(ctx context.Context, dataLakeStoreFile *v1alpha1.DataLakeStoreFile, opts v1.UpdateOptions) (result *v1alpha1.DataLakeStoreFile, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(datalakestorefilesResource, c.ns, dataLakeStoreFile), &v1alpha1.DataLakeStoreFile{})
 
@@ -102,7 +104,7 @@ func (c *FakeDataLakeStoreFiles) Update(dataLakeStoreFile *v1alpha1.DataLakeStor
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeDataLakeStoreFiles) UpdateStatus(dataLakeStoreFile *v1alpha1.DataLakeStoreFile) (*v1alpha1.DataLakeStoreFile, error) {
+func (c *FakeDataLakeStoreFiles) UpdateStatus(ctx context.Context, dataLakeStoreFile *v1alpha1.DataLakeStoreFile, opts v1.UpdateOptions) (*v1alpha1.DataLakeStoreFile, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(datalakestorefilesResource, "status", c.ns, dataLakeStoreFile), &v1alpha1.DataLakeStoreFile{})
 
@@ -113,7 +115,7 @@ func (c *FakeDataLakeStoreFiles) UpdateStatus(dataLakeStoreFile *v1alpha1.DataLa
 }
 
 // Delete takes name of the dataLakeStoreFile and deletes it. Returns an error if one occurs.
-func (c *FakeDataLakeStoreFiles) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeDataLakeStoreFiles) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(datalakestorefilesResource, c.ns, name), &v1alpha1.DataLakeStoreFile{})
 
@@ -121,15 +123,15 @@ func (c *FakeDataLakeStoreFiles) Delete(name string, options *v1.DeleteOptions) 
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeDataLakeStoreFiles) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(datalakestorefilesResource, c.ns, listOptions)
+func (c *FakeDataLakeStoreFiles) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(datalakestorefilesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.DataLakeStoreFileList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched dataLakeStoreFile.
-func (c *FakeDataLakeStoreFiles) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.DataLakeStoreFile, err error) {
+func (c *FakeDataLakeStoreFiles) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.DataLakeStoreFile, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(datalakestorefilesResource, c.ns, name, pt, data, subresources...), &v1alpha1.DataLakeStoreFile{})
 

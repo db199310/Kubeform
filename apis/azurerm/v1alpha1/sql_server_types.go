@@ -40,15 +40,6 @@ type SqlServer struct {
 	Status            SqlServerStatus `json:"status,omitempty"`
 }
 
-type SqlServerSpecExtendedAuditingPolicy struct {
-	// +optional
-	RetentionInDays         int64  `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
-	StorageAccountAccessKey string `json:"-" sensitive:"true" tf:"storage_account_access_key"`
-	// +optional
-	StorageAccountAccessKeyIsSecondary bool   `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
-	StorageEndpoint                    string `json:"storageEndpoint" tf:"storage_endpoint"`
-}
-
 type SqlServerSpecIdentity struct {
 	// +optional
 	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
@@ -66,11 +57,6 @@ type SqlServerSpec struct {
 
 	AdministratorLogin         string `json:"administratorLogin" tf:"administrator_login"`
 	AdministratorLoginPassword string `json:"-" sensitive:"true" tf:"administrator_login_password"`
-	// +optional
-	ConnectionPolicy string `json:"connectionPolicy,omitempty" tf:"connection_policy,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	ExtendedAuditingPolicy []SqlServerSpecExtendedAuditingPolicy `json:"extendedAuditingPolicy,omitempty" tf:"extended_auditing_policy,omitempty"`
 	// +optional
 	FullyQualifiedDomainName string `json:"fullyQualifiedDomainName,omitempty" tf:"fully_qualified_domain_name,omitempty"`
 	// +optional
@@ -93,7 +79,8 @@ type SqlServerStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -51,13 +51,20 @@ type KeyVaultAccessPolicySpec struct {
 	CertificatePermissions []string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
 	// +optional
 	KeyPermissions []string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
-	KeyVaultID     string   `json:"keyVaultID" tf:"key_vault_id"`
-	ObjectID       string   `json:"objectID" tf:"object_id"`
+	// +optional
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
+	ObjectID   string `json:"objectID" tf:"object_id"`
+	// +optional
+	// Deprecated
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	// +optional
 	SecretPermissions []string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
 	// +optional
 	StoragePermissions []string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
 	TenantID           string   `json:"tenantID" tf:"tenant_id"`
+	// +optional
+	// Deprecated
+	VaultName string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 }
 
 type KeyVaultAccessPolicyStatus struct {
@@ -69,7 +76,8 @@ type KeyVaultAccessPolicyStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

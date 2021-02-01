@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var networkpacketcapturesResource = schema.GroupVersionResource{Group: "azurerm.
 var networkpacketcapturesKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "NetworkPacketCapture"}
 
 // Get takes name of the networkPacketCapture, and returns the corresponding networkPacketCapture object, and an error if there is any.
-func (c *FakeNetworkPacketCaptures) Get(name string, options v1.GetOptions) (result *v1alpha1.NetworkPacketCapture, err error) {
+func (c *FakeNetworkPacketCaptures) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.NetworkPacketCapture, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(networkpacketcapturesResource, c.ns, name), &v1alpha1.NetworkPacketCapture{})
 
@@ -50,7 +52,7 @@ func (c *FakeNetworkPacketCaptures) Get(name string, options v1.GetOptions) (res
 }
 
 // List takes label and field selectors, and returns the list of NetworkPacketCaptures that match those selectors.
-func (c *FakeNetworkPacketCaptures) List(opts v1.ListOptions) (result *v1alpha1.NetworkPacketCaptureList, err error) {
+func (c *FakeNetworkPacketCaptures) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.NetworkPacketCaptureList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(networkpacketcapturesResource, networkpacketcapturesKind, c.ns, opts), &v1alpha1.NetworkPacketCaptureList{})
 
@@ -72,14 +74,14 @@ func (c *FakeNetworkPacketCaptures) List(opts v1.ListOptions) (result *v1alpha1.
 }
 
 // Watch returns a watch.Interface that watches the requested networkPacketCaptures.
-func (c *FakeNetworkPacketCaptures) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeNetworkPacketCaptures) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(networkpacketcapturesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a networkPacketCapture and creates it.  Returns the server's representation of the networkPacketCapture, and an error, if there is any.
-func (c *FakeNetworkPacketCaptures) Create(networkPacketCapture *v1alpha1.NetworkPacketCapture) (result *v1alpha1.NetworkPacketCapture, err error) {
+func (c *FakeNetworkPacketCaptures) Create(ctx context.Context, networkPacketCapture *v1alpha1.NetworkPacketCapture, opts v1.CreateOptions) (result *v1alpha1.NetworkPacketCapture, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(networkpacketcapturesResource, c.ns, networkPacketCapture), &v1alpha1.NetworkPacketCapture{})
 
@@ -90,7 +92,7 @@ func (c *FakeNetworkPacketCaptures) Create(networkPacketCapture *v1alpha1.Networ
 }
 
 // Update takes the representation of a networkPacketCapture and updates it. Returns the server's representation of the networkPacketCapture, and an error, if there is any.
-func (c *FakeNetworkPacketCaptures) Update(networkPacketCapture *v1alpha1.NetworkPacketCapture) (result *v1alpha1.NetworkPacketCapture, err error) {
+func (c *FakeNetworkPacketCaptures) Update(ctx context.Context, networkPacketCapture *v1alpha1.NetworkPacketCapture, opts v1.UpdateOptions) (result *v1alpha1.NetworkPacketCapture, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(networkpacketcapturesResource, c.ns, networkPacketCapture), &v1alpha1.NetworkPacketCapture{})
 
@@ -102,7 +104,7 @@ func (c *FakeNetworkPacketCaptures) Update(networkPacketCapture *v1alpha1.Networ
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeNetworkPacketCaptures) UpdateStatus(networkPacketCapture *v1alpha1.NetworkPacketCapture) (*v1alpha1.NetworkPacketCapture, error) {
+func (c *FakeNetworkPacketCaptures) UpdateStatus(ctx context.Context, networkPacketCapture *v1alpha1.NetworkPacketCapture, opts v1.UpdateOptions) (*v1alpha1.NetworkPacketCapture, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(networkpacketcapturesResource, "status", c.ns, networkPacketCapture), &v1alpha1.NetworkPacketCapture{})
 
@@ -113,7 +115,7 @@ func (c *FakeNetworkPacketCaptures) UpdateStatus(networkPacketCapture *v1alpha1.
 }
 
 // Delete takes name of the networkPacketCapture and deletes it. Returns an error if one occurs.
-func (c *FakeNetworkPacketCaptures) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeNetworkPacketCaptures) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(networkpacketcapturesResource, c.ns, name), &v1alpha1.NetworkPacketCapture{})
 
@@ -121,15 +123,15 @@ func (c *FakeNetworkPacketCaptures) Delete(name string, options *v1.DeleteOption
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeNetworkPacketCaptures) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(networkpacketcapturesResource, c.ns, listOptions)
+func (c *FakeNetworkPacketCaptures) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(networkpacketcapturesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.NetworkPacketCaptureList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched networkPacketCapture.
-func (c *FakeNetworkPacketCaptures) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.NetworkPacketCapture, err error) {
+func (c *FakeNetworkPacketCaptures) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.NetworkPacketCapture, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(networkpacketcapturesResource, c.ns, name, pt, data, subresources...), &v1alpha1.NetworkPacketCapture{})
 

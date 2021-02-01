@@ -112,10 +112,6 @@ func (c *FakeAzurermV1alpha1) ApiManagementLoggers(namespace string) v1alpha1.Ap
 	return &FakeApiManagementLoggers{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) ApiManagementNamedValues(namespace string) v1alpha1.ApiManagementNamedValueInterface {
-	return &FakeApiManagementNamedValues{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) ApiManagementOpenidConnectProviders(namespace string) v1alpha1.ApiManagementOpenidConnectProviderInterface {
 	return &FakeApiManagementOpenidConnectProviders{c, namespace}
 }
@@ -170,14 +166,6 @@ func (c *FakeAzurermV1alpha1) AppServiceCertificateOrders(namespace string) v1al
 
 func (c *FakeAzurermV1alpha1) AppServiceCustomHostnameBindings(namespace string) v1alpha1.AppServiceCustomHostnameBindingInterface {
 	return &FakeAppServiceCustomHostnameBindings{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) AppServiceEnvironments(namespace string) v1alpha1.AppServiceEnvironmentInterface {
-	return &FakeAppServiceEnvironments{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) AppServiceHybridConnections(namespace string) v1alpha1.AppServiceHybridConnectionInterface {
-	return &FakeAppServiceHybridConnections{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) AppServicePlans(namespace string) v1alpha1.AppServicePlanInterface {
@@ -272,8 +260,24 @@ func (c *FakeAzurermV1alpha1) AutomationVariableStrings(namespace string) v1alph
 	return &FakeAutomationVariableStrings{c, namespace}
 }
 
+func (c *FakeAzurermV1alpha1) AutoscaleSettings(namespace string) v1alpha1.AutoscaleSettingInterface {
+	return &FakeAutoscaleSettings{c, namespace}
+}
+
 func (c *FakeAzurermV1alpha1) AvailabilitySets(namespace string) v1alpha1.AvailabilitySetInterface {
 	return &FakeAvailabilitySets{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) AzureadApplications(namespace string) v1alpha1.AzureadApplicationInterface {
+	return &FakeAzureadApplications{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) AzureadServicePrincipals(namespace string) v1alpha1.AzureadServicePrincipalInterface {
+	return &FakeAzureadServicePrincipals{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) AzureadServicePrincipalPasswords(namespace string) v1alpha1.AzureadServicePrincipalPasswordInterface {
+	return &FakeAzureadServicePrincipalPasswords{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) BackupContainerStorageAccounts(namespace string) v1alpha1.BackupContainerStorageAccountInterface {
@@ -316,14 +320,6 @@ func (c *FakeAzurermV1alpha1) BatchPools(namespace string) v1alpha1.BatchPoolInt
 	return &FakeBatchPools{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) BlueprintAssignments(namespace string) v1alpha1.BlueprintAssignmentInterface {
-	return &FakeBlueprintAssignments{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) BotChannelDirectlines(namespace string) v1alpha1.BotChannelDirectlineInterface {
-	return &FakeBotChannelDirectlines{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) BotChannelEmails(namespace string) v1alpha1.BotChannelEmailInterface {
 	return &FakeBotChannelEmails{c, namespace}
 }
@@ -360,6 +356,10 @@ func (c *FakeAzurermV1alpha1) CognitiveAccounts(namespace string) v1alpha1.Cogni
 	return &FakeCognitiveAccounts{c, namespace}
 }
 
+func (c *FakeAzurermV1alpha1) ConnectionMonitors(namespace string) v1alpha1.ConnectionMonitorInterface {
+	return &FakeConnectionMonitors{c, namespace}
+}
+
 func (c *FakeAzurermV1alpha1) ContainerGroups(namespace string) v1alpha1.ContainerGroupInterface {
 	return &FakeContainerGroups{c, namespace}
 }
@@ -370,6 +370,10 @@ func (c *FakeAzurermV1alpha1) ContainerRegistries(namespace string) v1alpha1.Con
 
 func (c *FakeAzurermV1alpha1) ContainerRegistryWebhooks(namespace string) v1alpha1.ContainerRegistryWebhookInterface {
 	return &FakeContainerRegistryWebhooks{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) ContainerServices(namespace string) v1alpha1.ContainerServiceInterface {
+	return &FakeContainerServices{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) CosmosdbAccounts(namespace string) v1alpha1.CosmosdbAccountInterface {
@@ -408,14 +412,6 @@ func (c *FakeAzurermV1alpha1) CosmosdbTables(namespace string) v1alpha1.Cosmosdb
 	return &FakeCosmosdbTables{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) CostManagementExportResourceGroups(namespace string) v1alpha1.CostManagementExportResourceGroupInterface {
-	return &FakeCostManagementExportResourceGroups{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) CustomProviders(namespace string) v1alpha1.CustomProviderInterface {
-	return &FakeCustomProviders{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) Dashboards(namespace string) v1alpha1.DashboardInterface {
 	return &FakeDashboards{c, namespace}
 }
@@ -442,10 +438,6 @@ func (c *FakeAzurermV1alpha1) DataFactoryIntegrationRuntimeManageds(namespace st
 
 func (c *FakeAzurermV1alpha1) DataFactoryLinkedServiceDataLakeStorageGen2s(namespace string) v1alpha1.DataFactoryLinkedServiceDataLakeStorageGen2Interface {
 	return &FakeDataFactoryLinkedServiceDataLakeStorageGen2s{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) DataFactoryLinkedServiceKeyVaults(namespace string) v1alpha1.DataFactoryLinkedServiceKeyVaultInterface {
-	return &FakeDataFactoryLinkedServiceKeyVaults{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) DataFactoryLinkedServiceMysqls(namespace string) v1alpha1.DataFactoryLinkedServiceMysqlInterface {
@@ -488,24 +480,12 @@ func (c *FakeAzurermV1alpha1) DataLakeStoreFirewallRules(namespace string) v1alp
 	return &FakeDataLakeStoreFirewallRules{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) DataShares(namespace string) v1alpha1.DataShareInterface {
-	return &FakeDataShares{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) DataShareAccounts(namespace string) v1alpha1.DataShareAccountInterface {
-	return &FakeDataShareAccounts{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) DatabaseMigrationProjects(namespace string) v1alpha1.DatabaseMigrationProjectInterface {
-	return &FakeDatabaseMigrationProjects{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) DatabaseMigrationServices(namespace string) v1alpha1.DatabaseMigrationServiceInterface {
-	return &FakeDatabaseMigrationServices{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) DatabricksWorkspaces(namespace string) v1alpha1.DatabricksWorkspaceInterface {
 	return &FakeDatabricksWorkspaces{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) DdosProtectionPlans(namespace string) v1alpha1.DdosProtectionPlanInterface {
+	return &FakeDdosProtectionPlans{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) DedicatedHosts(namespace string) v1alpha1.DedicatedHostInterface {
@@ -514,10 +494,6 @@ func (c *FakeAzurermV1alpha1) DedicatedHosts(namespace string) v1alpha1.Dedicate
 
 func (c *FakeAzurermV1alpha1) DedicatedHostGroups(namespace string) v1alpha1.DedicatedHostGroupInterface {
 	return &FakeDedicatedHostGroups{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) DevTestGlobalVmShutdownSchedules(namespace string) v1alpha1.DevTestGlobalVmShutdownScheduleInterface {
-	return &FakeDevTestGlobalVmShutdownSchedules{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) DevTestLabs(namespace string) v1alpha1.DevTestLabInterface {
@@ -596,10 +572,6 @@ func (c *FakeAzurermV1alpha1) EventgridDomains(namespace string) v1alpha1.Eventg
 	return &FakeEventgridDomains{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) EventgridDomainTopics(namespace string) v1alpha1.EventgridDomainTopicInterface {
-	return &FakeEventgridDomainTopics{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) EventgridEventSubscriptions(namespace string) v1alpha1.EventgridEventSubscriptionInterface {
 	return &FakeEventgridEventSubscriptions{c, namespace}
 }
@@ -644,10 +616,6 @@ func (c *FakeAzurermV1alpha1) ExpressRouteCircuitPeerings(namespace string) v1al
 	return &FakeExpressRouteCircuitPeerings{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) ExpressRouteGateways(namespace string) v1alpha1.ExpressRouteGatewayInterface {
-	return &FakeExpressRouteGateways{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) Firewalls(namespace string) v1alpha1.FirewallInterface {
 	return &FakeFirewalls{c, namespace}
 }
@@ -674,10 +642,6 @@ func (c *FakeAzurermV1alpha1) FrontdoorFirewallPolicies(namespace string) v1alph
 
 func (c *FakeAzurermV1alpha1) FunctionApps(namespace string) v1alpha1.FunctionAppInterface {
 	return &FakeFunctionApps{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) FunctionAppSlots(namespace string) v1alpha1.FunctionAppSlotInterface {
-	return &FakeFunctionAppSlots{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) HdinsightHadoopClusters(namespace string) v1alpha1.HdinsightHadoopClusterInterface {
@@ -716,36 +680,16 @@ func (c *FakeAzurermV1alpha1) HealthcareServices(namespace string) v1alpha1.Heal
 	return &FakeHealthcareServices{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) HpcCaches(namespace string) v1alpha1.HpcCacheInterface {
-	return &FakeHpcCaches{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) HpcCacheBlobTargets(namespace string) v1alpha1.HpcCacheBlobTargetInterface {
-	return &FakeHpcCacheBlobTargets{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) HpcCacheNfsTargets(namespace string) v1alpha1.HpcCacheNfsTargetInterface {
-	return &FakeHpcCacheNfsTargets{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) Images(namespace string) v1alpha1.ImageInterface {
 	return &FakeImages{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) IotTimeSeriesInsightsAccessPolicies(namespace string) v1alpha1.IotTimeSeriesInsightsAccessPolicyInterface {
-	return &FakeIotTimeSeriesInsightsAccessPolicies{c, namespace}
+func (c *FakeAzurermV1alpha1) IotDpses(namespace string) v1alpha1.IotDpsInterface {
+	return &FakeIotDpses{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) IotTimeSeriesInsightsReferenceDataSets(namespace string) v1alpha1.IotTimeSeriesInsightsReferenceDataSetInterface {
-	return &FakeIotTimeSeriesInsightsReferenceDataSets{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) IotTimeSeriesInsightsStandardEnvironments(namespace string) v1alpha1.IotTimeSeriesInsightsStandardEnvironmentInterface {
-	return &FakeIotTimeSeriesInsightsStandardEnvironments{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) IotcentralApplications(namespace string) v1alpha1.IotcentralApplicationInterface {
-	return &FakeIotcentralApplications{c, namespace}
+func (c *FakeAzurermV1alpha1) IotDpsCertificates(namespace string) v1alpha1.IotDpsCertificateInterface {
+	return &FakeIotDpsCertificates{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) Iothubs(namespace string) v1alpha1.IothubInterface {
@@ -868,24 +812,8 @@ func (c *FakeAzurermV1alpha1) LbRules(namespace string) v1alpha1.LbRuleInterface
 	return &FakeLbRules{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) LinuxVirtualMachines(namespace string) v1alpha1.LinuxVirtualMachineInterface {
-	return &FakeLinuxVirtualMachines{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) LinuxVirtualMachineScaleSets(namespace string) v1alpha1.LinuxVirtualMachineScaleSetInterface {
-	return &FakeLinuxVirtualMachineScaleSets{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) LocalNetworkGateways(namespace string) v1alpha1.LocalNetworkGatewayInterface {
 	return &FakeLocalNetworkGateways{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) LogAnalyticsDatasourceWindowsEvents(namespace string) v1alpha1.LogAnalyticsDatasourceWindowsEventInterface {
-	return &FakeLogAnalyticsDatasourceWindowsEvents{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) LogAnalyticsDatasourceWindowsPerformanceCounters(namespace string) v1alpha1.LogAnalyticsDatasourceWindowsPerformanceCounterInterface {
-	return &FakeLogAnalyticsDatasourceWindowsPerformanceCounters{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) LogAnalyticsLinkedServices(namespace string) v1alpha1.LogAnalyticsLinkedServiceInterface {
@@ -900,16 +828,16 @@ func (c *FakeAzurermV1alpha1) LogAnalyticsWorkspaces(namespace string) v1alpha1.
 	return &FakeLogAnalyticsWorkspaces{c, namespace}
 }
 
+func (c *FakeAzurermV1alpha1) LogAnalyticsWorkspaceLinkedServices(namespace string) v1alpha1.LogAnalyticsWorkspaceLinkedServiceInterface {
+	return &FakeLogAnalyticsWorkspaceLinkedServices{c, namespace}
+}
+
 func (c *FakeAzurermV1alpha1) LogicAppActionCustoms(namespace string) v1alpha1.LogicAppActionCustomInterface {
 	return &FakeLogicAppActionCustoms{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) LogicAppActionHTTPs(namespace string) v1alpha1.LogicAppActionHTTPInterface {
 	return &FakeLogicAppActionHTTPs{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) LogicAppIntegrationAccounts(namespace string) v1alpha1.LogicAppIntegrationAccountInterface {
-	return &FakeLogicAppIntegrationAccounts{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) LogicAppTriggerCustoms(namespace string) v1alpha1.LogicAppTriggerCustomInterface {
@@ -926,22 +854,6 @@ func (c *FakeAzurermV1alpha1) LogicAppTriggerRecurrences(namespace string) v1alp
 
 func (c *FakeAzurermV1alpha1) LogicAppWorkflows(namespace string) v1alpha1.LogicAppWorkflowInterface {
 	return &FakeLogicAppWorkflows{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MachineLearningWorkspaces(namespace string) v1alpha1.MachineLearningWorkspaceInterface {
-	return &FakeMachineLearningWorkspaces{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MaintenanceConfigurations(namespace string) v1alpha1.MaintenanceConfigurationInterface {
-	return &FakeMaintenanceConfigurations{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) ManagedApplications(namespace string) v1alpha1.ManagedApplicationInterface {
-	return &FakeManagedApplications{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) ManagedApplicationDefinitions(namespace string) v1alpha1.ManagedApplicationDefinitionInterface {
-	return &FakeManagedApplicationDefinitions{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) ManagedDisks(namespace string) v1alpha1.ManagedDiskInterface {
@@ -988,16 +900,12 @@ func (c *FakeAzurermV1alpha1) MediaServicesAccounts(namespace string) v1alpha1.M
 	return &FakeMediaServicesAccounts{c, namespace}
 }
 
+func (c *FakeAzurermV1alpha1) MetricAlertrules(namespace string) v1alpha1.MetricAlertruleInterface {
+	return &FakeMetricAlertrules{c, namespace}
+}
+
 func (c *FakeAzurermV1alpha1) MonitorActionGroups(namespace string) v1alpha1.MonitorActionGroupInterface {
 	return &FakeMonitorActionGroups{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MonitorActionRuleActionGroups(namespace string) v1alpha1.MonitorActionRuleActionGroupInterface {
-	return &FakeMonitorActionRuleActionGroups{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MonitorActionRuleSuppressions(namespace string) v1alpha1.MonitorActionRuleSuppressionInterface {
-	return &FakeMonitorActionRuleSuppressions{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) MonitorActivityLogAlerts(namespace string) v1alpha1.MonitorActivityLogAlertInterface {
@@ -1020,16 +928,8 @@ func (c *FakeAzurermV1alpha1) MonitorMetricAlerts(namespace string) v1alpha1.Mon
 	return &FakeMonitorMetricAlerts{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) MonitorScheduledQueryRulesAlerts(namespace string) v1alpha1.MonitorScheduledQueryRulesAlertInterface {
-	return &FakeMonitorScheduledQueryRulesAlerts{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MonitorScheduledQueryRulesLogs(namespace string) v1alpha1.MonitorScheduledQueryRulesLogInterface {
-	return &FakeMonitorScheduledQueryRulesLogs{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MssqlDatabases(namespace string) v1alpha1.MssqlDatabaseInterface {
-	return &FakeMssqlDatabases{c, namespace}
+func (c *FakeAzurermV1alpha1) MonitorMetricAlertrules(namespace string) v1alpha1.MonitorMetricAlertruleInterface {
+	return &FakeMonitorMetricAlertrules{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) MssqlDatabaseVulnerabilityAssessmentRuleBaselines(namespace string) v1alpha1.MssqlDatabaseVulnerabilityAssessmentRuleBaselineInterface {
@@ -1040,20 +940,12 @@ func (c *FakeAzurermV1alpha1) MssqlElasticpools(namespace string) v1alpha1.Mssql
 	return &FakeMssqlElasticpools{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) MssqlServers(namespace string) v1alpha1.MssqlServerInterface {
-	return &FakeMssqlServers{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) MssqlServerSecurityAlertPolicies(namespace string) v1alpha1.MssqlServerSecurityAlertPolicyInterface {
 	return &FakeMssqlServerSecurityAlertPolicies{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) MssqlServerVulnerabilityAssessments(namespace string) v1alpha1.MssqlServerVulnerabilityAssessmentInterface {
 	return &FakeMssqlServerVulnerabilityAssessments{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) MssqlVirtualMachines(namespace string) v1alpha1.MssqlVirtualMachineInterface {
-	return &FakeMssqlVirtualMachines{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) MysqlConfigurations(namespace string) v1alpha1.MysqlConfigurationInterface {
@@ -1078,10 +970,6 @@ func (c *FakeAzurermV1alpha1) MysqlVirtualNetworkRules(namespace string) v1alpha
 
 func (c *FakeAzurermV1alpha1) NatGateways(namespace string) v1alpha1.NatGatewayInterface {
 	return &FakeNatGateways{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) NatGatewayPublicIPAssociations(namespace string) v1alpha1.NatGatewayPublicIPAssociationInterface {
-	return &FakeNatGatewayPublicIPAssociations{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) NetappAccounts(namespace string) v1alpha1.NetappAccountInterface {
@@ -1128,10 +1016,6 @@ func (c *FakeAzurermV1alpha1) NetworkInterfaceNATRuleAssociations(namespace stri
 	return &FakeNetworkInterfaceNATRuleAssociations{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) NetworkInterfaceSecurityGroupAssociations(namespace string) v1alpha1.NetworkInterfaceSecurityGroupAssociationInterface {
-	return &FakeNetworkInterfaceSecurityGroupAssociations{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) NetworkPacketCaptures(namespace string) v1alpha1.NetworkPacketCaptureInterface {
 	return &FakeNetworkPacketCaptures{c, namespace}
 }
@@ -1168,10 +1052,6 @@ func (c *FakeAzurermV1alpha1) NotificationHubNamespace_s(namespace string) v1alp
 	return &FakeNotificationHubNamespace_s{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) OrchestratedVirtualMachineScaleSets(namespace string) v1alpha1.OrchestratedVirtualMachineScaleSetInterface {
-	return &FakeOrchestratedVirtualMachineScaleSets{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) PacketCaptures(namespace string) v1alpha1.PacketCaptureInterface {
 	return &FakePacketCaptures{c, namespace}
 }
@@ -1186,10 +1066,6 @@ func (c *FakeAzurermV1alpha1) PolicyAssignments(namespace string) v1alpha1.Polic
 
 func (c *FakeAzurermV1alpha1) PolicyDefinitions(namespace string) v1alpha1.PolicyDefinitionInterface {
 	return &FakePolicyDefinitions{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) PolicyRemediations(namespace string) v1alpha1.PolicyRemediationInterface {
-	return &FakePolicyRemediations{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) PolicySetDefinitions(namespace string) v1alpha1.PolicySetDefinitionInterface {
@@ -1216,10 +1092,6 @@ func (c *FakeAzurermV1alpha1) PostgresqlVirtualNetworkRules(namespace string) v1
 	return &FakePostgresqlVirtualNetworkRules{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) PowerbiEmbeddeds(namespace string) v1alpha1.PowerbiEmbeddedInterface {
-	return &FakePowerbiEmbeddeds{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) PrivateDNSARecords(namespace string) v1alpha1.PrivateDNSARecordInterface {
 	return &FakePrivateDNSARecords{c, namespace}
 }
@@ -1244,10 +1116,6 @@ func (c *FakeAzurermV1alpha1) PrivateDNSSrvRecords(namespace string) v1alpha1.Pr
 	return &FakePrivateDNSSrvRecords{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) PrivateDNSTxtRecords(namespace string) v1alpha1.PrivateDNSTxtRecordInterface {
-	return &FakePrivateDNSTxtRecords{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) PrivateDNSZones(namespace string) v1alpha1.PrivateDNSZoneInterface {
 	return &FakePrivateDNSZones{c, namespace}
 }
@@ -1258,6 +1126,10 @@ func (c *FakeAzurermV1alpha1) PrivateDNSZoneVirtualNetworkLinks(namespace string
 
 func (c *FakeAzurermV1alpha1) PrivateEndpoints(namespace string) v1alpha1.PrivateEndpointInterface {
 	return &FakePrivateEndpoints{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) PrivateLinkEndpoints(namespace string) v1alpha1.PrivateLinkEndpointInterface {
+	return &FakePrivateLinkEndpoints{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) PrivateLinkServices(namespace string) v1alpha1.PrivateLinkServiceInterface {
@@ -1274,6 +1146,38 @@ func (c *FakeAzurermV1alpha1) PublicIPs(namespace string) v1alpha1.PublicIPInter
 
 func (c *FakeAzurermV1alpha1) PublicIPPrefixes(namespace string) v1alpha1.PublicIPPrefixInterface {
 	return &FakePublicIPPrefixes{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryNetworkMappings(namespace string) v1alpha1.RecoveryNetworkMappingInterface {
+	return &FakeRecoveryNetworkMappings{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryReplicatedVms(namespace string) v1alpha1.RecoveryReplicatedVmInterface {
+	return &FakeRecoveryReplicatedVms{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesFabrics(namespace string) v1alpha1.RecoveryServicesFabricInterface {
+	return &FakeRecoveryServicesFabrics{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesProtectedVms(namespace string) v1alpha1.RecoveryServicesProtectedVmInterface {
+	return &FakeRecoveryServicesProtectedVms{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesProtectionContainers(namespace string) v1alpha1.RecoveryServicesProtectionContainerInterface {
+	return &FakeRecoveryServicesProtectionContainers{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesProtectionContainerMappings(namespace string) v1alpha1.RecoveryServicesProtectionContainerMappingInterface {
+	return &FakeRecoveryServicesProtectionContainerMappings{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesProtectionPolicyVms(namespace string) v1alpha1.RecoveryServicesProtectionPolicyVmInterface {
+	return &FakeRecoveryServicesProtectionPolicyVms{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) RecoveryServicesReplicationPolicies(namespace string) v1alpha1.RecoveryServicesReplicationPolicyInterface {
+	return &FakeRecoveryServicesReplicationPolicies{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) RecoveryServicesVaults(namespace string) v1alpha1.RecoveryServicesVaultInterface {
@@ -1316,6 +1220,14 @@ func (c *FakeAzurermV1alpha1) RouteTables(namespace string) v1alpha1.RouteTableI
 	return &FakeRouteTables{c, namespace}
 }
 
+func (c *FakeAzurermV1alpha1) SchedulerJobs(namespace string) v1alpha1.SchedulerJobInterface {
+	return &FakeSchedulerJobs{c, namespace}
+}
+
+func (c *FakeAzurermV1alpha1) SchedulerJobCollections(namespace string) v1alpha1.SchedulerJobCollectionInterface {
+	return &FakeSchedulerJobCollections{c, namespace}
+}
+
 func (c *FakeAzurermV1alpha1) SearchServices(namespace string) v1alpha1.SearchServiceInterface {
 	return &FakeSearchServices{c, namespace}
 }
@@ -1332,14 +1244,6 @@ func (c *FakeAzurermV1alpha1) SecurityCenterWorkspaces(namespace string) v1alpha
 	return &FakeSecurityCenterWorkspaces{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) SentinelAlertRuleMsSecurityIncidents(namespace string) v1alpha1.SentinelAlertRuleMsSecurityIncidentInterface {
-	return &FakeSentinelAlertRuleMsSecurityIncidents{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) SentinelAlertRuleScheduleds(namespace string) v1alpha1.SentinelAlertRuleScheduledInterface {
-	return &FakeSentinelAlertRuleScheduleds{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) ServiceFabricClusters(namespace string) v1alpha1.ServiceFabricClusterInterface {
 	return &FakeServiceFabricClusters{c, namespace}
 }
@@ -1350,10 +1254,6 @@ func (c *FakeAzurermV1alpha1) ServicebusNamespaces(namespace string) v1alpha1.Se
 
 func (c *FakeAzurermV1alpha1) ServicebusNamespaceAuthorizationRules(namespace string) v1alpha1.ServicebusNamespaceAuthorizationRuleInterface {
 	return &FakeServicebusNamespaceAuthorizationRules{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) ServicebusNamespaceNetworkRuleSets(namespace string) v1alpha1.ServicebusNamespaceNetworkRuleSetInterface {
-	return &FakeServicebusNamespaceNetworkRuleSets{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) ServicebusQueues(namespace string) v1alpha1.ServicebusQueueInterface {
@@ -1424,18 +1324,6 @@ func (c *FakeAzurermV1alpha1) Snapshots(namespace string) v1alpha1.SnapshotInter
 	return &FakeSnapshots{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) SpatialAnchorsAccounts(namespace string) v1alpha1.SpatialAnchorsAccountInterface {
-	return &FakeSpatialAnchorsAccounts{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) SpringCloudApps(namespace string) v1alpha1.SpringCloudAppInterface {
-	return &FakeSpringCloudApps{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) SpringCloudServices(namespace string) v1alpha1.SpringCloudServiceInterface {
-	return &FakeSpringCloudServices{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) SqlActiveDirectoryAdministrators(namespace string) v1alpha1.SqlActiveDirectoryAdministratorInterface {
 	return &FakeSqlActiveDirectoryAdministrators{c, namespace}
 }
@@ -1466,10 +1354,6 @@ func (c *FakeAzurermV1alpha1) SqlVirtualNetworkRules(namespace string) v1alpha1.
 
 func (c *FakeAzurermV1alpha1) StorageAccounts(namespace string) v1alpha1.StorageAccountInterface {
 	return &FakeStorageAccounts{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) StorageAccountCustomerManagedKeys(namespace string) v1alpha1.StorageAccountCustomerManagedKeyInterface {
-	return &FakeStorageAccountCustomerManagedKeys{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) StorageAccountNetworkRuleses(namespace string) v1alpha1.StorageAccountNetworkRulesInterface {
@@ -1592,10 +1476,6 @@ func (c *FakeAzurermV1alpha1) VirtualHubs(namespace string) v1alpha1.VirtualHubI
 	return &FakeVirtualHubs{c, namespace}
 }
 
-func (c *FakeAzurermV1alpha1) VirtualHubConnections(namespace string) v1alpha1.VirtualHubConnectionInterface {
-	return &FakeVirtualHubConnections{c, namespace}
-}
-
 func (c *FakeAzurermV1alpha1) VirtualMachines(namespace string) v1alpha1.VirtualMachineInterface {
 	return &FakeVirtualMachines{c, namespace}
 }
@@ -1610,10 +1490,6 @@ func (c *FakeAzurermV1alpha1) VirtualMachineExtensions(namespace string) v1alpha
 
 func (c *FakeAzurermV1alpha1) VirtualMachineScaleSets(namespace string) v1alpha1.VirtualMachineScaleSetInterface {
 	return &FakeVirtualMachineScaleSets{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) VirtualMachineScaleSetExtensions(namespace string) v1alpha1.VirtualMachineScaleSetExtensionInterface {
-	return &FakeVirtualMachineScaleSetExtensions{c, namespace}
 }
 
 func (c *FakeAzurermV1alpha1) VirtualNetworks(namespace string) v1alpha1.VirtualNetworkInterface {
@@ -1646,14 +1522,6 @@ func (c *FakeAzurermV1alpha1) VpnServerConfigurations(namespace string) v1alpha1
 
 func (c *FakeAzurermV1alpha1) WebApplicationFirewallPolicies(namespace string) v1alpha1.WebApplicationFirewallPolicyInterface {
 	return &FakeWebApplicationFirewallPolicies{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) WindowsVirtualMachines(namespace string) v1alpha1.WindowsVirtualMachineInterface {
-	return &FakeWindowsVirtualMachines{c, namespace}
-}
-
-func (c *FakeAzurermV1alpha1) WindowsVirtualMachineScaleSets(namespace string) v1alpha1.WindowsVirtualMachineScaleSetInterface {
-	return &FakeWindowsVirtualMachineScaleSets{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate

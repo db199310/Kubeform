@@ -25,7 +25,8 @@ variables:
 - group: gogit
 - group: shellai_acr
 - name: IS_MASTER_BRANCH
-  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  # value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/feature/tn-merging-upstream')]
 
 
 resources:
@@ -67,13 +68,25 @@ stages:
       displayName: Set git properties
 
     # Build kubeform
+    # - script: make gen
+    #   # Moving "make gen" before "make build" breaks the build sequence.
+    #   # Manifests generated in "make gen" will not be built by kubeform
+    #   # binaries corresponding to the committed code.
+    #   # The intent behind moving "make gen" before "make build" was to
+    #   # satisfy module requirements if any gets added to the module templates.
+    #   # For such a change two build runs need to be executed.
+    #   displayName: Run kubeform codegen
+    #   workingDirectory: kubeform
+    # - script: go mod tidy && go mod vendor
+    #   displayName: Update vendored packages in kubeform
+    #   workingDirectory: kubeform
     - script: make build
       displayName: Build kubeform binaries
       workingDirectory: kubeform
     - script: make gen
       displayName: Run kubeform codegen
-      environment:
-        CRD_PATH: ../thomas-flux-get-started/releases/stratos-crds
+      env:
+        CRD_PATH: crds
       workingDirectory: kubeform
     - script: |
         git add -A
@@ -109,8 +122,7 @@ stages:
     - script: make push
       displayName: Push kfc containers
       workingDirectory: kfc
-    # DOCKER_TAG has to be written by make push to a file so that the next script can set it as a variable
-    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]somevalue"
+    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]$(cat bin/.container-tag"
       displayName: Set DOCKER_TAG
       name: setDockerTag
       workingDirectory: kfc
@@ -118,13 +130,12 @@ stages:
       displayName: Echo DOCKER_TAG
 
 - stage: Staging
-  condition: succeeded()
-  # condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
+  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
   dependsOn:
   - Build
   variables:
-  - ComponentsPath: components/staging/AKS-Test
-  - DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+    ComponentsPath: components/staging/AKS-Test
+    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
   jobs:
   - deployment: Deploy
     environment: staging
@@ -173,13 +184,13 @@ stages:
   - Build
   - Staging
   variables:
-  - DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
-  - NpdComponentsPath: components/npd/f4dpnpd
-  - PrdComponentsPath: components/prd/f4dpprd
-  - StratosCrdsPaths: components/base/stratos-crds/modules.kubeform.com_*.yaml
+    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+    NpdComponentsPath: components/npd/f4dpnpd
+    PrdComponentsPath: components/prd/f4dpprd
+    StratosCrdsPaths: components/base/stratos-crds/modules.kubeform.com_*.yaml
   jobs:
   - deployment: Deploy
-    environment: prd
+    environment: PRD
     strategy:
       runOnce:
         deploy:

@@ -63,31 +63,6 @@ type WebApplicationFirewallPolicySpecCustomRules struct {
 	RuleType string `json:"ruleType" tf:"rule_type"`
 }
 
-type WebApplicationFirewallPolicySpecManagedRulesExclusion struct {
-	MatchVariable         string `json:"matchVariable" tf:"match_variable"`
-	Selector              string `json:"selector" tf:"selector"`
-	SelectorMatchOperator string `json:"selectorMatchOperator" tf:"selector_match_operator"`
-}
-
-type WebApplicationFirewallPolicySpecManagedRulesManagedRuleSetRuleGroupOverride struct {
-	DisabledRules []string `json:"disabledRules" tf:"disabled_rules"`
-	RuleGroupName string   `json:"ruleGroupName" tf:"rule_group_name"`
-}
-
-type WebApplicationFirewallPolicySpecManagedRulesManagedRuleSet struct {
-	// +optional
-	RuleGroupOverride []WebApplicationFirewallPolicySpecManagedRulesManagedRuleSetRuleGroupOverride `json:"ruleGroupOverride,omitempty" tf:"rule_group_override,omitempty"`
-	// +optional
-	Type    string `json:"type,omitempty" tf:"type,omitempty"`
-	Version string `json:"version" tf:"version"`
-}
-
-type WebApplicationFirewallPolicySpecManagedRules struct {
-	// +optional
-	Exclusion      []WebApplicationFirewallPolicySpecManagedRulesExclusion      `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
-	ManagedRuleSet []WebApplicationFirewallPolicySpecManagedRulesManagedRuleSet `json:"managedRuleSet" tf:"managed_rule_set"`
-}
-
 type WebApplicationFirewallPolicySpecPolicySettings struct {
 	// +optional
 	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -103,9 +78,7 @@ type WebApplicationFirewallPolicySpec struct {
 	// +optional
 	CustomRules []WebApplicationFirewallPolicySpecCustomRules `json:"customRules,omitempty" tf:"custom_rules,omitempty"`
 	Location    string                                        `json:"location" tf:"location"`
-	// +kubebuilder:validation:MaxItems=1
-	ManagedRules []WebApplicationFirewallPolicySpecManagedRules `json:"managedRules" tf:"managed_rules"`
-	Name         string                                         `json:"name" tf:"name"`
+	Name        string                                        `json:"name" tf:"name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	PolicySettings    []WebApplicationFirewallPolicySpecPolicySettings `json:"policySettings,omitempty" tf:"policy_settings,omitempty"`
@@ -123,7 +96,8 @@ type WebApplicationFirewallPolicyStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

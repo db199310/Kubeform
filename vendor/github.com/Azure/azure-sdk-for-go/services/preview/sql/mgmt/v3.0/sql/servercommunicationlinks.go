@@ -38,9 +38,7 @@ func NewServerCommunicationLinksClient(subscriptionID string) ServerCommunicatio
 	return NewServerCommunicationLinksClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewServerCommunicationLinksClientWithBaseURI creates an instance of the ServerCommunicationLinksClient client using
-// a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewServerCommunicationLinksClientWithBaseURI creates an instance of the ServerCommunicationLinksClient client.
 func NewServerCommunicationLinksClientWithBaseURI(baseURI string, subscriptionID string) ServerCommunicationLinksClient {
 	return ServerCommunicationLinksClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -114,8 +112,9 @@ func (client ServerCommunicationLinksClient) CreateOrUpdatePreparer(ctx context.
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServerCommunicationLinksClient) CreateOrUpdateSender(req *http.Request) (future ServerCommunicationLinksCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -199,7 +198,8 @@ func (client ServerCommunicationLinksClient) DeletePreparer(ctx context.Context,
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServerCommunicationLinksClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -277,7 +277,8 @@ func (client ServerCommunicationLinksClient) GetPreparer(ctx context.Context, re
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServerCommunicationLinksClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -354,7 +355,8 @@ func (client ServerCommunicationLinksClient) ListByServerPreparer(ctx context.Co
 // ListByServerSender sends the ListByServer request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServerCommunicationLinksClient) ListByServerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByServerResponder handles the response to the ListByServer request. The method always

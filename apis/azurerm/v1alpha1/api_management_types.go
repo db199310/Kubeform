@@ -54,18 +54,6 @@ type ApiManagementSpecCertificate struct {
 	StoreName           string `json:"storeName" tf:"store_name"`
 }
 
-type ApiManagementSpecHostnameConfigurationDeveloperPortal struct {
-	// +optional
-	Certificate string `json:"-" sensitive:"true" tf:"certificate,omitempty"`
-	// +optional
-	CertificatePassword string `json:"-" sensitive:"true" tf:"certificate_password,omitempty"`
-	HostName            string `json:"hostName" tf:"host_name"`
-	// +optional
-	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
-	// +optional
-	NegotiateClientCertificate bool `json:"negotiateClientCertificate,omitempty" tf:"negotiate_client_certificate,omitempty"`
-}
-
 type ApiManagementSpecHostnameConfigurationManagement struct {
 	// +optional
 	Certificate string `json:"-" sensitive:"true" tf:"certificate,omitempty"`
@@ -118,8 +106,6 @@ type ApiManagementSpecHostnameConfigurationScm struct {
 
 type ApiManagementSpecHostnameConfiguration struct {
 	// +optional
-	DeveloperPortal []ApiManagementSpecHostnameConfigurationDeveloperPortal `json:"developerPortal,omitempty" tf:"developer_portal,omitempty"`
-	// +optional
 	Management []ApiManagementSpecHostnameConfigurationManagement `json:"management,omitempty" tf:"management,omitempty"`
 	// +optional
 	Portal []ApiManagementSpecHostnameConfigurationPortal `json:"portal,omitempty" tf:"portal,omitempty"`
@@ -131,14 +117,10 @@ type ApiManagementSpecHostnameConfiguration struct {
 
 type ApiManagementSpecIdentity struct {
 	// +optional
-	// +kubebuilder:validation:MinItems=1
-	IdentityIDS []string `json:"identityIDS,omitempty" tf:"identity_ids,omitempty"`
-	// +optional
 	PrincipalID string `json:"principalID,omitempty" tf:"principal_id,omitempty"`
 	// +optional
 	TenantID string `json:"tenantID,omitempty" tf:"tenant_id,omitempty"`
-	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Type     string `json:"type" tf:"type"`
 }
 
 type ApiManagementSpecPolicy struct {
@@ -154,6 +136,30 @@ type ApiManagementSpecProtocols struct {
 }
 
 type ApiManagementSpecSecurity struct {
+	// +optional
+	// Deprecated
+	DisableBackendSSL30 bool `json:"disableBackendSSL30,omitempty" tf:"disable_backend_ssl30,omitempty"`
+	// +optional
+	// Deprecated
+	DisableBackendTLS10 bool `json:"disableBackendTLS10,omitempty" tf:"disable_backend_tls10,omitempty"`
+	// +optional
+	// Deprecated
+	DisableBackendTLS11 bool `json:"disableBackendTLS11,omitempty" tf:"disable_backend_tls11,omitempty"`
+	// +optional
+	// Deprecated
+	DisableFrontendSSL30 bool `json:"disableFrontendSSL30,omitempty" tf:"disable_frontend_ssl30,omitempty"`
+	// +optional
+	// Deprecated
+	DisableFrontendTLS10 bool `json:"disableFrontendTLS10,omitempty" tf:"disable_frontend_tls10,omitempty"`
+	// +optional
+	// Deprecated
+	DisableFrontendTLS11 bool `json:"disableFrontendTLS11,omitempty" tf:"disable_frontend_tls11,omitempty"`
+	// +optional
+	// Deprecated
+	DisableTripleDESChipers bool `json:"disableTripleDESChipers,omitempty" tf:"disable_triple_des_chipers,omitempty"`
+	// +optional
+	// Deprecated
+	DisableTripleDESCiphers bool `json:"disableTripleDESCiphers,omitempty" tf:"disable_triple_des_ciphers,omitempty"`
 	// +optional
 	EnableBackendSSL30 bool `json:"enableBackendSSL30,omitempty" tf:"enable_backend_ssl30,omitempty"`
 	// +optional
@@ -187,8 +193,10 @@ type ApiManagementSpecSignUp struct {
 	TermsOfService []ApiManagementSpecSignUpTermsOfService `json:"termsOfService" tf:"terms_of_service"`
 }
 
-type ApiManagementSpecVirtualNetworkConfiguration struct {
-	SubnetID string `json:"subnetID" tf:"subnet_id"`
+type ApiManagementSpecSku struct {
+	// +optional
+	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Name     string `json:"name" tf:"name"`
 }
 
 type ApiManagementSpec struct {
@@ -225,8 +233,6 @@ type ApiManagementSpec struct {
 	// +optional
 	PortalURL string `json:"portalURL,omitempty" tf:"portal_url,omitempty"`
 	// +optional
-	PrivateIPAddresses []string `json:"privateIPAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
-	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	Protocols []ApiManagementSpecProtocols `json:"protocols,omitempty" tf:"protocols,omitempty"`
 	// +optional
@@ -244,15 +250,15 @@ type ApiManagementSpec struct {
 	SignIn []ApiManagementSpecSignIn `json:"signIn,omitempty" tf:"sign_in,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	SignUp  []ApiManagementSpecSignUp `json:"signUp,omitempty" tf:"sign_up,omitempty"`
-	SkuName string                    `json:"skuName" tf:"sku_name"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	SignUp []ApiManagementSpecSignUp `json:"signUp,omitempty" tf:"sign_up,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	VirtualNetworkConfiguration []ApiManagementSpecVirtualNetworkConfiguration `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
+	// Deprecated
+	Sku []ApiManagementSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
 	// +optional
-	VirtualNetworkType string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+	// +optional
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ApiManagementStatus struct {
@@ -264,7 +270,8 @@ type ApiManagementStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

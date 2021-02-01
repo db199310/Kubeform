@@ -7,16 +7,12 @@ import (
 )
 
 type Client struct {
-	DataSourcesClient    *operationalinsights.DataSourcesClient
 	LinkedServicesClient *operationalinsights.LinkedServicesClient
 	SolutionsClient      *operationsmanagement.SolutionsClient
 	WorkspacesClient     *operationalinsights.WorkspacesClient
 }
 
 func NewClient(o *common.ClientOptions) *Client {
-	DataSourcesClient := operationalinsights.NewDataSourcesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
-	o.ConfigureClient(&DataSourcesClient.Client, o.ResourceManagerAuthorizer)
-
 	WorkspacesClient := operationalinsights.NewWorkspacesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&WorkspacesClient.Client, o.ResourceManagerAuthorizer)
 
@@ -27,7 +23,6 @@ func NewClient(o *common.ClientOptions) *Client {
 	o.ConfigureClient(&LinkedServicesClient.Client, o.ResourceManagerAuthorizer)
 
 	return &Client{
-		DataSourcesClient:    &DataSourcesClient,
 		LinkedServicesClient: &LinkedServicesClient,
 		SolutionsClient:      &SolutionsClient,
 		WorkspacesClient:     &WorkspacesClient,

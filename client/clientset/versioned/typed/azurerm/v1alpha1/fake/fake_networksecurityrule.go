@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var networksecurityrulesResource = schema.GroupVersionResource{Group: "azurerm.k
 var networksecurityrulesKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "NetworkSecurityRule"}
 
 // Get takes name of the networkSecurityRule, and returns the corresponding networkSecurityRule object, and an error if there is any.
-func (c *FakeNetworkSecurityRules) Get(name string, options v1.GetOptions) (result *v1alpha1.NetworkSecurityRule, err error) {
+func (c *FakeNetworkSecurityRules) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.NetworkSecurityRule, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(networksecurityrulesResource, c.ns, name), &v1alpha1.NetworkSecurityRule{})
 
@@ -50,7 +52,7 @@ func (c *FakeNetworkSecurityRules) Get(name string, options v1.GetOptions) (resu
 }
 
 // List takes label and field selectors, and returns the list of NetworkSecurityRules that match those selectors.
-func (c *FakeNetworkSecurityRules) List(opts v1.ListOptions) (result *v1alpha1.NetworkSecurityRuleList, err error) {
+func (c *FakeNetworkSecurityRules) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.NetworkSecurityRuleList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(networksecurityrulesResource, networksecurityrulesKind, c.ns, opts), &v1alpha1.NetworkSecurityRuleList{})
 
@@ -72,14 +74,14 @@ func (c *FakeNetworkSecurityRules) List(opts v1.ListOptions) (result *v1alpha1.N
 }
 
 // Watch returns a watch.Interface that watches the requested networkSecurityRules.
-func (c *FakeNetworkSecurityRules) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeNetworkSecurityRules) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(networksecurityrulesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a networkSecurityRule and creates it.  Returns the server's representation of the networkSecurityRule, and an error, if there is any.
-func (c *FakeNetworkSecurityRules) Create(networkSecurityRule *v1alpha1.NetworkSecurityRule) (result *v1alpha1.NetworkSecurityRule, err error) {
+func (c *FakeNetworkSecurityRules) Create(ctx context.Context, networkSecurityRule *v1alpha1.NetworkSecurityRule, opts v1.CreateOptions) (result *v1alpha1.NetworkSecurityRule, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(networksecurityrulesResource, c.ns, networkSecurityRule), &v1alpha1.NetworkSecurityRule{})
 
@@ -90,7 +92,7 @@ func (c *FakeNetworkSecurityRules) Create(networkSecurityRule *v1alpha1.NetworkS
 }
 
 // Update takes the representation of a networkSecurityRule and updates it. Returns the server's representation of the networkSecurityRule, and an error, if there is any.
-func (c *FakeNetworkSecurityRules) Update(networkSecurityRule *v1alpha1.NetworkSecurityRule) (result *v1alpha1.NetworkSecurityRule, err error) {
+func (c *FakeNetworkSecurityRules) Update(ctx context.Context, networkSecurityRule *v1alpha1.NetworkSecurityRule, opts v1.UpdateOptions) (result *v1alpha1.NetworkSecurityRule, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(networksecurityrulesResource, c.ns, networkSecurityRule), &v1alpha1.NetworkSecurityRule{})
 
@@ -102,7 +104,7 @@ func (c *FakeNetworkSecurityRules) Update(networkSecurityRule *v1alpha1.NetworkS
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeNetworkSecurityRules) UpdateStatus(networkSecurityRule *v1alpha1.NetworkSecurityRule) (*v1alpha1.NetworkSecurityRule, error) {
+func (c *FakeNetworkSecurityRules) UpdateStatus(ctx context.Context, networkSecurityRule *v1alpha1.NetworkSecurityRule, opts v1.UpdateOptions) (*v1alpha1.NetworkSecurityRule, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(networksecurityrulesResource, "status", c.ns, networkSecurityRule), &v1alpha1.NetworkSecurityRule{})
 
@@ -113,7 +115,7 @@ func (c *FakeNetworkSecurityRules) UpdateStatus(networkSecurityRule *v1alpha1.Ne
 }
 
 // Delete takes name of the networkSecurityRule and deletes it. Returns an error if one occurs.
-func (c *FakeNetworkSecurityRules) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeNetworkSecurityRules) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(networksecurityrulesResource, c.ns, name), &v1alpha1.NetworkSecurityRule{})
 
@@ -121,15 +123,15 @@ func (c *FakeNetworkSecurityRules) Delete(name string, options *v1.DeleteOptions
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeNetworkSecurityRules) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(networksecurityrulesResource, c.ns, listOptions)
+func (c *FakeNetworkSecurityRules) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(networksecurityrulesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.NetworkSecurityRuleList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched networkSecurityRule.
-func (c *FakeNetworkSecurityRules) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.NetworkSecurityRule, err error) {
+func (c *FakeNetworkSecurityRules) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.NetworkSecurityRule, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(networksecurityrulesResource, c.ns, name, pt, data, subresources...), &v1alpha1.NetworkSecurityRule{})
 

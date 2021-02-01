@@ -78,7 +78,7 @@ func resourceArmRecoveryServicesBackupProtectedVMCreateUpdate(d *schema.Resource
 	vmId := d.Get("source_vm_id").(string)
 	policyId := d.Get("backup_policy_id").(string)
 
-	// get VM name from id
+	//get VM name from id
 	parsedVmId, err := azure.ParseAzureResourceID(vmId)
 	if err != nil {
 		return fmt.Errorf("[ERROR] Unable to parse source_vm_id '%s': %+v", vmId, err)
@@ -216,10 +216,14 @@ func resourceArmRecoveryServicesBackupProtectedVMWaitForStateCreateUpdate(ctx co
 		Refresh:    resourceArmRecoveryServicesBackupProtectedVMRefreshFunc(ctx, client, vaultName, resourceGroup, containerName, protectedItemName, policyId, true),
 	}
 
-	if d.IsNewResource() {
-		state.Timeout = d.Timeout(schema.TimeoutCreate)
+	if features.SupportsCustomTimeouts() {
+		if d.IsNewResource() {
+			state.Timeout = d.Timeout(schema.TimeoutCreate)
+		} else {
+			state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		}
 	} else {
-		state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		state.Timeout = 30 * time.Minute
 	}
 
 	resp, err := state.WaitForState()
@@ -238,7 +242,12 @@ func resourceArmRecoveryServicesBackupProtectedVMWaitForDeletion(ctx context.Con
 		Pending:    []string{"Found"},
 		Target:     []string{"NotFound"},
 		Refresh:    resourceArmRecoveryServicesBackupProtectedVMRefreshFunc(ctx, client, vaultName, resourceGroup, containerName, protectedItemName, policyId, false),
-		Timeout:    d.Timeout(schema.TimeoutDelete),
+	}
+
+	if features.SupportsCustomTimeouts() {
+		state.Timeout = d.Timeout(schema.TimeoutDelete)
+	} else {
+		state.Timeout = 30 * time.Minute
 	}
 
 	resp, err := state.WaitForState()

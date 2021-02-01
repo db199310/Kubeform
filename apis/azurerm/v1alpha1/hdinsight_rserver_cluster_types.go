@@ -145,8 +145,6 @@ type HdinsightRserverClusterSpec struct {
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	Tier string            `json:"tier" tf:"tier"`
-	// +optional
-	TlsMinVersion string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 }
 
 type HdinsightRserverClusterStatus struct {
@@ -158,7 +156,8 @@ type HdinsightRserverClusterStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

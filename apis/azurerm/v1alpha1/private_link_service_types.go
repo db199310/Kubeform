@@ -66,7 +66,10 @@ type PrivateLinkServiceSpec struct {
 	Name                                   string   `json:"name" tf:"name"`
 	// +kubebuilder:validation:MaxItems=8
 	NatIPConfiguration []PrivateLinkServiceSpecNatIPConfiguration `json:"natIPConfiguration" tf:"nat_ip_configuration"`
-	ResourceGroupName  string                                     `json:"resourceGroupName" tf:"resource_group_name"`
+	// +optional
+	// Deprecated
+	NetworkInterfaceIDS []string `json:"networkInterfaceIDS,omitempty" tf:"network_interface_ids,omitempty"`
+	ResourceGroupName   string   `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	// +optional
@@ -82,7 +85,8 @@ type PrivateLinkServiceStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

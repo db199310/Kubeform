@@ -7,6 +7,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/tf"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
@@ -53,6 +54,8 @@ func resourceArmStorageShare() *schema.Resource {
 				ForceNew:     true,
 				ValidateFunc: ValidateArmStorageShareName,
 			},
+
+			"resource_group_name": azure.SchemaResourceGroupNameDeprecated(),
 
 			"storage_account_name": {
 				Type:     schema.TypeString,
@@ -104,11 +107,6 @@ func resourceArmStorageShare() *schema.Resource {
 						},
 					},
 				},
-			},
-
-			"resource_manager_id": {
-				Type:     schema.TypeString,
-				Computed: true,
 			},
 
 			"url": {
@@ -232,8 +230,8 @@ func resourceArmStorageShareRead(d *schema.ResourceData, meta interface{}) error
 		return fmt.Errorf("Error flattening `acl`: %+v", err)
 	}
 
-	resourceManagerId := client.GetResourceManagerResourceID(storageClient.SubscriptionId, account.ResourceGroup, id.AccountName, id.ShareName)
-	d.Set("resource_manager_id", resourceManagerId)
+	// Deprecated: remove in 2.0
+	d.Set("resource_group_name", account.ResourceGroup)
 
 	return nil
 }

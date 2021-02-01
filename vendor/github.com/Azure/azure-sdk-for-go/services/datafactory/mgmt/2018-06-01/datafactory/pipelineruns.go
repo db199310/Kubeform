@@ -37,8 +37,7 @@ func NewPipelineRunsClient(subscriptionID string) PipelineRunsClient {
 	return NewPipelineRunsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewPipelineRunsClientWithBaseURI creates an instance of the PipelineRunsClient client using a custom endpoint.  Use
-// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewPipelineRunsClientWithBaseURI creates an instance of the PipelineRunsClient client.
 func NewPipelineRunsClientWithBaseURI(baseURI string, subscriptionID string) PipelineRunsClient {
 	return PipelineRunsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -121,7 +120,8 @@ func (client PipelineRunsClient) CancelPreparer(ctx context.Context, resourceGro
 // CancelSender sends the Cancel request. The method will close the
 // http.Response Body if it receives an error.
 func (client PipelineRunsClient) CancelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CancelResponder handles the response to the Cancel request. The method always
@@ -210,7 +210,8 @@ func (client PipelineRunsClient) GetPreparer(ctx context.Context, resourceGroupN
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client PipelineRunsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -304,7 +305,8 @@ func (client PipelineRunsClient) QueryByFactoryPreparer(ctx context.Context, res
 // QueryByFactorySender sends the QueryByFactory request. The method will close the
 // http.Response Body if it receives an error.
 func (client PipelineRunsClient) QueryByFactorySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // QueryByFactoryResponder handles the response to the QueryByFactory request. The method always

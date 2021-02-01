@@ -52,9 +52,12 @@ type LbNATPoolSpec struct {
 	FrontendPortEnd             int64  `json:"frontendPortEnd" tf:"frontend_port_end"`
 	FrontendPortStart           int64  `json:"frontendPortStart" tf:"frontend_port_start"`
 	LoadbalancerID              string `json:"loadbalancerID" tf:"loadbalancer_id"`
-	Name                        string `json:"name" tf:"name"`
-	Protocol                    string `json:"protocol" tf:"protocol"`
-	ResourceGroupName           string `json:"resourceGroupName" tf:"resource_group_name"`
+	// +optional
+	// Deprecated
+	Location          string `json:"location,omitempty" tf:"location,omitempty"`
+	Name              string `json:"name" tf:"name"`
+	Protocol          string `json:"protocol" tf:"protocol"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 }
 
 type LbNATPoolStatus struct {
@@ -66,7 +69,8 @@ type LbNATPoolStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

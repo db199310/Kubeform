@@ -36,8 +36,7 @@ func NewNodeReportsClient(subscriptionID string) NodeReportsClient {
 	return NewNodeReportsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewNodeReportsClientWithBaseURI creates an instance of the NodeReportsClient client using a custom endpoint.  Use
-// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewNodeReportsClientWithBaseURI creates an instance of the NodeReportsClient client.
 func NewNodeReportsClientWithBaseURI(baseURI string, subscriptionID string) NodeReportsClient {
 	return NodeReportsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -114,7 +113,8 @@ func (client NodeReportsClient) GetPreparer(ctx context.Context, resourceGroupNa
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client NodeReportsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -202,7 +202,8 @@ func (client NodeReportsClient) GetContentPreparer(ctx context.Context, resource
 // GetContentSender sends the GetContent request. The method will close the
 // http.Response Body if it receives an error.
 func (client NodeReportsClient) GetContentSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetContentResponder handles the response to the GetContent request. The method always
@@ -293,7 +294,8 @@ func (client NodeReportsClient) ListByNodePreparer(ctx context.Context, resource
 // ListByNodeSender sends the ListByNode request. The method will close the
 // http.Response Body if it receives an error.
 func (client NodeReportsClient) ListByNodeSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByNodeResponder handles the response to the ListByNode request. The method always

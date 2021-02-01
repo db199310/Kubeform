@@ -35,9 +35,7 @@ func NewExportJobsOperationResultsClient(subscriptionID string) ExportJobsOperat
 	return NewExportJobsOperationResultsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewExportJobsOperationResultsClientWithBaseURI creates an instance of the ExportJobsOperationResultsClient client
-// using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewExportJobsOperationResultsClientWithBaseURI creates an instance of the ExportJobsOperationResultsClient client.
 func NewExportJobsOperationResultsClientWithBaseURI(baseURI string, subscriptionID string) ExportJobsOperationResultsClient {
 	return ExportJobsOperationResultsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -106,7 +104,8 @@ func (client ExportJobsOperationResultsClient) GetPreparer(ctx context.Context, 
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ExportJobsOperationResultsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always

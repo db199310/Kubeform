@@ -45,7 +45,10 @@ type EventhubConsumerGroupSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	EventhubName      string `json:"eventhubName" tf:"eventhub_name"`
+	EventhubName string `json:"eventhubName" tf:"eventhub_name"`
+	// +optional
+	// Deprecated
+	Location          string `json:"location,omitempty" tf:"location,omitempty"`
 	Name              string `json:"name" tf:"name"`
 	NamespaceName     string `json:"namespaceName" tf:"namespace_name"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
@@ -62,7 +65,8 @@ type EventhubConsumerGroupStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

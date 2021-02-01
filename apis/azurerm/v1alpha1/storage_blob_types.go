@@ -48,12 +48,18 @@ type StorageBlobSpec struct {
 	// +optional
 	AccessTier string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 	// +optional
+	// Deprecated
+	Attempts int64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
+	// +optional
 	ContentType string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 	// +optional
 	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 	Name     string            `json:"name" tf:"name"`
 	// +optional
 	Parallelism int64 `json:"parallelism,omitempty" tf:"parallelism,omitempty"`
+	// +optional
+	// Deprecated
+	ResourceGroupName string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	// +optional
 	Size int64 `json:"size,omitempty" tf:"size,omitempty"`
 	// +optional
@@ -78,7 +84,8 @@ type StorageBlobStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

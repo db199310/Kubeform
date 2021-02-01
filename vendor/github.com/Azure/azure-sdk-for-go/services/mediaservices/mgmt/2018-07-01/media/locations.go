@@ -35,8 +35,7 @@ func NewLocationsClient(subscriptionID string) LocationsClient {
 	return NewLocationsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewLocationsClientWithBaseURI creates an instance of the LocationsClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewLocationsClientWithBaseURI creates an instance of the LocationsClient client.
 func NewLocationsClientWithBaseURI(baseURI string, subscriptionID string) LocationsClient {
 	return LocationsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -102,7 +101,8 @@ func (client LocationsClient) CheckNameAvailabilityPreparer(ctx context.Context,
 // CheckNameAvailabilitySender sends the CheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client LocationsClient) CheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckNameAvailabilityResponder handles the response to the CheckNameAvailability request. The method always

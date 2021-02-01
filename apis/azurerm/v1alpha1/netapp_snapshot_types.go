@@ -50,9 +50,7 @@ type NetappSnapshotSpec struct {
 	Name              string `json:"name" tf:"name"`
 	PoolName          string `json:"poolName" tf:"pool_name"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	Tags       map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	VolumeName string            `json:"volumeName" tf:"volume_name"`
+	VolumeName        string `json:"volumeName" tf:"volume_name"`
 }
 
 type NetappSnapshotStatus struct {
@@ -64,7 +62,8 @@ type NetappSnapshotStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -40,6 +40,10 @@ type NotificationHubNamespace_ struct {
 	Status            NotificationHubNamespace_Status `json:"status,omitempty"`
 }
 
+type NotificationHubNamespace_SpecSku struct {
+	Name string `json:"name" tf:"name"`
+}
+
 type NotificationHubNamespace_Spec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -53,9 +57,12 @@ type NotificationHubNamespace_Spec struct {
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	ServicebusEndpoint string `json:"servicebusEndpoint,omitempty" tf:"servicebus_endpoint,omitempty"`
-	SkuName            string `json:"skuName" tf:"sku_name"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []NotificationHubNamespace_SpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +optional
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }
 
 type NotificationHubNamespace_Status struct {
@@ -67,7 +74,8 @@ type NotificationHubNamespace_Status struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

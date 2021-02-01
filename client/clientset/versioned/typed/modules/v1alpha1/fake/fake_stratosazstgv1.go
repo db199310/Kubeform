@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var stratosazstgv1sResource = schema.GroupVersionResource{Group: "modules.kubefo
 var stratosazstgv1sKind = schema.GroupVersionKind{Group: "modules.kubeform.com", Version: "v1alpha1", Kind: "StratosAzStgv1"}
 
 // Get takes name of the stratosAzStgv1, and returns the corresponding stratosAzStgv1 object, and an error if there is any.
-func (c *FakeStratosAzStgv1s) Get(name string, options v1.GetOptions) (result *v1alpha1.StratosAzStgv1, err error) {
+func (c *FakeStratosAzStgv1s) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.StratosAzStgv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(stratosazstgv1sResource, c.ns, name), &v1alpha1.StratosAzStgv1{})
 
@@ -50,7 +52,7 @@ func (c *FakeStratosAzStgv1s) Get(name string, options v1.GetOptions) (result *v
 }
 
 // List takes label and field selectors, and returns the list of StratosAzStgv1s that match those selectors.
-func (c *FakeStratosAzStgv1s) List(opts v1.ListOptions) (result *v1alpha1.StratosAzStgv1List, err error) {
+func (c *FakeStratosAzStgv1s) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.StratosAzStgv1List, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(stratosazstgv1sResource, stratosazstgv1sKind, c.ns, opts), &v1alpha1.StratosAzStgv1List{})
 
@@ -72,14 +74,14 @@ func (c *FakeStratosAzStgv1s) List(opts v1.ListOptions) (result *v1alpha1.Strato
 }
 
 // Watch returns a watch.Interface that watches the requested stratosAzStgv1s.
-func (c *FakeStratosAzStgv1s) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeStratosAzStgv1s) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(stratosazstgv1sResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a stratosAzStgv1 and creates it.  Returns the server's representation of the stratosAzStgv1, and an error, if there is any.
-func (c *FakeStratosAzStgv1s) Create(stratosAzStgv1 *v1alpha1.StratosAzStgv1) (result *v1alpha1.StratosAzStgv1, err error) {
+func (c *FakeStratosAzStgv1s) Create(ctx context.Context, stratosAzStgv1 *v1alpha1.StratosAzStgv1, opts v1.CreateOptions) (result *v1alpha1.StratosAzStgv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(stratosazstgv1sResource, c.ns, stratosAzStgv1), &v1alpha1.StratosAzStgv1{})
 
@@ -90,7 +92,7 @@ func (c *FakeStratosAzStgv1s) Create(stratosAzStgv1 *v1alpha1.StratosAzStgv1) (r
 }
 
 // Update takes the representation of a stratosAzStgv1 and updates it. Returns the server's representation of the stratosAzStgv1, and an error, if there is any.
-func (c *FakeStratosAzStgv1s) Update(stratosAzStgv1 *v1alpha1.StratosAzStgv1) (result *v1alpha1.StratosAzStgv1, err error) {
+func (c *FakeStratosAzStgv1s) Update(ctx context.Context, stratosAzStgv1 *v1alpha1.StratosAzStgv1, opts v1.UpdateOptions) (result *v1alpha1.StratosAzStgv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(stratosazstgv1sResource, c.ns, stratosAzStgv1), &v1alpha1.StratosAzStgv1{})
 
@@ -102,7 +104,7 @@ func (c *FakeStratosAzStgv1s) Update(stratosAzStgv1 *v1alpha1.StratosAzStgv1) (r
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeStratosAzStgv1s) UpdateStatus(stratosAzStgv1 *v1alpha1.StratosAzStgv1) (*v1alpha1.StratosAzStgv1, error) {
+func (c *FakeStratosAzStgv1s) UpdateStatus(ctx context.Context, stratosAzStgv1 *v1alpha1.StratosAzStgv1, opts v1.UpdateOptions) (*v1alpha1.StratosAzStgv1, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(stratosazstgv1sResource, "status", c.ns, stratosAzStgv1), &v1alpha1.StratosAzStgv1{})
 
@@ -113,7 +115,7 @@ func (c *FakeStratosAzStgv1s) UpdateStatus(stratosAzStgv1 *v1alpha1.StratosAzStg
 }
 
 // Delete takes name of the stratosAzStgv1 and deletes it. Returns an error if one occurs.
-func (c *FakeStratosAzStgv1s) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeStratosAzStgv1s) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(stratosazstgv1sResource, c.ns, name), &v1alpha1.StratosAzStgv1{})
 
@@ -121,15 +123,15 @@ func (c *FakeStratosAzStgv1s) Delete(name string, options *v1.DeleteOptions) err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeStratosAzStgv1s) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(stratosazstgv1sResource, c.ns, listOptions)
+func (c *FakeStratosAzStgv1s) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(stratosazstgv1sResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.StratosAzStgv1List{})
 	return err
 }
 
 // Patch applies the patch and returns the patched stratosAzStgv1.
-func (c *FakeStratosAzStgv1s) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.StratosAzStgv1, err error) {
+func (c *FakeStratosAzStgv1s) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.StratosAzStgv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(stratosazstgv1sResource, c.ns, name, pt, data, subresources...), &v1alpha1.StratosAzStgv1{})
 

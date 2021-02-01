@@ -38,8 +38,7 @@ func NewWorkloadGroupsClient(subscriptionID string) WorkloadGroupsClient {
 	return NewWorkloadGroupsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewWorkloadGroupsClientWithBaseURI creates an instance of the WorkloadGroupsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewWorkloadGroupsClientWithBaseURI creates an instance of the WorkloadGroupsClient client.
 func NewWorkloadGroupsClientWithBaseURI(baseURI string, subscriptionID string) WorkloadGroupsClient {
 	return WorkloadGroupsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -116,8 +115,9 @@ func (client WorkloadGroupsClient) CreateOrUpdatePreparer(ctx context.Context, r
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client WorkloadGroupsClient) CreateOrUpdateSender(req *http.Request) (future WorkloadGroupsCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -197,8 +197,9 @@ func (client WorkloadGroupsClient) DeletePreparer(ctx context.Context, resourceG
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client WorkloadGroupsClient) DeleteSender(req *http.Request) (future WorkloadGroupsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -283,7 +284,8 @@ func (client WorkloadGroupsClient) GetPreparer(ctx context.Context, resourceGrou
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client WorkloadGroupsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -363,7 +365,8 @@ func (client WorkloadGroupsClient) ListByDatabasePreparer(ctx context.Context, r
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client WorkloadGroupsClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always

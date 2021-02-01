@@ -127,14 +127,18 @@ type KeyVaultCertificateSpec struct {
 	CertificateData string `json:"certificateData,omitempty" tf:"certificate_data,omitempty"`
 	// +kubebuilder:validation:MaxItems=1
 	CertificatePolicy []KeyVaultCertificateSpecCertificatePolicy `json:"certificatePolicy" tf:"certificate_policy"`
-	KeyVaultID        string                                     `json:"keyVaultID" tf:"key_vault_id"`
-	Name              string                                     `json:"name" tf:"name"`
+	// +optional
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
+	Name       string `json:"name" tf:"name"`
 	// +optional
 	SecretID string `json:"secretID,omitempty" tf:"secret_id,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	// +optional
 	Thumbprint string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	// +optional
+	// Deprecated
+	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty"`
 	// +optional
 	Version string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -148,7 +152,8 @@ type KeyVaultCertificateStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

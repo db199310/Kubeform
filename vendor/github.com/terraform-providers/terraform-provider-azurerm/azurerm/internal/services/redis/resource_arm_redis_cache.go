@@ -19,6 +19,7 @@ import (
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/suppress"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/tf"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/validate"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/locks"
@@ -218,7 +219,7 @@ func resourceArmRedisCache() *schema.Resource {
 							Type:             schema.TypeString,
 							Required:         true,
 							DiffSuppressFunc: suppress.CaseDifference,
-							ValidateFunc:     validation.IsDayOfTheWeek(true),
+							ValidateFunc:     validate.DayOfTheWeek(true),
 						},
 						"start_hour_utc": {
 							Type:         schema.TypeInt,
@@ -251,18 +252,6 @@ func resourceArmRedisCache() *schema.Resource {
 			},
 
 			"secondary_access_key": {
-				Type:      schema.TypeString,
-				Computed:  true,
-				Sensitive: true,
-			},
-
-			"primary_connection_string": {
-				Type:      schema.TypeString,
-				Computed:  true,
-				Sensitive: true,
-			},
-
-			"secondary_connection_string": {
 				Type:      schema.TypeString,
 				Computed:  true,
 				Sensitive: true,
@@ -305,7 +294,11 @@ func resourceArmRedisCacheCreate(d *schema.ResourceData, meta interface{}) error
 		}
 	}
 
-	patchSchedule := expandRedisPatchSchedule(d)
+	patchSchedule, err := expandRedisPatchSchedule(d)
+	if err != nil {
+		return fmt.Errorf("Error parsing Patch Schedule: %+v", err)
+	}
+
 	redisConfiguration, err := expandRedisConfiguration(d)
 	if err != nil {
 		return fmt.Errorf("Error parsing Redis Configuration: %+v", err)
@@ -379,7 +372,12 @@ func resourceArmRedisCacheCreate(d *schema.ResourceData, meta interface{}) error
 		Target:     []string{"Succeeded"},
 		Refresh:    redisStateRefreshFunc(ctx, client, resGroup, name),
 		MinTimeout: 15 * time.Second,
-		Timeout:    d.Timeout(schema.TimeoutCreate),
+	}
+
+	if features.SupportsCustomTimeouts() {
+		stateConf.Timeout = d.Timeout(schema.TimeoutCreate)
+	} else {
+		stateConf.Timeout = 60 * time.Minute
 	}
 
 	if _, err = stateConf.WaitForState(); err != nil {
@@ -463,7 +461,12 @@ func resourceArmRedisCacheUpdate(d *schema.ResourceData, meta interface{}) error
 		Target:     []string{"Succeeded"},
 		Refresh:    redisStateRefreshFunc(ctx, client, resGroup, name),
 		MinTimeout: 15 * time.Second,
-		Timeout:    d.Timeout(schema.TimeoutUpdate),
+	}
+
+	if features.SupportsCustomTimeouts() {
+		stateConf.Timeout = d.Timeout(schema.TimeoutUpdate)
+	} else {
+		stateConf.Timeout = 60 * time.Minute
 	}
 
 	if _, err = stateConf.WaitForState(); err != nil {
@@ -472,7 +475,10 @@ func resourceArmRedisCacheUpdate(d *schema.ResourceData, meta interface{}) error
 
 	d.SetId(*read.ID)
 
-	patchSchedule := expandRedisPatchSchedule(d)
+	patchSchedule, err := expandRedisPatchSchedule(d)
+	if err != nil {
+		return fmt.Errorf("Error parsing Patch Schedule: %+v", err)
+	}
 
 	patchClient := meta.(*clients.Client).Redis.PatchSchedulesClient
 	if patchSchedule == nil || len(*patchSchedule.ScheduleEntries.ScheduleEntries) == 0 {
@@ -544,8 +550,7 @@ func resourceArmRedisCacheRead(d *schema.ResourceData, meta interface{}) error {
 		d.Set("sku_name", sku.Name)
 	}
 
-	props := resp.Properties
-	if props != nil {
+	if props := resp.Properties; props != nil {
 		d.Set("ssl_port", props.SslPort)
 		d.Set("hostname", props.HostName)
 		d.Set("minimum_tls_version", string(props.MinimumTLSVersion))
@@ -568,12 +573,6 @@ func resourceArmRedisCacheRead(d *schema.ResourceData, meta interface{}) error {
 
 	d.Set("primary_access_key", keysResp.PrimaryKey)
 	d.Set("secondary_access_key", keysResp.SecondaryKey)
-
-	if props != nil {
-		enableSslPort := !*props.EnableNonSslPort
-		d.Set("primary_connection_string", getRedisConnectionString(*props.HostName, *props.SslPort, *keysResp.PrimaryKey, enableSslPort))
-		d.Set("secondary_connection_string", getRedisConnectionString(*props.HostName, *props.SslPort, *keysResp.SecondaryKey, enableSslPort))
-	}
 
 	return tags.FlattenAndSet(d, resp.Tags)
 }
@@ -672,11 +671,6 @@ func expandRedisConfiguration(d *schema.ResourceData) (map[string]*string, error
 
 	// RDB Backup
 	if v, ok := d.GetOk("redis_configuration.0.rdb_backup_enabled"); ok {
-		if v.(bool) {
-			if connStr, connOk := d.GetOk("redis_configuration.0.rdb_storage_connection_string"); !connOk || connStr.(string) == "" {
-				return nil, fmt.Errorf("The rdb_storage_connection_string property must be set when rdb_backup_enabled is true")
-			}
-		}
 		delta := strconv.FormatBool(v.(bool))
 		output["rdb-backup-enabled"] = utils.String(delta)
 	}
@@ -730,10 +724,10 @@ func expandRedisConfiguration(d *schema.ResourceData) (map[string]*string, error
 	return output, nil
 }
 
-func expandRedisPatchSchedule(d *schema.ResourceData) *redis.PatchSchedule {
+func expandRedisPatchSchedule(d *schema.ResourceData) (*redis.PatchSchedule, error) {
 	v, ok := d.GetOk("patch_schedule")
 	if !ok {
-		return nil
+		return nil, nil
 	}
 
 	scheduleValues := v.([]interface{})
@@ -755,7 +749,7 @@ func expandRedisPatchSchedule(d *schema.ResourceData) *redis.PatchSchedule {
 			ScheduleEntries: &entries,
 		},
 	}
-	return &schedule
+	return &schedule, nil
 }
 
 func flattenRedisConfiguration(input map[string]*string) ([]interface{}, error) {
@@ -900,12 +894,10 @@ func validateRedisMaxMemoryPolicy(v interface{}, _ string) (warnings []string, e
 		"allkeys-random":  true,
 		"volatile-random": true,
 		"volatile-ttl":    true,
-		"allkeys-lfu":     true,
-		"volatile-lfu":    true,
 	}
 
 	if !families[value] {
-		errors = append(errors, fmt.Errorf("Redis Max Memory Policy can only be 'noeviction' / 'allkeys-lru' / 'volatile-lru' / 'allkeys-random' / 'volatile-random' / 'volatile-ttl' / 'allkeys-lfu' / 'volatile-lfu'"))
+		errors = append(errors, fmt.Errorf("Redis Max Memory Policy can only be 'noeviction' / 'allkeys-lru' / 'volatile-lru' / 'allkeys-random' / 'volatile-random' / 'volatile-ttl'"))
 	}
 
 	return warnings, errors
@@ -927,8 +919,4 @@ func validateRedisBackupFrequency(v interface{}, _ string) (warnings []string, e
 	}
 
 	return warnings, errors
-}
-
-func getRedisConnectionString(redisHostName string, sslPort int32, accessKey string, enableSslPort bool) string {
-	return fmt.Sprintf("%s:%d,password=%s,ssl=%t,abortConnect=False", redisHostName, sslPort, accessKey, enableSslPort)
 }

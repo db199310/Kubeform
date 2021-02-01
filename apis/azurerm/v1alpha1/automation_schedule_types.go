@@ -50,7 +50,11 @@ type AutomationScheduleSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name"`
+	// +optional
+	// Deprecated
+	AccountName string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	// +optional
+	AutomationAccountName string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 	// +optional
 	Description string `json:"description,omitempty" tf:"description,omitempty"`
 	// +optional
@@ -81,7 +85,8 @@ type AutomationScheduleStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -35,9 +35,7 @@ func NewPremiumMessagingRegionsClient(subscriptionID string) PremiumMessagingReg
 	return NewPremiumMessagingRegionsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewPremiumMessagingRegionsClientWithBaseURI creates an instance of the PremiumMessagingRegionsClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewPremiumMessagingRegionsClientWithBaseURI creates an instance of the PremiumMessagingRegionsClient client.
 func NewPremiumMessagingRegionsClientWithBaseURI(baseURI string, subscriptionID string) PremiumMessagingRegionsClient {
 	return PremiumMessagingRegionsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -98,7 +96,8 @@ func (client PremiumMessagingRegionsClient) ListPreparer(ctx context.Context) (*
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client PremiumMessagingRegionsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always

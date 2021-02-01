@@ -50,9 +50,8 @@ type ApiManagementSubscriptionSpec struct {
 	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
 	DisplayName       string `json:"displayName" tf:"display_name"`
 	// +optional
-	PrimaryKey string `json:"-" sensitive:"true" tf:"primary_key,omitempty"`
-	// +optional
-	ProductID         string `json:"productID,omitempty" tf:"product_id,omitempty"`
+	PrimaryKey        string `json:"-" sensitive:"true" tf:"primary_key,omitempty"`
+	ProductID         string `json:"productID" tf:"product_id"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	SecondaryKey string `json:"-" sensitive:"true" tf:"secondary_key,omitempty"`
@@ -72,7 +71,8 @@ type ApiManagementSubscriptionStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

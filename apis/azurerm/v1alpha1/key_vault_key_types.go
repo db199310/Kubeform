@@ -53,9 +53,10 @@ type KeyVaultKeySpec struct {
 	ExpirationDate string   `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 	KeyOpts        []string `json:"keyOpts" tf:"key_opts"`
 	// +optional
-	KeySize    int64  `json:"keySize,omitempty" tf:"key_size,omitempty"`
-	KeyType    string `json:"keyType" tf:"key_type"`
-	KeyVaultID string `json:"keyVaultID" tf:"key_vault_id"`
+	KeySize int64  `json:"keySize,omitempty" tf:"key_size,omitempty"`
+	KeyType string `json:"keyType" tf:"key_type"`
+	// +optional
+	KeyVaultID string `json:"keyVaultID,omitempty" tf:"key_vault_id,omitempty"`
 	// +optional
 	N    string `json:"n,omitempty" tf:"n,omitempty"`
 	Name string `json:"name" tf:"name"`
@@ -63,6 +64,9 @@ type KeyVaultKeySpec struct {
 	NotBeforeDate string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +optional
+	// Deprecated
+	VaultURI string `json:"vaultURI,omitempty" tf:"vault_uri,omitempty"`
 	// +optional
 	Version string `json:"version,omitempty" tf:"version,omitempty"`
 	// +optional
@@ -80,7 +84,8 @@ type KeyVaultKeyStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

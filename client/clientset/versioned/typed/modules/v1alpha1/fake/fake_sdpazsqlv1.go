@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var sdpazsqlv1sResource = schema.GroupVersionResource{Group: "modules.kubeform.c
 var sdpazsqlv1sKind = schema.GroupVersionKind{Group: "modules.kubeform.com", Version: "v1alpha1", Kind: "SDPAzSqlv1"}
 
 // Get takes name of the sDPAzSqlv1, and returns the corresponding sDPAzSqlv1 object, and an error if there is any.
-func (c *FakeSDPAzSqlv1s) Get(name string, options v1.GetOptions) (result *v1alpha1.SDPAzSqlv1, err error) {
+func (c *FakeSDPAzSqlv1s) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.SDPAzSqlv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(sdpazsqlv1sResource, c.ns, name), &v1alpha1.SDPAzSqlv1{})
 
@@ -50,7 +52,7 @@ func (c *FakeSDPAzSqlv1s) Get(name string, options v1.GetOptions) (result *v1alp
 }
 
 // List takes label and field selectors, and returns the list of SDPAzSqlv1s that match those selectors.
-func (c *FakeSDPAzSqlv1s) List(opts v1.ListOptions) (result *v1alpha1.SDPAzSqlv1List, err error) {
+func (c *FakeSDPAzSqlv1s) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.SDPAzSqlv1List, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(sdpazsqlv1sResource, sdpazsqlv1sKind, c.ns, opts), &v1alpha1.SDPAzSqlv1List{})
 
@@ -72,14 +74,14 @@ func (c *FakeSDPAzSqlv1s) List(opts v1.ListOptions) (result *v1alpha1.SDPAzSqlv1
 }
 
 // Watch returns a watch.Interface that watches the requested sDPAzSqlv1s.
-func (c *FakeSDPAzSqlv1s) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeSDPAzSqlv1s) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(sdpazsqlv1sResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a sDPAzSqlv1 and creates it.  Returns the server's representation of the sDPAzSqlv1, and an error, if there is any.
-func (c *FakeSDPAzSqlv1s) Create(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (result *v1alpha1.SDPAzSqlv1, err error) {
+func (c *FakeSDPAzSqlv1s) Create(ctx context.Context, sDPAzSqlv1 *v1alpha1.SDPAzSqlv1, opts v1.CreateOptions) (result *v1alpha1.SDPAzSqlv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(sdpazsqlv1sResource, c.ns, sDPAzSqlv1), &v1alpha1.SDPAzSqlv1{})
 
@@ -90,7 +92,7 @@ func (c *FakeSDPAzSqlv1s) Create(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (result *v1alp
 }
 
 // Update takes the representation of a sDPAzSqlv1 and updates it. Returns the server's representation of the sDPAzSqlv1, and an error, if there is any.
-func (c *FakeSDPAzSqlv1s) Update(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (result *v1alpha1.SDPAzSqlv1, err error) {
+func (c *FakeSDPAzSqlv1s) Update(ctx context.Context, sDPAzSqlv1 *v1alpha1.SDPAzSqlv1, opts v1.UpdateOptions) (result *v1alpha1.SDPAzSqlv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(sdpazsqlv1sResource, c.ns, sDPAzSqlv1), &v1alpha1.SDPAzSqlv1{})
 
@@ -102,7 +104,7 @@ func (c *FakeSDPAzSqlv1s) Update(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (result *v1alp
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSDPAzSqlv1s) UpdateStatus(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (*v1alpha1.SDPAzSqlv1, error) {
+func (c *FakeSDPAzSqlv1s) UpdateStatus(ctx context.Context, sDPAzSqlv1 *v1alpha1.SDPAzSqlv1, opts v1.UpdateOptions) (*v1alpha1.SDPAzSqlv1, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(sdpazsqlv1sResource, "status", c.ns, sDPAzSqlv1), &v1alpha1.SDPAzSqlv1{})
 
@@ -113,7 +115,7 @@ func (c *FakeSDPAzSqlv1s) UpdateStatus(sDPAzSqlv1 *v1alpha1.SDPAzSqlv1) (*v1alph
 }
 
 // Delete takes name of the sDPAzSqlv1 and deletes it. Returns an error if one occurs.
-func (c *FakeSDPAzSqlv1s) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeSDPAzSqlv1s) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(sdpazsqlv1sResource, c.ns, name), &v1alpha1.SDPAzSqlv1{})
 
@@ -121,15 +123,15 @@ func (c *FakeSDPAzSqlv1s) Delete(name string, options *v1.DeleteOptions) error {
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeSDPAzSqlv1s) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(sdpazsqlv1sResource, c.ns, listOptions)
+func (c *FakeSDPAzSqlv1s) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(sdpazsqlv1sResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.SDPAzSqlv1List{})
 	return err
 }
 
 // Patch applies the patch and returns the patched sDPAzSqlv1.
-func (c *FakeSDPAzSqlv1s) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SDPAzSqlv1, err error) {
+func (c *FakeSDPAzSqlv1s) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SDPAzSqlv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(sdpazsqlv1sResource, c.ns, name, pt, data, subresources...), &v1alpha1.SDPAzSqlv1{})
 

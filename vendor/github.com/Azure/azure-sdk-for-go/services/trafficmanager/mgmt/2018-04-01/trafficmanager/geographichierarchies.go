@@ -35,9 +35,7 @@ func NewGeographicHierarchiesClient(subscriptionID string) GeographicHierarchies
 	return NewGeographicHierarchiesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewGeographicHierarchiesClientWithBaseURI creates an instance of the GeographicHierarchiesClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewGeographicHierarchiesClientWithBaseURI creates an instance of the GeographicHierarchiesClient client.
 func NewGeographicHierarchiesClientWithBaseURI(baseURI string, subscriptionID string) GeographicHierarchiesClient {
 	return GeographicHierarchiesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -93,7 +91,8 @@ func (client GeographicHierarchiesClient) GetDefaultPreparer(ctx context.Context
 // GetDefaultSender sends the GetDefault request. The method will close the
 // http.Response Body if it receives an error.
 func (client GeographicHierarchiesClient) GetDefaultSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetDefaultResponder handles the response to the GetDefault request. The method always

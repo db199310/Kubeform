@@ -46,9 +46,7 @@ type NetworkWatcherFlowLogSpecRetentionPolicy struct {
 }
 
 type NetworkWatcherFlowLogSpecTrafficAnalytics struct {
-	Enabled bool `json:"enabled" tf:"enabled"`
-	// +optional
-	IntervalInMinutes   int64  `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
+	Enabled             bool   `json:"enabled" tf:"enabled"`
 	WorkspaceID         string `json:"workspaceID" tf:"workspace_id"`
 	WorkspaceRegion     string `json:"workspaceRegion" tf:"workspace_region"`
 	WorkspaceResourceID string `json:"workspaceResourceID" tf:"workspace_resource_id"`
@@ -82,7 +80,8 @@ type NetworkWatcherFlowLogStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

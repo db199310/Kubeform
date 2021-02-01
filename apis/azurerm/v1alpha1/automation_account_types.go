@@ -40,6 +40,11 @@ type AutomationAccount struct {
 	Status            AutomationAccountStatus `json:"status,omitempty"`
 }
 
+type AutomationAccountSpecSku struct {
+	// +optional
+	Name string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type AutomationAccountSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -54,7 +59,12 @@ type AutomationAccountSpec struct {
 	Location          string `json:"location" tf:"location"`
 	Name              string `json:"name" tf:"name"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	SkuName           string `json:"skuName" tf:"sku_name"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []AutomationAccountSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +optional
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -68,7 +78,8 @@ type AutomationAccountStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

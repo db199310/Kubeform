@@ -46,8 +46,7 @@ func New(subscriptionID string) BaseClient {
 	return NewWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewWithBaseURI creates an instance of the BaseClient client using a custom endpoint.  Use this when interacting with
-// an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewWithBaseURI creates an instance of the BaseClient client.
 func NewWithBaseURI(baseURI string, subscriptionID string) BaseClient {
 	return BaseClient{
 		Client:         autorest.NewClientWithUserAgent(UserAgent()),
@@ -122,7 +121,8 @@ func (client BaseClient) CheckDomainAvailabilityPreparer(ctx context.Context, pa
 // CheckDomainAvailabilitySender sends the CheckDomainAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client BaseClient) CheckDomainAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckDomainAvailabilityResponder handles the response to the CheckDomainAvailability request. The method always
@@ -207,7 +207,8 @@ func (client BaseClient) CheckSkuAvailabilityPreparer(ctx context.Context, locat
 // CheckSkuAvailabilitySender sends the CheckSkuAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client BaseClient) CheckSkuAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckSkuAvailabilityResponder handles the response to the CheckSkuAvailability request. The method always

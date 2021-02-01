@@ -36,8 +36,7 @@ func NewTestJobStreamsClient(subscriptionID string) TestJobStreamsClient {
 	return NewTestJobStreamsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewTestJobStreamsClientWithBaseURI creates an instance of the TestJobStreamsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewTestJobStreamsClientWithBaseURI creates an instance of the TestJobStreamsClient client.
 func NewTestJobStreamsClientWithBaseURI(baseURI string, subscriptionID string) TestJobStreamsClient {
 	return TestJobStreamsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -114,7 +113,8 @@ func (client TestJobStreamsClient) GetPreparer(ctx context.Context, resourceGrou
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client TestJobStreamsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -205,7 +205,8 @@ func (client TestJobStreamsClient) ListByTestJobPreparer(ctx context.Context, re
 // ListByTestJobSender sends the ListByTestJob request. The method will close the
 // http.Response Body if it receives an error.
 func (client TestJobStreamsClient) ListByTestJobSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByTestJobResponder handles the response to the ListByTestJob request. The method always

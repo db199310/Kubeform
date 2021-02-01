@@ -50,39 +50,6 @@ type HdinsightHadoopClusterSpecGateway struct {
 	Username string `json:"username" tf:"username"`
 }
 
-type HdinsightHadoopClusterSpecMetastoresAmbari struct {
-	DatabaseName string `json:"databaseName" tf:"database_name"`
-	Password     string `json:"-" sensitive:"true" tf:"password"`
-	Server       string `json:"server" tf:"server"`
-	Username     string `json:"username" tf:"username"`
-}
-
-type HdinsightHadoopClusterSpecMetastoresHive struct {
-	DatabaseName string `json:"databaseName" tf:"database_name"`
-	Password     string `json:"-" sensitive:"true" tf:"password"`
-	Server       string `json:"server" tf:"server"`
-	Username     string `json:"username" tf:"username"`
-}
-
-type HdinsightHadoopClusterSpecMetastoresOozie struct {
-	DatabaseName string `json:"databaseName" tf:"database_name"`
-	Password     string `json:"-" sensitive:"true" tf:"password"`
-	Server       string `json:"server" tf:"server"`
-	Username     string `json:"username" tf:"username"`
-}
-
-type HdinsightHadoopClusterSpecMetastores struct {
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Ambari []HdinsightHadoopClusterSpecMetastoresAmbari `json:"ambari,omitempty" tf:"ambari,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Hive []HdinsightHadoopClusterSpecMetastoresHive `json:"hive,omitempty" tf:"hive,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Oozie []HdinsightHadoopClusterSpecMetastoresOozie `json:"oozie,omitempty" tf:"oozie,omitempty"`
-}
-
 type HdinsightHadoopClusterSpecRolesEdgeNodeInstallScriptAction struct {
 	Name string `json:"name" tf:"name"`
 	Uri  string `json:"uri" tf:"uri"`
@@ -175,13 +142,10 @@ type HdinsightHadoopClusterSpec struct {
 	// +kubebuilder:validation:MaxItems=1
 	Gateway []HdinsightHadoopClusterSpecGateway `json:"gateway" tf:"gateway"`
 	// +optional
-	HttpsEndpoint string `json:"httpsEndpoint,omitempty" tf:"https_endpoint,omitempty"`
-	Location      string `json:"location" tf:"location"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	Metastores        []HdinsightHadoopClusterSpecMetastores `json:"metastores,omitempty" tf:"metastores,omitempty"`
-	Name              string                                 `json:"name" tf:"name"`
-	ResourceGroupName string                                 `json:"resourceGroupName" tf:"resource_group_name"`
+	HttpsEndpoint     string `json:"httpsEndpoint,omitempty" tf:"https_endpoint,omitempty"`
+	Location          string `json:"location" tf:"location"`
+	Name              string `json:"name" tf:"name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +kubebuilder:validation:MaxItems=1
 	Roles []HdinsightHadoopClusterSpecRoles `json:"roles" tf:"roles"`
 	// +optional
@@ -194,8 +158,6 @@ type HdinsightHadoopClusterSpec struct {
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	Tier string            `json:"tier" tf:"tier"`
-	// +optional
-	TlsMinVersion string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 }
 
 type HdinsightHadoopClusterStatus struct {
@@ -207,7 +169,8 @@ type HdinsightHadoopClusterStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

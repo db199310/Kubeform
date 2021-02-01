@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var keyvaultcertificatesResource = schema.GroupVersionResource{Group: "azurerm.k
 var keyvaultcertificatesKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "KeyVaultCertificate"}
 
 // Get takes name of the keyVaultCertificate, and returns the corresponding keyVaultCertificate object, and an error if there is any.
-func (c *FakeKeyVaultCertificates) Get(name string, options v1.GetOptions) (result *v1alpha1.KeyVaultCertificate, err error) {
+func (c *FakeKeyVaultCertificates) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.KeyVaultCertificate, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(keyvaultcertificatesResource, c.ns, name), &v1alpha1.KeyVaultCertificate{})
 
@@ -50,7 +52,7 @@ func (c *FakeKeyVaultCertificates) Get(name string, options v1.GetOptions) (resu
 }
 
 // List takes label and field selectors, and returns the list of KeyVaultCertificates that match those selectors.
-func (c *FakeKeyVaultCertificates) List(opts v1.ListOptions) (result *v1alpha1.KeyVaultCertificateList, err error) {
+func (c *FakeKeyVaultCertificates) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.KeyVaultCertificateList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(keyvaultcertificatesResource, keyvaultcertificatesKind, c.ns, opts), &v1alpha1.KeyVaultCertificateList{})
 
@@ -72,14 +74,14 @@ func (c *FakeKeyVaultCertificates) List(opts v1.ListOptions) (result *v1alpha1.K
 }
 
 // Watch returns a watch.Interface that watches the requested keyVaultCertificates.
-func (c *FakeKeyVaultCertificates) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeKeyVaultCertificates) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(keyvaultcertificatesResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a keyVaultCertificate and creates it.  Returns the server's representation of the keyVaultCertificate, and an error, if there is any.
-func (c *FakeKeyVaultCertificates) Create(keyVaultCertificate *v1alpha1.KeyVaultCertificate) (result *v1alpha1.KeyVaultCertificate, err error) {
+func (c *FakeKeyVaultCertificates) Create(ctx context.Context, keyVaultCertificate *v1alpha1.KeyVaultCertificate, opts v1.CreateOptions) (result *v1alpha1.KeyVaultCertificate, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(keyvaultcertificatesResource, c.ns, keyVaultCertificate), &v1alpha1.KeyVaultCertificate{})
 
@@ -90,7 +92,7 @@ func (c *FakeKeyVaultCertificates) Create(keyVaultCertificate *v1alpha1.KeyVault
 }
 
 // Update takes the representation of a keyVaultCertificate and updates it. Returns the server's representation of the keyVaultCertificate, and an error, if there is any.
-func (c *FakeKeyVaultCertificates) Update(keyVaultCertificate *v1alpha1.KeyVaultCertificate) (result *v1alpha1.KeyVaultCertificate, err error) {
+func (c *FakeKeyVaultCertificates) Update(ctx context.Context, keyVaultCertificate *v1alpha1.KeyVaultCertificate, opts v1.UpdateOptions) (result *v1alpha1.KeyVaultCertificate, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(keyvaultcertificatesResource, c.ns, keyVaultCertificate), &v1alpha1.KeyVaultCertificate{})
 
@@ -102,7 +104,7 @@ func (c *FakeKeyVaultCertificates) Update(keyVaultCertificate *v1alpha1.KeyVault
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeKeyVaultCertificates) UpdateStatus(keyVaultCertificate *v1alpha1.KeyVaultCertificate) (*v1alpha1.KeyVaultCertificate, error) {
+func (c *FakeKeyVaultCertificates) UpdateStatus(ctx context.Context, keyVaultCertificate *v1alpha1.KeyVaultCertificate, opts v1.UpdateOptions) (*v1alpha1.KeyVaultCertificate, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(keyvaultcertificatesResource, "status", c.ns, keyVaultCertificate), &v1alpha1.KeyVaultCertificate{})
 
@@ -113,7 +115,7 @@ func (c *FakeKeyVaultCertificates) UpdateStatus(keyVaultCertificate *v1alpha1.Ke
 }
 
 // Delete takes name of the keyVaultCertificate and deletes it. Returns an error if one occurs.
-func (c *FakeKeyVaultCertificates) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeKeyVaultCertificates) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(keyvaultcertificatesResource, c.ns, name), &v1alpha1.KeyVaultCertificate{})
 
@@ -121,15 +123,15 @@ func (c *FakeKeyVaultCertificates) Delete(name string, options *v1.DeleteOptions
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeKeyVaultCertificates) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(keyvaultcertificatesResource, c.ns, listOptions)
+func (c *FakeKeyVaultCertificates) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(keyvaultcertificatesResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.KeyVaultCertificateList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched keyVaultCertificate.
-func (c *FakeKeyVaultCertificates) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.KeyVaultCertificate, err error) {
+func (c *FakeKeyVaultCertificates) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.KeyVaultCertificate, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(keyvaultcertificatesResource, c.ns, name, pt, data, subresources...), &v1alpha1.KeyVaultCertificate{})
 

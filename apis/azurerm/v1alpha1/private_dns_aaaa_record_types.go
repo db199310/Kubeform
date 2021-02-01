@@ -45,8 +45,6 @@ type PrivateDNSAaaaRecordSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// +optional
-	Fqdn              string   `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 	Name              string   `json:"name" tf:"name"`
 	Records           []string `json:"records" tf:"records"`
 	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
@@ -65,7 +63,8 @@ type PrivateDNSAaaaRecordStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

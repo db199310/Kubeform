@@ -42,20 +42,10 @@ type NetappVolume struct {
 
 type NetappVolumeSpecExportPolicyRule struct {
 	AllowedClients []string `json:"allowedClients" tf:"allowed_clients"`
-	// +optional
-	// Deprecated
-	CifsEnabled bool `json:"cifsEnabled,omitempty" tf:"cifs_enabled,omitempty"`
-	// +optional
-	// Deprecated
-	Nfsv3Enabled bool `json:"nfsv3Enabled,omitempty" tf:"nfsv3_enabled,omitempty"`
-	// +optional
-	// Deprecated
-	Nfsv4Enabled bool `json:"nfsv4Enabled,omitempty" tf:"nfsv4_enabled,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	// +kubebuilder:validation:MinItems=1
-	ProtocolsEnabled []string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
-	RuleIndex        int64    `json:"ruleIndex" tf:"rule_index"`
+	CifsEnabled    bool     `json:"cifsEnabled" tf:"cifs_enabled"`
+	Nfsv3Enabled   bool     `json:"nfsv3Enabled" tf:"nfsv3_enabled"`
+	Nfsv4Enabled   bool     `json:"nfsv4Enabled" tf:"nfsv4_enabled"`
+	RuleIndex      int64    `json:"ruleIndex" tf:"rule_index"`
 	// +optional
 	UnixReadOnly bool `json:"unixReadOnly,omitempty" tf:"unix_read_only,omitempty"`
 	// +optional
@@ -70,22 +60,15 @@ type NetappVolumeSpec struct {
 	AccountName string `json:"accountName" tf:"account_name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=5
-	ExportPolicyRule []NetappVolumeSpecExportPolicyRule `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
-	Location         string                             `json:"location" tf:"location"`
-	// +optional
-	MountIPAddresses []string `json:"mountIPAddresses,omitempty" tf:"mount_ip_addresses,omitempty"`
-	Name             string   `json:"name" tf:"name"`
-	PoolName         string   `json:"poolName" tf:"pool_name"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=2
-	Protocols         []string `json:"protocols,omitempty" tf:"protocols,omitempty"`
-	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
-	ServiceLevel      string   `json:"serviceLevel" tf:"service_level"`
-	StorageQuotaInGb  int64    `json:"storageQuotaInGb" tf:"storage_quota_in_gb"`
-	SubnetID          string   `json:"subnetID" tf:"subnet_id"`
-	// +optional
-	Tags       map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	VolumePath string            `json:"volumePath" tf:"volume_path"`
+	ExportPolicyRule  []NetappVolumeSpecExportPolicyRule `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
+	Location          string                             `json:"location" tf:"location"`
+	Name              string                             `json:"name" tf:"name"`
+	PoolName          string                             `json:"poolName" tf:"pool_name"`
+	ResourceGroupName string                             `json:"resourceGroupName" tf:"resource_group_name"`
+	ServiceLevel      string                             `json:"serviceLevel" tf:"service_level"`
+	StorageQuotaInGb  int64                              `json:"storageQuotaInGb" tf:"storage_quota_in_gb"`
+	SubnetID          string                             `json:"subnetID" tf:"subnet_id"`
+	VolumePath        string                             `json:"volumePath" tf:"volume_path"`
 }
 
 type NetappVolumeStatus struct {
@@ -97,7 +80,8 @@ type NetappVolumeStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

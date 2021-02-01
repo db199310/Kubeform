@@ -36,8 +36,7 @@ func NewPricingsClient(subscriptionID string, ascLocation string) PricingsClient
 	return NewPricingsClientWithBaseURI(DefaultBaseURI, subscriptionID, ascLocation)
 }
 
-// NewPricingsClientWithBaseURI creates an instance of the PricingsClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewPricingsClientWithBaseURI creates an instance of the PricingsClient client.
 func NewPricingsClientWithBaseURI(baseURI string, subscriptionID string, ascLocation string) PricingsClient {
 	return PricingsClient{NewWithBaseURI(baseURI, subscriptionID, ascLocation)}
 }
@@ -116,7 +115,8 @@ func (client PricingsClient) CreateOrUpdateResourceGroupPricingPreparer(ctx cont
 // CreateOrUpdateResourceGroupPricingSender sends the CreateOrUpdateResourceGroupPricing request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) CreateOrUpdateResourceGroupPricingSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateResourceGroupPricingResponder handles the response to the CreateOrUpdateResourceGroupPricing request. The method always
@@ -203,7 +203,8 @@ func (client PricingsClient) GetResourceGroupPricingPreparer(ctx context.Context
 // GetResourceGroupPricingSender sends the GetResourceGroupPricing request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) GetResourceGroupPricingSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResourceGroupPricingResponder handles the response to the GetResourceGroupPricing request. The method always
@@ -284,7 +285,8 @@ func (client PricingsClient) GetSubscriptionPricingPreparer(ctx context.Context,
 // GetSubscriptionPricingSender sends the GetSubscriptionPricing request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) GetSubscriptionPricingSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetSubscriptionPricingResponder handles the response to the GetSubscriptionPricing request. The method always
@@ -362,7 +364,8 @@ func (client PricingsClient) ListPreparer(ctx context.Context) (*http.Request, e
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -485,7 +488,8 @@ func (client PricingsClient) ListByResourceGroupPreparer(ctx context.Context, re
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -605,7 +609,8 @@ func (client PricingsClient) UpdateSubscriptionPricingPreparer(ctx context.Conte
 // UpdateSubscriptionPricingSender sends the UpdateSubscriptionPricing request. The method will close the
 // http.Response Body if it receives an error.
 func (client PricingsClient) UpdateSubscriptionPricingSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // UpdateSubscriptionPricingResponder handles the response to the UpdateSubscriptionPricing request. The method always

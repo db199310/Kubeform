@@ -38,8 +38,7 @@ func NewTdeCertificatesClient(subscriptionID string) TdeCertificatesClient {
 	return NewTdeCertificatesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewTdeCertificatesClientWithBaseURI creates an instance of the TdeCertificatesClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewTdeCertificatesClientWithBaseURI creates an instance of the TdeCertificatesClient client.
 func NewTdeCertificatesClientWithBaseURI(baseURI string, subscriptionID string) TdeCertificatesClient {
 	return TdeCertificatesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -109,8 +108,9 @@ func (client TdeCertificatesClient) CreatePreparer(ctx context.Context, resource
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client TdeCertificatesClient) CreateSender(req *http.Request) (future TdeCertificatesCreateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

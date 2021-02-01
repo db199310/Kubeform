@@ -101,8 +101,6 @@ type RedisCacheSpec struct {
 	// +optional
 	PrimaryAccessKey string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
 	// +optional
-	PrimaryConnectionString string `json:"-" sensitive:"true" tf:"primary_connection_string,omitempty"`
-	// +optional
 	PrivateStaticIPAddress string `json:"privateStaticIPAddress,omitempty" tf:"private_static_ip_address,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
@@ -110,8 +108,6 @@ type RedisCacheSpec struct {
 	ResourceGroupName  string                             `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	SecondaryAccessKey string `json:"-" sensitive:"true" tf:"secondary_access_key,omitempty"`
-	// +optional
-	SecondaryConnectionString string `json:"-" sensitive:"true" tf:"secondary_connection_string,omitempty"`
 	// +optional
 	ShardCount int64  `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
 	SkuName    string `json:"skuName" tf:"sku_name"`
@@ -135,7 +131,8 @@ type RedisCacheStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

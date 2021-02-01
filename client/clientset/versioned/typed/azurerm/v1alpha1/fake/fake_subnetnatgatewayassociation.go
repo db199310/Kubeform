@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var subnetnatgatewayassociationsResource = schema.GroupVersionResource{Group: "a
 var subnetnatgatewayassociationsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "SubnetNATGatewayAssociation"}
 
 // Get takes name of the subnetNATGatewayAssociation, and returns the corresponding subnetNATGatewayAssociation object, and an error if there is any.
-func (c *FakeSubnetNATGatewayAssociations) Get(name string, options v1.GetOptions) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
+func (c *FakeSubnetNATGatewayAssociations) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(subnetnatgatewayassociationsResource, c.ns, name), &v1alpha1.SubnetNATGatewayAssociation{})
 
@@ -50,7 +52,7 @@ func (c *FakeSubnetNATGatewayAssociations) Get(name string, options v1.GetOption
 }
 
 // List takes label and field selectors, and returns the list of SubnetNATGatewayAssociations that match those selectors.
-func (c *FakeSubnetNATGatewayAssociations) List(opts v1.ListOptions) (result *v1alpha1.SubnetNATGatewayAssociationList, err error) {
+func (c *FakeSubnetNATGatewayAssociations) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.SubnetNATGatewayAssociationList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(subnetnatgatewayassociationsResource, subnetnatgatewayassociationsKind, c.ns, opts), &v1alpha1.SubnetNATGatewayAssociationList{})
 
@@ -72,14 +74,14 @@ func (c *FakeSubnetNATGatewayAssociations) List(opts v1.ListOptions) (result *v1
 }
 
 // Watch returns a watch.Interface that watches the requested subnetNATGatewayAssociations.
-func (c *FakeSubnetNATGatewayAssociations) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeSubnetNATGatewayAssociations) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(subnetnatgatewayassociationsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a subnetNATGatewayAssociation and creates it.  Returns the server's representation of the subnetNATGatewayAssociation, and an error, if there is any.
-func (c *FakeSubnetNATGatewayAssociations) Create(subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
+func (c *FakeSubnetNATGatewayAssociations) Create(ctx context.Context, subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation, opts v1.CreateOptions) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(subnetnatgatewayassociationsResource, c.ns, subnetNATGatewayAssociation), &v1alpha1.SubnetNATGatewayAssociation{})
 
@@ -90,7 +92,7 @@ func (c *FakeSubnetNATGatewayAssociations) Create(subnetNATGatewayAssociation *v
 }
 
 // Update takes the representation of a subnetNATGatewayAssociation and updates it. Returns the server's representation of the subnetNATGatewayAssociation, and an error, if there is any.
-func (c *FakeSubnetNATGatewayAssociations) Update(subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
+func (c *FakeSubnetNATGatewayAssociations) Update(ctx context.Context, subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation, opts v1.UpdateOptions) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(subnetnatgatewayassociationsResource, c.ns, subnetNATGatewayAssociation), &v1alpha1.SubnetNATGatewayAssociation{})
 
@@ -102,7 +104,7 @@ func (c *FakeSubnetNATGatewayAssociations) Update(subnetNATGatewayAssociation *v
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSubnetNATGatewayAssociations) UpdateStatus(subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation) (*v1alpha1.SubnetNATGatewayAssociation, error) {
+func (c *FakeSubnetNATGatewayAssociations) UpdateStatus(ctx context.Context, subnetNATGatewayAssociation *v1alpha1.SubnetNATGatewayAssociation, opts v1.UpdateOptions) (*v1alpha1.SubnetNATGatewayAssociation, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(subnetnatgatewayassociationsResource, "status", c.ns, subnetNATGatewayAssociation), &v1alpha1.SubnetNATGatewayAssociation{})
 
@@ -113,7 +115,7 @@ func (c *FakeSubnetNATGatewayAssociations) UpdateStatus(subnetNATGatewayAssociat
 }
 
 // Delete takes name of the subnetNATGatewayAssociation and deletes it. Returns an error if one occurs.
-func (c *FakeSubnetNATGatewayAssociations) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeSubnetNATGatewayAssociations) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(subnetnatgatewayassociationsResource, c.ns, name), &v1alpha1.SubnetNATGatewayAssociation{})
 
@@ -121,15 +123,15 @@ func (c *FakeSubnetNATGatewayAssociations) Delete(name string, options *v1.Delet
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeSubnetNATGatewayAssociations) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(subnetnatgatewayassociationsResource, c.ns, listOptions)
+func (c *FakeSubnetNATGatewayAssociations) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(subnetnatgatewayassociationsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.SubnetNATGatewayAssociationList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched subnetNATGatewayAssociation.
-func (c *FakeSubnetNATGatewayAssociations) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
+func (c *FakeSubnetNATGatewayAssociations) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SubnetNATGatewayAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(subnetnatgatewayassociationsResource, c.ns, name, pt, data, subresources...), &v1alpha1.SubnetNATGatewayAssociation{})
 

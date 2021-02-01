@@ -46,6 +46,7 @@ type NetworkInterfaceApplicationSecurityGroupAssociationSpec struct {
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	ApplicationSecurityGroupID string `json:"applicationSecurityGroupID" tf:"application_security_group_id"`
+	IpConfigurationName        string `json:"ipConfigurationName" tf:"ip_configuration_name"`
 	NetworkInterfaceID         string `json:"networkInterfaceID" tf:"network_interface_id"`
 }
 
@@ -58,7 +59,8 @@ type NetworkInterfaceApplicationSecurityGroupAssociationStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

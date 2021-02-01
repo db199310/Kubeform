@@ -590,13 +590,11 @@ const (
 	ManagedDatabaseCreateModeRecovery ManagedDatabaseCreateMode = "Recovery"
 	// ManagedDatabaseCreateModeRestoreExternalBackup ...
 	ManagedDatabaseCreateModeRestoreExternalBackup ManagedDatabaseCreateMode = "RestoreExternalBackup"
-	// ManagedDatabaseCreateModeRestoreLongTermRetentionBackup ...
-	ManagedDatabaseCreateModeRestoreLongTermRetentionBackup ManagedDatabaseCreateMode = "RestoreLongTermRetentionBackup"
 )
 
 // PossibleManagedDatabaseCreateModeValues returns an array of possible values for the ManagedDatabaseCreateMode const type.
 func PossibleManagedDatabaseCreateModeValues() []ManagedDatabaseCreateMode {
-	return []ManagedDatabaseCreateMode{ManagedDatabaseCreateModeDefault, ManagedDatabaseCreateModePointInTimeRestore, ManagedDatabaseCreateModeRecovery, ManagedDatabaseCreateModeRestoreExternalBackup, ManagedDatabaseCreateModeRestoreLongTermRetentionBackup}
+	return []ManagedDatabaseCreateMode{ManagedDatabaseCreateModeDefault, ManagedDatabaseCreateModePointInTimeRestore, ManagedDatabaseCreateModeRecovery, ManagedDatabaseCreateModeRestoreExternalBackup}
 }
 
 // ManagedDatabaseStatus enumerates the values for managed database status.
@@ -611,8 +609,6 @@ const (
 	Offline ManagedDatabaseStatus = "Offline"
 	// Online ...
 	Online ManagedDatabaseStatus = "Online"
-	// Restoring ...
-	Restoring ManagedDatabaseStatus = "Restoring"
 	// Shutdown ...
 	Shutdown ManagedDatabaseStatus = "Shutdown"
 	// Updating ...
@@ -621,7 +617,7 @@ const (
 
 // PossibleManagedDatabaseStatusValues returns an array of possible values for the ManagedDatabaseStatus const type.
 func PossibleManagedDatabaseStatusValues() []ManagedDatabaseStatus {
-	return []ManagedDatabaseStatus{Creating, Inaccessible, Offline, Online, Restoring, Shutdown, Updating}
+	return []ManagedDatabaseStatus{Creating, Inaccessible, Offline, Online, Shutdown, Updating}
 }
 
 // ManagedInstanceLicenseType enumerates the values for managed instance license type.
@@ -1012,27 +1008,6 @@ const (
 // PossibleSecurityAlertPolicyUseServerDefaultValues returns an array of possible values for the SecurityAlertPolicyUseServerDefault const type.
 func PossibleSecurityAlertPolicyUseServerDefaultValues() []SecurityAlertPolicyUseServerDefault {
 	return []SecurityAlertPolicyUseServerDefault{SecurityAlertPolicyUseServerDefaultDisabled, SecurityAlertPolicyUseServerDefaultEnabled}
-}
-
-// SensitivityLabelRank enumerates the values for sensitivity label rank.
-type SensitivityLabelRank string
-
-const (
-	// SensitivityLabelRankCritical ...
-	SensitivityLabelRankCritical SensitivityLabelRank = "Critical"
-	// SensitivityLabelRankHigh ...
-	SensitivityLabelRankHigh SensitivityLabelRank = "High"
-	// SensitivityLabelRankLow ...
-	SensitivityLabelRankLow SensitivityLabelRank = "Low"
-	// SensitivityLabelRankMedium ...
-	SensitivityLabelRankMedium SensitivityLabelRank = "Medium"
-	// SensitivityLabelRankNone ...
-	SensitivityLabelRankNone SensitivityLabelRank = "None"
-)
-
-// PossibleSensitivityLabelRankValues returns an array of possible values for the SensitivityLabelRank const type.
-func PossibleSensitivityLabelRankValues() []SensitivityLabelRank {
-	return []SensitivityLabelRank{SensitivityLabelRankCritical, SensitivityLabelRankHigh, SensitivityLabelRankLow, SensitivityLabelRankMedium, SensitivityLabelRankNone}
 }
 
 // SensitivityLabelSource enumerates the values for sensitivity label source.
@@ -8495,7 +8470,7 @@ func NewManagedDatabaseListResultPage(getNextPage func(context.Context, ManagedD
 type ManagedDatabaseProperties struct {
 	// Collation - Collation of the managed database.
 	Collation *string `json:"collation,omitempty"`
-	// Status - READ-ONLY; Status of the database. Possible values include: 'Online', 'Offline', 'Shutdown', 'Creating', 'Inaccessible', 'Restoring', 'Updating'
+	// Status - READ-ONLY; Status of the database. Possible values include: 'Online', 'Offline', 'Shutdown', 'Creating', 'Inaccessible', 'Updating'
 	Status ManagedDatabaseStatus `json:"status,omitempty"`
 	// CreationDate - READ-ONLY; Creation date of the database.
 	CreationDate *date.Time `json:"creationDate,omitempty"`
@@ -8507,7 +8482,7 @@ type ManagedDatabaseProperties struct {
 	DefaultSecondaryLocation *string `json:"defaultSecondaryLocation,omitempty"`
 	// CatalogCollation - Collation of the metadata catalog. Possible values include: 'DATABASEDEFAULT', 'SQLLatin1GeneralCP1CIAS'
 	CatalogCollation CatalogCollationType `json:"catalogCollation,omitempty"`
-	// CreateMode - Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. Possible values include: 'ManagedDatabaseCreateModeDefault', 'ManagedDatabaseCreateModeRestoreExternalBackup', 'ManagedDatabaseCreateModePointInTimeRestore', 'ManagedDatabaseCreateModeRecovery', 'ManagedDatabaseCreateModeRestoreLongTermRetentionBackup'
+	// CreateMode - Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. Possible values include: 'ManagedDatabaseCreateModeDefault', 'ManagedDatabaseCreateModeRestoreExternalBackup', 'ManagedDatabaseCreateModePointInTimeRestore', 'ManagedDatabaseCreateModeRecovery'
 	CreateMode ManagedDatabaseCreateMode `json:"createMode,omitempty"`
 	// StorageContainerURI - Conditional. If createMode is RestoreExternalBackup, this value is required. Specifies the uri of the storage container where backups for this restore are stored.
 	StorageContainerURI *string `json:"storageContainerUri,omitempty"`
@@ -8521,8 +8496,6 @@ type ManagedDatabaseProperties struct {
 	FailoverGroupID *string `json:"failoverGroupId,omitempty"`
 	// RecoverableDatabaseID - The resource identifier of the recoverable database associated with create operation of this database.
 	RecoverableDatabaseID *string `json:"recoverableDatabaseId,omitempty"`
-	// LongTermRetentionBackupResourceID - The name of the Long Term Retention backup to be used for restore of this managed database.
-	LongTermRetentionBackupResourceID *string `json:"longTermRetentionBackupResourceId,omitempty"`
 }
 
 // ManagedDatabasesCompleteRestoreFuture an abstraction for monitoring and retrieving the results of a
@@ -9288,8 +9261,6 @@ type ManagedInstanceProperties struct {
 	TimezoneID *string `json:"timezoneId,omitempty"`
 	// InstancePoolID - The Id of the instance pool this managed server belongs to.
 	InstancePoolID *string `json:"instancePoolId,omitempty"`
-	// MinimalTLSVersion - Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'
-	MinimalTLSVersion *string `json:"minimalTlsVersion,omitempty"`
 }
 
 // ManagedInstancesCreateOrUpdateFuture an abstraction for monitoring and retrieving the results of a
@@ -10092,29 +10063,6 @@ func (future *ReplicationLinksFailoverFuture) Result(client ReplicationLinksClie
 	return
 }
 
-// ReplicationLinksUnlinkFuture an abstraction for monitoring and retrieving the results of a long-running
-// operation.
-type ReplicationLinksUnlinkFuture struct {
-	azure.Future
-}
-
-// Result returns the result of the asynchronous operation.
-// If the operation has not completed it will return an error.
-func (future *ReplicationLinksUnlinkFuture) Result(client ReplicationLinksClient) (ar autorest.Response, err error) {
-	var done bool
-	done, err = future.DoneWithContext(context.Background(), client)
-	if err != nil {
-		err = autorest.NewErrorWithError(err, "sql.ReplicationLinksUnlinkFuture", "Result", future.Response(), "Polling failure")
-		return
-	}
-	if !done {
-		err = azure.NewAsyncOpIncompleteError("sql.ReplicationLinksUnlinkFuture")
-		return
-	}
-	ar.Response = future.Response()
-	return
-}
-
 // Resource ARM resource.
 type Resource struct {
 	// ID - READ-ONLY; Resource ID.
@@ -10898,8 +10846,6 @@ type SensitivityLabelProperties struct {
 	InformationTypeID *string `json:"informationTypeId,omitempty"`
 	// IsDisabled - READ-ONLY; Is sensitivity recommendation disabled. Applicable for recommended sensitivity label only. Specifies whether the sensitivity recommendation on this column is disabled (dismissed) or not.
 	IsDisabled *bool `json:"isDisabled,omitempty"`
-	// Rank - Possible values include: 'SensitivityLabelRankNone', 'SensitivityLabelRankLow', 'SensitivityLabelRankMedium', 'SensitivityLabelRankHigh', 'SensitivityLabelRankCritical'
-	Rank SensitivityLabelRank `json:"rank,omitempty"`
 }
 
 // Server an Azure SQL Database server.
@@ -15398,12 +15344,6 @@ type TransparentDataEncryptionActivityProperties struct {
 type TransparentDataEncryptionProperties struct {
 	// Status - The status of the database transparent data encryption. Possible values include: 'TransparentDataEncryptionStatusEnabled', 'TransparentDataEncryptionStatusDisabled'
 	Status TransparentDataEncryptionStatus `json:"status,omitempty"`
-}
-
-// UnlinkParameters represents the parameters for Unlink Replication Link request.
-type UnlinkParameters struct {
-	// ForcedTermination - Determines whether link will be terminated in a forced or a friendly way.
-	ForcedTermination *bool `json:"forcedTermination,omitempty"`
 }
 
 // VirtualCluster an Azure SQL virtual cluster.

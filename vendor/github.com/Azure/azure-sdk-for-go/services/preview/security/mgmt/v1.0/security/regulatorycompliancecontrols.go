@@ -37,8 +37,7 @@ func NewRegulatoryComplianceControlsClient(subscriptionID string, ascLocation st
 }
 
 // NewRegulatoryComplianceControlsClientWithBaseURI creates an instance of the RegulatoryComplianceControlsClient
-// client using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI
-// (sovereign clouds, Azure stack).
+// client.
 func NewRegulatoryComplianceControlsClientWithBaseURI(baseURI string, subscriptionID string, ascLocation string) RegulatoryComplianceControlsClient {
 	return RegulatoryComplianceControlsClient{NewWithBaseURI(baseURI, subscriptionID, ascLocation)}
 }
@@ -109,7 +108,8 @@ func (client RegulatoryComplianceControlsClient) GetPreparer(ctx context.Context
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client RegulatoryComplianceControlsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -194,7 +194,8 @@ func (client RegulatoryComplianceControlsClient) ListPreparer(ctx context.Contex
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client RegulatoryComplianceControlsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always

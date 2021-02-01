@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var apimanagementgroupsResource = schema.GroupVersionResource{Group: "azurerm.ku
 var apimanagementgroupsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "ApiManagementGroup"}
 
 // Get takes name of the apiManagementGroup, and returns the corresponding apiManagementGroup object, and an error if there is any.
-func (c *FakeApiManagementGroups) Get(name string, options v1.GetOptions) (result *v1alpha1.ApiManagementGroup, err error) {
+func (c *FakeApiManagementGroups) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.ApiManagementGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(apimanagementgroupsResource, c.ns, name), &v1alpha1.ApiManagementGroup{})
 
@@ -50,7 +52,7 @@ func (c *FakeApiManagementGroups) Get(name string, options v1.GetOptions) (resul
 }
 
 // List takes label and field selectors, and returns the list of ApiManagementGroups that match those selectors.
-func (c *FakeApiManagementGroups) List(opts v1.ListOptions) (result *v1alpha1.ApiManagementGroupList, err error) {
+func (c *FakeApiManagementGroups) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.ApiManagementGroupList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(apimanagementgroupsResource, apimanagementgroupsKind, c.ns, opts), &v1alpha1.ApiManagementGroupList{})
 
@@ -72,14 +74,14 @@ func (c *FakeApiManagementGroups) List(opts v1.ListOptions) (result *v1alpha1.Ap
 }
 
 // Watch returns a watch.Interface that watches the requested apiManagementGroups.
-func (c *FakeApiManagementGroups) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeApiManagementGroups) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(apimanagementgroupsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a apiManagementGroup and creates it.  Returns the server's representation of the apiManagementGroup, and an error, if there is any.
-func (c *FakeApiManagementGroups) Create(apiManagementGroup *v1alpha1.ApiManagementGroup) (result *v1alpha1.ApiManagementGroup, err error) {
+func (c *FakeApiManagementGroups) Create(ctx context.Context, apiManagementGroup *v1alpha1.ApiManagementGroup, opts v1.CreateOptions) (result *v1alpha1.ApiManagementGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(apimanagementgroupsResource, c.ns, apiManagementGroup), &v1alpha1.ApiManagementGroup{})
 
@@ -90,7 +92,7 @@ func (c *FakeApiManagementGroups) Create(apiManagementGroup *v1alpha1.ApiManagem
 }
 
 // Update takes the representation of a apiManagementGroup and updates it. Returns the server's representation of the apiManagementGroup, and an error, if there is any.
-func (c *FakeApiManagementGroups) Update(apiManagementGroup *v1alpha1.ApiManagementGroup) (result *v1alpha1.ApiManagementGroup, err error) {
+func (c *FakeApiManagementGroups) Update(ctx context.Context, apiManagementGroup *v1alpha1.ApiManagementGroup, opts v1.UpdateOptions) (result *v1alpha1.ApiManagementGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(apimanagementgroupsResource, c.ns, apiManagementGroup), &v1alpha1.ApiManagementGroup{})
 
@@ -102,7 +104,7 @@ func (c *FakeApiManagementGroups) Update(apiManagementGroup *v1alpha1.ApiManagem
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeApiManagementGroups) UpdateStatus(apiManagementGroup *v1alpha1.ApiManagementGroup) (*v1alpha1.ApiManagementGroup, error) {
+func (c *FakeApiManagementGroups) UpdateStatus(ctx context.Context, apiManagementGroup *v1alpha1.ApiManagementGroup, opts v1.UpdateOptions) (*v1alpha1.ApiManagementGroup, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(apimanagementgroupsResource, "status", c.ns, apiManagementGroup), &v1alpha1.ApiManagementGroup{})
 
@@ -113,7 +115,7 @@ func (c *FakeApiManagementGroups) UpdateStatus(apiManagementGroup *v1alpha1.ApiM
 }
 
 // Delete takes name of the apiManagementGroup and deletes it. Returns an error if one occurs.
-func (c *FakeApiManagementGroups) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeApiManagementGroups) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(apimanagementgroupsResource, c.ns, name), &v1alpha1.ApiManagementGroup{})
 
@@ -121,15 +123,15 @@ func (c *FakeApiManagementGroups) Delete(name string, options *v1.DeleteOptions)
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeApiManagementGroups) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(apimanagementgroupsResource, c.ns, listOptions)
+func (c *FakeApiManagementGroups) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(apimanagementgroupsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.ApiManagementGroupList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched apiManagementGroup.
-func (c *FakeApiManagementGroups) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.ApiManagementGroup, err error) {
+func (c *FakeApiManagementGroups) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.ApiManagementGroup, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(apimanagementgroupsResource, c.ns, name, pt, data, subresources...), &v1alpha1.ApiManagementGroup{})
 

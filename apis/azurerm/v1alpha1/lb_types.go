@@ -55,8 +55,6 @@ type LbSpecFrontendIPConfiguration struct {
 	// +optional
 	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 	// +optional
-	PrivateIPAddressVersion string `json:"privateIPAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
-	// +optional
 	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
 	// +optional
 	PublicIPPrefixID string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty"`
@@ -97,7 +95,8 @@ type LbStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

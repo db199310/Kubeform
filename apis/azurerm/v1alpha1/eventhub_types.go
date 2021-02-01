@@ -68,10 +68,13 @@ type EventhubSpec struct {
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	CaptureDescription []EventhubSpecCaptureDescription `json:"captureDescription,omitempty" tf:"capture_description,omitempty"`
-	MessageRetention   int64                            `json:"messageRetention" tf:"message_retention"`
-	Name               string                           `json:"name" tf:"name"`
-	NamespaceName      string                           `json:"namespaceName" tf:"namespace_name"`
-	PartitionCount     int64                            `json:"partitionCount" tf:"partition_count"`
+	// +optional
+	// Deprecated
+	Location         string `json:"location,omitempty" tf:"location,omitempty"`
+	MessageRetention int64  `json:"messageRetention" tf:"message_retention"`
+	Name             string `json:"name" tf:"name"`
+	NamespaceName    string `json:"namespaceName" tf:"namespace_name"`
+	PartitionCount   int64  `json:"partitionCount" tf:"partition_count"`
 	// +optional
 	PartitionIDS      []string `json:"partitionIDS,omitempty" tf:"partition_ids,omitempty"`
 	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
@@ -86,7 +89,8 @@ type EventhubStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

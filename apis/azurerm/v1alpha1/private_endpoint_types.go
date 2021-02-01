@@ -45,8 +45,6 @@ type PrivateEndpointSpecPrivateServiceConnection struct {
 	Name                        string `json:"name" tf:"name"`
 	PrivateConnectionResourceID string `json:"privateConnectionResourceID" tf:"private_connection_resource_id"`
 	// +optional
-	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
-	// +optional
 	RequestMessage string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 	// +optional
 	SubresourceNames []string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
@@ -63,8 +61,6 @@ type PrivateEndpointSpec struct {
 	PrivateServiceConnection []PrivateEndpointSpecPrivateServiceConnection `json:"privateServiceConnection" tf:"private_service_connection"`
 	ResourceGroupName        string                                        `json:"resourceGroupName" tf:"resource_group_name"`
 	SubnetID                 string                                        `json:"subnetID" tf:"subnet_id"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PrivateEndpointStatus struct {
@@ -76,7 +72,8 @@ type PrivateEndpointStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

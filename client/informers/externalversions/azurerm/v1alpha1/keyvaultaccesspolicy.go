@@ -19,6 +19,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"context"
 	time "time"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -61,13 +62,13 @@ func NewFilteredKeyVaultAccessPolicyInformer(client versioned.Interface, namespa
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().KeyVaultAccessPolicies(namespace).List(options)
+				return client.AzurermV1alpha1().KeyVaultAccessPolicies(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().KeyVaultAccessPolicies(namespace).Watch(options)
+				return client.AzurermV1alpha1().KeyVaultAccessPolicies(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&azurermv1alpha1.KeyVaultAccessPolicy{},

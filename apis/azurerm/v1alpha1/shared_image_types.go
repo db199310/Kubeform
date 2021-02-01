@@ -56,8 +56,6 @@ type SharedImageSpec struct {
 	// +optional
 	Eula        string `json:"eula,omitempty" tf:"eula,omitempty"`
 	GalleryName string `json:"galleryName" tf:"gallery_name"`
-	// +optional
-	HyperVGeneration string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 	// +kubebuilder:validation:MaxItems=1
 	Identifier []SharedImageSpecIdentifier `json:"identifier" tf:"identifier"`
 	Location   string                      `json:"location" tf:"location"`
@@ -81,7 +79,8 @@ type SharedImageStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

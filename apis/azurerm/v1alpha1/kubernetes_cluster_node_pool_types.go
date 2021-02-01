@@ -50,38 +50,24 @@ type KubernetesClusterNodePoolSpec struct {
 	// +optional
 	EnableAutoScaling bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
 	// +optional
-	EnableNodePublicIP bool `json:"enableNodePublicIP,omitempty" tf:"enable_node_public_ip,omitempty"`
-	// +optional
-	EvictionPolicy      string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+	EnableNodePublicIP  bool   `json:"enableNodePublicIP,omitempty" tf:"enable_node_public_ip,omitempty"`
 	KubernetesClusterID string `json:"kubernetesClusterID" tf:"kubernetes_cluster_id"`
 	// +optional
 	MaxCount int64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 	// +optional
 	MaxPods int64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 	// +optional
-	MinCount int64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
-	// +optional
-	Mode string `json:"mode,omitempty" tf:"mode,omitempty"`
-	Name string `json:"name" tf:"name"`
+	MinCount int64  `json:"minCount,omitempty" tf:"min_count,omitempty"`
+	Name     string `json:"name" tf:"name"`
 	// +optional
 	NodeCount int64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 	// +optional
-	NodeLabels map[string]string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
-	// +optional
 	NodeTaints []string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
-	// +optional
-	OrchestratorVersion string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 	// +optional
 	OsDiskSizeGb int64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 	// +optional
 	OsType string `json:"osType,omitempty" tf:"os_type,omitempty"`
-	// +optional
-	Priority string `json:"priority,omitempty" tf:"priority,omitempty"`
-	// +optional
-	SpotMaxPrice float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
-	// +optional
-	Tags   map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	VmSize string            `json:"vmSize" tf:"vm_size"`
+	VmSize string `json:"vmSize" tf:"vm_size"`
 	// +optional
 	VnetSubnetID string `json:"vnetSubnetID,omitempty" tf:"vnet_subnet_id,omitempty"`
 }
@@ -95,7 +81,8 @@ type KubernetesClusterNodePoolStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

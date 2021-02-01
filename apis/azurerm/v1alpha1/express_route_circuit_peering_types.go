@@ -42,10 +42,6 @@ type ExpressRouteCircuitPeering struct {
 
 type ExpressRouteCircuitPeeringSpecMicrosoftPeeringConfig struct {
 	AdvertisedPublicPrefixes []string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes"`
-	// +optional
-	CustomerAsn int64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
-	// +optional
-	RoutingRegistryName string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
 
 type ExpressRouteCircuitPeeringSpec struct {
@@ -85,7 +81,8 @@ type ExpressRouteCircuitPeeringStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var netappsnapshotsResource = schema.GroupVersionResource{Group: "azurerm.kubefo
 var netappsnapshotsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "NetappSnapshot"}
 
 // Get takes name of the netappSnapshot, and returns the corresponding netappSnapshot object, and an error if there is any.
-func (c *FakeNetappSnapshots) Get(name string, options v1.GetOptions) (result *v1alpha1.NetappSnapshot, err error) {
+func (c *FakeNetappSnapshots) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.NetappSnapshot, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(netappsnapshotsResource, c.ns, name), &v1alpha1.NetappSnapshot{})
 
@@ -50,7 +52,7 @@ func (c *FakeNetappSnapshots) Get(name string, options v1.GetOptions) (result *v
 }
 
 // List takes label and field selectors, and returns the list of NetappSnapshots that match those selectors.
-func (c *FakeNetappSnapshots) List(opts v1.ListOptions) (result *v1alpha1.NetappSnapshotList, err error) {
+func (c *FakeNetappSnapshots) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.NetappSnapshotList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(netappsnapshotsResource, netappsnapshotsKind, c.ns, opts), &v1alpha1.NetappSnapshotList{})
 
@@ -72,14 +74,14 @@ func (c *FakeNetappSnapshots) List(opts v1.ListOptions) (result *v1alpha1.Netapp
 }
 
 // Watch returns a watch.Interface that watches the requested netappSnapshots.
-func (c *FakeNetappSnapshots) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeNetappSnapshots) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(netappsnapshotsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a netappSnapshot and creates it.  Returns the server's representation of the netappSnapshot, and an error, if there is any.
-func (c *FakeNetappSnapshots) Create(netappSnapshot *v1alpha1.NetappSnapshot) (result *v1alpha1.NetappSnapshot, err error) {
+func (c *FakeNetappSnapshots) Create(ctx context.Context, netappSnapshot *v1alpha1.NetappSnapshot, opts v1.CreateOptions) (result *v1alpha1.NetappSnapshot, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(netappsnapshotsResource, c.ns, netappSnapshot), &v1alpha1.NetappSnapshot{})
 
@@ -90,7 +92,7 @@ func (c *FakeNetappSnapshots) Create(netappSnapshot *v1alpha1.NetappSnapshot) (r
 }
 
 // Update takes the representation of a netappSnapshot and updates it. Returns the server's representation of the netappSnapshot, and an error, if there is any.
-func (c *FakeNetappSnapshots) Update(netappSnapshot *v1alpha1.NetappSnapshot) (result *v1alpha1.NetappSnapshot, err error) {
+func (c *FakeNetappSnapshots) Update(ctx context.Context, netappSnapshot *v1alpha1.NetappSnapshot, opts v1.UpdateOptions) (result *v1alpha1.NetappSnapshot, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(netappsnapshotsResource, c.ns, netappSnapshot), &v1alpha1.NetappSnapshot{})
 
@@ -102,7 +104,7 @@ func (c *FakeNetappSnapshots) Update(netappSnapshot *v1alpha1.NetappSnapshot) (r
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeNetappSnapshots) UpdateStatus(netappSnapshot *v1alpha1.NetappSnapshot) (*v1alpha1.NetappSnapshot, error) {
+func (c *FakeNetappSnapshots) UpdateStatus(ctx context.Context, netappSnapshot *v1alpha1.NetappSnapshot, opts v1.UpdateOptions) (*v1alpha1.NetappSnapshot, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(netappsnapshotsResource, "status", c.ns, netappSnapshot), &v1alpha1.NetappSnapshot{})
 
@@ -113,7 +115,7 @@ func (c *FakeNetappSnapshots) UpdateStatus(netappSnapshot *v1alpha1.NetappSnapsh
 }
 
 // Delete takes name of the netappSnapshot and deletes it. Returns an error if one occurs.
-func (c *FakeNetappSnapshots) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeNetappSnapshots) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(netappsnapshotsResource, c.ns, name), &v1alpha1.NetappSnapshot{})
 
@@ -121,15 +123,15 @@ func (c *FakeNetappSnapshots) Delete(name string, options *v1.DeleteOptions) err
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeNetappSnapshots) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(netappsnapshotsResource, c.ns, listOptions)
+func (c *FakeNetappSnapshots) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(netappsnapshotsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.NetappSnapshotList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched netappSnapshot.
-func (c *FakeNetappSnapshots) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.NetappSnapshot, err error) {
+func (c *FakeNetappSnapshots) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.NetappSnapshot, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(netappsnapshotsResource, c.ns, name, pt, data, subresources...), &v1alpha1.NetappSnapshot{})
 

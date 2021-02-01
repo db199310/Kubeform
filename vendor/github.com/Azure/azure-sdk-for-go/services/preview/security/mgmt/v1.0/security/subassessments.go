@@ -35,8 +35,7 @@ func NewSubAssessmentsClient(subscriptionID string, ascLocation string) SubAsses
 	return NewSubAssessmentsClientWithBaseURI(DefaultBaseURI, subscriptionID, ascLocation)
 }
 
-// NewSubAssessmentsClientWithBaseURI creates an instance of the SubAssessmentsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewSubAssessmentsClientWithBaseURI creates an instance of the SubAssessmentsClient client.
 func NewSubAssessmentsClientWithBaseURI(baseURI string, subscriptionID string, ascLocation string) SubAssessmentsClient {
 	return SubAssessmentsClient{NewWithBaseURI(baseURI, subscriptionID, ascLocation)}
 }
@@ -103,7 +102,8 @@ func (client SubAssessmentsClient) GetPreparer(ctx context.Context, scope string
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client SubAssessmentsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -180,7 +180,8 @@ func (client SubAssessmentsClient) ListPreparer(ctx context.Context, scope strin
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client SubAssessmentsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -292,7 +293,8 @@ func (client SubAssessmentsClient) ListAllPreparer(ctx context.Context, scope st
 // ListAllSender sends the ListAll request. The method will close the
 // http.Response Body if it receives an error.
 func (client SubAssessmentsClient) ListAllSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListAllResponder handles the response to the ListAll request. The method always

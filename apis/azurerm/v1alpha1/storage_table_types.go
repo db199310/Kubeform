@@ -58,9 +58,12 @@ type StorageTableSpec struct {
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +optional
-	Acl                []StorageTableSpecAcl `json:"acl,omitempty" tf:"acl,omitempty"`
-	Name               string                `json:"name" tf:"name"`
-	StorageAccountName string                `json:"storageAccountName" tf:"storage_account_name"`
+	Acl  []StorageTableSpecAcl `json:"acl,omitempty" tf:"acl,omitempty"`
+	Name string                `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 }
 
 type StorageTableStatus struct {
@@ -72,7 +75,8 @@ type StorageTableStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

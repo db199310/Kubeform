@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Azure/azure-sdk-for-go/services/web/mgmt/2019-08-01/web"
+	"github.com/Azure/azure-sdk-for-go/services/web/mgmt/2018-02-01/web"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
@@ -33,10 +33,10 @@ func resourceArmAppServicePlan() *schema.Resource {
 		}),
 
 		Timeouts: &schema.ResourceTimeout{
-			Create: schema.DefaultTimeout(60 * time.Minute),
+			Create: schema.DefaultTimeout(30 * time.Minute),
 			Read:   schema.DefaultTimeout(5 * time.Minute),
-			Update: schema.DefaultTimeout(60 * time.Minute),
-			Delete: schema.DefaultTimeout(60 * time.Minute),
+			Update: schema.DefaultTimeout(30 * time.Minute),
+			Delete: schema.DefaultTimeout(30 * time.Minute),
 		},
 
 		Schema: map[string]*schema.Schema{
@@ -94,21 +94,63 @@ func resourceArmAppServicePlan() *schema.Resource {
 				},
 			},
 
-			// / AppServicePlanProperties
+			"properties": {
+				Type:       schema.TypeList,
+				Optional:   true,
+				Computed:   true,
+				MaxItems:   1,
+				Deprecated: "These properties have been moved to the top level",
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"app_service_environment_id": {
+							Type:          schema.TypeString,
+							Optional:      true,
+							ForceNew:      true,
+							Computed:      true,
+							Deprecated:    "This property has been moved to the top level",
+							ConflictsWith: []string{"app_service_environment_id"},
+						},
+
+						"reserved": {
+							Type:          schema.TypeBool,
+							Optional:      true,
+							Computed:      true,
+							Deprecated:    "This property has been moved to the top level",
+							ConflictsWith: []string{"reserved"},
+						},
+
+						"per_site_scaling": {
+							Type:          schema.TypeBool,
+							Optional:      true,
+							Computed:      true,
+							Deprecated:    "This property has been moved to the top level",
+							ConflictsWith: []string{"per_site_scaling"},
+						},
+					},
+				},
+			},
+
+			/// AppServicePlanProperties
 			"app_service_environment_id": {
-				Type:     schema.TypeString,
-				Optional: true,
-				ForceNew: true,
+				Type:          schema.TypeString,
+				Optional:      true,
+				ForceNew:      true,
+				Computed:      true,
+				ConflictsWith: []string{"properties.0.app_service_environment_id"},
 			},
 
 			"per_site_scaling": {
-				Type:     schema.TypeBool,
-				Optional: true,
+				Type:          schema.TypeBool,
+				Optional:      true,
+				Computed:      true,
+				ConflictsWith: []string{"properties.0.per_site_scaling"},
 			},
 
 			"reserved": {
-				Type:     schema.TypeBool,
-				Optional: true,
+				Type:          schema.TypeBool,
+				Optional:      true,
+				Computed:      true,
+				ConflictsWith: []string{"properties.0.reserved"},
 			},
 
 			"maximum_elastic_worker_count": {
@@ -161,7 +203,7 @@ func resourceArmAppServicePlanCreateUpdate(d *schema.ResourceData, meta interfac
 	t := d.Get("tags").(map[string]interface{})
 
 	sku := expandAzureRmAppServicePlanSku(d)
-	properties := &web.AppServicePlanProperties{}
+	properties := expandAppServicePlanProperties(d)
 
 	isXenon := d.Get("is_xenon").(bool)
 	properties.IsXenon = &isXenon
@@ -179,10 +221,8 @@ func resourceArmAppServicePlanCreateUpdate(d *schema.ResourceData, meta interfac
 	}
 
 	if v, exists := d.GetOkExists("app_service_environment_id"); exists {
-		if v != "" {
-			appServicePlan.AppServicePlanProperties.HostingEnvironmentProfile = &web.HostingEnvironmentProfile{
-				ID: utils.String(v.(string)),
-			}
+		appServicePlan.AppServicePlanProperties.HostingEnvironmentProfile = &web.HostingEnvironmentProfile{
+			ID: utils.String(v.(string)),
 		}
 	}
 
@@ -236,51 +276,51 @@ func resourceArmAppServicePlanRead(d *schema.ResourceData, meta interface{}) err
 	if err != nil {
 		return err
 	}
+	resourceGroup := id.ResourceGroup
+	name := id.Name
 
-	resp, err := client.Get(ctx, id.ResourceGroup, id.Name)
+	resp, err := client.Get(ctx, resourceGroup, name)
 	if err != nil {
 		if utils.ResponseWasNotFound(resp.Response) {
-			log.Printf("[DEBUG] App Service Plan %q was not found in Resource Group %q - removnig from state!", id.Name, id.ResourceGroup)
+			log.Printf("[DEBUG] App Service Plan %q was not found in Resource Group %q - removnig from state!", name, resourceGroup)
 			d.SetId("")
 			return nil
 		}
 
-		return fmt.Errorf("Error making Read request on App Service Plan %q (Resource Group %q): %+v", id.Name, id.ResourceGroup, err)
+		return fmt.Errorf("Error making Read request on App Service Plan %q (Resource Group %q): %+v", name, resourceGroup, err)
 	}
 
 	// A 404 doesn't error from the app service plan sdk so we'll add this check here to catch resource not found responses
 	// TODO This block can be removed if https://github.com/Azure/azure-sdk-for-go/issues/5407 gets addressed.
 	if utils.ResponseWasNotFound(resp.Response) {
-		log.Printf("[DEBUG] App Service Plan %q was not found in Resource Group %q - removing from state!", id.Name, id.ResourceGroup)
+		log.Printf("[DEBUG] App Service Plan %q was not found in Resource Group %q - removing from state!", name, resourceGroup)
 		d.SetId("")
 		return nil
 	}
 
-	d.Set("name", id.Name)
-	d.Set("resource_group_name", id.ResourceGroup)
+	d.Set("name", name)
+	d.Set("resource_group_name", resourceGroup)
 	if location := resp.Location; location != nil {
 		d.Set("location", azure.NormalizeLocation(*location))
 	}
 	d.Set("kind", resp.Kind)
 
 	if props := resp.AppServicePlanProperties; props != nil {
-		appServiceEnvironmentId := ""
-		if props.HostingEnvironmentProfile != nil && props.HostingEnvironmentProfile.ID != nil {
-			appServiceEnvironmentId = *props.HostingEnvironmentProfile.ID
+		if err := d.Set("properties", flattenAppServiceProperties(props)); err != nil {
+			return fmt.Errorf("Error setting `properties`: %+v", err)
 		}
-		d.Set("app_service_environment_id", appServiceEnvironmentId)
 
-		maximumNumberOfWorkers := 0
+		if profile := props.HostingEnvironmentProfile; profile != nil {
+			d.Set("app_service_environment_id", profile.ID)
+		}
+
 		if props.MaximumNumberOfWorkers != nil {
-			maximumNumberOfWorkers = int(*props.MaximumNumberOfWorkers)
+			d.Set("maximum_number_of_workers", int(*props.MaximumNumberOfWorkers))
 		}
-		d.Set("maximum_number_of_workers", maximumNumberOfWorkers)
 
-		maximumElasticWorkerCount := 0
 		if props.MaximumElasticWorkerCount != nil {
-			maximumElasticWorkerCount = int(*props.MaximumElasticWorkerCount)
+			d.Set("maximum_elastic_worker_count", int(*props.MaximumElasticWorkerCount))
 		}
-		d.Set("maximum_elastic_worker_count", maximumElasticWorkerCount)
 
 		d.Set("per_site_scaling", props.PerSiteScaling)
 		d.Set("reserved", props.Reserved)
@@ -303,13 +343,15 @@ func resourceArmAppServicePlanDelete(d *schema.ResourceData, meta interface{}) e
 	if err != nil {
 		return err
 	}
+	resourceGroup := id.ResourceGroup
+	name := id.Name
 
-	log.Printf("[DEBUG] Deleting App Service Plan %q (Resource Group %q)", id.Name, id.ResourceGroup)
+	log.Printf("[DEBUG] Deleting App Service Plan %q (Resource Group %q)", name, resourceGroup)
 
-	resp, err := client.Delete(ctx, id.ResourceGroup, id.Name)
+	resp, err := client.Delete(ctx, resourceGroup, name)
 	if err != nil {
 		if !utils.ResponseWasNotFound(resp) {
-			return fmt.Errorf("Error deleting App Service Plan %q (Resource Group %q): %+v", id.Name, id.ResourceGroup, err)
+			return fmt.Errorf("Error deleting App Service Plan %q (Resource Group %q): %+v", name, resourceGroup, err)
 		}
 	}
 
@@ -360,6 +402,50 @@ func flattenAppServicePlanSku(input *web.SkuDescription) []interface{} {
 	outputs = append(outputs, output)
 
 	return outputs
+}
+
+func expandAppServicePlanProperties(d *schema.ResourceData) *web.AppServicePlanProperties {
+	configs := d.Get("properties").([]interface{})
+	properties := web.AppServicePlanProperties{}
+	if len(configs) == 0 {
+		return &properties
+	}
+	config := configs[0].(map[string]interface{})
+
+	appServiceEnvironmentId := config["app_service_environment_id"].(string)
+	if appServiceEnvironmentId != "" {
+		properties.HostingEnvironmentProfile = &web.HostingEnvironmentProfile{
+			ID: utils.String(appServiceEnvironmentId),
+		}
+	}
+
+	perSiteScaling := config["per_site_scaling"].(bool)
+	properties.PerSiteScaling = utils.Bool(perSiteScaling)
+
+	reserved := config["reserved"].(bool)
+	properties.Reserved = utils.Bool(reserved)
+
+	return &properties
+}
+
+func flattenAppServiceProperties(props *web.AppServicePlanProperties) []interface{} {
+	result := make([]interface{}, 0, 1)
+	properties := make(map[string]interface{})
+
+	if props.HostingEnvironmentProfile != nil && props.HostingEnvironmentProfile.ID != nil {
+		properties["app_service_environment_id"] = *props.HostingEnvironmentProfile.ID
+	}
+
+	if props.PerSiteScaling != nil {
+		properties["per_site_scaling"] = *props.PerSiteScaling
+	}
+
+	if props.Reserved != nil {
+		properties["reserved"] = *props.Reserved
+	}
+
+	result = append(result, properties)
+	return result
 }
 
 func validateAppServicePlanName(v interface{}, k string) (warnings []string, errors []error) {

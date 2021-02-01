@@ -6,12 +6,11 @@ import (
 )
 
 type Client struct {
-	GlobalLabSchedulesClient *dtl.GlobalSchedulesClient
-	LabsClient               *dtl.LabsClient
-	LabSchedulesClient       *dtl.SchedulesClient
-	PoliciesClient           *dtl.PoliciesClient
-	VirtualMachinesClient    *dtl.VirtualMachinesClient
-	VirtualNetworksClient    *dtl.VirtualNetworksClient
+	LabsClient            *dtl.LabsClient
+	LabSchedulesClient    *dtl.SchedulesClient
+	PoliciesClient        *dtl.PoliciesClient
+	VirtualMachinesClient *dtl.VirtualMachinesClient
+	VirtualNetworksClient *dtl.VirtualNetworksClient
 }
 
 func NewClient(o *common.ClientOptions) *Client {
@@ -30,15 +29,11 @@ func NewClient(o *common.ClientOptions) *Client {
 	LabSchedulesClient := dtl.NewSchedulesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
 	o.ConfigureClient(&LabSchedulesClient.Client, o.ResourceManagerAuthorizer)
 
-	GlobalLabSchedulesClient := dtl.NewGlobalSchedulesClientWithBaseURI(o.ResourceManagerEndpoint, o.SubscriptionId)
-	o.ConfigureClient(&GlobalLabSchedulesClient.Client, o.ResourceManagerAuthorizer)
-
 	return &Client{
-		GlobalLabSchedulesClient: &GlobalLabSchedulesClient,
-		LabsClient:               &LabsClient,
-		LabSchedulesClient:       &LabSchedulesClient,
-		PoliciesClient:           &PoliciesClient,
-		VirtualMachinesClient:    &VirtualMachinesClient,
-		VirtualNetworksClient:    &VirtualNetworksClient,
+		LabsClient:            &LabsClient,
+		LabSchedulesClient:    &LabSchedulesClient,
+		PoliciesClient:        &PoliciesClient,
+		VirtualMachinesClient: &VirtualMachinesClient,
+		VirtualNetworksClient: &VirtualNetworksClient,
 	}
 }

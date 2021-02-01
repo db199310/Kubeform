@@ -11,7 +11,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/eventhub/mgmt/2017-04-01/eventhub"
 )
 
-// validation
+//validation
 func ValidateEventHubNamespaceName() schema.SchemaValidateFunc {
 	return validation.StringMatch(
 		regexp.MustCompile("^[a-zA-Z][-a-zA-Z0-9]{4,48}[a-zA-Z0-9]$"),
@@ -40,7 +40,7 @@ func ValidateEventHubAuthorizationRuleName() schema.SchemaValidateFunc {
 	)
 }
 
-// schema
+//schema
 func ExpandEventHubAuthorizationRuleRights(d *schema.ResourceData) *[]eventhub.AccessRights {
 	rights := make([]eventhub.AccessRights, 0)
 
@@ -49,7 +49,7 @@ func ExpandEventHubAuthorizationRuleRights(d *schema.ResourceData) *[]eventhub.A
 	}
 
 	if d.Get("send").(bool) {
-		rights = append(rights, eventhub.SendEnumValue)
+		rights = append(rights, eventhub.Send)
 	}
 
 	if d.Get("manage").(bool) {
@@ -60,14 +60,14 @@ func ExpandEventHubAuthorizationRuleRights(d *schema.ResourceData) *[]eventhub.A
 }
 
 func FlattenEventHubAuthorizationRuleRights(rights *[]eventhub.AccessRights) (listen, send, manage bool) {
-	// zero (initial) value for a bool in go is false
+	//zero (initial) value for a bool in go is false
 
 	if rights != nil {
 		for _, right := range *rights {
 			switch right {
 			case eventhub.Listen:
 				listen = true
-			case eventhub.SendEnumValue:
+			case eventhub.Send:
 				send = true
 			case eventhub.Manage:
 				manage = true
@@ -88,22 +88,16 @@ func EventHubAuthorizationRuleSchemaFrom(s map[string]*schema.Schema) map[string
 			Default:  false,
 		},
 
-		"manage": {
+		"send": {
 			Type:     schema.TypeBool,
 			Optional: true,
 			Default:  false,
 		},
 
-		"primary_connection_string": {
-			Type:      schema.TypeString,
-			Computed:  true,
-			Sensitive: true,
-		},
-
-		"primary_connection_string_alias": {
-			Type:      schema.TypeString,
-			Computed:  true,
-			Sensitive: true,
+		"manage": {
+			Type:     schema.TypeBool,
+			Optional: true,
+			Default:  false,
 		},
 
 		"primary_key": {
@@ -112,13 +106,7 @@ func EventHubAuthorizationRuleSchemaFrom(s map[string]*schema.Schema) map[string
 			Sensitive: true,
 		},
 
-		"secondary_connection_string": {
-			Type:      schema.TypeString,
-			Computed:  true,
-			Sensitive: true,
-		},
-
-		"secondary_connection_string_alias": {
+		"primary_connection_string": {
 			Type:      schema.TypeString,
 			Computed:  true,
 			Sensitive: true,
@@ -130,10 +118,10 @@ func EventHubAuthorizationRuleSchemaFrom(s map[string]*schema.Schema) map[string
 			Sensitive: true,
 		},
 
-		"send": {
-			Type:     schema.TypeBool,
-			Optional: true,
-			Default:  false,
+		"secondary_connection_string": {
+			Type:      schema.TypeString,
+			Computed:  true,
+			Sensitive: true,
 		},
 	}
 	return MergeSchema(s, authSchema)

@@ -11,18 +11,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
+	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
 )
 
 func AzureProvider() terraform.ResourceProvider {
-	return azureProvider(false)
-}
-
-func TestAzureProvider() terraform.ResourceProvider {
-	return azureProvider(true)
-}
-
-func azureProvider(supportLegacyTestSuite bool) terraform.ResourceProvider {
 	// avoids this showing up in test output
 	var debugLog = func(f string, v ...interface{}) {
 		if os.Getenv("TF_LOG") == "" {
@@ -55,6 +48,14 @@ func azureProvider(supportLegacyTestSuite bool) terraform.ResourceProvider {
 			}
 
 			resources[k] = v
+		}
+	}
+
+	// TODO: remove all of this in 2.0 once Custom Timeouts are supported
+	if !features.SupportsCustomTimeouts() {
+		// ensure any timeouts configured on the resources are removed until 2.0
+		for _, v := range resources {
+			v.Timeouts = nil
 		}
 	}
 
@@ -144,9 +145,10 @@ func azureProvider(supportLegacyTestSuite bool) terraform.ResourceProvider {
 			},
 
 			"disable_correlation_request_id": {
-				Type:        schema.TypeBool,
-				Optional:    true,
-				DefaultFunc: schema.EnvDefaultFunc("ARM_DISABLE_CORRELATION_REQUEST_ID", false),
+				Type:     schema.TypeBool,
+				Optional: true,
+				// TODO: add an ARM_ prefix in 2.0w
+				DefaultFunc: schema.EnvDefaultFunc("DISABLE_CORRELATION_REQUEST_ID", false),
 				Description: "This will disable the x-ms-correlation-request-id header.",
 			},
 
@@ -157,7 +159,7 @@ func azureProvider(supportLegacyTestSuite bool) terraform.ResourceProvider {
 				Description: "This will disable the Terraform Partner ID which is used if a custom `partner_id` isn't specified.",
 			},
 
-			"features": schemaFeatures(supportLegacyTestSuite),
+			"features": schemaFeatures(),
 
 			// Advanced feature flags
 			"skip_credentials_validation": {
@@ -196,8 +198,10 @@ func providerConfigure(p *schema.Provider) schema.ConfigureFunc {
 		var auxTenants []string
 		if v, ok := d.Get("auxiliary_tenant_ids").([]interface{}); ok && len(v) > 0 {
 			auxTenants = *utils.ExpandStringSlice(v)
-		} else if v := os.Getenv("ARM_AUXILIARY_TENANT_IDS"); v != "" {
-			auxTenants = strings.Split(v, ";")
+		} else {
+			if v := os.Getenv("ARM_AUXILIARY_TENANT_IDS"); v != "" {
+				auxTenants = strings.Split(v, ";")
+			}
 		}
 
 		if len(auxTenants) > 3 {

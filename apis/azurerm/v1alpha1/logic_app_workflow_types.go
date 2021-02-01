@@ -47,23 +47,13 @@ type LogicAppWorkflowSpec struct {
 
 	// +optional
 	AccessEndpoint string `json:"accessEndpoint,omitempty" tf:"access_endpoint,omitempty"`
-	// +optional
-	ConnectorEndpointIPAddresses []string `json:"connectorEndpointIPAddresses,omitempty" tf:"connector_endpoint_ip_addresses,omitempty"`
-	// +optional
-	ConnectorOutboundIPAddresses []string `json:"connectorOutboundIPAddresses,omitempty" tf:"connector_outbound_ip_addresses,omitempty"`
-	Location                     string   `json:"location" tf:"location"`
-	// +optional
-	LogicAppIntegrationAccountID string `json:"logicAppIntegrationAccountID,omitempty" tf:"logic_app_integration_account_id,omitempty"`
-	Name                         string `json:"name" tf:"name"`
+	Location       string `json:"location" tf:"location"`
+	Name           string `json:"name" tf:"name"`
 	// +optional
 	Parameters        map[string]string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 	ResourceGroupName string            `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	// +optional
-	WorkflowEndpointIPAddresses []string `json:"workflowEndpointIPAddresses,omitempty" tf:"workflow_endpoint_ip_addresses,omitempty"`
-	// +optional
-	WorkflowOutboundIPAddresses []string `json:"workflowOutboundIPAddresses,omitempty" tf:"workflow_outbound_ip_addresses,omitempty"`
 	// +optional
 	WorkflowSchema string `json:"workflowSchema,omitempty" tf:"workflow_schema,omitempty"`
 	// +optional
@@ -79,7 +69,8 @@ type LogicAppWorkflowStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

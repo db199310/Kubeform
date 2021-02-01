@@ -40,6 +40,10 @@ type LogAnalyticsLinkedService struct {
 	Status            LogAnalyticsLinkedServiceStatus `json:"status,omitempty"`
 }
 
+type LogAnalyticsLinkedServiceSpecLinkedServiceProperties struct {
+	ResourceID string `json:"resourceID" tf:"resource_id"`
+}
+
 type LogAnalyticsLinkedServiceSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -48,9 +52,14 @@ type LogAnalyticsLinkedServiceSpec struct {
 	// +optional
 	LinkedServiceName string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	LinkedServiceProperties []LogAnalyticsLinkedServiceSpecLinkedServiceProperties `json:"linkedServiceProperties,omitempty" tf:"linked_service_properties,omitempty"`
+	// +optional
 	Name              string `json:"name,omitempty" tf:"name,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	ResourceID        string `json:"resourceID" tf:"resource_id"`
+	// +optional
+	ResourceID string `json:"resourceID,omitempty" tf:"resource_id,omitempty"`
 	// +optional
 	Tags          map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	WorkspaceName string            `json:"workspaceName" tf:"workspace_name"`
@@ -65,7 +74,8 @@ type LogAnalyticsLinkedServiceStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

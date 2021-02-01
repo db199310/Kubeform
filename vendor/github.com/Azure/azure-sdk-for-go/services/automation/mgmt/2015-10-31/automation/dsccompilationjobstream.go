@@ -37,9 +37,7 @@ func NewDscCompilationJobStreamClient(subscriptionID string) DscCompilationJobSt
 	return NewDscCompilationJobStreamClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDscCompilationJobStreamClientWithBaseURI creates an instance of the DscCompilationJobStreamClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewDscCompilationJobStreamClientWithBaseURI creates an instance of the DscCompilationJobStreamClient client.
 func NewDscCompilationJobStreamClientWithBaseURI(baseURI string, subscriptionID string) DscCompilationJobStreamClient {
 	return DscCompilationJobStreamClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -114,7 +112,8 @@ func (client DscCompilationJobStreamClient) ListByJobPreparer(ctx context.Contex
 // ListByJobSender sends the ListByJob request. The method will close the
 // http.Response Body if it receives an error.
 func (client DscCompilationJobStreamClient) ListByJobSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByJobResponder handles the response to the ListByJob request. The method always

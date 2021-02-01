@@ -37,8 +37,7 @@ func NewNamespacesClient(subscriptionID string) NamespacesClient {
 	return NewNamespacesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewNamespacesClientWithBaseURI creates an instance of the NamespacesClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewNamespacesClientWithBaseURI creates an instance of the NamespacesClient client.
 func NewNamespacesClientWithBaseURI(baseURI string, subscriptionID string) NamespacesClient {
 	return NamespacesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -108,8 +107,9 @@ func (client NamespacesClient) CreateOrUpdatePreparer(ctx context.Context, resou
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateSender(req *http.Request) (future NamespacesCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -207,7 +207,8 @@ func (client NamespacesClient) CreateOrUpdateIPFilterRulePreparer(ctx context.Co
 // CreateOrUpdateIPFilterRuleSender sends the CreateOrUpdateIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateIPFilterRuleResponder handles the response to the CreateOrUpdateIPFilterRule request. The method always
@@ -296,7 +297,8 @@ func (client NamespacesClient) CreateOrUpdateNetworkRuleSetPreparer(ctx context.
 // CreateOrUpdateNetworkRuleSetSender sends the CreateOrUpdateNetworkRuleSet request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateNetworkRuleSetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateNetworkRuleSetResponder handles the response to the CreateOrUpdateNetworkRuleSet request. The method always
@@ -389,7 +391,8 @@ func (client NamespacesClient) CreateOrUpdateVirtualNetworkRulePreparer(ctx cont
 // CreateOrUpdateVirtualNetworkRuleSender sends the CreateOrUpdateVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) CreateOrUpdateVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateVirtualNetworkRuleResponder handles the response to the CreateOrUpdateVirtualNetworkRule request. The method always
@@ -469,8 +472,9 @@ func (client NamespacesClient) DeletePreparer(ctx context.Context, resourceGroup
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteSender(req *http.Request) (future NamespacesDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -564,7 +568,8 @@ func (client NamespacesClient) DeleteIPFilterRulePreparer(ctx context.Context, r
 // DeleteIPFilterRuleSender sends the DeleteIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteIPFilterRuleResponder handles the response to the DeleteIPFilterRule request. The method always
@@ -653,7 +658,8 @@ func (client NamespacesClient) DeleteVirtualNetworkRulePreparer(ctx context.Cont
 // DeleteVirtualNetworkRuleSender sends the DeleteVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) DeleteVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteVirtualNetworkRuleResponder handles the response to the DeleteVirtualNetworkRule request. The method always
@@ -738,7 +744,8 @@ func (client NamespacesClient) GetPreparer(ctx context.Context, resourceGroupNam
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -828,7 +835,8 @@ func (client NamespacesClient) GetIPFilterRulePreparer(ctx context.Context, reso
 // GetIPFilterRuleSender sends the GetIPFilterRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetIPFilterRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetIPFilterRuleResponder handles the response to the GetIPFilterRule request. The method always
@@ -914,7 +922,8 @@ func (client NamespacesClient) GetNetworkRuleSetPreparer(ctx context.Context, re
 // GetNetworkRuleSetSender sends the GetNetworkRuleSet request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetNetworkRuleSetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetNetworkRuleSetResponder handles the response to the GetNetworkRuleSet request. The method always
@@ -1004,7 +1013,8 @@ func (client NamespacesClient) GetVirtualNetworkRulePreparer(ctx context.Context
 // GetVirtualNetworkRuleSender sends the GetVirtualNetworkRule request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) GetVirtualNetworkRuleSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetVirtualNetworkRuleResponder handles the response to the GetVirtualNetworkRule request. The method always
@@ -1076,7 +1086,8 @@ func (client NamespacesClient) ListPreparer(ctx context.Context) (*http.Request,
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -1195,7 +1206,8 @@ func (client NamespacesClient) ListByResourceGroupPreparer(ctx context.Context, 
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -1319,7 +1331,8 @@ func (client NamespacesClient) ListIPFilterRulesPreparer(ctx context.Context, re
 // ListIPFilterRulesSender sends the ListIPFilterRules request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListIPFilterRulesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListIPFilterRulesResponder handles the response to the ListIPFilterRules request. The method always
@@ -1443,7 +1456,8 @@ func (client NamespacesClient) ListVirtualNetworkRulesPreparer(ctx context.Conte
 // ListVirtualNetworkRulesSender sends the ListVirtualNetworkRules request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) ListVirtualNetworkRulesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListVirtualNetworkRulesResponder handles the response to the ListVirtualNetworkRules request. The method always
@@ -1570,7 +1584,8 @@ func (client NamespacesClient) UpdatePreparer(ctx context.Context, resourceGroup
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client NamespacesClient) UpdateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // UpdateResponder handles the response to the Update request. The method always

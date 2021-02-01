@@ -45,11 +45,8 @@ type ApiManagementDiagnosticSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	ApiManagementLoggerID string `json:"apiManagementLoggerID" tf:"api_management_logger_id"`
-	ApiManagementName     string `json:"apiManagementName" tf:"api_management_name"`
-	// +optional
-	// Deprecated
-	Enabled           bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	ApiManagementName string `json:"apiManagementName" tf:"api_management_name"`
+	Enabled           bool   `json:"enabled" tf:"enabled"`
 	Identifier        string `json:"identifier" tf:"identifier"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 }
@@ -63,7 +60,8 @@ type ApiManagementDiagnosticStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

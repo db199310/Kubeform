@@ -48,6 +48,9 @@ type ServicebusSubscriptionSpec struct {
 	// +optional
 	AutoDeleteOnIdle string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 	// +optional
+	// Deprecated
+	DeadLetteringOnFilterEvaluationExceptions bool `json:"deadLetteringOnFilterEvaluationExceptions,omitempty" tf:"dead_lettering_on_filter_evaluation_exceptions,omitempty"`
+	// +optional
 	DeadLetteringOnMessageExpiration bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 	// +optional
 	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
@@ -57,6 +60,9 @@ type ServicebusSubscriptionSpec struct {
 	ForwardDeadLetteredMessagesTo string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
 	// +optional
 	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
+	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
 	// +optional
 	LockDuration     string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 	MaxDeliveryCount int64  `json:"maxDeliveryCount" tf:"max_delivery_count"`
@@ -77,7 +83,8 @@ type ServicebusSubscriptionStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

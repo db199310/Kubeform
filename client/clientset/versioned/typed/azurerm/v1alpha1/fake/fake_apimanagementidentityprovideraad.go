@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var apimanagementidentityprovideraadsResource = schema.GroupVersionResource{Grou
 var apimanagementidentityprovideraadsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "ApiManagementIdentityProviderAad"}
 
 // Get takes name of the apiManagementIdentityProviderAad, and returns the corresponding apiManagementIdentityProviderAad object, and an error if there is any.
-func (c *FakeApiManagementIdentityProviderAads) Get(name string, options v1.GetOptions) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
+func (c *FakeApiManagementIdentityProviderAads) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(apimanagementidentityprovideraadsResource, c.ns, name), &v1alpha1.ApiManagementIdentityProviderAad{})
 
@@ -50,7 +52,7 @@ func (c *FakeApiManagementIdentityProviderAads) Get(name string, options v1.GetO
 }
 
 // List takes label and field selectors, and returns the list of ApiManagementIdentityProviderAads that match those selectors.
-func (c *FakeApiManagementIdentityProviderAads) List(opts v1.ListOptions) (result *v1alpha1.ApiManagementIdentityProviderAadList, err error) {
+func (c *FakeApiManagementIdentityProviderAads) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.ApiManagementIdentityProviderAadList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(apimanagementidentityprovideraadsResource, apimanagementidentityprovideraadsKind, c.ns, opts), &v1alpha1.ApiManagementIdentityProviderAadList{})
 
@@ -72,14 +74,14 @@ func (c *FakeApiManagementIdentityProviderAads) List(opts v1.ListOptions) (resul
 }
 
 // Watch returns a watch.Interface that watches the requested apiManagementIdentityProviderAads.
-func (c *FakeApiManagementIdentityProviderAads) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeApiManagementIdentityProviderAads) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(apimanagementidentityprovideraadsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a apiManagementIdentityProviderAad and creates it.  Returns the server's representation of the apiManagementIdentityProviderAad, and an error, if there is any.
-func (c *FakeApiManagementIdentityProviderAads) Create(apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
+func (c *FakeApiManagementIdentityProviderAads) Create(ctx context.Context, apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad, opts v1.CreateOptions) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(apimanagementidentityprovideraadsResource, c.ns, apiManagementIdentityProviderAad), &v1alpha1.ApiManagementIdentityProviderAad{})
 
@@ -90,7 +92,7 @@ func (c *FakeApiManagementIdentityProviderAads) Create(apiManagementIdentityProv
 }
 
 // Update takes the representation of a apiManagementIdentityProviderAad and updates it. Returns the server's representation of the apiManagementIdentityProviderAad, and an error, if there is any.
-func (c *FakeApiManagementIdentityProviderAads) Update(apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
+func (c *FakeApiManagementIdentityProviderAads) Update(ctx context.Context, apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad, opts v1.UpdateOptions) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(apimanagementidentityprovideraadsResource, c.ns, apiManagementIdentityProviderAad), &v1alpha1.ApiManagementIdentityProviderAad{})
 
@@ -102,7 +104,7 @@ func (c *FakeApiManagementIdentityProviderAads) Update(apiManagementIdentityProv
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeApiManagementIdentityProviderAads) UpdateStatus(apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad) (*v1alpha1.ApiManagementIdentityProviderAad, error) {
+func (c *FakeApiManagementIdentityProviderAads) UpdateStatus(ctx context.Context, apiManagementIdentityProviderAad *v1alpha1.ApiManagementIdentityProviderAad, opts v1.UpdateOptions) (*v1alpha1.ApiManagementIdentityProviderAad, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(apimanagementidentityprovideraadsResource, "status", c.ns, apiManagementIdentityProviderAad), &v1alpha1.ApiManagementIdentityProviderAad{})
 
@@ -113,7 +115,7 @@ func (c *FakeApiManagementIdentityProviderAads) UpdateStatus(apiManagementIdenti
 }
 
 // Delete takes name of the apiManagementIdentityProviderAad and deletes it. Returns an error if one occurs.
-func (c *FakeApiManagementIdentityProviderAads) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeApiManagementIdentityProviderAads) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(apimanagementidentityprovideraadsResource, c.ns, name), &v1alpha1.ApiManagementIdentityProviderAad{})
 
@@ -121,15 +123,15 @@ func (c *FakeApiManagementIdentityProviderAads) Delete(name string, options *v1.
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeApiManagementIdentityProviderAads) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(apimanagementidentityprovideraadsResource, c.ns, listOptions)
+func (c *FakeApiManagementIdentityProviderAads) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(apimanagementidentityprovideraadsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.ApiManagementIdentityProviderAadList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched apiManagementIdentityProviderAad.
-func (c *FakeApiManagementIdentityProviderAads) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
+func (c *FakeApiManagementIdentityProviderAads) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.ApiManagementIdentityProviderAad, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(apimanagementidentityprovideraadsResource, c.ns, name, pt, data, subresources...), &v1alpha1.ApiManagementIdentityProviderAad{})
 

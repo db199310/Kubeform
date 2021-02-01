@@ -63,8 +63,6 @@ type BatchPoolSpecContainerConfigurationContainerRegistries struct {
 
 type BatchPoolSpecContainerConfiguration struct {
 	// +optional
-	ContainerImageNames []string `json:"containerImageNames,omitempty" tf:"container_image_names,omitempty"`
-	// +optional
 	ContainerRegistries []BatchPoolSpecContainerConfigurationContainerRegistries `json:"containerRegistries,omitempty" tf:"container_registries,omitempty"`
 	// +optional
 	Type string `json:"type,omitempty" tf:"type,omitempty"`
@@ -97,9 +95,7 @@ type BatchPoolSpecNetworkConfigurationEndpointConfiguration struct {
 type BatchPoolSpecNetworkConfiguration struct {
 	// +optional
 	EndpointConfiguration []BatchPoolSpecNetworkConfigurationEndpointConfiguration `json:"endpointConfiguration,omitempty" tf:"endpoint_configuration,omitempty"`
-	// +optional
-	PublicIPS []string `json:"publicIPS,omitempty" tf:"public_ips,omitempty"`
-	SubnetID  string   `json:"subnetID" tf:"subnet_id"`
+	SubnetID              string                                                   `json:"subnetID" tf:"subnet_id"`
 }
 
 type BatchPoolSpecStartTaskResourceFile struct {
@@ -210,7 +206,8 @@ type BatchPoolStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

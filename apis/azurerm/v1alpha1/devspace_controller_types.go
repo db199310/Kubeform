@@ -40,6 +40,11 @@ type DevspaceController struct {
 	Status            DevspaceControllerStatus `json:"status,omitempty"`
 }
 
+type DevspaceControllerSpecSku struct {
+	Name string `json:"name" tf:"name"`
+	Tier string `json:"tier" tf:"tier"`
+}
+
 type DevspaceControllerSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -54,7 +59,12 @@ type DevspaceControllerSpec struct {
 	Location          string `json:"location" tf:"location"`
 	Name              string `json:"name" tf:"name"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
-	SkuName           string `json:"skuName" tf:"sku_name"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []DevspaceControllerSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +optional
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 	// +optional
 	Tags                                 map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	TargetContainerHostCredentialsBase64 string            `json:"-" sensitive:"true" tf:"target_container_host_credentials_base64"`
@@ -70,7 +80,8 @@ type DevspaceControllerStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

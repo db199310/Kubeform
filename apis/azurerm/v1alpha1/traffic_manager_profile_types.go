@@ -45,14 +45,7 @@ type TrafficManagerProfileSpecDnsConfig struct {
 	Ttl          int64  `json:"ttl" tf:"ttl"`
 }
 
-type TrafficManagerProfileSpecMonitorConfigCustomHeader struct {
-	Name  string `json:"name" tf:"name"`
-	Value string `json:"value" tf:"value"`
-}
-
 type TrafficManagerProfileSpecMonitorConfig struct {
-	// +optional
-	CustomHeader []TrafficManagerProfileSpecMonitorConfigCustomHeader `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 	// +optional
 	ExpectedStatusCodeRanges []string `json:"expectedStatusCodeRanges,omitempty" tf:"expected_status_code_ranges,omitempty"`
 	// +optional
@@ -96,7 +89,8 @@ type TrafficManagerProfileStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

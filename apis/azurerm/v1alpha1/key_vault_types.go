@@ -64,6 +64,11 @@ type KeyVaultSpecNetworkAcls struct {
 	VirtualNetworkSubnetIDS []string `json:"virtualNetworkSubnetIDS,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
+type KeyVaultSpecSku struct {
+	// +optional
+	Name string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type KeyVaultSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -82,13 +87,14 @@ type KeyVaultSpec struct {
 	Name                         string `json:"name" tf:"name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	NetworkAcls []KeyVaultSpecNetworkAcls `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	NetworkAcls       []KeyVaultSpecNetworkAcls `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+	ResourceGroupName string                    `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
-	PurgeProtectionEnabled bool   `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
-	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
-	SkuName                string `json:"skuName" tf:"sku_name"`
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []KeyVaultSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
 	// +optional
-	SoftDeleteEnabled bool `json:"softDeleteEnabled,omitempty" tf:"soft_delete_enabled,omitempty"`
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 	// +optional
 	Tags     map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 	TenantID string            `json:"tenantID" tf:"tenant_id"`
@@ -105,7 +111,8 @@ type KeyVaultStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

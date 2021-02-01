@@ -21,9 +21,13 @@ BIN      := kubeform
 
 # Produce CRDs that work back to Kubernetes 1.11 (no version conversion)
 CRD_OPTIONS          ?= "crd:trivialVersions=false"
+CRD_PATH             := $(if $(CRD_PATH),$(CRD_PATH),crds)
 # https://github.com/appscodelabs/gengo-builder
-CODE_GENERATOR_IMAGE ?= ibelikov/gengo:release-1.14
-API_GROUPS           ?= $(shell find $$(pwd)/apis -maxdepth 1 -mindepth 1 -type d -printf '%f:v1alpha1 ')
+CODE_GENERATOR_IMAGE ?= appscode/gengo:release-1.18
+
+API_GROUPS           ?= $(subst /,:, $(shell find $$(pwd)/apis -maxdepth 2 -mindepth 2 -type d -name 'v*' -printf '%P '))
+API_GROUPS_BASE      ?= $(filter base%, $(API_GROUPS))
+API_GROUPS_NONBASE   ?= $(filter-out base%, $(API_GROUPS))
 
 
 # This version-strategy uses git tags to set the version string
@@ -50,7 +54,8 @@ endif
 ### These variables should not need tweaking.
 ###
 
-SRC_DIRS := *.go apis client data util hack/gencrd # directories which hold app source (not vendored)
+SRC_PKGS := apis client data util
+SRC_DIRS := $(SRC_PKGS) *.go hack/gencrd # directories which hold app source (not vendored)
 
 DOCKER_PLATFORMS := linux/amd64 linux/arm linux/arm64
 BIN_PLATFORMS    := $(DOCKER_PLATFORMS)
@@ -59,10 +64,10 @@ BIN_PLATFORMS    := $(DOCKER_PLATFORMS)
 OS   := $(if $(GOOS),$(GOOS),$(shell go env GOOS))
 ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 
-BASEIMAGE_PROD   ?= gcr.io/distroless/static
-BASEIMAGE_DBG    ?= debian:stretch
+BASEIMAGE_PROD   ?= gcr.io/distroless/static-debian10
+BASEIMAGE_DBG    ?= debian:buster
 
-GO_VERSION       ?= 1.14.6
+GO_VERSION       ?= 1.15
 BUILD_IMAGE      ?= appscode/golang-dev:$(GO_VERSION)
 
 OUTBIN = bin/$(OS)_$(ARCH)/$(BIN)
@@ -119,8 +124,12 @@ gen-types: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
-	    --env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
+  		--env GIT_READ_TOKEN=$(GIT_READ_TOKEN)                  \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
@@ -128,6 +137,7 @@ gen-types: $(BUILD_DIRS)
 	        VERSION=$(VERSION)                                  \
 	        ./hack/run.sh                                       \
 	    "
+	@echo "Making fmt add-license..."
 	@$(MAKE) fmt add-license --no-print-directory
 
 # Generate a typed clientset
@@ -138,54 +148,70 @@ clientset:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		/go/src/k8s.io/code-generator/generate-groups.sh \
 			deepcopy                                     \
 			$(GO_PKG)/$(REPO)/client                     \
 			$(GO_PKG)/$(REPO)/apis                       \
-			"base:v1alpha1"                              \
+			"$(API_GROUPS_BASE)" \
 			--go-header-file "./hack/license/go.txt"
 	@docker run --rm                                     \
 		-u $$(id -u):$$(id -g)                           \
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		/go/src/k8s.io/code-generator/generate-groups.sh \
 			all                                          \
 			$(GO_PKG)/$(REPO)/client                     \
 			$(GO_PKG)/$(REPO)/apis                       \
-			"$(subst base:v1alpha1,, $(API_GROUPS))"     \
+      "$(API_GROUPS_NONBASE)" \
 			--go-header-file "./hack/license/go.txt"
 
 # Generate openapi schema
 .PHONY: openapi
 openapi: $(addprefix openapi-, $(subst :,_, $(API_GROUPS)))
-	@echo "Generating api/openapi-spec/swagger.json"
+	@echo "Generating openapi/swagger.json"
 	@docker run --rm                                     \
 		-u $$(id -u):$$(id -g)                           \
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		go run hack/gencrd/main.go
 
 openapi-%:
 	@echo "Generating openapi schema for $(subst _,/,$*)"
-	@mkdir -p api/api-rules
+	@mkdir -p .config/api-rules
 	@docker run --rm                                     \
 		-u $$(id -u):$$(id -g)                           \
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)                          \
 		openapi-gen                                      \
 			--v 1 --logtostderr                          \
@@ -203,17 +229,21 @@ gen-crds:
 		-v /tmp:/.cache                     \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)      \
 		-w $(DOCKER_REPO_ROOT)              \
-	    --env HTTP_PROXY=$(HTTP_PROXY)      \
-	    --env HTTPS_PROXY=$(HTTPS_PROXY)    \
+	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
+	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 		$(CODE_GENERATOR_IMAGE)             \
 		controller-gen                      \
 			$(CRD_OPTIONS)                  \
 			paths="./apis/..."              \
-			output:crd:artifacts:config=api/crds
+			output:crd:artifacts:config=$(CRD_PATH)
 
 .PHONY: label-crds
 label-crds: $(BUILD_DIRS)
-	@for f in api/crds/*.yaml; do \
+	@for f in crds/*.yaml; do \
 		echo "applying app.kubernetes.io/name=kubeform label to $$f"; \
 		kubectl label --overwrite -f $$f --local=true -o yaml app.kubernetes.io/name=kubeform > bin/crd.yaml; \
 		mv bin/crd.yaml $$f; \
@@ -253,7 +283,11 @@ fmt: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        REPO_PKG=$(GO_PKG)                                  \
@@ -273,7 +307,11 @@ build: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
@@ -304,13 +342,17 @@ unit-tests: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    $(BUILD_IMAGE)                                          \
 	    /bin/bash -c "                                          \
 	        ARCH=$(ARCH)                                        \
 	        OS=$(OS)                                            \
 	        VERSION=$(VERSION)                                  \
-	        ./hack/test.sh $(SRC_DIRS)                          \
+	        ./hack/test.sh $(SRC_PKGS)                          \
 	    "
 
 ADDTL_LINTERS   := goconst,gofmt,goimports,unparam
@@ -328,7 +370,11 @@ lint: $(BUILD_DIRS)
 	    -v $$(pwd)/.go/bin/$(OS)_$(ARCH):/go/bin/$(OS)_$(ARCH)  \
 	    -v $$(pwd)/.go/cache:/.cache                            \
 	    --env HTTP_PROXY=$(HTTP_PROXY)                          \
+	    --env http_proxy=$(http_proxy)                          \
 	    --env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+	    --env https_proxy=$(https_proxy)                        \
+	    --env NO_PROXY=$(NO_PROXY)                              \
+	    --env no_proxy=$(no_proxy)                              \
 	    --env GO111MODULE=on                                    \
 	    --env GOFLAGS="-mod=vendor"                             \
 	    $(BUILD_IMAGE)                                          \
@@ -365,8 +411,12 @@ add-license:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		ltag -t "./hack/license" --excludes "vendor contrib" -v
 
@@ -378,8 +428,12 @@ check-license:
 		-v /tmp:/.cache                                  \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                   \
 		-w $(DOCKER_REPO_ROOT)                           \
-		--env HTTP_PROXY=$(HTTP_PROXY)                   \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                 \
+		--env HTTP_PROXY=$(HTTP_PROXY)                          \
+		--env http_proxy=$(http_proxy)                          \
+		--env HTTPS_PROXY=$(HTTPS_PROXY)                        \
+		--env https_proxy=$(https_proxy)                        \
+		--env NO_PROXY=$(NO_PROXY)                              \
+		--env no_proxy=$(no_proxy)                              \
 		$(BUILD_IMAGE)                                   \
 		ltag -t "./hack/license" --excludes "vendor contrib" --check -v
 

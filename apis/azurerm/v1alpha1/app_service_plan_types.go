@@ -40,6 +40,18 @@ type AppServicePlan struct {
 	Status            AppServicePlanStatus `json:"status,omitempty"`
 }
 
+type AppServicePlanSpecProperties struct {
+	// +optional
+	// Deprecated
+	AppServiceEnvironmentID string `json:"appServiceEnvironmentID,omitempty" tf:"app_service_environment_id,omitempty"`
+	// +optional
+	// Deprecated
+	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
+	// +optional
+	// Deprecated
+	Reserved bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
+}
+
 type AppServicePlanSpecSku struct {
 	// +optional
 	Capacity int64  `json:"capacity,omitempty" tf:"capacity,omitempty"`
@@ -67,6 +79,10 @@ type AppServicePlanSpec struct {
 	// +optional
 	PerSiteScaling bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
 	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Properties []AppServicePlanSpecProperties `json:"properties,omitempty" tf:"properties,omitempty"`
+	// +optional
 	Reserved          bool   `json:"reserved,omitempty" tf:"reserved,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +kubebuilder:validation:MaxItems=1
@@ -84,7 +100,8 @@ type AppServicePlanStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

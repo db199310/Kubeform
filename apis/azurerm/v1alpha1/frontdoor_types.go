@@ -65,16 +65,12 @@ type FrontdoorSpecBackendPool struct {
 
 type FrontdoorSpecBackendPoolHealthProbe struct {
 	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
 	ID string `json:"ID,omitempty" tf:"id,omitempty"`
 	// +optional
 	IntervalInSeconds int64  `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 	Name              string `json:"name" tf:"name"`
 	// +optional
 	Path string `json:"path,omitempty" tf:"path,omitempty"`
-	// +optional
-	ProbeMethod string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 	// +optional
 	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
@@ -184,8 +180,6 @@ type FrontdoorSpec struct {
 	// +kubebuilder:validation:MaxItems=5000
 	BackendPoolLoadBalancing []FrontdoorSpecBackendPoolLoadBalancing `json:"backendPoolLoadBalancing" tf:"backend_pool_load_balancing"`
 	// +optional
-	BackendPoolsSendReceiveTimeoutSeconds int64 `json:"backendPoolsSendReceiveTimeoutSeconds,omitempty" tf:"backend_pools_send_receive_timeout_seconds,omitempty"`
-	// +optional
 	Cname                                   string `json:"cname,omitempty" tf:"cname,omitempty"`
 	EnforceBackendPoolsCertificateNameCheck bool   `json:"enforceBackendPoolsCertificateNameCheck" tf:"enforce_backend_pools_certificate_name_check"`
 	// +optional
@@ -193,14 +187,10 @@ type FrontdoorSpec struct {
 	// +kubebuilder:validation:MaxItems=100
 	FrontendEndpoint []FrontdoorSpecFrontendEndpoint `json:"frontendEndpoint" tf:"frontend_endpoint"`
 	// +optional
-	HeaderFrontdoorID string `json:"headerFrontdoorID,omitempty" tf:"header_frontdoor_id,omitempty"`
-	// +optional
-	LoadBalancerEnabled bool `json:"loadBalancerEnabled,omitempty" tf:"load_balancer_enabled,omitempty"`
-	// +optional
-	// Deprecated
-	Location          string `json:"location,omitempty" tf:"location,omitempty"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	LoadBalancerEnabled bool   `json:"loadBalancerEnabled,omitempty" tf:"load_balancer_enabled,omitempty"`
+	Location            string `json:"location" tf:"location"`
+	Name                string `json:"name" tf:"name"`
+	ResourceGroupName   string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +kubebuilder:validation:MaxItems=100
 	RoutingRule []FrontdoorSpecRoutingRule `json:"routingRule" tf:"routing_rule"`
 	// +optional
@@ -216,7 +206,8 @@ type FrontdoorStatus struct {
 	// +optional
 	State *base.State `json:"state,omitempty"`
 	// +optional
-	Phase base.Phase `json:"phase,omitempty"`
+	Phase           base.Phase `json:"phase,omitempty"`
+	TerraformErrors []string   `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

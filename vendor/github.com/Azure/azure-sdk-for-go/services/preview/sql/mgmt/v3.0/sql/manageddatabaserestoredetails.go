@@ -38,8 +38,7 @@ func NewManagedDatabaseRestoreDetailsClient(subscriptionID string) ManagedDataba
 }
 
 // NewManagedDatabaseRestoreDetailsClientWithBaseURI creates an instance of the ManagedDatabaseRestoreDetailsClient
-// client using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI
-// (sovereign clouds, Azure stack).
+// client.
 func NewManagedDatabaseRestoreDetailsClientWithBaseURI(baseURI string, subscriptionID string) ManagedDatabaseRestoreDetailsClient {
 	return ManagedDatabaseRestoreDetailsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -92,7 +91,7 @@ func (client ManagedDatabaseRestoreDetailsClient) GetPreparer(ctx context.Contex
 		"subscriptionId":      autorest.Encode("path", client.SubscriptionID),
 	}
 
-	const APIVersion = "2019-06-01-preview"
+	const APIVersion = "2018-06-01-preview"
 	queryParameters := map[string]interface{}{
 		"api-version": APIVersion,
 	}
@@ -108,7 +107,8 @@ func (client ManagedDatabaseRestoreDetailsClient) GetPreparer(ctx context.Contex
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedDatabaseRestoreDetailsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always

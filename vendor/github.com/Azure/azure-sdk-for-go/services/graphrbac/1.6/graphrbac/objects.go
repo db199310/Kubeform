@@ -36,8 +36,7 @@ func NewObjectsClient(tenantID string) ObjectsClient {
 	return NewObjectsClientWithBaseURI(DefaultBaseURI, tenantID)
 }
 
-// NewObjectsClientWithBaseURI creates an instance of the ObjectsClient client using a custom endpoint.  Use this when
-// interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewObjectsClientWithBaseURI creates an instance of the ObjectsClient client.
 func NewObjectsClientWithBaseURI(baseURI string, tenantID string) ObjectsClient {
 	return ObjectsClient{NewWithBaseURI(baseURI, tenantID)}
 }
@@ -108,7 +107,8 @@ func (client ObjectsClient) GetObjectsByObjectIdsPreparer(ctx context.Context, p
 // GetObjectsByObjectIdsSender sends the GetObjectsByObjectIds request. The method will close the
 // http.Response Body if it receives an error.
 func (client ObjectsClient) GetObjectsByObjectIdsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetObjectsByObjectIdsResponder handles the response to the GetObjectsByObjectIds request. The method always
@@ -198,7 +198,8 @@ func (client ObjectsClient) GetObjectsByObjectIdsNextPreparer(ctx context.Contex
 // GetObjectsByObjectIdsNextSender sends the GetObjectsByObjectIdsNext request. The method will close the
 // http.Response Body if it receives an error.
 func (client ObjectsClient) GetObjectsByObjectIdsNextSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetObjectsByObjectIdsNextResponder handles the response to the GetObjectsByObjectIdsNext request. The method always
