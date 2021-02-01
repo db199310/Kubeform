@@ -80,6 +80,7 @@ stages:
       displayName: Build kubeform binaries
       workingDirectory: kubeform
     - script: |
+        git status
         git add -A
         git commit -m "[skip ci] Update Terraform modules"
         git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
