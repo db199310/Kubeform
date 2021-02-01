@@ -121,7 +121,7 @@ stages:
     - script: echo $(setDockerTag.DOCKER_TAG)
       displayName: Echo DOCKER_TAG
 
-- stage: Staging
+- stage: DeployStaging
   condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
   dependsOn:
   - Build
@@ -148,7 +148,7 @@ stages:
           - script: npm install js-yaml
             displayName: Install node packages
             workingDirectory: kubeform/util
-          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
             displayName: Update schemas in ConfigMap
             workingDirectory: kubeform
           - script: |
@@ -170,7 +170,7 @@ stages:
             displayName: Push updates to Stratos CRDs
             workingDirectory: stratos-core-bootstrap
 
-- stage: Production
+- stage: DeployProduction
   condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
   dependsOn:
   - Build
@@ -200,10 +200,10 @@ stages:
           - script: npm install js-yaml
             displayName: Install node packages
             workingDirectory: kubeform/util
-          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
             displayName: Update schemas in Npd ConfigMap
             workingDirectory: kubeform
-          - script: node util/update-configmap-resource-schemas.js ../stratos-core-bootstrap/$(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
             displayName: Update schemas in Prd ConfigMap
             workingDirectory: kubeform
           - script: |

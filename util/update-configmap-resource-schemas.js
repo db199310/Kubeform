@@ -3,12 +3,12 @@
 const fs = require('fs');
 const yaml = require('js-yaml');
 
-const crds_path = 'api/crds';
+const crds_path = process.argv[2];
 const crd_names_list = [
   'modules.kubeform.com_thomasstorageaccounts.yaml'
 ];
 
-const config_map_file = process.argv[2];
+const config_map_file = process.argv[3];
 var cm_obj = yaml.load(fs.readFileSync(config_map_file, { encoding: 'UTF-8' }));
 var crd_schemas = JSON.parse(cm_obj['data']['schemas']);
 
