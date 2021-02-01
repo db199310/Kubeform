@@ -79,6 +79,11 @@ stages:
     - script: make build
       displayName: Build kubeform binaries
       workingDirectory: kubeform
+    - script: make gen
+      displayName: Run kubeform codegen
+      env:
+        CRD_PATH: crds
+      workingDirectory: kubeform
     - script: |
         git status
         git add -A
