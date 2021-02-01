@@ -113,7 +113,7 @@ stages:
     - script: make push
       displayName: Push kfc containers
       workingDirectory: kfc
-    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]$(cat bin/.container-tag"
+    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]$(cat bin/.container-tag)"
       displayName: Set DOCKER_TAG
       name: setDockerTag
       workingDirectory: kfc
