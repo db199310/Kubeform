@@ -60,6 +60,9 @@ stages:
     - task: GoTool@0
       inputs:
         version: '1.14.6'
+    - task: KubectlInstaller@0
+      inputs:
+        kubectlVersion: "1.18.3"
     - task: NodeTool@0
     - script: |
         git config --global user.email "sedp-ci@shell.com"
