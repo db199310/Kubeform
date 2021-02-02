@@ -234,6 +234,7 @@ func TerraformSchemaToStruct(s map[string]*schema.Schema, structName, providerNa
 		if *genSecret {
 			statements = append(jen.Statement{jen.Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"}).Line()}, statements...)
 		}
+		statements = append(Statement{Id("RemoteBackend").Id("*base.Backend").Tag(map[string]string{"json": "remoteBackend,omitempty", "tf": "-"}).Line()}, statements...)
 		statements = append(jen.Statement{jen.Id("ID").Id("string").Tag(map[string]string{"json": "id,omitempty", "tf": "id,omitempty"}).Line()}, statements...)
 		statements = append(jen.Statement{jen.Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"}).Line()}, statements...)
 	}
