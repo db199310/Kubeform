@@ -44,6 +44,8 @@ type LogAnalyticsDatasourceWindowsPerformanceCounterSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	CounterName       string `json:"counterName" tf:"counter_name"`
 	InstanceName      string `json:"instanceName" tf:"instance_name"`
 	IntervalSeconds   int64  `json:"intervalSeconds" tf:"interval_seconds"`

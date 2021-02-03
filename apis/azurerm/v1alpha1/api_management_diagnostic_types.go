@@ -44,6 +44,8 @@ type ApiManagementDiagnosticSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	ApiManagementLoggerID string `json:"apiManagementLoggerID" tf:"api_management_logger_id"`
 	ApiManagementName     string `json:"apiManagementName" tf:"api_management_name"`
 	// +optional

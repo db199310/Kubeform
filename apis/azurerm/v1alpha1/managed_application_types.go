@@ -53,6 +53,8 @@ type ManagedApplicationSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	ApplicationDefinitionID  string `json:"applicationDefinitionID,omitempty" tf:"application_definition_id,omitempty"`
 	Kind                     string `json:"kind" tf:"kind"`

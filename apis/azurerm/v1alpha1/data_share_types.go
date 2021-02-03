@@ -50,6 +50,8 @@ type DataShareSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	AccountID string `json:"accountID" tf:"account_id"`
 	// +optional
 	Description string `json:"description,omitempty" tf:"description,omitempty"`

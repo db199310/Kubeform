@@ -49,6 +49,8 @@ type IotTimeSeriesInsightsReferenceDataSetSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	DataStringComparisonBehavior string                                                 `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
 	KeyProperty                  []IotTimeSeriesInsightsReferenceDataSetSpecKeyProperty `json:"keyProperty" tf:"key_property"`

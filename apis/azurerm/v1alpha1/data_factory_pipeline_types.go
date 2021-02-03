@@ -44,6 +44,8 @@ type DataFactoryPipelineSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	ActivitiesJSON string `json:"activitiesJSON,omitempty" tf:"activities_json,omitempty"`
 	// +optional

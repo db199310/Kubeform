@@ -52,6 +52,8 @@ type DevTestGlobalVmShutdownScheduleSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	DailyRecurrenceTime string `json:"dailyRecurrenceTime" tf:"daily_recurrence_time"`
 	// +optional
 	Enabled  bool   `json:"enabled,omitempty" tf:"enabled,omitempty"`

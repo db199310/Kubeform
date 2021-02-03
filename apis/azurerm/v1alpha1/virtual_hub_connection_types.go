@@ -44,6 +44,8 @@ type VirtualHubConnectionSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	HubToVitualNetworkTrafficAllowed bool `json:"hubToVitualNetworkTrafficAllowed,omitempty" tf:"hub_to_vitual_network_traffic_allowed,omitempty"`
 	// +optional

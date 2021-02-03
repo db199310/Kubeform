@@ -99,6 +99,8 @@ type WebApplicationFirewallPolicySpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	CustomRules []WebApplicationFirewallPolicySpecCustomRules `json:"customRules,omitempty" tf:"custom_rules,omitempty"`
 	Location    string                                        `json:"location" tf:"location"`

@@ -52,6 +52,8 @@ type MachineLearningWorkspaceSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	ApplicationInsightsID string `json:"applicationInsightsID" tf:"application_insights_id"`
 	// +optional
 	ContainerRegistryID string `json:"containerRegistryID,omitempty" tf:"container_registry_id,omitempty"`

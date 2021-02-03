@@ -54,6 +54,8 @@ type BlueprintAssignmentSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	BlueprintName string `json:"blueprintName,omitempty" tf:"blueprint_name,omitempty"`
 	// +optional
