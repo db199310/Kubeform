@@ -12,7 +12,7 @@ pool:
 resources:
   repositories:
   - repository: stratos
-    ref: refs/feature/tn-installing-aks-test
+    ref: refs/heads/feature/tn-installing-aks-test
     type: github
     endpoint: 'Sede-X Github (ThomasNal)'
     name: sede-x/stratos-core-bootstrap
