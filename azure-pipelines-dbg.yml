@@ -22,24 +22,15 @@ stages:
       runOnce:
         deploy:
           steps:
-          - checkout: self
-            displayName: Checkout kubeform
           - checkout: stratos
             displayName: Checkout stratos
             persistCredentials: true
-          - script: git checkout feature/tn-installing-aks-test
-            displayName: Checkout stratos branch
-            workingDirectory: stratos-core-bootstrap
 
           - script: |
+              git checkout feature/tn-installing-aks-test
               git config --global user.email "sedp-ci@shell.com"
               git config --global user.name "Azure Pipelines"
-            displayName: Set git properties
-
-          - script: |
               echo "my change" > staging/AKS-Test/.dbg
               git add  staging/AKS-Test/.dbg
               git commit -m "[kubeform-dbg] Update crd-conversion config"
               git push
-            displayName: Push updates to crd-conversion config
-            workingDirectory: stratos-core-bootstrap
