@@ -16,21 +16,16 @@ resources:
 stages:
 - stage: DeployStaging
   jobs:
-  - deployment: Deploy
-    environment: staging
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: stratos
-            displayName: Checkout stratos
-            persistCredentials: true
+  - job: Deploy
+    steps:
+    - checkout: stratos
+      persistCredentials: true
 
-          - script: |
-              git checkout feature/tn-installing-aks-test
-              git config --global user.email "sedp-ci@shell.com"
-              git config --global user.name "Azure Pipelines"
-              echo "my change" > staging/AKS-Test/.dbg
-              git add  staging/AKS-Test/.dbg
-              git commit -m "[kubeform-dbg] Update crd-conversion config"
-              git push
+    - script: |
+        git checkout feature/tn-installing-aks-test
+        git config --global user.email "sedp-ci@shell.com"
+        git config --global user.name "Azure Pipelines"
+        echo "my change" > staging/AKS-Test/.dbg
+        git add  staging/AKS-Test/.dbg
+        git commit -m "[kubeform-dbg] Commit msg"
+        git push -f origin HEAD:feature/tn-installing-aks-test
