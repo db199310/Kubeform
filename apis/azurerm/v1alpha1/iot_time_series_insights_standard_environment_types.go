@@ -44,6 +44,8 @@ type IotTimeSeriesInsightsStandardEnvironmentSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	DataRetentionTime string `json:"dataRetentionTime" tf:"data_retention_time"`
 	Location          string `json:"location" tf:"location"`
 	Name              string `json:"name" tf:"name"`

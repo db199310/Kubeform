@@ -56,6 +56,8 @@ type MonitorScheduledQueryRulesLogSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	AuthorizedResourceIDS []string `json:"authorizedResourceIDS,omitempty" tf:"authorized_resource_ids,omitempty"`
 	// +kubebuilder:validation:MaxItems=1

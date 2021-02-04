@@ -44,6 +44,8 @@ type StorageAccountCustomerManagedKeySpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	KeyName          string `json:"keyName" tf:"key_name"`
 	KeyVaultID       string `json:"keyVaultID" tf:"key_vault_id"`
 	KeyVersion       string `json:"keyVersion" tf:"key_version"`

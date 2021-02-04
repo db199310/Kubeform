@@ -108,6 +108,8 @@ type MonitorActionRuleActionGroupSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	ActionGroupID string `json:"actionGroupID" tf:"action_group_id"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1

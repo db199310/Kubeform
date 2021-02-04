@@ -44,6 +44,8 @@ type HpcCacheSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	CacheSizeInGb int64  `json:"cacheSizeInGb" tf:"cache_size_in_gb"`
 	Location      string `json:"location" tf:"location"`
 	// +optional

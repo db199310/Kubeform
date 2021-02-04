@@ -44,6 +44,8 @@ type NetworkInterfaceSecurityGroupAssociationSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	NetworkInterfaceID     string `json:"networkInterfaceID" tf:"network_interface_id"`
 	NetworkSecurityGroupID string `json:"networkSecurityGroupID" tf:"network_security_group_id"`
 }

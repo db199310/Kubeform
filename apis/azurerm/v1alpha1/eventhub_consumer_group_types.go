@@ -44,6 +44,8 @@ type EventhubConsumerGroupSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	EventhubName      string `json:"eventhubName" tf:"eventhub_name"`
 	Name              string `json:"name" tf:"name"`
 	NamespaceName     string `json:"namespaceName" tf:"namespace_name"`

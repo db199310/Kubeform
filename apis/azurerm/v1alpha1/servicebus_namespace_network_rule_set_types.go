@@ -50,6 +50,8 @@ type ServicebusNamespaceNetworkRuleSetSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	DefaultAction string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 	// +optional

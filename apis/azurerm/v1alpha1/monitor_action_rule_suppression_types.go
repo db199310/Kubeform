@@ -126,6 +126,8 @@ type MonitorActionRuleSuppressionSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	Condition []MonitorActionRuleSuppressionSpecCondition `json:"condition,omitempty" tf:"condition,omitempty"`

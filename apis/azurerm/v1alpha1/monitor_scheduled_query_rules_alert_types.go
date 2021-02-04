@@ -67,6 +67,8 @@ type MonitorScheduledQueryRulesAlertSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +kubebuilder:validation:MaxItems=1
 	Action []MonitorScheduledQueryRulesAlertSpecAction `json:"action" tf:"action"`
 	// +optional

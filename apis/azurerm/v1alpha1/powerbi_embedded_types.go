@@ -44,6 +44,8 @@ type PowerbiEmbeddedSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	Administrators    []string `json:"administrators" tf:"administrators"`
 	Location          string   `json:"location" tf:"location"`
 	Name              string   `json:"name" tf:"name"`

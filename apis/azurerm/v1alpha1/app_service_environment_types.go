@@ -44,6 +44,8 @@ type AppServiceEnvironmentSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	FrontEndScaleFactor int64 `json:"frontEndScaleFactor,omitempty" tf:"front_end_scale_factor,omitempty"`
 	// +optional

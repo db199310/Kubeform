@@ -55,6 +55,8 @@ type CostManagementExportResourceGroupSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	Active bool `json:"active,omitempty" tf:"active,omitempty"`
 	// +kubebuilder:validation:MaxItems=1

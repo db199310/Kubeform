@@ -56,6 +56,8 @@ type SubnetSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	// Deprecated
 	AddressPrefix string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`

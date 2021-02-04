@@ -44,6 +44,8 @@ type NatGatewayPublicIPAssociationSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	NatGatewayID      string `json:"natGatewayID" tf:"nat_gateway_id"`
 	PublicIPAddressID string `json:"publicIPAddressID" tf:"public_ip_address_id"`
 }

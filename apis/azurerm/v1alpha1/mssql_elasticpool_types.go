@@ -57,6 +57,8 @@ type MssqlElasticpoolSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	LicenseType string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 	Location    string `json:"location" tf:"location"`

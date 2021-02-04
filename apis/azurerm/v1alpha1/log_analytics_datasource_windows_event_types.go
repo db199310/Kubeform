@@ -44,6 +44,8 @@ type LogAnalyticsDatasourceWindowsEventSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
+	RemoteBackend *base.Backend `json:"remoteBackend,omitempty" tf:"-"`
+
 	EventLogName string `json:"eventLogName" tf:"event_log_name"`
 	// +kubebuilder:validation:MinItems=1
 	EventTypes        []string `json:"eventTypes" tf:"event_types"`
