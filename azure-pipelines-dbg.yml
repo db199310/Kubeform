@@ -14,8 +14,8 @@ resources:
   - repository: stratos
     ref: refs/heads/feature/tn-installing-aks-test
     type: github
-    endpoint: 'Sede-X Github (ThomasNal)'
-    # endpoint: 'Sede-x Github'
+    # endpoint: 'Sede-X Github (ThomasNal)'
+    endpoint: 'Sede-x Github'
     name: sede-x/stratos-core-bootstrap
 
 stages:
@@ -33,7 +33,9 @@ stages:
         git add  staging/AKS-Test/.hello-world
         git commit -m "[kubeform-dbg] Add .hello-world"
         git push
+      displayName: Add .hello-world
     - script: |
         git rm staging/AKS-Test/.hello-world
         git commit -m "[kubeform-dbg] Remove .hello-world"
         git push
+      displayName: Del .hello-world
