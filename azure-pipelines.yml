@@ -40,6 +40,9 @@ steps:
     persistCredentials: true
   - script: echo $DOCKER_PASSWORD | docker login shellai.azurecr.io -u $DOCKER_LOGIN --password-stdin
     displayName: Login to ShellAI ACR
+    env:
+      DOCKER_LOGIN: $(DOCKER_LOGIN)
+      DOCKER_PASSWORD: $(DOCKER_PASSWORD)
   - task: KubectlInstaller@0
     inputs:
       kubectlVersion: "1.18.3"
