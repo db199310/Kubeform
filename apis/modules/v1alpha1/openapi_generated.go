@@ -15427,6 +15427,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -15719,7 +15724,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzAppv1Spec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1SiteConfigCors"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzAppv1SiteConfigCors"},
 	}
 }
 
@@ -15998,6 +16003,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -16241,7 +16251,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzFnv1Spec(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfigCors"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1AuthSettings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1ConnectionStrings", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfig", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzFnv1SiteConfigCors"},
 	}
 }
 
@@ -16921,6 +16931,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -17102,7 +17117,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzSqlv1Spec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend"},
 	}
 }
 
@@ -17764,6 +17779,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -17893,7 +17913,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzadfv1Spec(ref common.ReferenceCa
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1GithubConfiguration", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1GithubConfiguration", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzadfv1VstsConfiguration"},
 	}
 }
 
@@ -18129,6 +18149,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -18254,7 +18279,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzappserviceplanv1Spec(ref common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend"},
 	}
 }
 
@@ -18687,6 +18712,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Spec(ref common.
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -18768,7 +18798,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzplatformeventsv1Spec(ref common.
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend"},
 	}
 }
 
@@ -19088,6 +19118,11 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -19297,7 +19332,7 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Spec(ref common.ReferenceCal
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1NamespaceAuthRules", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1QueueAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Queues", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1TopicAuthRule", "kubeform.dev/kubeform/apis/modules/v1alpha1.SDPAzsbv1Topics"},
 	}
 }
 
@@ -19631,6 +19666,11 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref common.Referen
 							Ref: ref("k8s.io/api/core/v1.LocalObjectReference"),
 						},
 					},
+					"remoteBackend": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("kubeform.dev/kubeform/apis/base/v1alpha1.Backend"),
+						},
+					},
 					"source": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
@@ -19843,7 +19883,7 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Spec(ref common.Referen
 			},
 		},
 		Dependencies: []string{
-			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Blobs", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares"},
+			"k8s.io/api/core/v1.LocalObjectReference", "kubeform.dev/kubeform/apis/base/v1alpha1.Backend", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Blobs", "kubeform.dev/kubeform/apis/modules/v1alpha1.StratosAzStgv1Shares"},
 	}
 }
 

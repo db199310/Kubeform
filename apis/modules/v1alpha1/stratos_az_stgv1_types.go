@@ -43,8 +43,10 @@ type StratosAzStgv1 struct {
 
 type StratosAzStgv1Spec struct {
 	// +optional
-	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
-	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	SecretRef     *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	ProviderRef   core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	RemoteBackend *base.Backend              `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	Source string `json:"source" tf:"source"`
 

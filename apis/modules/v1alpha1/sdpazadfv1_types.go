@@ -41,8 +41,10 @@ type SDPAzadfv1 struct {
 
 type SDPAzadfv1Spec struct {
 	// +optional
-	SecretRef   *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
-	ProviderRef core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	SecretRef     *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
+	ProviderRef   core.LocalObjectReference  `json:"providerRef" tf:"-"`
+	RemoteBackend *base.Backend              `json:"remoteBackend,omitempty" tf:"-"`
+
 	// +optional
 	Source string `json:"source" tf:"source"`
 
