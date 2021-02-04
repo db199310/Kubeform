@@ -14,13 +14,9 @@ resources:
   - repository: stratos
     ref: refs/heads/feature/tn-installing-aks-test
     type: github
-    endpoint: 'Sede-X Github (ThomasNal)'
+    # endpoint: 'Sede-X Github (ThomasNal)'
+    endpoint: 'Sede-x Github'
     name: sede-x/stratos-core-bootstrap
-
-#   - repository: stratos
-#     type: github
-#     endpoint: 'Sede-x Github'
-#     name: sede-x/stratos-core-bootstrap
 
 stages:
 - stage: DeployStaging
@@ -31,9 +27,13 @@ stages:
       persistCredentials: true
     - script: |
         git checkout feature/tn-installing-aks-test
-        echo "my change" > staging/AKS-Test/.dbg
+        echo "Hello World!" > staging/AKS-Test/.hello-world
         git config --global user.email "sedp-ci@shell.com"
         git config --global user.name "Azure Pipelines"
         git add  staging/AKS-Test/.dbg
-        git commit -m "[kubeform-dbg] Commit msg"
+        git commit -m "[kubeform-dbg] Add .hello-world"
+        git push
+    - script: |
+        git rm staging/AKS-Test/.dbg
+        git commit -m "[kubeform-dbg] Remove .hello-world"
         git push
