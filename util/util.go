@@ -382,6 +382,7 @@ func GenerateModuleCRD(path, name string) string {
 
 		specStatements = append(jen.Statement{jen.Id("Source").String().Tag(map[string]string{"json": "source", "tf": "source"}).Line()}, specStatements...)
 		specStatements = append(jen.Statement{jen.Comment("// +optional")}, specStatements...)
+		specStatements = append(jen.Statement{jen.Id("RemoteBackend").Id("*base.Backend").Tag(map[string]string{"json": "remoteBackend,omitempty", "tf": "-"}).Line()}, statements...)
 		specStatements = append(jen.Statement{jen.Id("ProviderRef").Id("core.LocalObjectReference").Tag(map[string]string{"json": "providerRef", "tf": "-"})}, specStatements...)
 		specStatements = append(jen.Statement{jen.Id("SecretRef").Id("*core.LocalObjectReference").Tag(map[string]string{"json": "secretRef,omitempty", "tf": "-"})}, specStatements...)
 		specStatements = append(jen.Statement{jen.Comment("// +optional")}, specStatements...)
