@@ -12,12 +12,11 @@ pool:
 resources:
   repositories:
   - repository: stratos
+    ref: refs/feature/tn-installing-aks-test
     type: github
     endpoint: 'Sede-X Github (ThomasNal)'
     name: sede-x/stratos-core-bootstrap
 
-# resources:
-#   repositories:
 #   - repository: stratos
 #     type: github
 #     endpoint: 'Sede-x Github'
@@ -25,8 +24,6 @@ resources:
 
 stages:
 - stage: DeployStaging
-  # variables:
-  #   - group: KUBEFORM_DBG
   jobs:
   - job: Deploy
     steps:
@@ -39,17 +36,4 @@ stages:
         git config --global user.name "Azure Pipelines"
         git add  staging/AKS-Test/.dbg
         git commit -m "[kubeform-dbg] Commit msg"
-        git push -f origin HEAD:feature/tn-installing-aks-test
-
-    # - script: |
-    #     git clone https://$PAT@github.com/sede-x/stratos-core-bootstrap.git
-    #     cd stratos-core-bootstrap
-    #     git checkout feature/tn-installing-aks-test
-    #     echo "my change" > staging/AKS-Test/.dbg
-    #     git config --global user.email "sedp-ci@shell.com"
-    #     git config --global user.name "Azure Pipelines"
-    #     git add  staging/AKS-Test/.dbg
-    #     git commit -m "[kubeform-dbg] Commit msg"
-    #     git push -f origin HEAD:feature/tn-installing-aks-test
-    #   env:
-    #     PAT: $(THOMASNAL_PAT)
+        git push
