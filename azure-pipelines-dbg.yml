@@ -30,10 +30,10 @@ stages:
         echo "Hello World!" > staging/AKS-Test/.hello-world
         git config --global user.email "sedp-ci@shell.com"
         git config --global user.name "Azure Pipelines"
-        git add  staging/AKS-Test/.dbg
+        git add  staging/AKS-Test/.hello-world
         git commit -m "[kubeform-dbg] Add .hello-world"
         git push
     - script: |
-        git rm staging/AKS-Test/.dbg
+        git rm staging/AKS-Test/.hello-world
         git commit -m "[kubeform-dbg] Remove .hello-world"
         git push
