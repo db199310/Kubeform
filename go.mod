@@ -11,9 +11,9 @@ require (
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20200526195750-d43f12b82861
 	github.com/hashicorp/terraform-plugin-sdk v1.14.0
 	github.com/terraform-providers/terraform-provider-azurerm v1.44.0
-	k8s.io/api v0.18.3
+	k8s.io/api v0.18.3 // indirect
 	k8s.io/apimachinery v0.18.3
-	k8s.io/client-go v10.0.0+incompatible
+	k8s.io/client-go v10.0.0+incompatible // indirect
 	k8s.io/kube-openapi v0.0.0-20200410145947-61e04a5be9a6
 	kmodules.xyz/client-go v0.0.0-20200630053911-20d035822d35
 )
