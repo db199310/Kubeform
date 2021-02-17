@@ -1,12 +1,16 @@
+parameters:
+- name: SandboxClusterName
+  displayName: Target Sandbox Kubernetes Cluster
+  type: string
+  default: DPPUBMGMTNPDaks
+  values:
+  - DPPUBMGMTNPDaks
+
+
 trigger:
   branches:
     include:
     - '*'
-    exclude:
-    - master
-  paths:
-    include:
-    - module-sources.json
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -26,7 +30,9 @@ variables:
 - group: shellai_acr
 - name: IS_MASTER_BRANCH
   # value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/feature/tn-merging-upstream')]
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/feature/tn-merging-upstream')] # XXX: Use master
+- name: StratosBranch
+  value: feature/tn-installing-aks-test # XXX: Use master
 
 
 resources:
@@ -35,8 +41,10 @@ resources:
     type: git
     name: Platform - General/kfc
   - repository: stratos
+    ref: refs/heads/feature/tn-installing-aks-test
     type: github
-    endpoint: 'Sede-x Github'
+    endpoint: 'Sede-x Github (ThomasNal)'
+    # endpoint: 'Sede-x Github' # XXX: Fix the service connection permissions
     name: sede-x/stratos-core-bootstrap
 
 stages:
@@ -128,6 +136,55 @@ stages:
       workingDirectory: kfc
     - script: echo $(setDockerTag.DOCKER_TAG)
       displayName: Echo DOCKER_TAG
+
+- stage: DeploySandbox
+  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, false))'
+  dependsOn:
+  - Build
+  variables:
+    ComponentsPath: components/sandbox/${{ parameters.SandboxClusterName }}
+    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+  jobs:
+  - deployment: Deploy
+    environment: sbx
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+            displayName: Checkout kubeform
+          - checkout: stratos
+            displayName: Checkout stratos
+            persistCredentials: true
+          - script: git checkout $(StratosBranch)
+            displayName: Checkout stratos branch
+            workingDirectory: stratos-core-bootstrap
+
+          # Update crd-conversion config
+          - script: npm install js-yaml
+            displayName: Install node packages
+            workingDirectory: kubeform/util
+          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+            displayName: Update schemas in ConfigMap
+            workingDirectory: kubeform
+          - script: |
+              git pull
+              git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
+              git commit -m "[kubeform] Update crd-conversion config"
+              git push
+            displayName: Push updates to crd-conversion config
+            workingDirectory: stratos-core-bootstrap
+
+          # Update stratos-crds
+          - script: for crd in stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml; do sed -i '' -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+            displayName: Patch CRDs with conversion config
+          - script: |
+              git pull
+              git add $(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
+              git commit -m "[kubeform] Update Stratos CRDs"
+              git push
+            displayName: Push updates to Stratos CRDs
+            workingDirectory: stratos-core-bootstrap
 
 - stage: DeployStaging
   condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
