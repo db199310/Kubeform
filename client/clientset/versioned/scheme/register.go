@@ -34,8 +34,8 @@ var Codecs = serializer.NewCodecFactory(Scheme)
 var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
 	azurermv1alpha1.AddToScheme,
-	modulesv1alpha2.AddToScheme,
 	modulesv1alpha1.AddToScheme,
+	modulesv1alpha2.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition
