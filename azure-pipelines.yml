@@ -63,7 +63,7 @@ stages:
       workingDirectory: kfc
       displayName: Checkout kfc source branch
 
-    - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+    - script: echo $DOCKER_PASSWORD | docker login shellai.azurecr.io -u $DOCKER_LOGIN --password-stdin
       displayName: Login to ShellAI ACR
     - task: GoTool@0
       inputs:
