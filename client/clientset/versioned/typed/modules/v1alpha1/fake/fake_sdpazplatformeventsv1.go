@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var sdpazplatformeventsv1sResource = schema.GroupVersionResource{Group: "modules
 var sdpazplatformeventsv1sKind = schema.GroupVersionKind{Group: "modules.kubeform.com", Version: "v1alpha1", Kind: "SDPAzplatformeventsv1"}
 
 // Get takes name of the sDPAzplatformeventsv1, and returns the corresponding sDPAzplatformeventsv1 object, and an error if there is any.
-func (c *FakeSDPAzplatformeventsv1s) Get(name string, options v1.GetOptions) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
+func (c *FakeSDPAzplatformeventsv1s) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(sdpazplatformeventsv1sResource, c.ns, name), &v1alpha1.SDPAzplatformeventsv1{})
 
@@ -50,7 +52,7 @@ func (c *FakeSDPAzplatformeventsv1s) Get(name string, options v1.GetOptions) (re
 }
 
 // List takes label and field selectors, and returns the list of SDPAzplatformeventsv1s that match those selectors.
-func (c *FakeSDPAzplatformeventsv1s) List(opts v1.ListOptions) (result *v1alpha1.SDPAzplatformeventsv1List, err error) {
+func (c *FakeSDPAzplatformeventsv1s) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.SDPAzplatformeventsv1List, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(sdpazplatformeventsv1sResource, sdpazplatformeventsv1sKind, c.ns, opts), &v1alpha1.SDPAzplatformeventsv1List{})
 
@@ -72,14 +74,14 @@ func (c *FakeSDPAzplatformeventsv1s) List(opts v1.ListOptions) (result *v1alpha1
 }
 
 // Watch returns a watch.Interface that watches the requested sDPAzplatformeventsv1s.
-func (c *FakeSDPAzplatformeventsv1s) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeSDPAzplatformeventsv1s) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(sdpazplatformeventsv1sResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a sDPAzplatformeventsv1 and creates it.  Returns the server's representation of the sDPAzplatformeventsv1, and an error, if there is any.
-func (c *FakeSDPAzplatformeventsv1s) Create(sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
+func (c *FakeSDPAzplatformeventsv1s) Create(ctx context.Context, sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1, opts v1.CreateOptions) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(sdpazplatformeventsv1sResource, c.ns, sDPAzplatformeventsv1), &v1alpha1.SDPAzplatformeventsv1{})
 
@@ -90,7 +92,7 @@ func (c *FakeSDPAzplatformeventsv1s) Create(sDPAzplatformeventsv1 *v1alpha1.SDPA
 }
 
 // Update takes the representation of a sDPAzplatformeventsv1 and updates it. Returns the server's representation of the sDPAzplatformeventsv1, and an error, if there is any.
-func (c *FakeSDPAzplatformeventsv1s) Update(sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
+func (c *FakeSDPAzplatformeventsv1s) Update(ctx context.Context, sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1, opts v1.UpdateOptions) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(sdpazplatformeventsv1sResource, c.ns, sDPAzplatformeventsv1), &v1alpha1.SDPAzplatformeventsv1{})
 
@@ -102,7 +104,7 @@ func (c *FakeSDPAzplatformeventsv1s) Update(sDPAzplatformeventsv1 *v1alpha1.SDPA
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSDPAzplatformeventsv1s) UpdateStatus(sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1) (*v1alpha1.SDPAzplatformeventsv1, error) {
+func (c *FakeSDPAzplatformeventsv1s) UpdateStatus(ctx context.Context, sDPAzplatformeventsv1 *v1alpha1.SDPAzplatformeventsv1, opts v1.UpdateOptions) (*v1alpha1.SDPAzplatformeventsv1, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(sdpazplatformeventsv1sResource, "status", c.ns, sDPAzplatformeventsv1), &v1alpha1.SDPAzplatformeventsv1{})
 
@@ -113,7 +115,7 @@ func (c *FakeSDPAzplatformeventsv1s) UpdateStatus(sDPAzplatformeventsv1 *v1alpha
 }
 
 // Delete takes name of the sDPAzplatformeventsv1 and deletes it. Returns an error if one occurs.
-func (c *FakeSDPAzplatformeventsv1s) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeSDPAzplatformeventsv1s) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(sdpazplatformeventsv1sResource, c.ns, name), &v1alpha1.SDPAzplatformeventsv1{})
 
@@ -121,15 +123,15 @@ func (c *FakeSDPAzplatformeventsv1s) Delete(name string, options *v1.DeleteOptio
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeSDPAzplatformeventsv1s) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(sdpazplatformeventsv1sResource, c.ns, listOptions)
+func (c *FakeSDPAzplatformeventsv1s) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(sdpazplatformeventsv1sResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.SDPAzplatformeventsv1List{})
 	return err
 }
 
 // Patch applies the patch and returns the patched sDPAzplatformeventsv1.
-func (c *FakeSDPAzplatformeventsv1s) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
+func (c *FakeSDPAzplatformeventsv1s) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SDPAzplatformeventsv1, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(sdpazplatformeventsv1sResource, c.ns, name, pt, data, subresources...), &v1alpha1.SDPAzplatformeventsv1{})
 

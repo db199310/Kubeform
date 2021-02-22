@@ -39,15 +39,8 @@ type CosmosdbMongoCollection struct {
 	Status            CosmosdbMongoCollectionStatus `json:"status,omitempty"`
 }
 
-type CosmosdbMongoCollectionSpecIndex struct {
-	Keys []string `json:"keys" tf:"keys"`
-	// +optional
-	Unique bool `json:"unique,omitempty" tf:"unique,omitempty"`
-}
-
-type CosmosdbMongoCollectionSpecSystemIndexes struct {
-	// +optional
-	Keys []string `json:"keys,omitempty" tf:"keys,omitempty"`
+type CosmosdbMongoCollectionSpecIndexes struct {
+	Key string `json:"key" tf:"key"`
 	// +optional
 	Unique bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
@@ -62,13 +55,12 @@ type CosmosdbMongoCollectionSpec struct {
 	// +optional
 	DefaultTtlSeconds int64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
 	// +optional
-	Index             []CosmosdbMongoCollectionSpecIndex `json:"index,omitempty" tf:"index,omitempty"`
-	Name              string                             `json:"name" tf:"name"`
-	ResourceGroupName string                             `json:"resourceGroupName" tf:"resource_group_name"`
+	// Deprecated
+	Indexes           []CosmosdbMongoCollectionSpecIndexes `json:"indexes,omitempty" tf:"indexes,omitempty"`
+	Name              string                               `json:"name" tf:"name"`
+	ResourceGroupName string                               `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	ShardKey string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
-	// +optional
-	SystemIndexes []CosmosdbMongoCollectionSpecSystemIndexes `json:"systemIndexes,omitempty" tf:"system_indexes,omitempty"`
 	// +optional
 	Throughput int64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
@@ -83,6 +75,8 @@ type CosmosdbMongoCollectionStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

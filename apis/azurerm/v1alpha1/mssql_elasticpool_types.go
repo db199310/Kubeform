@@ -39,6 +39,24 @@ type MssqlElasticpool struct {
 	Status            MssqlElasticpoolStatus `json:"status,omitempty"`
 }
 
+type MssqlElasticpoolSpecElasticPoolProperties struct {
+	// +optional
+	// Deprecated
+	CreationDate string `json:"creationDate,omitempty" tf:"creation_date,omitempty"`
+	// +optional
+	// Deprecated
+	LicenseType string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+	// +optional
+	// Deprecated
+	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
+	// +optional
+	// Deprecated
+	State string `json:"state,omitempty" tf:"state,omitempty"`
+	// +optional
+	// Deprecated
+	ZoneRedundant bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
+}
+
 type MssqlElasticpoolSpecPerDatabaseSettings struct {
 	MaxCapacity float64 `json:"maxCapacity" tf:"max_capacity"`
 	MinCapacity float64 `json:"minCapacity" tf:"min_capacity"`
@@ -58,8 +76,9 @@ type MssqlElasticpoolSpec struct {
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +optional
-	LicenseType string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
-	Location    string `json:"location" tf:"location"`
+	// Deprecated
+	ElasticPoolProperties []MssqlElasticpoolSpecElasticPoolProperties `json:"elasticPoolProperties,omitempty" tf:"elastic_pool_properties,omitempty"`
+	Location              string                                      `json:"location" tf:"location"`
 	// +optional
 	MaxSizeBytes int64 `json:"maxSizeBytes,omitempty" tf:"max_size_bytes,omitempty"`
 	// +optional
@@ -87,6 +106,8 @@ type MssqlElasticpoolStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

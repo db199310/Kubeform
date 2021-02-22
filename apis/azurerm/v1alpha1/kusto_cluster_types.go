@@ -50,14 +50,10 @@ type KustoClusterSpec struct {
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +optional
-	DataIngestionURI string `json:"dataIngestionURI,omitempty" tf:"data_ingestion_uri,omitempty"`
-	// +optional
-	EnableDiskEncryption bool `json:"enableDiskEncryption,omitempty" tf:"enable_disk_encryption,omitempty"`
-	// +optional
-	EnableStreamingIngest bool   `json:"enableStreamingIngest,omitempty" tf:"enable_streaming_ingest,omitempty"`
-	Location              string `json:"location" tf:"location"`
-	Name                  string `json:"name" tf:"name"`
-	ResourceGroupName     string `json:"resourceGroupName" tf:"resource_group_name"`
+	DataIngestionURI  string `json:"dataIngestionURI,omitempty" tf:"data_ingestion_uri,omitempty"`
+	Location          string `json:"location" tf:"location"`
+	Name              string `json:"name" tf:"name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +kubebuilder:validation:MaxItems=1
 	Sku []KustoClusterSpecSku `json:"sku" tf:"sku"`
 	// +optional
@@ -76,6 +72,8 @@ type KustoClusterStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

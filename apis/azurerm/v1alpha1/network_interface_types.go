@@ -40,7 +40,19 @@ type NetworkInterface struct {
 }
 
 type NetworkInterfaceSpecIpConfiguration struct {
-	Name string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	ApplicationGatewayBackendAddressPoolsIDS []string `json:"applicationGatewayBackendAddressPoolsIDS,omitempty" tf:"application_gateway_backend_address_pools_ids,omitempty"`
+	// +optional
+	// Deprecated
+	ApplicationSecurityGroupIDS []string `json:"applicationSecurityGroupIDS,omitempty" tf:"application_security_group_ids,omitempty"`
+	// +optional
+	// Deprecated
+	LoadBalancerBackendAddressPoolsIDS []string `json:"loadBalancerBackendAddressPoolsIDS,omitempty" tf:"load_balancer_backend_address_pools_ids,omitempty"`
+	// +optional
+	// Deprecated
+	LoadBalancerInboundNATRulesIDS []string `json:"loadBalancerInboundNATRulesIDS,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
+	Name                           string   `json:"name" tf:"name"`
 	// +optional
 	Primary bool `json:"primary,omitempty" tf:"primary,omitempty"`
 	// +optional
@@ -70,12 +82,15 @@ type NetworkInterfaceSpec struct {
 	// +optional
 	InternalDNSNameLabel string `json:"internalDNSNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
 	// +optional
-	InternalDomainNameSuffix string                                `json:"internalDomainNameSuffix,omitempty" tf:"internal_domain_name_suffix,omitempty"`
-	IpConfiguration          []NetworkInterfaceSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
-	Location                 string                                `json:"location" tf:"location"`
+	// Deprecated
+	InternalFqdn    string                                `json:"internalFqdn,omitempty" tf:"internal_fqdn,omitempty"`
+	IpConfiguration []NetworkInterfaceSpecIpConfiguration `json:"ipConfiguration" tf:"ip_configuration"`
+	Location        string                                `json:"location" tf:"location"`
 	// +optional
 	MacAddress string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 	Name       string `json:"name" tf:"name"`
+	// +optional
+	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty"`
 	// +optional
 	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
 	// +optional
@@ -97,6 +112,8 @@ type NetworkInterfaceStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

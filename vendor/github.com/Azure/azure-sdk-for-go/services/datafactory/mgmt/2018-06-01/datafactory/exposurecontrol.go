@@ -37,8 +37,7 @@ func NewExposureControlClient(subscriptionID string) ExposureControlClient {
 	return NewExposureControlClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewExposureControlClientWithBaseURI creates an instance of the ExposureControlClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewExposureControlClientWithBaseURI creates an instance of the ExposureControlClient client.
 func NewExposureControlClientWithBaseURI(baseURI string, subscriptionID string) ExposureControlClient {
 	return ExposureControlClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -104,7 +103,8 @@ func (client ExposureControlClient) GetFeatureValuePreparer(ctx context.Context,
 // GetFeatureValueSender sends the GetFeatureValue request. The method will close the
 // http.Response Body if it receives an error.
 func (client ExposureControlClient) GetFeatureValueSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetFeatureValueResponder handles the response to the GetFeatureValue request. The method always
@@ -195,7 +195,8 @@ func (client ExposureControlClient) GetFeatureValueByFactoryPreparer(ctx context
 // GetFeatureValueByFactorySender sends the GetFeatureValueByFactory request. The method will close the
 // http.Response Body if it receives an error.
 func (client ExposureControlClient) GetFeatureValueByFactorySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetFeatureValueByFactoryResponder handles the response to the GetFeatureValueByFactory request. The method always

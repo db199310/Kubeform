@@ -2,7 +2,6 @@ package recoveryservices
 
 import (
 	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/Azure/azure-sdk-for-go/services/recoveryservices/mgmt/2018-01-10/siterecovery"
@@ -91,7 +90,7 @@ func resourceArmSiteRecoveryNetworkMappingCreate(d *schema.ResourceData, meta in
 	ctx, cancel := timeouts.ForCreate(meta.(*clients.Client).StopContext, d)
 	defer cancel()
 
-	// get network name from id
+	//get network name from id
 	parsedSourceNetworkId, err := azure.ParseAzureResourceID(sourceNetworkId)
 	if err != nil {
 		return fmt.Errorf("[ERROR] Unable to parse source_network_id '%s' (network mapping %s): %+v", sourceNetworkId, name, err)
@@ -107,10 +106,7 @@ func resourceArmSiteRecoveryNetworkMappingCreate(d *schema.ResourceData, meta in
 	if features.ShouldResourcesBeImported() && d.IsNewResource() {
 		existing, err := client.Get(ctx, fabricName, sourceNetworkName, name)
 		if err != nil {
-			if !utils.ResponseWasNotFound(existing.Response) &&
-				// todo this workaround can be removed when this bug is fixed
-				// https://github.com/Azure/azure-sdk-for-go/issues/8705
-				!utils.ResponseWasStatusCode(existing.Response, http.StatusBadRequest) {
+			if !utils.ResponseWasNotFound(existing.Response) {
 				return fmt.Errorf("Error checking for presence of existing site recovery network mapping %s (vault %s): %+v", name, vaultName, err)
 			}
 		}

@@ -11,7 +11,6 @@ import (
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/tf"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
-	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/services/servicebus/validate"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/timeouts"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
 )
@@ -34,7 +33,7 @@ func resourceArmServiceBusNamespaceAuthorizationRule() *schema.Resource {
 			Delete: schema.DefaultTimeout(30 * time.Minute),
 		},
 
-		// function takes a schema map and adds the authorization rule properties to it
+		//function takes a schema map and adds the authorization rule properties to it
 		Schema: azure.ServiceBusAuthorizationRuleSchemaFrom(map[string]*schema.Schema{
 			"name": {
 				Type:         schema.TypeString,
@@ -47,7 +46,7 @@ func resourceArmServiceBusNamespaceAuthorizationRule() *schema.Resource {
 				Type:         schema.TypeString,
 				Required:     true,
 				ForceNew:     true,
-				ValidateFunc: validate.ServiceBusNamespaceName,
+				ValidateFunc: azure.ValidateServiceBusNamespaceName(),
 			},
 
 			"resource_group_name": azure.SchemaResourceGroupName(),
@@ -118,7 +117,7 @@ func resourceArmServiceBusNamespaceAuthorizationRuleRead(d *schema.ResourceData,
 
 	resGroup := id.ResourceGroup
 	namespaceName := id.Path["namespaces"]
-	name := id.Path["AuthorizationRules"] // this is slightly different then a topic rule (Authorization vs authorization)
+	name := id.Path["AuthorizationRules"] //this is slightly different then a topic rule (Authorization vs authorization)
 
 	resp, err := client.GetAuthorizationRule(ctx, resGroup, namespaceName, name)
 	if err != nil {
@@ -165,7 +164,7 @@ func resourceArmServiceBusNamespaceAuthorizationRuleDelete(d *schema.ResourceDat
 
 	resGroup := id.ResourceGroup
 	namespaceName := id.Path["namespaces"]
-	name := id.Path["AuthorizationRules"] // this is slightly different then topic/queue (Authorization vs authorization)
+	name := id.Path["AuthorizationRules"] //this is slightly different then topic/queue (Authorization vs authorization)
 
 	if _, err = client.DeleteAuthorizationRule(ctx, resGroup, namespaceName, name); err != nil {
 		return fmt.Errorf("Error issuing Azure ARM delete request of ServiceBus Namespace Authorization Rule %q (Resource Group %q): %+v", name, resGroup, err)

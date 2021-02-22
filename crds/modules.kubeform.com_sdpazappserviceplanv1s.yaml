@@ -1,0 +1,156 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: sdpazappserviceplanv1s.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: SDPAzappserviceplanv1
+    listKind: SDPAzappserviceplanv1List
+    plural: sdpazappserviceplanv1s
+    singular: sdpazappserviceplanv1
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            customName:
+              description: Name of the App Service Plan, generated if not set.
+              type: string
+            environment:
+              description: Project environment
+              type: string
+            extraTags:
+              additionalProperties:
+                type: string
+              description: Extra tags to add
+              type: object
+            kind:
+              description: The kind of the App Service Plan to create. See documentation
+                https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#kind
+              type: string
+            namePrefix:
+              description: appserviceplan nameprefix
+              type: string
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            projectStream:
+              description: project stream name
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            region:
+              description: region
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
+            reserved:
+              description: Flag indicating if App Service Plan should be reserved.
+                Forced to true if "kind" is "Linux".
+              type: string
+            resourceGroupName:
+              description: Resource group name
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            sku:
+              additionalProperties:
+                type: string
+              description: A sku block. See documentation https://www.terraform.io/docs/providers/azurerm/r/app_service_plan.html#sku
+              type: object
+            source:
+              type: string
+            workStream:
+              description: ' 4 character project stream name/code'
+              type: string
+          required:
+          - environment
+          - kind
+          - namePrefix
+          - owner
+          - projectStream
+          - providerRef
+          - region
+          - resourceGroupName
+          - sku
+          - workStream
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              properties:
+                appServicePlanID:
+                  description: Id of the created App Service Plan
+                  type: string
+                appServicePlanLocation:
+                  description: Azure location of the created App Service Plan
+                  type: string
+                appServicePlanMaxWorkers:
+                  description: Maximum number of workers for the created App Service
+                    Plan
+                  type: string
+                appServicePlanName:
+                  description: Name of the created App Service Plan
+                  type: string
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+            terraformErrors:
+              items:
+                type: string
+              type: array
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

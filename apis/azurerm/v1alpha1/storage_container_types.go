@@ -54,7 +54,11 @@ type StorageContainerSpec struct {
 	Metadata map[string]string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 	Name     string            `json:"name" tf:"name"`
 	// +optional
-	ResourceManagerID  string `json:"resourceManagerID,omitempty" tf:"resource_manager_id,omitempty"`
+	// Deprecated
+	Properties map[string]string `json:"properties,omitempty" tf:"properties,omitempty"`
+	// +optional
+	// Deprecated
+	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 }
 
@@ -68,6 +72,8 @@ type StorageContainerStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

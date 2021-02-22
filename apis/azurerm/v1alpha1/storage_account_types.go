@@ -39,27 +39,12 @@ type StorageAccount struct {
 	Status            StorageAccountStatus `json:"status,omitempty"`
 }
 
-type StorageAccountSpecBlobPropertiesCorsRule struct {
-	// +kubebuilder:validation:MaxItems=64
-	AllowedHeaders []string `json:"allowedHeaders" tf:"allowed_headers"`
-	// +kubebuilder:validation:MaxItems=64
-	AllowedMethods []string `json:"allowedMethods" tf:"allowed_methods"`
-	// +kubebuilder:validation:MaxItems=64
-	AllowedOrigins []string `json:"allowedOrigins" tf:"allowed_origins"`
-	// +kubebuilder:validation:MaxItems=64
-	ExposedHeaders  []string `json:"exposedHeaders" tf:"exposed_headers"`
-	MaxAgeInSeconds int64    `json:"maxAgeInSeconds" tf:"max_age_in_seconds"`
-}
-
 type StorageAccountSpecBlobPropertiesDeleteRetentionPolicy struct {
 	// +optional
 	Days int64 `json:"days,omitempty" tf:"days,omitempty"`
 }
 
 type StorageAccountSpecBlobProperties struct {
-	// +optional
-	// +kubebuilder:validation:MaxItems=5
-	CorsRule []StorageAccountSpecBlobPropertiesCorsRule `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	DeleteRetentionPolicy []StorageAccountSpecBlobPropertiesDeleteRetentionPolicy `json:"deleteRetentionPolicy,omitempty" tf:"delete_retention_policy,omitempty"`
@@ -143,13 +128,6 @@ type StorageAccountSpecQueueProperties struct {
 	MinuteMetrics []StorageAccountSpecQueuePropertiesMinuteMetrics `json:"minuteMetrics,omitempty" tf:"minute_metrics,omitempty"`
 }
 
-type StorageAccountSpecStaticWebsite struct {
-	// +optional
-	Error404Document string `json:"error404Document,omitempty" tf:"error_404_document,omitempty"`
-	// +optional
-	IndexDocument string `json:"indexDocument,omitempty" tf:"index_document,omitempty"`
-}
-
 type StorageAccountSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -160,15 +138,27 @@ type StorageAccountSpec struct {
 	// +optional
 	AccessTier string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
 	// +optional
+	AccountEncryptionSource string `json:"accountEncryptionSource,omitempty" tf:"account_encryption_source,omitempty"`
+	// +optional
 	AccountKind            string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 	AccountReplicationType string `json:"accountReplicationType" tf:"account_replication_type"`
 	AccountTier            string `json:"accountTier" tf:"account_tier"`
+	// +optional
+	// Deprecated
+	AccountType string `json:"accountType,omitempty" tf:"account_type,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	BlobProperties []StorageAccountSpecBlobProperties `json:"blobProperties,omitempty" tf:"blob_properties,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	CustomDomain []StorageAccountSpecCustomDomain `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
+	// +optional
+	// Deprecated
+	EnableAdvancedThreatProtection bool `json:"enableAdvancedThreatProtection,omitempty" tf:"enable_advanced_threat_protection,omitempty"`
+	// +optional
+	EnableBlobEncryption bool `json:"enableBlobEncryption,omitempty" tf:"enable_blob_encryption,omitempty"`
+	// +optional
+	EnableFileEncryption bool `json:"enableFileEncryption,omitempty" tf:"enable_file_encryption,omitempty"`
 	// +optional
 	EnableHTTPSTrafficOnly bool `json:"enableHTTPSTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 	// +optional
@@ -250,9 +240,6 @@ type StorageAccountSpec struct {
 	// +optional
 	SecondaryWebHost string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty"`
 	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	StaticWebsite []StorageAccountSpecStaticWebsite `json:"staticWebsite,omitempty" tf:"static_website,omitempty"`
-	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -266,6 +253,8 @@ type StorageAccountStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

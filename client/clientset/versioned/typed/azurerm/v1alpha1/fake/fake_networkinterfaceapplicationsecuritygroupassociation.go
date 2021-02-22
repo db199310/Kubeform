@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var networkinterfaceapplicationsecuritygroupassociationsResource = schema.GroupV
 var networkinterfaceapplicationsecuritygroupassociationsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "NetworkInterfaceApplicationSecurityGroupAssociation"}
 
 // Get takes name of the networkInterfaceApplicationSecurityGroupAssociation, and returns the corresponding networkInterfaceApplicationSecurityGroupAssociation object, and an error if there is any.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Get(name string, options v1.GetOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, name), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 
@@ -50,7 +52,7 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Get(name stri
 }
 
 // List takes label and field selectors, and returns the list of NetworkInterfaceApplicationSecurityGroupAssociations that match those selectors.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) List(opts v1.ListOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociationList, err error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociationList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(networkinterfaceapplicationsecuritygroupassociationsResource, networkinterfaceapplicationsecuritygroupassociationsKind, c.ns, opts), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociationList{})
 
@@ -72,14 +74,14 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) List(opts v1.
 }
 
 // Watch returns a watch.Interface that watches the requested networkInterfaceApplicationSecurityGroupAssociations.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a networkInterfaceApplicationSecurityGroupAssociation and creates it.  Returns the server's representation of the networkInterfaceApplicationSecurityGroupAssociation, and an error, if there is any.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Create(networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Create(ctx context.Context, networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, opts v1.CreateOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, networkInterfaceApplicationSecurityGroupAssociation), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 
@@ -90,7 +92,7 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Create(networ
 }
 
 // Update takes the representation of a networkInterfaceApplicationSecurityGroupAssociation and updates it. Returns the server's representation of the networkInterfaceApplicationSecurityGroupAssociation, and an error, if there is any.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Update(networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Update(ctx context.Context, networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, opts v1.UpdateOptions) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, networkInterfaceApplicationSecurityGroupAssociation), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 
@@ -102,7 +104,7 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Update(networ
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) UpdateStatus(networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation) (*v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) UpdateStatus(ctx context.Context, networkInterfaceApplicationSecurityGroupAssociation *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, opts v1.UpdateOptions) (*v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(networkinterfaceapplicationsecuritygroupassociationsResource, "status", c.ns, networkInterfaceApplicationSecurityGroupAssociation), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 
@@ -113,7 +115,7 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) UpdateStatus(
 }
 
 // Delete takes name of the networkInterfaceApplicationSecurityGroupAssociation and deletes it. Returns an error if one occurs.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, name), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 
@@ -121,15 +123,15 @@ func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Delete(name s
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, listOptions)
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociationList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched networkInterfaceApplicationSecurityGroupAssociation.
-func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
+func (c *FakeNetworkInterfaceApplicationSecurityGroupAssociations) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(networkinterfaceapplicationsecuritygroupassociationsResource, c.ns, name, pt, data, subresources...), &v1alpha1.NetworkInterfaceApplicationSecurityGroupAssociation{})
 

@@ -49,9 +49,8 @@ type MonitorDiagnosticSettingSpecLog struct {
 	Category string `json:"category" tf:"category"`
 	// +optional
 	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionPolicy []MonitorDiagnosticSettingSpecLogRetentionPolicy `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicy []MonitorDiagnosticSettingSpecLogRetentionPolicy `json:"retentionPolicy" tf:"retention_policy"`
 }
 
 type MonitorDiagnosticSettingSpecMetricRetentionPolicy struct {
@@ -64,9 +63,8 @@ type MonitorDiagnosticSettingSpecMetric struct {
 	Category string `json:"category" tf:"category"`
 	// +optional
 	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	RetentionPolicy []MonitorDiagnosticSettingSpecMetricRetentionPolicy `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicy []MonitorDiagnosticSettingSpecMetricRetentionPolicy `json:"retentionPolicy" tf:"retention_policy"`
 }
 
 type MonitorDiagnosticSettingSpec struct {
@@ -102,6 +100,8 @@ type MonitorDiagnosticSettingStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

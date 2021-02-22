@@ -36,8 +36,7 @@ func NewBlobServicesClient(subscriptionID string) BlobServicesClient {
 	return NewBlobServicesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewBlobServicesClientWithBaseURI creates an instance of the BlobServicesClient client using a custom endpoint.  Use
-// this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewBlobServicesClientWithBaseURI creates an instance of the BlobServicesClient client.
 func NewBlobServicesClientWithBaseURI(baseURI string, subscriptionID string) BlobServicesClient {
 	return BlobServicesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -119,7 +118,8 @@ func (client BlobServicesClient) GetServicePropertiesPreparer(ctx context.Contex
 // GetServicePropertiesSender sends the GetServiceProperties request. The method will close the
 // http.Response Body if it receives an error.
 func (client BlobServicesClient) GetServicePropertiesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetServicePropertiesResponder handles the response to the GetServiceProperties request. The method always
@@ -210,7 +210,8 @@ func (client BlobServicesClient) ListPreparer(ctx context.Context, resourceGroup
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client BlobServicesClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -316,7 +317,8 @@ func (client BlobServicesClient) SetServicePropertiesPreparer(ctx context.Contex
 // SetServicePropertiesSender sends the SetServiceProperties request. The method will close the
 // http.Response Body if it receives an error.
 func (client BlobServicesClient) SetServicePropertiesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // SetServicePropertiesResponder handles the response to the SetServiceProperties request. The method always

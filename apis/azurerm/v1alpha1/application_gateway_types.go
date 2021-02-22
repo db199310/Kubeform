@@ -55,9 +55,17 @@ type ApplicationGatewaySpecAutoscaleConfiguration struct {
 type ApplicationGatewaySpecBackendAddressPool struct {
 	// +optional
 	// +kubebuilder:validation:MinItems=1
+	// Deprecated
+	FqdnList []string `json:"fqdnList,omitempty" tf:"fqdn_list,omitempty"`
+	// +optional
+	// +kubebuilder:validation:MinItems=1
 	Fqdns []string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 	// +optional
 	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	// +optional
+	// +kubebuilder:validation:MinItems=1
+	// Deprecated
+	IpAddressList []string `json:"ipAddressList,omitempty" tf:"ip_address_list,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MinItems=1
 	IpAddresses []string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
@@ -158,8 +166,6 @@ type ApplicationGatewaySpecHttpListener struct {
 	FrontendPortName string `json:"frontendPortName" tf:"frontend_port_name"`
 	// +optional
 	HostName string `json:"hostName,omitempty" tf:"host_name,omitempty"`
-	// +optional
-	HostNames []string `json:"hostNames,omitempty" tf:"host_names,omitempty"`
 	// +optional
 	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
 	Name     string `json:"name" tf:"name"`
@@ -300,15 +306,11 @@ type ApplicationGatewaySpecSku struct {
 }
 
 type ApplicationGatewaySpecSslCertificate struct {
+	Data string `json:"-" sensitive:"true" tf:"data"`
 	// +optional
-	Data string `json:"-" sensitive:"true" tf:"data,omitempty"`
-	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
-	// +optional
-	KeyVaultSecretID string `json:"keyVaultSecretID,omitempty" tf:"key_vault_secret_id,omitempty"`
-	Name             string `json:"name" tf:"name"`
-	// +optional
-	Password string `json:"-" sensitive:"true" tf:"password,omitempty"`
+	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
+	Name     string `json:"name" tf:"name"`
+	Password string `json:"-" sensitive:"true" tf:"password"`
 	// +optional
 	PublicCertData string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
 }
@@ -429,9 +431,10 @@ type ApplicationGatewaySpec struct {
 	// +optional
 	CustomErrorConfiguration []ApplicationGatewaySpecCustomErrorConfiguration `json:"customErrorConfiguration,omitempty" tf:"custom_error_configuration,omitempty"`
 	// +optional
-	EnableHttp2 bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+	// Deprecated
+	DisabledSSLProtocols []string `json:"disabledSSLProtocols,omitempty" tf:"disabled_ssl_protocols,omitempty"`
 	// +optional
-	FirewallPolicyID string `json:"firewallPolicyID,omitempty" tf:"firewall_policy_id,omitempty"`
+	EnableHttp2 bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 	// +kubebuilder:validation:MinItems=1
 	FrontendIPConfiguration []ApplicationGatewaySpecFrontendIPConfiguration `json:"frontendIPConfiguration" tf:"frontend_ip_configuration"`
 	FrontendPort            []ApplicationGatewaySpecFrontendPort            `json:"frontendPort" tf:"frontend_port"`
@@ -481,6 +484,8 @@ type ApplicationGatewayStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

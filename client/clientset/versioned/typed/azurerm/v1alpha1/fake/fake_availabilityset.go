@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var availabilitysetsResource = schema.GroupVersionResource{Group: "azurerm.kubef
 var availabilitysetsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "AvailabilitySet"}
 
 // Get takes name of the availabilitySet, and returns the corresponding availabilitySet object, and an error if there is any.
-func (c *FakeAvailabilitySets) Get(name string, options v1.GetOptions) (result *v1alpha1.AvailabilitySet, err error) {
+func (c *FakeAvailabilitySets) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.AvailabilitySet, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(availabilitysetsResource, c.ns, name), &v1alpha1.AvailabilitySet{})
 
@@ -50,7 +52,7 @@ func (c *FakeAvailabilitySets) Get(name string, options v1.GetOptions) (result *
 }
 
 // List takes label and field selectors, and returns the list of AvailabilitySets that match those selectors.
-func (c *FakeAvailabilitySets) List(opts v1.ListOptions) (result *v1alpha1.AvailabilitySetList, err error) {
+func (c *FakeAvailabilitySets) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.AvailabilitySetList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(availabilitysetsResource, availabilitysetsKind, c.ns, opts), &v1alpha1.AvailabilitySetList{})
 
@@ -72,14 +74,14 @@ func (c *FakeAvailabilitySets) List(opts v1.ListOptions) (result *v1alpha1.Avail
 }
 
 // Watch returns a watch.Interface that watches the requested availabilitySets.
-func (c *FakeAvailabilitySets) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeAvailabilitySets) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(availabilitysetsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a availabilitySet and creates it.  Returns the server's representation of the availabilitySet, and an error, if there is any.
-func (c *FakeAvailabilitySets) Create(availabilitySet *v1alpha1.AvailabilitySet) (result *v1alpha1.AvailabilitySet, err error) {
+func (c *FakeAvailabilitySets) Create(ctx context.Context, availabilitySet *v1alpha1.AvailabilitySet, opts v1.CreateOptions) (result *v1alpha1.AvailabilitySet, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(availabilitysetsResource, c.ns, availabilitySet), &v1alpha1.AvailabilitySet{})
 
@@ -90,7 +92,7 @@ func (c *FakeAvailabilitySets) Create(availabilitySet *v1alpha1.AvailabilitySet)
 }
 
 // Update takes the representation of a availabilitySet and updates it. Returns the server's representation of the availabilitySet, and an error, if there is any.
-func (c *FakeAvailabilitySets) Update(availabilitySet *v1alpha1.AvailabilitySet) (result *v1alpha1.AvailabilitySet, err error) {
+func (c *FakeAvailabilitySets) Update(ctx context.Context, availabilitySet *v1alpha1.AvailabilitySet, opts v1.UpdateOptions) (result *v1alpha1.AvailabilitySet, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(availabilitysetsResource, c.ns, availabilitySet), &v1alpha1.AvailabilitySet{})
 
@@ -102,7 +104,7 @@ func (c *FakeAvailabilitySets) Update(availabilitySet *v1alpha1.AvailabilitySet)
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeAvailabilitySets) UpdateStatus(availabilitySet *v1alpha1.AvailabilitySet) (*v1alpha1.AvailabilitySet, error) {
+func (c *FakeAvailabilitySets) UpdateStatus(ctx context.Context, availabilitySet *v1alpha1.AvailabilitySet, opts v1.UpdateOptions) (*v1alpha1.AvailabilitySet, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(availabilitysetsResource, "status", c.ns, availabilitySet), &v1alpha1.AvailabilitySet{})
 
@@ -113,7 +115,7 @@ func (c *FakeAvailabilitySets) UpdateStatus(availabilitySet *v1alpha1.Availabili
 }
 
 // Delete takes name of the availabilitySet and deletes it. Returns an error if one occurs.
-func (c *FakeAvailabilitySets) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeAvailabilitySets) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(availabilitysetsResource, c.ns, name), &v1alpha1.AvailabilitySet{})
 
@@ -121,15 +123,15 @@ func (c *FakeAvailabilitySets) Delete(name string, options *v1.DeleteOptions) er
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeAvailabilitySets) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(availabilitysetsResource, c.ns, listOptions)
+func (c *FakeAvailabilitySets) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(availabilitysetsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.AvailabilitySetList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched availabilitySet.
-func (c *FakeAvailabilitySets) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.AvailabilitySet, err error) {
+func (c *FakeAvailabilitySets) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.AvailabilitySet, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(availabilitysetsResource, c.ns, name, pt, data, subresources...), &v1alpha1.AvailabilitySet{})
 

@@ -35,9 +35,7 @@ func NewMigrationRecoveryPointsClient(subscriptionID string, resourceGroupName s
 	return NewMigrationRecoveryPointsClientWithBaseURI(DefaultBaseURI, subscriptionID, resourceGroupName, resourceName)
 }
 
-// NewMigrationRecoveryPointsClientWithBaseURI creates an instance of the MigrationRecoveryPointsClient client using a
-// custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds,
-// Azure stack).
+// NewMigrationRecoveryPointsClientWithBaseURI creates an instance of the MigrationRecoveryPointsClient client.
 func NewMigrationRecoveryPointsClientWithBaseURI(baseURI string, subscriptionID string, resourceGroupName string, resourceName string) MigrationRecoveryPointsClient {
 	return MigrationRecoveryPointsClient{NewWithBaseURI(baseURI, subscriptionID, resourceGroupName, resourceName)}
 }
@@ -108,7 +106,8 @@ func (client MigrationRecoveryPointsClient) GetPreparer(ctx context.Context, fab
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client MigrationRecoveryPointsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -189,7 +188,8 @@ func (client MigrationRecoveryPointsClient) ListByReplicationMigrationItemsPrepa
 // ListByReplicationMigrationItemsSender sends the ListByReplicationMigrationItems request. The method will close the
 // http.Response Body if it receives an error.
 func (client MigrationRecoveryPointsClient) ListByReplicationMigrationItemsSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByReplicationMigrationItemsResponder handles the response to the ListByReplicationMigrationItems request. The method always

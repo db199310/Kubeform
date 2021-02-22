@@ -53,9 +53,15 @@ type ServicebusQueueSpec struct {
 	// +optional
 	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
 	// +optional
+	// Deprecated
+	EnableBatchedOperations bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
+	// +optional
 	EnableExpress bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 	// +optional
 	EnablePartitioning bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
 	// +optional
 	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 	// +optional
@@ -69,6 +75,9 @@ type ServicebusQueueSpec struct {
 	// +optional
 	RequiresSession   bool   `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	// +optional
+	// Deprecated
+	SupportOrdering bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
 }
 
 type ServicebusQueueStatus struct {
@@ -81,6 +90,8 @@ type ServicebusQueueStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -54,8 +54,6 @@ type ApplicationInsightsSpec struct {
 	// +optional
 	DailyDataCapNotificationsDisabled bool `json:"dailyDataCapNotificationsDisabled,omitempty" tf:"daily_data_cap_notifications_disabled,omitempty"`
 	// +optional
-	DisableIPMasking bool `json:"disableIPMasking,omitempty" tf:"disable_ip_masking,omitempty"`
-	// +optional
 	InstrumentationKey string `json:"-" sensitive:"true" tf:"instrumentation_key,omitempty"`
 	Location           string `json:"location" tf:"location"`
 	Name               string `json:"name" tf:"name"`
@@ -78,6 +76,8 @@ type ApplicationInsightsStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

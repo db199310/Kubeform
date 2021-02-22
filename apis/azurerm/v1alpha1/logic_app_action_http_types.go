@@ -39,11 +39,6 @@ type LogicAppActionHTTP struct {
 	Status            LogicAppActionHTTPStatus `json:"status,omitempty"`
 }
 
-type LogicAppActionHTTPSpecRunAfter struct {
-	ActionName   string `json:"actionName" tf:"action_name"`
-	ActionResult string `json:"actionResult" tf:"action_result"`
-}
-
 type LogicAppActionHTTPSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -56,10 +51,7 @@ type LogicAppActionHTTPSpec struct {
 	LogicAppID string            `json:"logicAppID" tf:"logic_app_id"`
 	Method     string            `json:"method" tf:"method"`
 	Name       string            `json:"name" tf:"name"`
-	// +optional
-	// +kubebuilder:validation:MinItems=1
-	RunAfter []LogicAppActionHTTPSpecRunAfter `json:"runAfter,omitempty" tf:"run_after,omitempty"`
-	Uri      string                           `json:"uri" tf:"uri"`
+	Uri        string            `json:"uri" tf:"uri"`
 }
 
 type LogicAppActionHTTPStatus struct {
@@ -72,6 +64,8 @@ type LogicAppActionHTTPStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

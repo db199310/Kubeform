@@ -21,7 +21,6 @@ import (
 	"context"
 	"github.com/Azure/go-autorest/autorest"
 	"github.com/Azure/go-autorest/autorest/azure"
-	"github.com/Azure/go-autorest/autorest/validation"
 	"github.com/Azure/go-autorest/tracing"
 	"net/http"
 )
@@ -38,15 +37,15 @@ func NewLogFilesClient(subscriptionID string) LogFilesClient {
 	return NewLogFilesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewLogFilesClientWithBaseURI creates an instance of the LogFilesClient client using a custom endpoint.  Use this
-// when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewLogFilesClientWithBaseURI creates an instance of the LogFilesClient client.
 func NewLogFilesClientWithBaseURI(baseURI string, subscriptionID string) LogFilesClient {
 	return LogFilesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
 
 // ListByServer list all the log files in a given server.
 // Parameters:
-// resourceGroupName - the name of the resource group. The name is case insensitive.
+// resourceGroupName - the name of the resource group that contains the resource. You can obtain this value
+// from the Azure Resource Manager API or the portal.
 // serverName - the name of the server.
 func (client LogFilesClient) ListByServer(ctx context.Context, resourceGroupName string, serverName string) (result LogFileListResult, err error) {
 	if tracing.IsEnabled() {
@@ -59,16 +58,6 @@ func (client LogFilesClient) ListByServer(ctx context.Context, resourceGroupName
 			tracing.EndSpan(ctx, sc, err)
 		}()
 	}
-	if err := validation.Validate([]validation.Validation{
-		{TargetValue: client.SubscriptionID,
-			Constraints: []validation.Constraint{{Target: "client.SubscriptionID", Name: validation.MinLength, Rule: 1, Chain: nil}}},
-		{TargetValue: resourceGroupName,
-			Constraints: []validation.Constraint{{Target: "resourceGroupName", Name: validation.MaxLength, Rule: 90, Chain: nil},
-				{Target: "resourceGroupName", Name: validation.MinLength, Rule: 1, Chain: nil},
-				{Target: "resourceGroupName", Name: validation.Pattern, Rule: `^[-\w\._\(\)]+$`, Chain: nil}}}}); err != nil {
-		return result, validation.NewError("postgresql.LogFilesClient", "ListByServer", err.Error())
-	}
-
 	req, err := client.ListByServerPreparer(ctx, resourceGroupName, serverName)
 	if err != nil {
 		err = autorest.NewErrorWithError(err, "postgresql.LogFilesClient", "ListByServer", nil, "Failure preparing request")
@@ -114,7 +103,8 @@ func (client LogFilesClient) ListByServerPreparer(ctx context.Context, resourceG
 // ListByServerSender sends the ListByServer request. The method will close the
 // http.Response Body if it receives an error.
 func (client LogFilesClient) ListByServerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByServerResponder handles the response to the ListByServer request. The method always

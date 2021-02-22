@@ -1,0 +1,256 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/name: kubeform
+  name: sdpazsbv1s.modules.kubeform.com
+spec:
+  additionalPrinterColumns:
+  - JSONPath: .status.phase
+    name: Phase
+    type: string
+  group: modules.kubeform.com
+  names:
+    kind: SDPAzsbv1
+    listKind: SDPAzsbv1List
+    plural: sdpazsbv1s
+    singular: sdpazsbv1
+  scope: Namespaced
+  subresources:
+    status: {}
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          properties:
+            capacity:
+              description: The number of message units.
+              type: string
+            environment:
+              description: Environment. Upto 5 character. For e.g. dev, dev01 , prd01
+              type: string
+            instance:
+              description: Instance number
+              type: string
+            name:
+              description: The name of the namespace.
+              type: string
+            namespaceAuthRules:
+              description: Namespace Authorization rules
+              items:
+                properties:
+                  listen:
+                    type: boolean
+                  manage:
+                    type: boolean
+                  name:
+                    type: string
+                  send:
+                    type: boolean
+                type: object
+              type: array
+            owner:
+              description: owner
+              type: string
+            placement:
+              description: placement
+              type: string
+            project:
+              description: project stream name
+              type: string
+            projectStream:
+              description: ' 4 character project stream name/code'
+              type: string
+            providerRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            queueAuthRule:
+              description: Queue authorization rules
+              items:
+                properties:
+                  listen:
+                    type: boolean
+                  manage:
+                    type: boolean
+                  name:
+                    type: string
+                  queueName:
+                    type: string
+                  send:
+                    type: boolean
+                type: object
+              type: array
+            queues:
+              description: Queues for the ServiceBus namespace
+              items:
+                properties:
+                  autoDeleteOnIdle:
+                    type: string
+                  deadLetteringOnMessageExpiration:
+                    type: boolean
+                  defaultMessageTtl:
+                    type: string
+                  duplicateDetectionHistoryTimeWindow:
+                    type: string
+                  enableExpress:
+                    type: boolean
+                  enablePartitioning:
+                    type: boolean
+                  lockDuration:
+                    type: string
+                  maxDeliveryCount:
+                    description: A Number represents a JSON number literal.
+                    type: string
+                  maxSizeInMegabytes:
+                    description: A Number represents a JSON number literal.
+                    type: string
+                  name:
+                    type: string
+                  requiresDuplicateDetection:
+                    type: boolean
+                  requiresSession:
+                    type: boolean
+                type: object
+              type: array
+            region:
+              description: region. Choose from australia, europe, asia, europe
+              type: string
+            releaseVersion:
+              description: releaseVersion
+              type: string
+            resourceGroupName:
+              description: The name of an existing resource group.
+              type: string
+            secretRef:
+              description: LocalObjectReference contains enough information to let
+                you locate the referenced object inside the same namespace.
+              properties:
+                name:
+                  description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                    TODO: Add other useful fields. apiVersion, kind, uid?'
+                  type: string
+              type: object
+            sku:
+              description: 'The SKU of the namespace. The options are: `Basic`, `Standard`,
+                `Premium`.'
+              type: string
+            source:
+              type: string
+            subnetIDS:
+              items:
+                type: string
+              type: array
+            subscriptionRules:
+              description: Subscription rules.
+              format: byte
+              type: string
+            subscriptions:
+              description: subscription for the Topic in the namespace
+              format: byte
+              type: string
+            tags:
+              additionalProperties:
+                type: string
+              description: ' Map of tags to assign to the resources.'
+              type: object
+            topicAuthRule:
+              description: Topic Authorization Rule
+              items:
+                properties:
+                  listen:
+                    type: boolean
+                  manage:
+                    type: boolean
+                  name:
+                    type: string
+                  send:
+                    type: boolean
+                  topicName:
+                    type: string
+                type: object
+              type: array
+            topics:
+              description: List of topics.
+              items:
+                properties:
+                  autoDeleteOnIdle:
+                    type: string
+                  defaultMessageTtl:
+                    type: string
+                  duplicateDetectionHistoryTimeWindow:
+                    type: string
+                  enableBatchedOperations:
+                    type: string
+                  enableExpress:
+                    type: boolean
+                  enablePartitioning:
+                    type: boolean
+                  maxSizeInMegabytes:
+                    description: A Number represents a JSON number literal.
+                    type: string
+                  name:
+                    type: string
+                  requiresDuplicateDetection:
+                    type: boolean
+                  status:
+                    type: string
+                  supportOrdering:
+                    type: boolean
+                type: object
+              type: array
+            workStream:
+              description: ' 4 character project stream name/code'
+              type: string
+          required:
+          - environment
+          - name
+          - owner
+          - projectStream
+          - providerRef
+          - region
+          - resourceGroupName
+          - workStream
+          type: object
+        status:
+          properties:
+            observedGeneration:
+              description: Resource generation, which is updated on mutation by the
+                API Server.
+              format: int64
+              type: integer
+            output:
+              type: object
+            phase:
+              type: string
+            state:
+              type: string
+            terraformErrors:
+              items:
+                type: string
+              type: array
+          type: object
+      type: object
+  version: v1alpha1
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true

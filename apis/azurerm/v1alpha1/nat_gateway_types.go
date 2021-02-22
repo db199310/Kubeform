@@ -49,7 +49,6 @@ type NatGatewaySpec struct {
 	Location             string `json:"location" tf:"location"`
 	Name                 string `json:"name" tf:"name"`
 	// +optional
-	// Deprecated
 	PublicIPAddressIDS []string `json:"publicIPAddressIDS,omitempty" tf:"public_ip_address_ids,omitempty"`
 	// +optional
 	PublicIPPrefixIDS []string `json:"publicIPPrefixIDS,omitempty" tf:"public_ip_prefix_ids,omitempty"`
@@ -74,6 +73,8 @@ type NatGatewayStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

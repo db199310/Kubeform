@@ -45,8 +45,7 @@ func New(subscriptionID string) BaseClient {
 	return NewWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewWithBaseURI creates an instance of the BaseClient client using a custom endpoint.  Use this when interacting with
-// an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewWithBaseURI creates an instance of the BaseClient client.
 func NewWithBaseURI(baseURI string, subscriptionID string) BaseClient {
 	return BaseClient{
 		Client:         autorest.NewClientWithUserAgent(UserAgent()),
@@ -113,7 +112,8 @@ func (client BaseClient) ListCachedImagesPreparer(ctx context.Context, location 
 // ListCachedImagesSender sends the ListCachedImages request. The method will close the
 // http.Response Body if it receives an error.
 func (client BaseClient) ListCachedImagesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListCachedImagesResponder handles the response to the ListCachedImages request. The method always
@@ -187,7 +187,8 @@ func (client BaseClient) ListCapabilitiesPreparer(ctx context.Context, location 
 // ListCapabilitiesSender sends the ListCapabilities request. The method will close the
 // http.Response Body if it receives an error.
 func (client BaseClient) ListCapabilitiesSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListCapabilitiesResponder handles the response to the ListCapabilities request. The method always

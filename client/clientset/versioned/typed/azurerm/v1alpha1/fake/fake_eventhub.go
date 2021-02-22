@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var eventhubsResource = schema.GroupVersionResource{Group: "azurerm.kubeform.com
 var eventhubsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "Eventhub"}
 
 // Get takes name of the eventhub, and returns the corresponding eventhub object, and an error if there is any.
-func (c *FakeEventhubs) Get(name string, options v1.GetOptions) (result *v1alpha1.Eventhub, err error) {
+func (c *FakeEventhubs) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.Eventhub, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(eventhubsResource, c.ns, name), &v1alpha1.Eventhub{})
 
@@ -50,7 +52,7 @@ func (c *FakeEventhubs) Get(name string, options v1.GetOptions) (result *v1alpha
 }
 
 // List takes label and field selectors, and returns the list of Eventhubs that match those selectors.
-func (c *FakeEventhubs) List(opts v1.ListOptions) (result *v1alpha1.EventhubList, err error) {
+func (c *FakeEventhubs) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.EventhubList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(eventhubsResource, eventhubsKind, c.ns, opts), &v1alpha1.EventhubList{})
 
@@ -72,14 +74,14 @@ func (c *FakeEventhubs) List(opts v1.ListOptions) (result *v1alpha1.EventhubList
 }
 
 // Watch returns a watch.Interface that watches the requested eventhubs.
-func (c *FakeEventhubs) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeEventhubs) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(eventhubsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a eventhub and creates it.  Returns the server's representation of the eventhub, and an error, if there is any.
-func (c *FakeEventhubs) Create(eventhub *v1alpha1.Eventhub) (result *v1alpha1.Eventhub, err error) {
+func (c *FakeEventhubs) Create(ctx context.Context, eventhub *v1alpha1.Eventhub, opts v1.CreateOptions) (result *v1alpha1.Eventhub, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(eventhubsResource, c.ns, eventhub), &v1alpha1.Eventhub{})
 
@@ -90,7 +92,7 @@ func (c *FakeEventhubs) Create(eventhub *v1alpha1.Eventhub) (result *v1alpha1.Ev
 }
 
 // Update takes the representation of a eventhub and updates it. Returns the server's representation of the eventhub, and an error, if there is any.
-func (c *FakeEventhubs) Update(eventhub *v1alpha1.Eventhub) (result *v1alpha1.Eventhub, err error) {
+func (c *FakeEventhubs) Update(ctx context.Context, eventhub *v1alpha1.Eventhub, opts v1.UpdateOptions) (result *v1alpha1.Eventhub, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(eventhubsResource, c.ns, eventhub), &v1alpha1.Eventhub{})
 
@@ -102,7 +104,7 @@ func (c *FakeEventhubs) Update(eventhub *v1alpha1.Eventhub) (result *v1alpha1.Ev
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeEventhubs) UpdateStatus(eventhub *v1alpha1.Eventhub) (*v1alpha1.Eventhub, error) {
+func (c *FakeEventhubs) UpdateStatus(ctx context.Context, eventhub *v1alpha1.Eventhub, opts v1.UpdateOptions) (*v1alpha1.Eventhub, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(eventhubsResource, "status", c.ns, eventhub), &v1alpha1.Eventhub{})
 
@@ -113,7 +115,7 @@ func (c *FakeEventhubs) UpdateStatus(eventhub *v1alpha1.Eventhub) (*v1alpha1.Eve
 }
 
 // Delete takes name of the eventhub and deletes it. Returns an error if one occurs.
-func (c *FakeEventhubs) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeEventhubs) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(eventhubsResource, c.ns, name), &v1alpha1.Eventhub{})
 
@@ -121,15 +123,15 @@ func (c *FakeEventhubs) Delete(name string, options *v1.DeleteOptions) error {
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeEventhubs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(eventhubsResource, c.ns, listOptions)
+func (c *FakeEventhubs) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(eventhubsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.EventhubList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched eventhub.
-func (c *FakeEventhubs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.Eventhub, err error) {
+func (c *FakeEventhubs) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.Eventhub, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(eventhubsResource, c.ns, name, pt, data, subresources...), &v1alpha1.Eventhub{})
 

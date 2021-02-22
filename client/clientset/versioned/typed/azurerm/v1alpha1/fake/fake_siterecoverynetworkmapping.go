@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var siterecoverynetworkmappingsResource = schema.GroupVersionResource{Group: "az
 var siterecoverynetworkmappingsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "SiteRecoveryNetworkMapping"}
 
 // Get takes name of the siteRecoveryNetworkMapping, and returns the corresponding siteRecoveryNetworkMapping object, and an error if there is any.
-func (c *FakeSiteRecoveryNetworkMappings) Get(name string, options v1.GetOptions) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
+func (c *FakeSiteRecoveryNetworkMappings) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(siterecoverynetworkmappingsResource, c.ns, name), &v1alpha1.SiteRecoveryNetworkMapping{})
 
@@ -50,7 +52,7 @@ func (c *FakeSiteRecoveryNetworkMappings) Get(name string, options v1.GetOptions
 }
 
 // List takes label and field selectors, and returns the list of SiteRecoveryNetworkMappings that match those selectors.
-func (c *FakeSiteRecoveryNetworkMappings) List(opts v1.ListOptions) (result *v1alpha1.SiteRecoveryNetworkMappingList, err error) {
+func (c *FakeSiteRecoveryNetworkMappings) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.SiteRecoveryNetworkMappingList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(siterecoverynetworkmappingsResource, siterecoverynetworkmappingsKind, c.ns, opts), &v1alpha1.SiteRecoveryNetworkMappingList{})
 
@@ -72,14 +74,14 @@ func (c *FakeSiteRecoveryNetworkMappings) List(opts v1.ListOptions) (result *v1a
 }
 
 // Watch returns a watch.Interface that watches the requested siteRecoveryNetworkMappings.
-func (c *FakeSiteRecoveryNetworkMappings) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeSiteRecoveryNetworkMappings) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(siterecoverynetworkmappingsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a siteRecoveryNetworkMapping and creates it.  Returns the server's representation of the siteRecoveryNetworkMapping, and an error, if there is any.
-func (c *FakeSiteRecoveryNetworkMappings) Create(siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
+func (c *FakeSiteRecoveryNetworkMappings) Create(ctx context.Context, siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping, opts v1.CreateOptions) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(siterecoverynetworkmappingsResource, c.ns, siteRecoveryNetworkMapping), &v1alpha1.SiteRecoveryNetworkMapping{})
 
@@ -90,7 +92,7 @@ func (c *FakeSiteRecoveryNetworkMappings) Create(siteRecoveryNetworkMapping *v1a
 }
 
 // Update takes the representation of a siteRecoveryNetworkMapping and updates it. Returns the server's representation of the siteRecoveryNetworkMapping, and an error, if there is any.
-func (c *FakeSiteRecoveryNetworkMappings) Update(siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
+func (c *FakeSiteRecoveryNetworkMappings) Update(ctx context.Context, siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping, opts v1.UpdateOptions) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(siterecoverynetworkmappingsResource, c.ns, siteRecoveryNetworkMapping), &v1alpha1.SiteRecoveryNetworkMapping{})
 
@@ -102,7 +104,7 @@ func (c *FakeSiteRecoveryNetworkMappings) Update(siteRecoveryNetworkMapping *v1a
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeSiteRecoveryNetworkMappings) UpdateStatus(siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping) (*v1alpha1.SiteRecoveryNetworkMapping, error) {
+func (c *FakeSiteRecoveryNetworkMappings) UpdateStatus(ctx context.Context, siteRecoveryNetworkMapping *v1alpha1.SiteRecoveryNetworkMapping, opts v1.UpdateOptions) (*v1alpha1.SiteRecoveryNetworkMapping, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(siterecoverynetworkmappingsResource, "status", c.ns, siteRecoveryNetworkMapping), &v1alpha1.SiteRecoveryNetworkMapping{})
 
@@ -113,7 +115,7 @@ func (c *FakeSiteRecoveryNetworkMappings) UpdateStatus(siteRecoveryNetworkMappin
 }
 
 // Delete takes name of the siteRecoveryNetworkMapping and deletes it. Returns an error if one occurs.
-func (c *FakeSiteRecoveryNetworkMappings) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeSiteRecoveryNetworkMappings) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(siterecoverynetworkmappingsResource, c.ns, name), &v1alpha1.SiteRecoveryNetworkMapping{})
 
@@ -121,15 +123,15 @@ func (c *FakeSiteRecoveryNetworkMappings) Delete(name string, options *v1.Delete
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeSiteRecoveryNetworkMappings) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(siterecoverynetworkmappingsResource, c.ns, listOptions)
+func (c *FakeSiteRecoveryNetworkMappings) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(siterecoverynetworkmappingsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.SiteRecoveryNetworkMappingList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched siteRecoveryNetworkMapping.
-func (c *FakeSiteRecoveryNetworkMappings) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
+func (c *FakeSiteRecoveryNetworkMappings) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SiteRecoveryNetworkMapping, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(siterecoverynetworkmappingsResource, c.ns, name, pt, data, subresources...), &v1alpha1.SiteRecoveryNetworkMapping{})
 

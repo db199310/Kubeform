@@ -36,8 +36,7 @@ func NewDedicatedHostsClient(subscriptionID string) DedicatedHostsClient {
 	return NewDedicatedHostsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDedicatedHostsClientWithBaseURI creates an instance of the DedicatedHostsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewDedicatedHostsClientWithBaseURI creates an instance of the DedicatedHostsClient client.
 func NewDedicatedHostsClientWithBaseURI(baseURI string, subscriptionID string) DedicatedHostsClient {
 	return DedicatedHostsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -113,8 +112,9 @@ func (client DedicatedHostsClient) CreateOrUpdatePreparer(ctx context.Context, r
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client DedicatedHostsClient) CreateOrUpdateSender(req *http.Request) (future DedicatedHostsCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -191,8 +191,9 @@ func (client DedicatedHostsClient) DeletePreparer(ctx context.Context, resourceG
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client DedicatedHostsClient) DeleteSender(req *http.Request) (future DedicatedHostsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -278,7 +279,8 @@ func (client DedicatedHostsClient) GetPreparer(ctx context.Context, resourceGrou
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DedicatedHostsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -356,7 +358,8 @@ func (client DedicatedHostsClient) ListByHostGroupPreparer(ctx context.Context, 
 // ListByHostGroupSender sends the ListByHostGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client DedicatedHostsClient) ListByHostGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByHostGroupResponder handles the response to the ListByHostGroup request. The method always
@@ -468,8 +471,9 @@ func (client DedicatedHostsClient) UpdatePreparer(ctx context.Context, resourceG
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client DedicatedHostsClient) UpdateSender(req *http.Request) (future DedicatedHostsUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

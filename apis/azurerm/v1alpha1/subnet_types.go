@@ -56,19 +56,23 @@ type SubnetSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// +optional
-	// Deprecated
-	AddressPrefix string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
-	// +optional
-	AddressPrefixes []string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+	AddressPrefix string `json:"addressPrefix" tf:"address_prefix"`
 	// +optional
 	Delegation []SubnetSpecDelegation `json:"delegation,omitempty" tf:"delegation,omitempty"`
 	// +optional
 	EnforcePrivateLinkEndpointNetworkPolicies bool `json:"enforcePrivateLinkEndpointNetworkPolicies,omitempty" tf:"enforce_private_link_endpoint_network_policies,omitempty"`
 	// +optional
-	EnforcePrivateLinkServiceNetworkPolicies bool   `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
-	Name                                     string `json:"name" tf:"name"`
-	ResourceGroupName                        string `json:"resourceGroupName" tf:"resource_group_name"`
+	EnforcePrivateLinkServiceNetworkPolicies bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
+	// +optional
+	IpConfigurations []string `json:"ipConfigurations,omitempty" tf:"ip_configurations,omitempty"`
+	Name             string   `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	NetworkSecurityGroupID string `json:"networkSecurityGroupID,omitempty" tf:"network_security_group_id,omitempty"`
+	ResourceGroupName      string `json:"resourceGroupName" tf:"resource_group_name"`
+	// +optional
+	// Deprecated
+	RouteTableID string `json:"routeTableID,omitempty" tf:"route_table_id,omitempty"`
 	// +optional
 	ServiceEndpoints   []string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 	VirtualNetworkName string   `json:"virtualNetworkName" tf:"virtual_network_name"`
@@ -84,6 +88,8 @@ type SubnetStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

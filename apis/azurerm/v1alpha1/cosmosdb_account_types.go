@@ -51,6 +51,13 @@ type CosmosdbAccountSpecConsistencyPolicy struct {
 	MaxStalenessPrefix int64 `json:"maxStalenessPrefix,omitempty" tf:"max_staleness_prefix,omitempty"`
 }
 
+type CosmosdbAccountSpecFailoverPolicy struct {
+	// +optional
+	ID       string `json:"ID,omitempty" tf:"id,omitempty"`
+	Location string `json:"location" tf:"location"`
+	Priority int64  `json:"priority" tf:"priority"`
+}
+
 type CosmosdbAccountSpecGeoLocation struct {
 	FailoverPriority int64 `json:"failoverPriority" tf:"failover_priority"`
 	// +optional
@@ -81,8 +88,12 @@ type CosmosdbAccountSpec struct {
 	// +optional
 	EnableMultipleWriteLocations bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
 	// +optional
-	Endpoint    string                           `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-	GeoLocation []CosmosdbAccountSpecGeoLocation `json:"geoLocation" tf:"geo_location"`
+	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	// +optional
+	// Deprecated
+	FailoverPolicy []CosmosdbAccountSpecFailoverPolicy `json:"failoverPolicy,omitempty" tf:"failover_policy,omitempty"`
+	// +optional
+	GeoLocation []CosmosdbAccountSpecGeoLocation `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
 	// +optional
 	IpRangeFilter string `json:"ipRangeFilter,omitempty" tf:"ip_range_filter,omitempty"`
 	// +optional
@@ -121,6 +132,8 @@ type CosmosdbAccountStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

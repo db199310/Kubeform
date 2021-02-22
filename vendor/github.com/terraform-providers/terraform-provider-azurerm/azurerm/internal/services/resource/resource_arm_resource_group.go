@@ -5,17 +5,17 @@ import (
 	"log"
 	"time"
 
-	"github.com/Azure/azure-sdk-for-go/services/resources/mgmt/2018-05-01/resources"
-	"github.com/hashicorp/go-azure-helpers/response"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/azure"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/helpers/tf"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/clients"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/features"
-	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/location"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tags"
 	azSchema "github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/tf/schema"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/internal/timeouts"
+
+	"github.com/Azure/azure-sdk-for-go/services/resources/mgmt/2018-05-01/resources"
+	"github.com/hashicorp/go-azure-helpers/response"
+	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/terraform-providers/terraform-provider-azurerm/azurerm/utils"
 )
 
@@ -53,7 +53,7 @@ func resourceArmResourceGroupCreateUpdate(d *schema.ResourceData, meta interface
 	defer cancel()
 
 	name := d.Get("name").(string)
-	location := location.Normalize(d.Get("location").(string))
+	location := azure.NormalizeLocation(d.Get("location").(string))
 	t := d.Get("tags").(map[string]interface{})
 
 	if features.ShouldResourcesBeImported() && d.IsNewResource() {
@@ -98,7 +98,9 @@ func resourceArmResourceGroupRead(d *schema.ResourceData, meta interface{}) erro
 		return err
 	}
 
-	resp, err := client.Get(ctx, id.Name)
+	name := id.Name
+
+	resp, err := client.Get(ctx, name)
 	if err != nil {
 		if utils.ResponseWasNotFound(resp.Response) {
 			log.Printf("[INFO] Error reading resource group %q - removing from state", d.Id())
@@ -110,7 +112,9 @@ func resourceArmResourceGroupRead(d *schema.ResourceData, meta interface{}) erro
 	}
 
 	d.Set("name", resp.Name)
-	d.Set("location", location.NormalizeNilable(resp.Location))
+	if location := resp.Location; location != nil {
+		d.Set("location", azure.NormalizeLocation(*location))
+	}
 	return tags.FlattenAndSet(d, resp.Tags)
 }
 
@@ -124,13 +128,15 @@ func resourceArmResourceGroupDelete(d *schema.ResourceData, meta interface{}) er
 		return err
 	}
 
-	deleteFuture, err := client.Delete(ctx, id.Name)
+	name := id.Name
+
+	deleteFuture, err := client.Delete(ctx, name)
 	if err != nil {
 		if response.WasNotFound(deleteFuture.Response()) {
 			return nil
 		}
 
-		return fmt.Errorf("Error deleting Resource Group %q: %+v", id.Name, err)
+		return fmt.Errorf("Error deleting Resource Group %q: %+v", name, err)
 	}
 
 	err = deleteFuture.WaitForCompletionRef(ctx, client.Client)
@@ -139,7 +145,7 @@ func resourceArmResourceGroupDelete(d *schema.ResourceData, meta interface{}) er
 			return nil
 		}
 
-		return fmt.Errorf("Error deleting Resource Group %q: %+v", id.Name, err)
+		return fmt.Errorf("Error deleting Resource Group %q: %+v", name, err)
 	}
 
 	return nil

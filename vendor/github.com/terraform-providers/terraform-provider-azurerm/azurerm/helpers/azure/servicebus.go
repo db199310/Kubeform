@@ -11,7 +11,14 @@ import (
 	"github.com/Azure/azure-sdk-for-go/services/servicebus/mgmt/2017-04-01/servicebus"
 )
 
-// validation
+//validation
+func ValidateServiceBusNamespaceName() schema.SchemaValidateFunc {
+	return validation.StringMatch(
+		regexp.MustCompile("^[a-zA-Z][-a-zA-Z0-9]{4,48}[a-zA-Z0-9]$"),
+		"The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number and be between 6 and 50 characters long.",
+	)
+}
+
 func ValidateServiceBusQueueName() schema.SchemaValidateFunc {
 	return validation.StringMatch(
 		regexp.MustCompile(`^[a-zA-Z0-9][\w-./~]{0,258}([a-zA-Z0-9])?$`),
@@ -28,8 +35,8 @@ func ValidateServiceBusSubscriptionName() schema.SchemaValidateFunc {
 
 func ValidateServiceBusTopicName() schema.SchemaValidateFunc {
 	return validation.StringMatch(
-		regexp.MustCompile("^[a-zA-Z0-9]([-._~a-zA-Z0-9]{0,258}[a-zA-Z0-9])?$"),
-		"The topic name can contain only letters, numbers, periods, hyphens, tildas and underscores. The namespace must start with a letter or number, and it must end with a letter or number and be less then 260 characters long.",
+		regexp.MustCompile("^[a-zA-Z][-._~a-zA-Z0-9]{0,258}([a-zA-Z0-9])?$"),
+		"The topic name can contain only letters, numbers, periods, hyphens, tildas and underscores. The namespace must start with a letter, and it must end with a letter or number and be less then 260 characters long.",
 	)
 }
 
@@ -48,7 +55,7 @@ func ExpandServiceBusAuthorizationRuleRights(d *schema.ResourceData) *[]serviceb
 	}
 
 	if d.Get("send").(bool) {
-		rights = append(rights, servicebus.SendEnumValue)
+		rights = append(rights, servicebus.Send)
 	}
 
 	if d.Get("manage").(bool) {
@@ -59,14 +66,14 @@ func ExpandServiceBusAuthorizationRuleRights(d *schema.ResourceData) *[]serviceb
 }
 
 func FlattenServiceBusAuthorizationRuleRights(rights *[]servicebus.AccessRights) (listen, send, manage bool) {
-	// zero (initial) value for a bool in go is false
+	//zero (initial) value for a bool in go is false
 
 	if rights != nil {
 		for _, right := range *rights {
 			switch right {
 			case servicebus.Listen:
 				listen = true
-			case servicebus.SendEnumValue:
+			case servicebus.Send:
 				send = true
 			case servicebus.Manage:
 				manage = true
@@ -79,7 +86,7 @@ func FlattenServiceBusAuthorizationRuleRights(rights *[]servicebus.AccessRights)
 	return listen, send, manage
 }
 
-// shared schema
+//shared schema
 func MergeSchema(a map[string]*schema.Schema, b map[string]*schema.Schema) map[string]*schema.Schema {
 	s := map[string]*schema.Schema{}
 

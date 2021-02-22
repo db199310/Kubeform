@@ -117,6 +117,9 @@ type ContainerGroupSpecContainerVolume struct {
 
 type ContainerGroupSpecContainer struct {
 	// +optional
+	// Deprecated
+	Command string `json:"command,omitempty" tf:"command,omitempty"`
+	// +optional
 	Commands []string `json:"commands,omitempty" tf:"commands,omitempty"`
 	Cpu      float64  `json:"cpu" tf:"cpu"`
 	// +optional
@@ -131,7 +134,13 @@ type ContainerGroupSpecContainer struct {
 	Memory        float64                                    `json:"memory" tf:"memory"`
 	Name          string                                     `json:"name" tf:"name"`
 	// +optional
+	// Deprecated
+	Port int64 `json:"port,omitempty" tf:"port,omitempty"`
+	// +optional
 	Ports []ContainerGroupSpecContainerPorts `json:"ports,omitempty" tf:"ports,omitempty"`
+	// +optional
+	// Deprecated
+	Protocol string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	ReadinessProbe []ContainerGroupSpecContainerReadinessProbe `json:"readinessProbe,omitempty" tf:"readiness_probe,omitempty"`
@@ -216,6 +225,8 @@ type ContainerGroupStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

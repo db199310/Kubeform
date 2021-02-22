@@ -36,9 +36,7 @@ func NewDiscoveredSecuritySolutionsClient(subscriptionID string, ascLocation str
 	return NewDiscoveredSecuritySolutionsClientWithBaseURI(DefaultBaseURI, subscriptionID, ascLocation)
 }
 
-// NewDiscoveredSecuritySolutionsClientWithBaseURI creates an instance of the DiscoveredSecuritySolutionsClient client
-// using a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewDiscoveredSecuritySolutionsClientWithBaseURI creates an instance of the DiscoveredSecuritySolutionsClient client.
 func NewDiscoveredSecuritySolutionsClientWithBaseURI(baseURI string, subscriptionID string, ascLocation string) DiscoveredSecuritySolutionsClient {
 	return DiscoveredSecuritySolutionsClient{NewWithBaseURI(baseURI, subscriptionID, ascLocation)}
 }
@@ -115,7 +113,8 @@ func (client DiscoveredSecuritySolutionsClient) GetPreparer(ctx context.Context,
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DiscoveredSecuritySolutionsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -193,7 +192,8 @@ func (client DiscoveredSecuritySolutionsClient) ListPreparer(ctx context.Context
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client DiscoveredSecuritySolutionsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -309,7 +309,8 @@ func (client DiscoveredSecuritySolutionsClient) ListByHomeRegionPreparer(ctx con
 // ListByHomeRegionSender sends the ListByHomeRegion request. The method will close the
 // http.Response Body if it receives an error.
 func (client DiscoveredSecuritySolutionsClient) ListByHomeRegionSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByHomeRegionResponder handles the response to the ListByHomeRegion request. The method always

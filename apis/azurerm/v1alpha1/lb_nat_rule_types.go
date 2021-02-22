@@ -58,9 +58,12 @@ type LbNATRuleSpec struct {
 	// +optional
 	IdleTimeoutInMinutes int64  `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 	LoadbalancerID       string `json:"loadbalancerID" tf:"loadbalancer_id"`
-	Name                 string `json:"name" tf:"name"`
-	Protocol             string `json:"protocol" tf:"protocol"`
-	ResourceGroupName    string `json:"resourceGroupName" tf:"resource_group_name"`
+	// +optional
+	// Deprecated
+	Location          string `json:"location,omitempty" tf:"location,omitempty"`
+	Name              string `json:"name" tf:"name"`
+	Protocol          string `json:"protocol" tf:"protocol"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 }
 
 type LbNATRuleStatus struct {
@@ -73,6 +76,8 @@ type LbNATRuleStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

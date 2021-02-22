@@ -37,8 +37,7 @@ func NewManagementLocksClient(subscriptionID string) ManagementLocksClient {
 	return NewManagementLocksClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewManagementLocksClientWithBaseURI creates an instance of the ManagementLocksClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewManagementLocksClientWithBaseURI creates an instance of the ManagementLocksClient client.
 func NewManagementLocksClientWithBaseURI(baseURI string, subscriptionID string) ManagementLocksClient {
 	return ManagementLocksClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -123,7 +122,8 @@ func (client ManagementLocksClient) CreateOrUpdateAtResourceGroupLevelPreparer(c
 // CreateOrUpdateAtResourceGroupLevelSender sends the CreateOrUpdateAtResourceGroupLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) CreateOrUpdateAtResourceGroupLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateAtResourceGroupLevelResponder handles the response to the CreateOrUpdateAtResourceGroupLevel request. The method always
@@ -226,7 +226,8 @@ func (client ManagementLocksClient) CreateOrUpdateAtResourceLevelPreparer(ctx co
 // CreateOrUpdateAtResourceLevelSender sends the CreateOrUpdateAtResourceLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) CreateOrUpdateAtResourceLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateAtResourceLevelResponder handles the response to the CreateOrUpdateAtResourceLevel request. The method always
@@ -316,7 +317,8 @@ func (client ManagementLocksClient) CreateOrUpdateAtSubscriptionLevelPreparer(ct
 // CreateOrUpdateAtSubscriptionLevelSender sends the CreateOrUpdateAtSubscriptionLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) CreateOrUpdateAtSubscriptionLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateAtSubscriptionLevelResponder handles the response to the CreateOrUpdateAtSubscriptionLevel request. The method always
@@ -407,7 +409,8 @@ func (client ManagementLocksClient) CreateOrUpdateByScopePreparer(ctx context.Co
 // CreateOrUpdateByScopeSender sends the CreateOrUpdateByScope request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) CreateOrUpdateByScopeSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateOrUpdateByScopeResponder handles the response to the CreateOrUpdateByScope request. The method always
@@ -493,7 +496,8 @@ func (client ManagementLocksClient) DeleteAtResourceGroupLevelPreparer(ctx conte
 // DeleteAtResourceGroupLevelSender sends the DeleteAtResourceGroupLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) DeleteAtResourceGroupLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteAtResourceGroupLevelResponder handles the response to the DeleteAtResourceGroupLevel request. The method always
@@ -586,7 +590,8 @@ func (client ManagementLocksClient) DeleteAtResourceLevelPreparer(ctx context.Co
 // DeleteAtResourceLevelSender sends the DeleteAtResourceLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) DeleteAtResourceLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteAtResourceLevelResponder handles the response to the DeleteAtResourceLevel request. The method always
@@ -661,7 +666,8 @@ func (client ManagementLocksClient) DeleteAtSubscriptionLevelPreparer(ctx contex
 // DeleteAtSubscriptionLevelSender sends the DeleteAtSubscriptionLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) DeleteAtSubscriptionLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteAtSubscriptionLevelResponder handles the response to the DeleteAtSubscriptionLevel request. The method always
@@ -735,7 +741,8 @@ func (client ManagementLocksClient) DeleteByScopePreparer(ctx context.Context, s
 // DeleteByScopeSender sends the DeleteByScope request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) DeleteByScopeSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteByScopeResponder handles the response to the DeleteByScope request. The method always
@@ -818,7 +825,8 @@ func (client ManagementLocksClient) GetAtResourceGroupLevelPreparer(ctx context.
 // GetAtResourceGroupLevelSender sends the GetAtResourceGroupLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) GetAtResourceGroupLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetAtResourceGroupLevelResponder handles the response to the GetAtResourceGroupLevel request. The method always
@@ -910,7 +918,8 @@ func (client ManagementLocksClient) GetAtResourceLevelPreparer(ctx context.Conte
 // GetAtResourceLevelSender sends the GetAtResourceLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) GetAtResourceLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetAtResourceLevelResponder handles the response to the GetAtResourceLevel request. The method always
@@ -984,7 +993,8 @@ func (client ManagementLocksClient) GetAtSubscriptionLevelPreparer(ctx context.C
 // GetAtSubscriptionLevelSender sends the GetAtSubscriptionLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) GetAtSubscriptionLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetAtSubscriptionLevelResponder handles the response to the GetAtSubscriptionLevel request. The method always
@@ -1059,7 +1069,8 @@ func (client ManagementLocksClient) GetByScopePreparer(ctx context.Context, scop
 // GetByScopeSender sends the GetByScope request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) GetByScopeSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetByScopeResponder handles the response to the GetByScope request. The method always
@@ -1146,7 +1157,8 @@ func (client ManagementLocksClient) ListAtResourceGroupLevelPreparer(ctx context
 // ListAtResourceGroupLevelSender sends the ListAtResourceGroupLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) ListAtResourceGroupLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListAtResourceGroupLevelResponder handles the response to the ListAtResourceGroupLevel request. The method always
@@ -1279,7 +1291,8 @@ func (client ManagementLocksClient) ListAtResourceLevelPreparer(ctx context.Cont
 // ListAtResourceLevelSender sends the ListAtResourceLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) ListAtResourceLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListAtResourceLevelResponder handles the response to the ListAtResourceLevel request. The method always
@@ -1393,7 +1406,8 @@ func (client ManagementLocksClient) ListAtSubscriptionLevelPreparer(ctx context.
 // ListAtSubscriptionLevelSender sends the ListAtSubscriptionLevel request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) ListAtSubscriptionLevelSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListAtSubscriptionLevelResponder handles the response to the ListAtSubscriptionLevel request. The method always
@@ -1512,7 +1526,8 @@ func (client ManagementLocksClient) ListByScopePreparer(ctx context.Context, sco
 // ListByScopeSender sends the ListByScope request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagementLocksClient) ListByScopeSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByScopeResponder handles the response to the ListByScope request. The method always

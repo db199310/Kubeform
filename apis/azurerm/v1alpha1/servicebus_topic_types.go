@@ -55,7 +55,13 @@ type ServicebusTopicSpec struct {
 	// +optional
 	EnableExpress bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 	// +optional
+	// Deprecated
+	EnableFilteringMessagesBeforePublishing bool `json:"enableFilteringMessagesBeforePublishing,omitempty" tf:"enable_filtering_messages_before_publishing,omitempty"`
+	// +optional
 	EnablePartitioning bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
 	// +optional
 	MaxSizeInMegabytes int64  `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 	Name               string `json:"name" tf:"name"`
@@ -79,6 +85,8 @@ type ServicebusTopicStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

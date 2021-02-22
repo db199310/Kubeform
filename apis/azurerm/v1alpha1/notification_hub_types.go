@@ -68,8 +68,6 @@ type NotificationHubSpec struct {
 	Name              string                             `json:"name" tf:"name"`
 	NamespaceName     string                             `json:"namespaceName" tf:"namespace_name"`
 	ResourceGroupName string                             `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NotificationHubStatus struct {
@@ -82,6 +80,8 @@ type NotificationHubStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

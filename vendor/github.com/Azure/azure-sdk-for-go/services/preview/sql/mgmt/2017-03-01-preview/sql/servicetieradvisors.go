@@ -37,9 +37,7 @@ func NewServiceTierAdvisorsClient(subscriptionID string) ServiceTierAdvisorsClie
 	return NewServiceTierAdvisorsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewServiceTierAdvisorsClientWithBaseURI creates an instance of the ServiceTierAdvisorsClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewServiceTierAdvisorsClientWithBaseURI creates an instance of the ServiceTierAdvisorsClient client.
 func NewServiceTierAdvisorsClientWithBaseURI(baseURI string, subscriptionID string) ServiceTierAdvisorsClient {
 	return ServiceTierAdvisorsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -109,7 +107,8 @@ func (client ServiceTierAdvisorsClient) GetPreparer(ctx context.Context, resourc
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServiceTierAdvisorsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -188,7 +187,8 @@ func (client ServiceTierAdvisorsClient) ListByDatabasePreparer(ctx context.Conte
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client ServiceTierAdvisorsClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always

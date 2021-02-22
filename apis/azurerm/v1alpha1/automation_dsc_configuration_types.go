@@ -55,8 +55,6 @@ type AutomationDscConfigurationSpec struct {
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	State string `json:"state,omitempty" tf:"state,omitempty"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AutomationDscConfigurationStatus struct {
@@ -69,6 +67,8 @@ type AutomationDscConfigurationStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

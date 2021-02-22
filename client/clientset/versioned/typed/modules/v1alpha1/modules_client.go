@@ -19,7 +19,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	rest "k8s.io/client-go/rest"
 	v1alpha1 "kubeform.dev/kubeform/apis/modules/v1alpha1"
 	"kubeform.dev/kubeform/client/clientset/versioned/scheme"
@@ -27,15 +26,9 @@ import (
 
 type ModulesV1alpha1Interface interface {
 	RESTClient() rest.Interface
-	AzureAppServicesGetter
-	AzureFnAppsGetter
-	F4dpAzFnv1sGetter
-	F4dpAzSqlsGetter
-	F4dpAzStgv1sGetter
 	SDPAzAppv1sGetter
 	SDPAzFnv1sGetter
 	SDPAzSqlv1sGetter
-	SDPAzStgv1sGetter
 	SDPAzadfv1sGetter
 	SDPAzappserviceplanv1sGetter
 	SDPAzplatformeventsv1sGetter
@@ -48,26 +41,6 @@ type ModulesV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *ModulesV1alpha1Client) AzureAppServices(namespace string) AzureAppServiceInterface {
-	return newAzureAppServices(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) AzureFnApps(namespace string) AzureFnAppInterface {
-	return newAzureFnApps(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) F4dpAzFnv1s(namespace string) F4dpAzFnv1Interface {
-	return newF4dpAzFnv1s(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) F4dpAzSqls(namespace string) F4dpAzSqlInterface {
-	return newF4dpAzSqls(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) F4dpAzStgv1s(namespace string) F4dpAzStgv1Interface {
-	return newF4dpAzStgv1s(c, namespace)
-}
-
 func (c *ModulesV1alpha1Client) SDPAzAppv1s(namespace string) SDPAzAppv1Interface {
 	return newSDPAzAppv1s(c, namespace)
 }
@@ -78,10 +51,6 @@ func (c *ModulesV1alpha1Client) SDPAzFnv1s(namespace string) SDPAzFnv1Interface 
 
 func (c *ModulesV1alpha1Client) SDPAzSqlv1s(namespace string) SDPAzSqlv1Interface {
 	return newSDPAzSqlv1s(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) SDPAzStgv1s(namespace string) SDPAzStgv1Interface {
-	return newSDPAzStgv1s(c, namespace)
 }
 
 func (c *ModulesV1alpha1Client) SDPAzadfv1s(namespace string) SDPAzadfv1Interface {
@@ -136,7 +105,7 @@ func setConfigDefaults(config *rest.Config) error {
 	gv := v1alpha1.SchemeGroupVersion
 	config.GroupVersion = &gv
 	config.APIPath = "/apis"
-	config.NegotiatedSerializer = serializer.DirectCodecFactory{CodecFactory: scheme.Codecs}
+	config.NegotiatedSerializer = scheme.Codecs.WithoutConversion()
 
 	if config.UserAgent == "" {
 		config.UserAgent = rest.DefaultKubernetesUserAgent()

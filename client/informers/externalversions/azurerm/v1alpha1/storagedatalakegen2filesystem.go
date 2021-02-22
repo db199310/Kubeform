@@ -19,6 +19,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"context"
 	time "time"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -61,13 +62,13 @@ func NewFilteredStorageDataLakeGen2FilesystemInformer(client versioned.Interface
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().StorageDataLakeGen2Filesystems(namespace).List(options)
+				return client.AzurermV1alpha1().StorageDataLakeGen2Filesystems(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().StorageDataLakeGen2Filesystems(namespace).Watch(options)
+				return client.AzurermV1alpha1().StorageDataLakeGen2Filesystems(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&azurermv1alpha1.StorageDataLakeGen2Filesystem{},

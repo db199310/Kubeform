@@ -50,8 +50,6 @@ type NetappPoolSpec struct {
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	ServiceLevel      string `json:"serviceLevel" tf:"service_level"`
 	SizeInTb          int64  `json:"sizeInTb" tf:"size_in_tb"`
-	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NetappPoolStatus struct {
@@ -64,6 +62,8 @@ type NetappPoolStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

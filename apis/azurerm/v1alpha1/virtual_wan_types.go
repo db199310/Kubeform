@@ -56,9 +56,10 @@ type VirtualWANSpec struct {
 	Office365LocalBreakoutCategory string `json:"office365LocalBreakoutCategory,omitempty" tf:"office365_local_breakout_category,omitempty"`
 	ResourceGroupName              string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// Deprecated
+	SecurityProviderName string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 	// +optional
-	Type string `json:"type,omitempty" tf:"type,omitempty"`
+	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualWANStatus struct {
@@ -71,6 +72,8 @@ type VirtualWANStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

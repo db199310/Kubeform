@@ -50,20 +50,19 @@ type EventhubAuthorizationRuleSpec struct {
 	// +optional
 	Listen bool `json:"listen,omitempty" tf:"listen,omitempty"`
 	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	// +optional
 	Manage        bool   `json:"manage,omitempty" tf:"manage,omitempty"`
 	Name          string `json:"name" tf:"name"`
 	NamespaceName string `json:"namespaceName" tf:"namespace_name"`
 	// +optional
 	PrimaryConnectionString string `json:"-" sensitive:"true" tf:"primary_connection_string,omitempty"`
 	// +optional
-	PrimaryConnectionStringAlias string `json:"-" sensitive:"true" tf:"primary_connection_string_alias,omitempty"`
-	// +optional
 	PrimaryKey        string `json:"-" sensitive:"true" tf:"primary_key,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	SecondaryConnectionString string `json:"-" sensitive:"true" tf:"secondary_connection_string,omitempty"`
-	// +optional
-	SecondaryConnectionStringAlias string `json:"-" sensitive:"true" tf:"secondary_connection_string_alias,omitempty"`
 	// +optional
 	SecondaryKey string `json:"-" sensitive:"true" tf:"secondary_key,omitempty"`
 	// +optional
@@ -80,6 +79,8 @@ type EventhubAuthorizationRuleStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

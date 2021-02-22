@@ -47,10 +47,7 @@ type ManagementGroupSpec struct {
 	// +optional
 	DisplayName string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 	// +optional
-	// Deprecated
 	GroupID string `json:"groupID,omitempty" tf:"group_id,omitempty"`
-	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	ParentManagementGroupID string `json:"parentManagementGroupID,omitempty" tf:"parent_management_group_id,omitempty"`
 	// +optional
@@ -67,6 +64,8 @@ type ManagementGroupStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

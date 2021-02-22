@@ -38,8 +38,7 @@ func NewDataConnectionsClient(subscriptionID string) DataConnectionsClient {
 	return NewDataConnectionsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDataConnectionsClientWithBaseURI creates an instance of the DataConnectionsClient client using a custom endpoint.
-// Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewDataConnectionsClientWithBaseURI creates an instance of the DataConnectionsClient client.
 func NewDataConnectionsClientWithBaseURI(baseURI string, subscriptionID string) DataConnectionsClient {
 	return DataConnectionsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -116,7 +115,8 @@ func (client DataConnectionsClient) CheckNameAvailabilityPreparer(ctx context.Co
 // CheckNameAvailabilitySender sends the CheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) CheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckNameAvailabilityResponder handles the response to the CheckNameAvailability request. The method always
@@ -193,8 +193,9 @@ func (client DataConnectionsClient) CreateOrUpdatePreparer(ctx context.Context, 
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) CreateOrUpdateSender(req *http.Request) (future DataConnectionsCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -280,7 +281,8 @@ func (client DataConnectionsClient) DataConnectionValidationMethodPreparer(ctx c
 // DataConnectionValidationMethodSender sends the DataConnectionValidationMethod request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) DataConnectionValidationMethodSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DataConnectionValidationMethodResponder handles the response to the DataConnectionValidationMethod request. The method always
@@ -354,8 +356,9 @@ func (client DataConnectionsClient) DeletePreparer(ctx context.Context, resource
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) DeleteSender(req *http.Request) (future DataConnectionsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -439,7 +442,8 @@ func (client DataConnectionsClient) GetPreparer(ctx context.Context, resourceGro
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -517,7 +521,8 @@ func (client DataConnectionsClient) ListByDatabasePreparer(ctx context.Context, 
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always
@@ -594,8 +599,9 @@ func (client DataConnectionsClient) UpdatePreparer(ctx context.Context, resource
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataConnectionsClient) UpdateSender(req *http.Request) (future DataConnectionsUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

@@ -193,13 +193,9 @@ type AppServiceSpecSiteConfigCors struct {
 
 type AppServiceSpecSiteConfigIpRestriction struct {
 	// +optional
-	Action string `json:"action,omitempty" tf:"action,omitempty"`
-	// +optional
 	IpAddress string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
-	// +optional
-	Priority int64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	SubnetMask string `json:"subnetMask,omitempty" tf:"subnet_mask,omitempty"`
 	// +optional
 	VirtualNetworkSubnetID string `json:"virtualNetworkSubnetID,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
@@ -220,8 +216,6 @@ type AppServiceSpecSiteConfig struct {
 	DotnetFrameworkVersion string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
 	// +optional
 	FtpsState string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
-	// +optional
-	HealthCheckPath string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 	// +optional
 	Http2Enabled bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 	// +optional
@@ -252,6 +246,8 @@ type AppServiceSpecSiteConfig struct {
 	ScmType string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
 	// +optional
 	Use32BitWorkerProcess bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
+	// +optional
+	VirtualNetworkName string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 	// +optional
 	WebsocketsEnabled bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 	// +optional
@@ -346,6 +342,8 @@ type AppServiceStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

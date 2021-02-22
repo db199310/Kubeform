@@ -203,7 +203,6 @@ func resourceArmBackupProtectionContainerStorageAccountDelete(d *schema.Resource
 	return nil
 }
 
-// nolint unused - linter mistakenly things this function isn't used?
 func resourceArmBackupProtectionContainerStorageAccountWaitForOperation(ctx context.Context, client *backup.OperationStatusesClient, vaultName, resourceGroup, operationID string, d *schema.ResourceData) (backup.OperationStatus, error) {
 	state := &resource.StateChangeConf{
 		MinTimeout:                10 * time.Second,
@@ -214,10 +213,14 @@ func resourceArmBackupProtectionContainerStorageAccountWaitForOperation(ctx cont
 		ContinuousTargetOccurence: 5, // Without this buffer, file share backups and storage account deletions may fail if performed immediately after creating/destroying the container
 	}
 
-	if d.IsNewResource() {
-		state.Timeout = d.Timeout(schema.TimeoutCreate)
+	if features.SupportsCustomTimeouts() {
+		if d.IsNewResource() {
+			state.Timeout = d.Timeout(schema.TimeoutCreate)
+		} else {
+			state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		}
 	} else {
-		state.Timeout = d.Timeout(schema.TimeoutUpdate)
+		state.Timeout = 30 * time.Minute
 	}
 
 	log.Printf("[DEBUG] Waiting for backup container operation %q (Vault %q) to complete", operationID, vaultName)

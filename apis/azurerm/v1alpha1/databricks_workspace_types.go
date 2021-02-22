@@ -68,10 +68,6 @@ type DatabricksWorkspaceSpec struct {
 	Sku                      string `json:"sku" tf:"sku"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	// +optional
-	WorkspaceID string `json:"workspaceID,omitempty" tf:"workspace_id,omitempty"`
-	// +optional
-	WorkspaceURL string `json:"workspaceURL,omitempty" tf:"workspace_url,omitempty"`
 }
 
 type DatabricksWorkspaceStatus struct {
@@ -84,6 +80,8 @@ type DatabricksWorkspaceStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var virtualnetworkpeeringsResource = schema.GroupVersionResource{Group: "azurerm
 var virtualnetworkpeeringsKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "VirtualNetworkPeering"}
 
 // Get takes name of the virtualNetworkPeering, and returns the corresponding virtualNetworkPeering object, and an error if there is any.
-func (c *FakeVirtualNetworkPeerings) Get(name string, options v1.GetOptions) (result *v1alpha1.VirtualNetworkPeering, err error) {
+func (c *FakeVirtualNetworkPeerings) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.VirtualNetworkPeering, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(virtualnetworkpeeringsResource, c.ns, name), &v1alpha1.VirtualNetworkPeering{})
 
@@ -50,7 +52,7 @@ func (c *FakeVirtualNetworkPeerings) Get(name string, options v1.GetOptions) (re
 }
 
 // List takes label and field selectors, and returns the list of VirtualNetworkPeerings that match those selectors.
-func (c *FakeVirtualNetworkPeerings) List(opts v1.ListOptions) (result *v1alpha1.VirtualNetworkPeeringList, err error) {
+func (c *FakeVirtualNetworkPeerings) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.VirtualNetworkPeeringList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(virtualnetworkpeeringsResource, virtualnetworkpeeringsKind, c.ns, opts), &v1alpha1.VirtualNetworkPeeringList{})
 
@@ -72,14 +74,14 @@ func (c *FakeVirtualNetworkPeerings) List(opts v1.ListOptions) (result *v1alpha1
 }
 
 // Watch returns a watch.Interface that watches the requested virtualNetworkPeerings.
-func (c *FakeVirtualNetworkPeerings) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeVirtualNetworkPeerings) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(virtualnetworkpeeringsResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a virtualNetworkPeering and creates it.  Returns the server's representation of the virtualNetworkPeering, and an error, if there is any.
-func (c *FakeVirtualNetworkPeerings) Create(virtualNetworkPeering *v1alpha1.VirtualNetworkPeering) (result *v1alpha1.VirtualNetworkPeering, err error) {
+func (c *FakeVirtualNetworkPeerings) Create(ctx context.Context, virtualNetworkPeering *v1alpha1.VirtualNetworkPeering, opts v1.CreateOptions) (result *v1alpha1.VirtualNetworkPeering, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(virtualnetworkpeeringsResource, c.ns, virtualNetworkPeering), &v1alpha1.VirtualNetworkPeering{})
 
@@ -90,7 +92,7 @@ func (c *FakeVirtualNetworkPeerings) Create(virtualNetworkPeering *v1alpha1.Virt
 }
 
 // Update takes the representation of a virtualNetworkPeering and updates it. Returns the server's representation of the virtualNetworkPeering, and an error, if there is any.
-func (c *FakeVirtualNetworkPeerings) Update(virtualNetworkPeering *v1alpha1.VirtualNetworkPeering) (result *v1alpha1.VirtualNetworkPeering, err error) {
+func (c *FakeVirtualNetworkPeerings) Update(ctx context.Context, virtualNetworkPeering *v1alpha1.VirtualNetworkPeering, opts v1.UpdateOptions) (result *v1alpha1.VirtualNetworkPeering, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(virtualnetworkpeeringsResource, c.ns, virtualNetworkPeering), &v1alpha1.VirtualNetworkPeering{})
 
@@ -102,7 +104,7 @@ func (c *FakeVirtualNetworkPeerings) Update(virtualNetworkPeering *v1alpha1.Virt
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeVirtualNetworkPeerings) UpdateStatus(virtualNetworkPeering *v1alpha1.VirtualNetworkPeering) (*v1alpha1.VirtualNetworkPeering, error) {
+func (c *FakeVirtualNetworkPeerings) UpdateStatus(ctx context.Context, virtualNetworkPeering *v1alpha1.VirtualNetworkPeering, opts v1.UpdateOptions) (*v1alpha1.VirtualNetworkPeering, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(virtualnetworkpeeringsResource, "status", c.ns, virtualNetworkPeering), &v1alpha1.VirtualNetworkPeering{})
 
@@ -113,7 +115,7 @@ func (c *FakeVirtualNetworkPeerings) UpdateStatus(virtualNetworkPeering *v1alpha
 }
 
 // Delete takes name of the virtualNetworkPeering and deletes it. Returns an error if one occurs.
-func (c *FakeVirtualNetworkPeerings) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeVirtualNetworkPeerings) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(virtualnetworkpeeringsResource, c.ns, name), &v1alpha1.VirtualNetworkPeering{})
 
@@ -121,15 +123,15 @@ func (c *FakeVirtualNetworkPeerings) Delete(name string, options *v1.DeleteOptio
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeVirtualNetworkPeerings) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(virtualnetworkpeeringsResource, c.ns, listOptions)
+func (c *FakeVirtualNetworkPeerings) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(virtualnetworkpeeringsResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.VirtualNetworkPeeringList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched virtualNetworkPeering.
-func (c *FakeVirtualNetworkPeerings) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.VirtualNetworkPeering, err error) {
+func (c *FakeVirtualNetworkPeerings) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.VirtualNetworkPeering, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(virtualnetworkpeeringsResource, c.ns, name, pt, data, subresources...), &v1alpha1.VirtualNetworkPeering{})
 

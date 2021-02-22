@@ -37,8 +37,7 @@ func NewTenantsClient() TenantsClient {
 	return NewTenantsClientWithBaseURI(DefaultBaseURI)
 }
 
-// NewTenantsClientWithBaseURI creates an instance of the TenantsClient client using a custom endpoint.  Use this when
-// interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewTenantsClientWithBaseURI creates an instance of the TenantsClient client.
 func NewTenantsClientWithBaseURI(baseURI string) TenantsClient {
 	return TenantsClient{NewWithBaseURI(baseURI)}
 }
@@ -95,7 +94,8 @@ func (client TenantsClient) ListPreparer(ctx context.Context) (*http.Request, er
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client TenantsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always

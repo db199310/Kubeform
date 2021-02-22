@@ -53,6 +53,9 @@ type IothubDpsSpecLinkedHub struct {
 type IothubDpsSpecSku struct {
 	Capacity int64  `json:"capacity" tf:"capacity"`
 	Name     string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	Tier string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type IothubDpsSpec struct {
@@ -91,6 +94,8 @@ type IothubDpsStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

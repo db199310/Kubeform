@@ -39,30 +39,6 @@ type EventgridTopic struct {
 	Status            EventgridTopicStatus `json:"status,omitempty"`
 }
 
-type EventgridTopicSpecInputMappingDefaultValues struct {
-	// +optional
-	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
-	// +optional
-	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty"`
-	// +optional
-	Subject string `json:"subject,omitempty" tf:"subject,omitempty"`
-}
-
-type EventgridTopicSpecInputMappingFields struct {
-	// +optional
-	DataVersion string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
-	// +optional
-	EventTime string `json:"eventTime,omitempty" tf:"event_time,omitempty"`
-	// +optional
-	EventType string `json:"eventType,omitempty" tf:"event_type,omitempty"`
-	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
-	// +optional
-	Subject string `json:"subject,omitempty" tf:"subject,omitempty"`
-	// +optional
-	Topic string `json:"topic,omitempty" tf:"topic,omitempty"`
-}
-
 type EventgridTopicSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -72,16 +48,8 @@ type EventgridTopicSpec struct {
 
 	// +optional
 	Endpoint string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	InputMappingDefaultValues []EventgridTopicSpecInputMappingDefaultValues `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
-	// +optional
-	// +kubebuilder:validation:MaxItems=1
-	InputMappingFields []EventgridTopicSpecInputMappingFields `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
-	// +optional
-	InputSchema string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
-	Location    string `json:"location" tf:"location"`
-	Name        string `json:"name" tf:"name"`
+	Location string `json:"location" tf:"location"`
+	Name     string `json:"name" tf:"name"`
 	// +optional
 	PrimaryAccessKey  string `json:"-" sensitive:"true" tf:"primary_access_key,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
@@ -101,6 +69,8 @@ type EventgridTopicStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

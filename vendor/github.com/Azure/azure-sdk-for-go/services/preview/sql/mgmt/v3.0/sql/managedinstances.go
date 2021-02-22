@@ -38,9 +38,7 @@ func NewManagedInstancesClient(subscriptionID string) ManagedInstancesClient {
 	return NewManagedInstancesClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewManagedInstancesClientWithBaseURI creates an instance of the ManagedInstancesClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewManagedInstancesClientWithBaseURI creates an instance of the ManagedInstancesClient client.
 func NewManagedInstancesClientWithBaseURI(baseURI string, subscriptionID string) ManagedInstancesClient {
 	return ManagedInstancesClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -110,8 +108,9 @@ func (client ManagedInstancesClient) CreateOrUpdatePreparer(ctx context.Context,
 // CreateOrUpdateSender sends the CreateOrUpdate request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) CreateOrUpdateSender(req *http.Request) (future ManagedInstancesCreateOrUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -187,8 +186,9 @@ func (client ManagedInstancesClient) DeletePreparer(ctx context.Context, resourc
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) DeleteSender(req *http.Request) (future ManagedInstancesDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -269,7 +269,8 @@ func (client ManagedInstancesClient) GetPreparer(ctx context.Context, resourceGr
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -341,7 +342,8 @@ func (client ManagedInstancesClient) ListPreparer(ctx context.Context) (*http.Re
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -456,7 +458,8 @@ func (client ManagedInstancesClient) ListByInstancePoolPreparer(ctx context.Cont
 // ListByInstancePoolSender sends the ListByInstancePool request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) ListByInstancePoolSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByInstancePoolResponder handles the response to the ListByInstancePool request. The method always
@@ -569,7 +572,8 @@ func (client ManagedInstancesClient) ListByResourceGroupPreparer(ctx context.Con
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -680,8 +684,9 @@ func (client ManagedInstancesClient) UpdatePreparer(ctx context.Context, resourc
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client ManagedInstancesClient) UpdateSender(req *http.Request) (future ManagedInstancesUpdateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}

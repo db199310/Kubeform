@@ -19,6 +19,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"context"
 	"time"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -37,15 +38,15 @@ type SDPAzAppv1sGetter interface {
 
 // SDPAzAppv1Interface has methods to work with SDPAzAppv1 resources.
 type SDPAzAppv1Interface interface {
-	Create(*v1alpha1.SDPAzAppv1) (*v1alpha1.SDPAzAppv1, error)
-	Update(*v1alpha1.SDPAzAppv1) (*v1alpha1.SDPAzAppv1, error)
-	UpdateStatus(*v1alpha1.SDPAzAppv1) (*v1alpha1.SDPAzAppv1, error)
-	Delete(name string, options *v1.DeleteOptions) error
-	DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error
-	Get(name string, options v1.GetOptions) (*v1alpha1.SDPAzAppv1, error)
-	List(opts v1.ListOptions) (*v1alpha1.SDPAzAppv1List, error)
-	Watch(opts v1.ListOptions) (watch.Interface, error)
-	Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SDPAzAppv1, err error)
+	Create(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.CreateOptions) (*v1alpha1.SDPAzAppv1, error)
+	Update(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.UpdateOptions) (*v1alpha1.SDPAzAppv1, error)
+	UpdateStatus(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.UpdateOptions) (*v1alpha1.SDPAzAppv1, error)
+	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
+	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
+	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.SDPAzAppv1, error)
+	List(ctx context.Context, opts v1.ListOptions) (*v1alpha1.SDPAzAppv1List, error)
+	Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error)
+	Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SDPAzAppv1, err error)
 	SDPAzAppv1Expansion
 }
 
@@ -64,20 +65,20 @@ func newSDPAzAppv1s(c *ModulesV1alpha1Client, namespace string) *sDPAzAppv1s {
 }
 
 // Get takes name of the sDPAzAppv1, and returns the corresponding sDPAzAppv1 object, and an error if there is any.
-func (c *sDPAzAppv1s) Get(name string, options v1.GetOptions) (result *v1alpha1.SDPAzAppv1, err error) {
+func (c *sDPAzAppv1s) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.SDPAzAppv1, err error) {
 	result = &v1alpha1.SDPAzAppv1{}
 	err = c.client.Get().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // List takes label and field selectors, and returns the list of SDPAzAppv1s that match those selectors.
-func (c *sDPAzAppv1s) List(opts v1.ListOptions) (result *v1alpha1.SDPAzAppv1List, err error) {
+func (c *sDPAzAppv1s) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.SDPAzAppv1List, err error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -88,13 +89,13 @@ func (c *sDPAzAppv1s) List(opts v1.ListOptions) (result *v1alpha1.SDPAzAppv1List
 		Resource("sdpazappv1s").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Watch returns a watch.Interface that watches the requested sDPAzAppv1s.
-func (c *sDPAzAppv1s) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *sDPAzAppv1s) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	var timeout time.Duration
 	if opts.TimeoutSeconds != nil {
 		timeout = time.Duration(*opts.TimeoutSeconds) * time.Second
@@ -105,87 +106,90 @@ func (c *sDPAzAppv1s) Watch(opts v1.ListOptions) (watch.Interface, error) {
 		Resource("sdpazappv1s").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Watch()
+		Watch(ctx)
 }
 
 // Create takes the representation of a sDPAzAppv1 and creates it.  Returns the server's representation of the sDPAzAppv1, and an error, if there is any.
-func (c *sDPAzAppv1s) Create(sDPAzAppv1 *v1alpha1.SDPAzAppv1) (result *v1alpha1.SDPAzAppv1, err error) {
+func (c *sDPAzAppv1s) Create(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.CreateOptions) (result *v1alpha1.SDPAzAppv1, err error) {
 	result = &v1alpha1.SDPAzAppv1{}
 	err = c.client.Post().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sDPAzAppv1).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Update takes the representation of a sDPAzAppv1 and updates it. Returns the server's representation of the sDPAzAppv1, and an error, if there is any.
-func (c *sDPAzAppv1s) Update(sDPAzAppv1 *v1alpha1.SDPAzAppv1) (result *v1alpha1.SDPAzAppv1, err error) {
+func (c *sDPAzAppv1s) Update(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.UpdateOptions) (result *v1alpha1.SDPAzAppv1, err error) {
 	result = &v1alpha1.SDPAzAppv1{}
 	err = c.client.Put().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
 		Name(sDPAzAppv1.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sDPAzAppv1).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-
-func (c *sDPAzAppv1s) UpdateStatus(sDPAzAppv1 *v1alpha1.SDPAzAppv1) (result *v1alpha1.SDPAzAppv1, err error) {
+func (c *sDPAzAppv1s) UpdateStatus(ctx context.Context, sDPAzAppv1 *v1alpha1.SDPAzAppv1, opts v1.UpdateOptions) (result *v1alpha1.SDPAzAppv1, err error) {
 	result = &v1alpha1.SDPAzAppv1{}
 	err = c.client.Put().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
 		Name(sDPAzAppv1.Name).
 		SubResource("status").
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(sDPAzAppv1).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }
 
 // Delete takes name of the sDPAzAppv1 and deletes it. Returns an error if one occurs.
-func (c *sDPAzAppv1s) Delete(name string, options *v1.DeleteOptions) error {
+func (c *sDPAzAppv1s) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
 		Name(name).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *sDPAzAppv1s) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+func (c *sDPAzAppv1s) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
 	var timeout time.Duration
-	if listOptions.TimeoutSeconds != nil {
-		timeout = time.Duration(*listOptions.TimeoutSeconds) * time.Second
+	if listOpts.TimeoutSeconds != nil {
+		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
-		VersionedParams(&listOptions, scheme.ParameterCodec).
+		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
-		Body(options).
-		Do().
+		Body(&opts).
+		Do(ctx).
 		Error()
 }
 
 // Patch applies the patch and returns the patched sDPAzAppv1.
-func (c *sDPAzAppv1s) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.SDPAzAppv1, err error) {
+func (c *sDPAzAppv1s) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.SDPAzAppv1, err error) {
 	result = &v1alpha1.SDPAzAppv1{}
 	err = c.client.Patch(pt).
 		Namespace(c.ns).
 		Resource("sdpazappv1s").
-		SubResource(subresources...).
 		Name(name).
+		SubResource(subresources...).
+		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(data).
-		Do().
+		Do(ctx).
 		Into(result)
 	return
 }

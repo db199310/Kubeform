@@ -58,6 +58,11 @@ type ContainerRegistrySpecNetworkRuleSet struct {
 	VirtualNetwork []ContainerRegistrySpecNetworkRuleSetVirtualNetwork `json:"virtualNetwork,omitempty" tf:"virtual_network,omitempty"`
 }
 
+type ContainerRegistrySpecStorageAccount struct {
+	AccessKey string `json:"-" sensitive:"true" tf:"access_key"`
+	Name      string `json:"name" tf:"name"`
+}
+
 type ContainerRegistrySpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -85,6 +90,10 @@ type ContainerRegistrySpec struct {
 	// +optional
 	Sku string `json:"sku,omitempty" tf:"sku,omitempty"`
 	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	StorageAccount []ContainerRegistrySpecStorageAccount `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+	// +optional
 	StorageAccountID string `json:"storageAccountID,omitempty" tf:"storage_account_id,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -100,6 +109,8 @@ type ContainerRegistryStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

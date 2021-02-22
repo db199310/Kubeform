@@ -40,10 +40,14 @@ type Firewall struct {
 }
 
 type FirewallSpecIpConfiguration struct {
-	Name string `json:"name" tf:"name"`
 	// +optional
-	PrivateIPAddress  string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
-	PublicIPAddressID string `json:"publicIPAddressID" tf:"public_ip_address_id"`
+	// Deprecated
+	InternalPublicIPAddressID string `json:"internalPublicIPAddressID,omitempty" tf:"internal_public_ip_address_id,omitempty"`
+	Name                      string `json:"name" tf:"name"`
+	// +optional
+	PrivateIPAddress string `json:"privateIPAddress,omitempty" tf:"private_ip_address,omitempty"`
+	// +optional
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
 	// +optional
 	SubnetID string `json:"subnetID,omitempty" tf:"subnet_id,omitempty"`
 }
@@ -74,6 +78,8 @@ type FirewallStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

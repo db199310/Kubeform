@@ -64,12 +64,10 @@ type VirtualNetworkSpec struct {
 	// +kubebuilder:validation:MaxItems=1
 	DdosProtectionPlan []VirtualNetworkSpecDdosProtectionPlan `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
 	// +optional
-	DnsServers []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-	// +optional
-	Guid              string `json:"guid,omitempty" tf:"guid,omitempty"`
-	Location          string `json:"location" tf:"location"`
-	Name              string `json:"name" tf:"name"`
-	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
+	DnsServers        []string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+	Location          string   `json:"location" tf:"location"`
+	Name              string   `json:"name" tf:"name"`
+	ResourceGroupName string   `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	Subnet []VirtualNetworkSpecSubnet `json:"subnet,omitempty" tf:"subnet,omitempty"`
 	// +optional
@@ -86,6 +84,8 @@ type VirtualNetworkStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

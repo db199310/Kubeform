@@ -38,8 +38,11 @@ steps:
   - checkout: kfc
     displayName: Checkout kfc
     persistCredentials: true
-  - script: docker login shellai.azurecr.io -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+  - script: echo $DOCKER_PASSWORD | docker login shellai.azurecr.io -u $DOCKER_LOGIN --password-stdin
     displayName: Login to ShellAI ACR
+    env:
+      DOCKER_LOGIN: $(DOCKER_LOGIN)
+      DOCKER_PASSWORD: $(DOCKER_PASSWORD)
   - task: KubectlInstaller@0
     inputs:
       kubectlVersion: "1.18.3"
@@ -51,11 +54,14 @@ steps:
       git config --global user.name "Azure Pipeline"
       git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
     displayName: Set git properties
-  - script: make build
-    displayName: Build kubeform binaries
-    workingDirectory: kubeform
   - script: make gen
     displayName: Run kubeform codegen
+    workingDirectory: kubeform
+  - script: go mod tidy && go mod vendor
+    displayName: Update vendored packages in kubeform
+    workingDirectory: kubeform
+  - script: make build
+    displayName: Build kubeform binaries
     workingDirectory: kubeform
   - script: |
       git add -A

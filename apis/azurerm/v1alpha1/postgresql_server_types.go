@@ -39,36 +39,21 @@ type PostgresqlServer struct {
 	Status            PostgresqlServerStatus `json:"status,omitempty"`
 }
 
-type PostgresqlServerSpecStorageProfile struct {
-	// +optional
-	// Deprecated
-	AutoGrow string `json:"autoGrow,omitempty" tf:"auto_grow,omitempty"`
-	// +optional
-	// Deprecated
-	BackupRetentionDays int64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
-	// +optional
-	// Deprecated
-	GeoRedundantBackup string `json:"geoRedundantBackup,omitempty" tf:"geo_redundant_backup,omitempty"`
-	// +optional
-	// Deprecated
-	StorageMb int64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+type PostgresqlServerSpecSku struct {
+	Capacity int64  `json:"capacity" tf:"capacity"`
+	Family   string `json:"family" tf:"family"`
+	Name     string `json:"name" tf:"name"`
+	Tier     string `json:"tier" tf:"tier"`
 }
 
-type PostgresqlServerSpecThreatDetectionPolicy struct {
+type PostgresqlServerSpecStorageProfile struct {
 	// +optional
-	DisabledAlerts []string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+	AutoGrow string `json:"autoGrow,omitempty" tf:"auto_grow,omitempty"`
 	// +optional
-	EmailAccountAdmins bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+	BackupRetentionDays int64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 	// +optional
-	EmailAddresses []string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
-	// +optional
-	Enabled bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-	// +optional
-	RetentionDays int64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
-	// +optional
-	StorageAccountAccessKey string `json:"-" sensitive:"true" tf:"storage_account_access_key,omitempty"`
-	// +optional
-	StorageEndpoint string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+	GeoRedundantBackup string `json:"geoRedundantBackup,omitempty" tf:"geo_redundant_backup,omitempty"`
+	StorageMb          int64  `json:"storageMb" tf:"storage_mb"`
 }
 
 type PostgresqlServerSpec struct {
@@ -78,51 +63,25 @@ type PostgresqlServerSpec struct {
 
 	SecretRef *core.LocalObjectReference `json:"secretRef,omitempty" tf:"-"`
 
+	AdministratorLogin         string `json:"administratorLogin" tf:"administrator_login"`
+	AdministratorLoginPassword string `json:"-" sensitive:"true" tf:"administrator_login_password"`
 	// +optional
-	AdministratorLogin string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
-	// +optional
-	AdministratorLoginPassword string `json:"-" sensitive:"true" tf:"administrator_login_password,omitempty"`
-	// +optional
-	AutoGrowEnabled bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
-	// +optional
-	BackupRetentionDays int64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
-	// +optional
-	CreateMode string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
-	// +optional
-	CreationSourceServerID string `json:"creationSourceServerID,omitempty" tf:"creation_source_server_id,omitempty"`
-	// +optional
-	Fqdn string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-	// +optional
-	GeoRedundantBackupEnabled bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
-	// +optional
-	InfrastructureEncryptionEnabled bool   `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
-	Location                        string `json:"location" tf:"location"`
-	Name                            string `json:"name" tf:"name"`
-	// +optional
-	PublicNetworkAccessEnabled bool   `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
-	ResourceGroupName          string `json:"resourceGroupName" tf:"resource_group_name"`
-	// +optional
-	RestorePointInTime string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
-	SkuName            string `json:"skuName" tf:"sku_name"`
-	// +optional
-	// Deprecated
-	SslEnforcement string `json:"sslEnforcement,omitempty" tf:"ssl_enforcement,omitempty"`
-	// +optional
-	SslEnforcementEnabled bool `json:"sslEnforcementEnabled,omitempty" tf:"ssl_enforcement_enabled,omitempty"`
-	// +optional
-	SslMinimalTLSVersionEnforced string `json:"sslMinimalTLSVersionEnforced,omitempty" tf:"ssl_minimal_tls_version_enforced,omitempty"`
-	// +optional
-	StorageMb int64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
+	Fqdn              string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	Location          string `json:"location" tf:"location"`
+	Name              string `json:"name" tf:"name"`
+	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	// +kubebuilder:validation:MaxItems=1
 	// Deprecated
-	StorageProfile []PostgresqlServerSpecStorageProfile `json:"storageProfile,omitempty" tf:"storage_profile,omitempty"`
+	Sku []PostgresqlServerSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
 	// +optional
-	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
-	// +optional
+	SkuName        string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+	SslEnforcement string `json:"sslEnforcement" tf:"ssl_enforcement"`
 	// +kubebuilder:validation:MaxItems=1
-	ThreatDetectionPolicy []PostgresqlServerSpecThreatDetectionPolicy `json:"threatDetectionPolicy,omitempty" tf:"threat_detection_policy,omitempty"`
-	Version               string                                      `json:"version" tf:"version"`
+	StorageProfile []PostgresqlServerSpecStorageProfile `json:"storageProfile" tf:"storage_profile"`
+	// +optional
+	Tags    map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	Version string            `json:"version" tf:"version"`
 }
 
 type PostgresqlServerStatus struct {
@@ -135,6 +94,8 @@ type PostgresqlServerStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

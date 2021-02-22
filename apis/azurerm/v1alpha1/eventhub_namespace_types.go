@@ -54,10 +54,9 @@ type EventhubNamespace_SpecNetworkRulesetsVirtualNetworkRule struct {
 type EventhubNamespace_SpecNetworkRulesets struct {
 	DefaultAction string `json:"defaultAction" tf:"default_action"`
 	// +optional
-	// +kubebuilder:validation:MaxItems=128
+	// +kubebuilder:validation:MaxItems=1
 	IpRule []EventhubNamespace_SpecNetworkRulesetsIpRule `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
 	// +optional
-	// +kubebuilder:validation:MaxItems=128
 	VirtualNetworkRule []EventhubNamespace_SpecNetworkRulesetsVirtualNetworkRule `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
 }
 
@@ -75,16 +74,15 @@ type EventhubNamespace_Spec struct {
 	// +optional
 	DefaultPrimaryConnectionString string `json:"-" sensitive:"true" tf:"default_primary_connection_string,omitempty"`
 	// +optional
-	DefaultPrimaryConnectionStringAlias string `json:"-" sensitive:"true" tf:"default_primary_connection_string_alias,omitempty"`
-	// +optional
 	DefaultPrimaryKey string `json:"-" sensitive:"true" tf:"default_primary_key,omitempty"`
 	// +optional
 	DefaultSecondaryConnectionString string `json:"-" sensitive:"true" tf:"default_secondary_connection_string,omitempty"`
 	// +optional
-	DefaultSecondaryConnectionStringAlias string `json:"-" sensitive:"true" tf:"default_secondary_connection_string_alias,omitempty"`
-	// +optional
 	DefaultSecondaryKey string `json:"-" sensitive:"true" tf:"default_secondary_key,omitempty"`
-	Location            string `json:"location" tf:"location"`
+	// +optional
+	// Deprecated
+	KafkaEnabled bool   `json:"kafkaEnabled,omitempty" tf:"kafka_enabled,omitempty"`
+	Location     string `json:"location" tf:"location"`
 	// +optional
 	MaximumThroughputUnits int64  `json:"maximumThroughputUnits,omitempty" tf:"maximum_throughput_units,omitempty"`
 	Name                   string `json:"name" tf:"name"`
@@ -107,6 +105,8 @@ type EventhubNamespace_Status struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

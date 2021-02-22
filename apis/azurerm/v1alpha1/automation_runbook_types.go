@@ -58,7 +58,7 @@ type AutomationRunbookSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	AutomationAccountName string `json:"automationAccountName" tf:"automation_account_name"`
+	AccountName string `json:"accountName" tf:"account_name"`
 	// +optional
 	Content string `json:"content,omitempty" tf:"content,omitempty"`
 	// +optional
@@ -67,9 +67,8 @@ type AutomationRunbookSpec struct {
 	LogProgress bool   `json:"logProgress" tf:"log_progress"`
 	LogVerbose  bool   `json:"logVerbose" tf:"log_verbose"`
 	Name        string `json:"name" tf:"name"`
-	// +optional
 	// +kubebuilder:validation:MaxItems=1
-	PublishContentLink []AutomationRunbookSpecPublishContentLink `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
+	PublishContentLink []AutomationRunbookSpecPublishContentLink `json:"publishContentLink" tf:"publish_content_link"`
 	ResourceGroupName  string                                    `json:"resourceGroupName" tf:"resource_group_name"`
 	RunbookType        string                                    `json:"runbookType" tf:"runbook_type"`
 	// +optional
@@ -86,6 +85,8 @@ type AutomationRunbookStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

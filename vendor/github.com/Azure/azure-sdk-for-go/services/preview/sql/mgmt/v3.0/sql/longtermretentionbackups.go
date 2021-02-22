@@ -37,9 +37,7 @@ func NewLongTermRetentionBackupsClient(subscriptionID string) LongTermRetentionB
 	return NewLongTermRetentionBackupsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewLongTermRetentionBackupsClientWithBaseURI creates an instance of the LongTermRetentionBackupsClient client using
-// a custom endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign
-// clouds, Azure stack).
+// NewLongTermRetentionBackupsClientWithBaseURI creates an instance of the LongTermRetentionBackupsClient client.
 func NewLongTermRetentionBackupsClientWithBaseURI(baseURI string, subscriptionID string) LongTermRetentionBackupsClient {
 	return LongTermRetentionBackupsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -102,8 +100,9 @@ func (client LongTermRetentionBackupsClient) DeletePreparer(ctx context.Context,
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) DeleteSender(req *http.Request) (future LongTermRetentionBackupsDeleteFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -184,8 +183,9 @@ func (client LongTermRetentionBackupsClient) DeleteByResourceGroupPreparer(ctx c
 // DeleteByResourceGroupSender sends the DeleteByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) DeleteByResourceGroupSender(req *http.Request) (future LongTermRetentionBackupsDeleteByResourceGroupFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -269,7 +269,8 @@ func (client LongTermRetentionBackupsClient) GetPreparer(ctx context.Context, lo
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -352,7 +353,8 @@ func (client LongTermRetentionBackupsClient) GetByResourceGroupPreparer(ctx cont
 // GetByResourceGroupSender sends the GetByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) GetByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetByResourceGroupResponder handles the response to the GetByResourceGroup request. The method always
@@ -439,7 +441,8 @@ func (client LongTermRetentionBackupsClient) ListByDatabasePreparer(ctx context.
 // ListByDatabaseSender sends the ListByDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByDatabaseResponder handles the response to the ListByDatabase request. The method always
@@ -559,7 +562,8 @@ func (client LongTermRetentionBackupsClient) ListByLocationPreparer(ctx context.
 // ListByLocationSender sends the ListByLocation request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByLocationSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByLocationResponder handles the response to the ListByLocation request. The method always
@@ -686,7 +690,8 @@ func (client LongTermRetentionBackupsClient) ListByResourceGroupDatabasePreparer
 // ListByResourceGroupDatabaseSender sends the ListByResourceGroupDatabase request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByResourceGroupDatabaseSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupDatabaseResponder handles the response to the ListByResourceGroupDatabase request. The method always
@@ -809,7 +814,8 @@ func (client LongTermRetentionBackupsClient) ListByResourceGroupLocationPreparer
 // ListByResourceGroupLocationSender sends the ListByResourceGroupLocation request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByResourceGroupLocationSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupLocationResponder handles the response to the ListByResourceGroupLocation request. The method always
@@ -934,7 +940,8 @@ func (client LongTermRetentionBackupsClient) ListByResourceGroupServerPreparer(c
 // ListByResourceGroupServerSender sends the ListByResourceGroupServer request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByResourceGroupServerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupServerResponder handles the response to the ListByResourceGroupServer request. The method always
@@ -1056,7 +1063,8 @@ func (client LongTermRetentionBackupsClient) ListByServerPreparer(ctx context.Co
 // ListByServerSender sends the ListByServer request. The method will close the
 // http.Response Body if it receives an error.
 func (client LongTermRetentionBackupsClient) ListByServerSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByServerResponder handles the response to the ListByServer request. The method always

@@ -48,10 +48,7 @@ type PolicyDefinitionSpec struct {
 	Description string `json:"description,omitempty" tf:"description,omitempty"`
 	DisplayName string `json:"displayName" tf:"display_name"`
 	// +optional
-	// Deprecated
 	ManagementGroupID string `json:"managementGroupID,omitempty" tf:"management_group_id,omitempty"`
-	// +optional
-	ManagementGroupName string `json:"managementGroupName,omitempty" tf:"management_group_name,omitempty"`
 	// +optional
 	Metadata string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 	Mode     string `json:"mode" tf:"mode"`
@@ -73,6 +70,8 @@ type PolicyDefinitionStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

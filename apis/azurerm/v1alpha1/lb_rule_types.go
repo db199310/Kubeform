@@ -62,7 +62,10 @@ type LbRuleSpec struct {
 	// +optional
 	LoadDistribution string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty"`
 	LoadbalancerID   string `json:"loadbalancerID" tf:"loadbalancer_id"`
-	Name             string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	Name     string `json:"name" tf:"name"`
 	// +optional
 	ProbeID           string `json:"probeID,omitempty" tf:"probe_id,omitempty"`
 	Protocol          string `json:"protocol" tf:"protocol"`
@@ -79,6 +82,8 @@ type LbRuleStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

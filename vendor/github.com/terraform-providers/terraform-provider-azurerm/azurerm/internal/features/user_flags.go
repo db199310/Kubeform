@@ -3,7 +3,6 @@ package features
 type UserFeatures struct {
 	VirtualMachine         VirtualMachineFeatures
 	VirtualMachineScaleSet VirtualMachineScaleSetFeatures
-	KeyVault               KeyVaultFeatures
 }
 
 type VirtualMachineFeatures struct {
@@ -12,9 +11,4 @@ type VirtualMachineFeatures struct {
 
 type VirtualMachineScaleSetFeatures struct {
 	RollInstancesWhenRequired bool
-}
-
-type KeyVaultFeatures struct {
-	PurgeSoftDeleteOnDestroy    bool
-	RecoverSoftDeletedKeyVaults bool
 }

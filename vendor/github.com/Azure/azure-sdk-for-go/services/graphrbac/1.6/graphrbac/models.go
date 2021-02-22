@@ -45,23 +45,6 @@ func PossibleConsentTypeValues() []ConsentType {
 	return []ConsentType{AllPrincipals, Principal}
 }
 
-// GroupMembershipClaimTypes enumerates the values for group membership claim types.
-type GroupMembershipClaimTypes string
-
-const (
-	// All ...
-	All GroupMembershipClaimTypes = "All"
-	// None ...
-	None GroupMembershipClaimTypes = "None"
-	// SecurityGroup ...
-	SecurityGroup GroupMembershipClaimTypes = "SecurityGroup"
-)
-
-// PossibleGroupMembershipClaimTypesValues returns an array of possible values for the GroupMembershipClaimTypes const type.
-func PossibleGroupMembershipClaimTypesValues() []GroupMembershipClaimTypes {
-	return []GroupMembershipClaimTypes{All, None, SecurityGroup}
-}
-
 // ObjectType enumerates the values for object type.
 type ObjectType string
 
@@ -355,8 +338,8 @@ type Application struct {
 	DisplayName *string `json:"displayName,omitempty"`
 	// ErrorURL - A URL provided by the author of the application to report errors when using the application.
 	ErrorURL *string `json:"errorUrl,omitempty"`
-	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects. Possible values include: 'None', 'SecurityGroup', 'All'
-	GroupMembershipClaims GroupMembershipClaimTypes `json:"groupMembershipClaims,omitempty"`
+	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
+	GroupMembershipClaims interface{} `json:"groupMembershipClaims,omitempty"`
 	// Homepage - The home page of the application.
 	Homepage *string `json:"homepage,omitempty"`
 	// IdentifierUris - A collection of URIs for the application.
@@ -441,7 +424,7 @@ func (a Application) MarshalJSON() ([]byte, error) {
 	if a.ErrorURL != nil {
 		objectMap["errorUrl"] = a.ErrorURL
 	}
-	if a.GroupMembershipClaims != "" {
+	if a.GroupMembershipClaims != nil {
 		objectMap["groupMembershipClaims"] = a.GroupMembershipClaims
 	}
 	if a.Homepage != nil {
@@ -641,7 +624,7 @@ func (a *Application) UnmarshalJSON(body []byte) error {
 			}
 		case "groupMembershipClaims":
 			if v != nil {
-				var groupMembershipClaims GroupMembershipClaimTypes
+				var groupMembershipClaims interface{}
 				err = json.Unmarshal(*v, &groupMembershipClaims)
 				if err != nil {
 					return err
@@ -907,8 +890,8 @@ type ApplicationBase struct {
 	AvailableToOtherTenants *bool `json:"availableToOtherTenants,omitempty"`
 	// ErrorURL - A URL provided by the author of the application to report errors when using the application.
 	ErrorURL *string `json:"errorUrl,omitempty"`
-	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects. Possible values include: 'None', 'SecurityGroup', 'All'
-	GroupMembershipClaims GroupMembershipClaimTypes `json:"groupMembershipClaims,omitempty"`
+	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
+	GroupMembershipClaims interface{} `json:"groupMembershipClaims,omitempty"`
 	// Homepage - The home page of the application.
 	Homepage *string `json:"homepage,omitempty"`
 	// InformationalUrls - URLs with more information about the application.
@@ -972,8 +955,8 @@ type ApplicationCreateParameters struct {
 	AvailableToOtherTenants *bool `json:"availableToOtherTenants,omitempty"`
 	// ErrorURL - A URL provided by the author of the application to report errors when using the application.
 	ErrorURL *string `json:"errorUrl,omitempty"`
-	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects. Possible values include: 'None', 'SecurityGroup', 'All'
-	GroupMembershipClaims GroupMembershipClaimTypes `json:"groupMembershipClaims,omitempty"`
+	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
+	GroupMembershipClaims interface{} `json:"groupMembershipClaims,omitempty"`
 	// Homepage - The home page of the application.
 	Homepage *string `json:"homepage,omitempty"`
 	// InformationalUrls - URLs with more information about the application.
@@ -1171,8 +1154,8 @@ type ApplicationUpdateParameters struct {
 	AvailableToOtherTenants *bool `json:"availableToOtherTenants,omitempty"`
 	// ErrorURL - A URL provided by the author of the application to report errors when using the application.
 	ErrorURL *string `json:"errorUrl,omitempty"`
-	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects. Possible values include: 'None', 'SecurityGroup', 'All'
-	GroupMembershipClaims GroupMembershipClaimTypes `json:"groupMembershipClaims,omitempty"`
+	// GroupMembershipClaims - Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
+	GroupMembershipClaims interface{} `json:"groupMembershipClaims,omitempty"`
 	// Homepage - The home page of the application.
 	Homepage *string `json:"homepage,omitempty"`
 	// InformationalUrls - URLs with more information about the application.

@@ -19,6 +19,7 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"context"
 	time "time"
 
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -61,13 +62,13 @@ func NewFilteredStreamAnalyticsOutputServicebusTopicInformer(client versioned.In
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().StreamAnalyticsOutputServicebusTopics(namespace).List(options)
+				return client.AzurermV1alpha1().StreamAnalyticsOutputServicebusTopics(namespace).List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.AzurermV1alpha1().StreamAnalyticsOutputServicebusTopics(namespace).Watch(options)
+				return client.AzurermV1alpha1().StreamAnalyticsOutputServicebusTopics(namespace).Watch(context.TODO(), options)
 			},
 		},
 		&azurermv1alpha1.StreamAnalyticsOutputServicebusTopic{},

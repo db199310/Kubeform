@@ -44,7 +44,8 @@ type PublicIPSpec struct {
 
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
-	AllocationMethod string `json:"allocationMethod" tf:"allocation_method"`
+	// +optional
+	AllocationMethod string `json:"allocationMethod,omitempty" tf:"allocation_method,omitempty"`
 	// +optional
 	DomainNameLabel string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
 	// +optional
@@ -57,6 +58,9 @@ type PublicIPSpec struct {
 	IpVersion string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 	Location  string `json:"location" tf:"location"`
 	Name      string `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	PublicIPAddressAllocation string `json:"publicIPAddressAllocation,omitempty" tf:"public_ip_address_allocation,omitempty"`
 	// +optional
 	PublicIPPrefixID  string `json:"publicIPPrefixID,omitempty" tf:"public_ip_prefix_id,omitempty"`
 	ResourceGroupName string `json:"resourceGroupName" tf:"resource_group_name"`
@@ -81,6 +85,8 @@ type PublicIPStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -39,6 +39,10 @@ type RelayNamespace struct {
 	Status            RelayNamespaceStatus `json:"status,omitempty"`
 }
 
+type RelayNamespaceSpecSku struct {
+	Name string `json:"name" tf:"name"`
+}
+
 type RelayNamespaceSpec struct {
 	ProviderRef core.LocalObjectReference `json:"providerRef" tf:"-"`
 
@@ -59,7 +63,12 @@ type RelayNamespaceSpec struct {
 	SecondaryConnectionString string `json:"-" sensitive:"true" tf:"secondary_connection_string,omitempty"`
 	// +optional
 	SecondaryKey string `json:"-" sensitive:"true" tf:"secondary_key,omitempty"`
-	SkuName      string `json:"skuName" tf:"sku_name"`
+	// +optional
+	// +kubebuilder:validation:MaxItems=1
+	// Deprecated
+	Sku []RelayNamespaceSpecSku `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +optional
+	SkuName string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
@@ -74,6 +83,8 @@ type RelayNamespaceStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

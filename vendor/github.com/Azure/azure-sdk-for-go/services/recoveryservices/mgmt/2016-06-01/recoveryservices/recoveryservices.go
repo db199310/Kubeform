@@ -35,8 +35,7 @@ func NewClient(subscriptionID string) Client {
 	return NewClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewClientWithBaseURI creates an instance of the Client client using a custom endpoint.  Use this when interacting
-// with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewClientWithBaseURI creates an instance of the Client client.
 func NewClientWithBaseURI(baseURI string, subscriptionID string) Client {
 	return Client{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -46,7 +45,7 @@ func NewClientWithBaseURI(baseURI string, subscriptionID string) Client {
 // resourceGroupName - the name of the resource group where the recovery services vault is present.
 // location - location of the resource
 // input - contains information about Resource type and Resource name
-func (client Client) CheckNameAvailability(ctx context.Context, resourceGroupName string, location string, input CheckNameAvailabilityParameters) (result CheckNameAvailabilityResult, err error) {
+func (client Client) CheckNameAvailability(ctx context.Context, resourceGroupName string, location string, input CheckNameAvailabilityParameters) (result CheckNameAvailabilityResultResource, err error) {
 	if tracing.IsEnabled() {
 		ctx = tracing.StartSpan(ctx, fqdn+"/Client.CheckNameAvailability")
 		defer func() {
@@ -104,12 +103,13 @@ func (client Client) CheckNameAvailabilityPreparer(ctx context.Context, resource
 // CheckNameAvailabilitySender sends the CheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client Client) CheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CheckNameAvailabilityResponder handles the response to the CheckNameAvailability request. The method always
 // closes the http.Response Body.
-func (client Client) CheckNameAvailabilityResponder(resp *http.Response) (result CheckNameAvailabilityResult, err error) {
+func (client Client) CheckNameAvailabilityResponder(resp *http.Response) (result CheckNameAvailabilityResultResource, err error) {
 	err = autorest.Respond(
 		resp,
 		client.ByInspecting(),

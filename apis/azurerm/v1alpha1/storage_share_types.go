@@ -64,7 +64,8 @@ type StorageShareSpec struct {
 	// +optional
 	Quota int64 `json:"quota,omitempty" tf:"quota,omitempty"`
 	// +optional
-	ResourceManagerID  string `json:"resourceManagerID,omitempty" tf:"resource_manager_id,omitempty"`
+	// Deprecated
+	ResourceGroupName  string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 	// +optional
 	Url string `json:"url,omitempty" tf:"url,omitempty"`
@@ -80,6 +81,8 @@ type StorageShareStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

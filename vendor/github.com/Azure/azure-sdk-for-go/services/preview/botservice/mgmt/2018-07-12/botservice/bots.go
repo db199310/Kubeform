@@ -36,8 +36,7 @@ func NewBotsClient(subscriptionID string) BotsClient {
 	return NewBotsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewBotsClientWithBaseURI creates an instance of the BotsClient client using a custom endpoint.  Use this when
-// interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure stack).
+// NewBotsClientWithBaseURI creates an instance of the BotsClient client.
 func NewBotsClientWithBaseURI(baseURI string, subscriptionID string) BotsClient {
 	return BotsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -123,7 +122,8 @@ func (client BotsClient) CreatePreparer(ctx context.Context, resourceGroupName s
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) CreateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // CreateResponder handles the response to the Create request. The method always
@@ -211,7 +211,8 @@ func (client BotsClient) DeletePreparer(ctx context.Context, resourceGroupName s
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -298,7 +299,8 @@ func (client BotsClient) GetPreparer(ctx context.Context, resourceGroupName stri
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -369,7 +371,8 @@ func (client BotsClient) GetCheckNameAvailabilityPreparer(ctx context.Context, p
 // GetCheckNameAvailabilitySender sends the GetCheckNameAvailability request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) GetCheckNameAvailabilitySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	sd := autorest.GetSendDecorators(req.Context(), autorest.DoRetryForStatusCodes(client.RetryAttempts, client.RetryDuration, autorest.StatusCodesForRetry...))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetCheckNameAvailabilityResponder handles the response to the GetCheckNameAvailability request. The method always
@@ -441,7 +444,8 @@ func (client BotsClient) ListPreparer(ctx context.Context) (*http.Request, error
 // ListSender sends the List request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) ListSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListResponder handles the response to the List request. The method always
@@ -561,7 +565,8 @@ func (client BotsClient) ListByResourceGroupPreparer(ctx context.Context, resour
 // ListByResourceGroupSender sends the ListByResourceGroup request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) ListByResourceGroupSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByResourceGroupResponder handles the response to the ListByResourceGroup request. The method always
@@ -689,7 +694,8 @@ func (client BotsClient) UpdatePreparer(ctx context.Context, resourceGroupName s
 // UpdateSender sends the Update request. The method will close the
 // http.Response Body if it receives an error.
 func (client BotsClient) UpdateSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // UpdateResponder handles the response to the Update request. The method always

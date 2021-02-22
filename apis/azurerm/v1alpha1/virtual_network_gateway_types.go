@@ -53,8 +53,9 @@ type VirtualNetworkGatewaySpecIpConfiguration struct {
 	Name string `json:"name,omitempty" tf:"name,omitempty"`
 	// +optional
 	PrivateIPAddressAllocation string `json:"privateIPAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
-	PublicIPAddressID          string `json:"publicIPAddressID" tf:"public_ip_address_id"`
-	SubnetID                   string `json:"subnetID" tf:"subnet_id"`
+	// +optional
+	PublicIPAddressID string `json:"publicIPAddressID,omitempty" tf:"public_ip_address_id,omitempty"`
+	SubnetID          string `json:"subnetID" tf:"subnet_id"`
 }
 
 type VirtualNetworkGatewaySpecVpnClientConfigurationRevokedCertificate struct {
@@ -123,6 +124,8 @@ type VirtualNetworkGatewayStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

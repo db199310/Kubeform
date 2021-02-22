@@ -37,9 +37,7 @@ func NewDataFlowDebugSessionClient(subscriptionID string) DataFlowDebugSessionCl
 	return NewDataFlowDebugSessionClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewDataFlowDebugSessionClientWithBaseURI creates an instance of the DataFlowDebugSessionClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewDataFlowDebugSessionClientWithBaseURI creates an instance of the DataFlowDebugSessionClient client.
 func NewDataFlowDebugSessionClientWithBaseURI(baseURI string, subscriptionID string) DataFlowDebugSessionClient {
 	return DataFlowDebugSessionClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -128,7 +126,8 @@ func (client DataFlowDebugSessionClient) AddDataFlowPreparer(ctx context.Context
 // AddDataFlowSender sends the AddDataFlow request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataFlowDebugSessionClient) AddDataFlowSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // AddDataFlowResponder handles the response to the AddDataFlow request. The method always
@@ -216,8 +215,9 @@ func (client DataFlowDebugSessionClient) CreatePreparer(ctx context.Context, res
 // CreateSender sends the Create request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataFlowDebugSessionClient) CreateSender(req *http.Request) (future DataFlowDebugSessionCreateFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -313,7 +313,8 @@ func (client DataFlowDebugSessionClient) DeletePreparer(ctx context.Context, res
 // DeleteSender sends the Delete request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataFlowDebugSessionClient) DeleteSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // DeleteResponder handles the response to the Delete request. The method always
@@ -400,8 +401,9 @@ func (client DataFlowDebugSessionClient) ExecuteCommandPreparer(ctx context.Cont
 // ExecuteCommandSender sends the ExecuteCommand request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataFlowDebugSessionClient) ExecuteCommandSender(req *http.Request) (future DataFlowDebugSessionExecuteCommandFuture, err error) {
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
 	var resp *http.Response
-	resp, err = client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	resp, err = autorest.SendWithSender(client, req, sd...)
 	if err != nil {
 		return
 	}
@@ -495,7 +497,8 @@ func (client DataFlowDebugSessionClient) QueryByFactoryPreparer(ctx context.Cont
 // QueryByFactorySender sends the QueryByFactory request. The method will close the
 // http.Response Body if it receives an error.
 func (client DataFlowDebugSessionClient) QueryByFactorySender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // QueryByFactoryResponder handles the response to the QueryByFactory request. The method always

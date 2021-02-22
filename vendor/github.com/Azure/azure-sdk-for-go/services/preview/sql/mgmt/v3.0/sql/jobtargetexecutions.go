@@ -39,9 +39,7 @@ func NewJobTargetExecutionsClient(subscriptionID string) JobTargetExecutionsClie
 	return NewJobTargetExecutionsClientWithBaseURI(DefaultBaseURI, subscriptionID)
 }
 
-// NewJobTargetExecutionsClientWithBaseURI creates an instance of the JobTargetExecutionsClient client using a custom
-// endpoint.  Use this when interacting with an Azure cloud that uses a non-standard base URI (sovereign clouds, Azure
-// stack).
+// NewJobTargetExecutionsClientWithBaseURI creates an instance of the JobTargetExecutionsClient client.
 func NewJobTargetExecutionsClientWithBaseURI(baseURI string, subscriptionID string) JobTargetExecutionsClient {
 	return JobTargetExecutionsClient{NewWithBaseURI(baseURI, subscriptionID)}
 }
@@ -117,7 +115,8 @@ func (client JobTargetExecutionsClient) GetPreparer(ctx context.Context, resourc
 // GetSender sends the Get request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobTargetExecutionsClient) GetSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // GetResponder handles the response to the Get request. The method always
@@ -229,7 +228,8 @@ func (client JobTargetExecutionsClient) ListByJobExecutionPreparer(ctx context.C
 // ListByJobExecutionSender sends the ListByJobExecution request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobTargetExecutionsClient) ListByJobExecutionSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByJobExecutionResponder handles the response to the ListByJobExecution request. The method always
@@ -380,7 +380,8 @@ func (client JobTargetExecutionsClient) ListByStepPreparer(ctx context.Context, 
 // ListByStepSender sends the ListByStep request. The method will close the
 // http.Response Body if it receives an error.
 func (client JobTargetExecutionsClient) ListByStepSender(req *http.Request) (*http.Response, error) {
-	return client.Send(req, azure.DoRetryWithRegistration(client.Client))
+	sd := autorest.GetSendDecorators(req.Context(), azure.DoRetryWithRegistration(client.Client))
+	return autorest.SendWithSender(client, req, sd...)
 }
 
 // ListByStepResponder handles the response to the ListByStep request. The method always

@@ -49,7 +49,10 @@ type LbProbeSpec struct {
 	// +optional
 	LoadBalancerRules []string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
 	LoadbalancerID    string   `json:"loadbalancerID" tf:"loadbalancer_id"`
-	Name              string   `json:"name" tf:"name"`
+	// +optional
+	// Deprecated
+	Location string `json:"location,omitempty" tf:"location,omitempty"`
+	Name     string `json:"name" tf:"name"`
 	// +optional
 	NumberOfProbes int64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 	Port           int64 `json:"port" tf:"port"`
@@ -70,6 +73,8 @@ type LbProbeStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

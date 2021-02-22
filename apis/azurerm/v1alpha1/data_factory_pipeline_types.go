@@ -45,8 +45,6 @@ type DataFactoryPipelineSpec struct {
 	ID string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +optional
-	ActivitiesJSON string `json:"activitiesJSON,omitempty" tf:"activities_json,omitempty"`
-	// +optional
 	Annotations     []string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 	DataFactoryName string   `json:"dataFactoryName" tf:"data_factory_name"`
 	// +optional
@@ -69,6 +67,8 @@ type DataFactoryPipelineStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

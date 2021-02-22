@@ -19,6 +19,8 @@ limitations under the License.
 package fake
 
 import (
+	"context"
+
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labels "k8s.io/apimachinery/pkg/labels"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -39,7 +41,7 @@ var virtualwansResource = schema.GroupVersionResource{Group: "azurerm.kubeform.c
 var virtualwansKind = schema.GroupVersionKind{Group: "azurerm.kubeform.com", Version: "v1alpha1", Kind: "VirtualWAN"}
 
 // Get takes name of the virtualWAN, and returns the corresponding virtualWAN object, and an error if there is any.
-func (c *FakeVirtualWANs) Get(name string, options v1.GetOptions) (result *v1alpha1.VirtualWAN, err error) {
+func (c *FakeVirtualWANs) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.VirtualWAN, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewGetAction(virtualwansResource, c.ns, name), &v1alpha1.VirtualWAN{})
 
@@ -50,7 +52,7 @@ func (c *FakeVirtualWANs) Get(name string, options v1.GetOptions) (result *v1alp
 }
 
 // List takes label and field selectors, and returns the list of VirtualWANs that match those selectors.
-func (c *FakeVirtualWANs) List(opts v1.ListOptions) (result *v1alpha1.VirtualWANList, err error) {
+func (c *FakeVirtualWANs) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.VirtualWANList, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewListAction(virtualwansResource, virtualwansKind, c.ns, opts), &v1alpha1.VirtualWANList{})
 
@@ -72,14 +74,14 @@ func (c *FakeVirtualWANs) List(opts v1.ListOptions) (result *v1alpha1.VirtualWAN
 }
 
 // Watch returns a watch.Interface that watches the requested virtualWANs.
-func (c *FakeVirtualWANs) Watch(opts v1.ListOptions) (watch.Interface, error) {
+func (c *FakeVirtualWANs) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
 		InvokesWatch(testing.NewWatchAction(virtualwansResource, c.ns, opts))
 
 }
 
 // Create takes the representation of a virtualWAN and creates it.  Returns the server's representation of the virtualWAN, and an error, if there is any.
-func (c *FakeVirtualWANs) Create(virtualWAN *v1alpha1.VirtualWAN) (result *v1alpha1.VirtualWAN, err error) {
+func (c *FakeVirtualWANs) Create(ctx context.Context, virtualWAN *v1alpha1.VirtualWAN, opts v1.CreateOptions) (result *v1alpha1.VirtualWAN, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewCreateAction(virtualwansResource, c.ns, virtualWAN), &v1alpha1.VirtualWAN{})
 
@@ -90,7 +92,7 @@ func (c *FakeVirtualWANs) Create(virtualWAN *v1alpha1.VirtualWAN) (result *v1alp
 }
 
 // Update takes the representation of a virtualWAN and updates it. Returns the server's representation of the virtualWAN, and an error, if there is any.
-func (c *FakeVirtualWANs) Update(virtualWAN *v1alpha1.VirtualWAN) (result *v1alpha1.VirtualWAN, err error) {
+func (c *FakeVirtualWANs) Update(ctx context.Context, virtualWAN *v1alpha1.VirtualWAN, opts v1.UpdateOptions) (result *v1alpha1.VirtualWAN, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateAction(virtualwansResource, c.ns, virtualWAN), &v1alpha1.VirtualWAN{})
 
@@ -102,7 +104,7 @@ func (c *FakeVirtualWANs) Update(virtualWAN *v1alpha1.VirtualWAN) (result *v1alp
 
 // UpdateStatus was generated because the type contains a Status member.
 // Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
-func (c *FakeVirtualWANs) UpdateStatus(virtualWAN *v1alpha1.VirtualWAN) (*v1alpha1.VirtualWAN, error) {
+func (c *FakeVirtualWANs) UpdateStatus(ctx context.Context, virtualWAN *v1alpha1.VirtualWAN, opts v1.UpdateOptions) (*v1alpha1.VirtualWAN, error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewUpdateSubresourceAction(virtualwansResource, "status", c.ns, virtualWAN), &v1alpha1.VirtualWAN{})
 
@@ -113,7 +115,7 @@ func (c *FakeVirtualWANs) UpdateStatus(virtualWAN *v1alpha1.VirtualWAN) (*v1alph
 }
 
 // Delete takes name of the virtualWAN and deletes it. Returns an error if one occurs.
-func (c *FakeVirtualWANs) Delete(name string, options *v1.DeleteOptions) error {
+func (c *FakeVirtualWANs) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
 		Invokes(testing.NewDeleteAction(virtualwansResource, c.ns, name), &v1alpha1.VirtualWAN{})
 
@@ -121,15 +123,15 @@ func (c *FakeVirtualWANs) Delete(name string, options *v1.DeleteOptions) error {
 }
 
 // DeleteCollection deletes a collection of objects.
-func (c *FakeVirtualWANs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(virtualwansResource, c.ns, listOptions)
+func (c *FakeVirtualWANs) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
+	action := testing.NewDeleteCollectionAction(virtualwansResource, c.ns, listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.VirtualWANList{})
 	return err
 }
 
 // Patch applies the patch and returns the patched virtualWAN.
-func (c *FakeVirtualWANs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *v1alpha1.VirtualWAN, err error) {
+func (c *FakeVirtualWANs) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.VirtualWAN, err error) {
 	obj, err := c.Fake.
 		Invokes(testing.NewPatchSubresourceAction(virtualwansResource, c.ns, name, pt, data, subresources...), &v1alpha1.VirtualWAN{})
 

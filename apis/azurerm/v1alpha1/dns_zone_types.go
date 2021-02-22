@@ -50,10 +50,17 @@ type DnsZoneSpec struct {
 	// +optional
 	NameServers []string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 	// +optional
-	NumberOfRecordSets int64  `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
-	ResourceGroupName  string `json:"resourceGroupName" tf:"resource_group_name"`
+	NumberOfRecordSets int64 `json:"numberOfRecordSets,omitempty" tf:"number_of_record_sets,omitempty"`
+	// +optional
+	RegistrationVirtualNetworkIDS []string `json:"registrationVirtualNetworkIDS,omitempty" tf:"registration_virtual_network_ids,omitempty"`
+	// +optional
+	ResolutionVirtualNetworkIDS []string `json:"resolutionVirtualNetworkIDS,omitempty" tf:"resolution_virtual_network_ids,omitempty"`
+	ResourceGroupName           string   `json:"resourceGroupName" tf:"resource_group_name"`
 	// +optional
 	Tags map[string]string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +optional
+	// Deprecated
+	ZoneType string `json:"zoneType,omitempty" tf:"zone_type,omitempty"`
 }
 
 type DnsZoneStatus struct {
@@ -66,6 +73,8 @@ type DnsZoneStatus struct {
 	State *base.State `json:"state,omitempty"`
 	// +optional
 	Phase base.Phase `json:"phase,omitempty"`
+	// +optional
+	TerraformErrors []string `json:"terraformErrors,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
