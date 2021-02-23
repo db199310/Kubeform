@@ -254,7 +254,7 @@ stages:
               CRDS: stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
 
           # Update stratos-crds
-          - script: for crd in stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml; do sed -i '' -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+          - script: for crd in stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
           - script: |
               git pull
