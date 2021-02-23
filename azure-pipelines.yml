@@ -77,65 +77,63 @@ stages:
     - task: NodeTool@0
     - script: |
         git config --global user.email "sedp-ci@shell.com"
-        git config --global user.name "Azure Pipeline"
+        git config --global user.name "Azure Pipelines"
         git config --global url."https://test:${GIT_READ_TOKEN}@dev.azure.com/sede-ds-adp/Platform%20-%20General/_git/kubeform".insteadOf https://dev.azure.com/sede-ds-adp/kubeform
       displayName: Set git properties
 
-    # # Build kubeform
-    # - script: make gen
-    #   displayName: Run kubeform codegen
-    #   env:
-    #     CRD_PATH: crds
-    #   workingDirectory: kubeform
-    # - script: go mod tidy && go mod vendor
-    #   displayName: Update vendored packages in kubeform
-    #   workingDirectory: kubeform
-    # - script: make build
-    #   displayName: Build kubeform binaries
-    #   workingDirectory: kubeform
-    # - script: make gen
-    #   displayName: Run kubeform codegen
-    #   env:
-    #     CRD_PATH: crds
-    #   workingDirectory: kubeform
-    # - script: |
-    #     git status
-    #     git add -A
-    #     git commit -m "[skip ci] Update Terraform modules"
-    #     git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
-    #   displayName: Commit & push results to kubeform
-    #   workingDirectory: kubeform
-    #
-    # # Build kfc binary
-    # - script: git rev-parse HEAD > ../kubeform-sha
-    #   displayName: Store kubeform revision for kfc to use
-    #   workingDirectory: kubeform
-    # - script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
-    #   displayName: Point kfc to the right revision of kubeform
-    #   workingDirectory: kfc
-    # - script: go mod tidy && go mod vendor
-    #   displayName: Update vendored version of kubeform in kfc
-    #   workingDirectory: kfc
-    # - script: |
-    #     git add -A
-    #     git commit -m "[skip ci] Update Terraform modules"
-    #     git push -f origin HEAD:${BUILD_SOURCEBRANCH}
-    #   displayName: Commit & push changes to kfc
-    #   workingDirectory: kfc
-    # - script: make build
-    #   displayName: Build kfc binaries
-    #   workingDirectory: kfc
-    #
-    # # Build kfc container
-    # - script: make container
-    #   displayName: Build kfc containers
-    #   workingDirectory: kfc
-    # - script: make push
-    #   displayName: Push kfc containers
-    #   workingDirectory: kfc
-    # - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]$(cat bin/.container-tag)"
-    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]feature_tn-merging-upstream_linux_amd64" # XXX: speeds-up debugging. remove.
-      # XXX: the docker tag on a feature branch has to use commit hash in order to detect new builds. update kubeform and kfc makefiles
+    # Build kubeform
+    - script: make gen
+      displayName: Run kubeform codegen
+      env:
+        CRD_PATH: crds
+      workingDirectory: kubeform
+    - script: go mod tidy && go mod vendor
+      displayName: Update vendored packages in kubeform
+      workingDirectory: kubeform
+    - script: make build
+      displayName: Build kubeform binaries
+      workingDirectory: kubeform
+    - script: make gen
+      displayName: Run kubeform codegen
+      env:
+        CRD_PATH: crds
+      workingDirectory: kubeform
+    - script: |
+        git status
+        git add -A
+        git commit -m "[skip ci] Update Terraform modules"
+        git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
+      displayName: Commit & push results to kubeform
+      workingDirectory: kubeform
+
+    # Build kfc binary
+    - script: git rev-parse HEAD > ../kubeform-sha
+      displayName: Store kubeform revision for kfc to use
+      workingDirectory: kubeform
+    - script: go mod edit -replace "kubeform.dev/kubeform=dev.azure.com/sede-ds-adp/kubeform.git@$(cat ../kubeform-sha)"
+      displayName: Point kfc to the right revision of kubeform
+      workingDirectory: kfc
+    - script: go mod tidy && go mod vendor
+      displayName: Update vendored version of kubeform in kfc
+      workingDirectory: kfc
+    - script: |
+        git add -A
+        git commit -m "[skip ci] Update Terraform modules"
+        git push -f origin HEAD:${BUILD_SOURCEBRANCH}
+      displayName: Commit & push changes to kfc
+      workingDirectory: kfc
+    - script: make build
+      displayName: Build kfc binaries
+      workingDirectory: kfc
+
+    # Build kfc container
+    - script: make container
+      displayName: Build kfc containers
+      workingDirectory: kfc
+    - script: make push
+      displayName: Push kfc containers
+      workingDirectory: kfc
+    - script: echo "##vso[task.setvariable variable=DOCKER_TAG;isOutput=true]$(cat bin/.container-tag)"
       displayName: Set DOCKER_TAG
       name: setDockerTag
       workingDirectory: kfc
