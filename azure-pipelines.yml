@@ -191,6 +191,13 @@ stages:
               sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
+          - script: |
+              git pull
+              git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              git commit -m "[kubeform] Update KFC image"
+              git push
+            displayName: Push updates to Stratos CRDs
+            workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
           - task: CopyFiles@2
@@ -259,17 +266,15 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
-            displayName: Update deployment manifest
-            workingDirectory: stratos-core-bootstrap
-          - script: |
               sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
           - script: |
-              cat $(ComponentsPath)/kubeform/kubeform-hr.yaml
-              ls -l $(ComponentsPath)/kubeform/kubeform-hr.yaml.bak
-            displayName: Update deployment manifest
+              git pull
+              git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              git commit -m "[kubeform] Update KFC image"
+              git push
+            displayName: Push updates to Stratos CRDs
             workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
@@ -349,6 +354,14 @@ stages:
               sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
               sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
+            workingDirectory: stratos-core-bootstrap
+          - script: |
+              git pull
+              git add $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
+              git add $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
+              git commit -m "[kubeform] Update KFC image"
+              git push
+            displayName: Push updates to Stratos CRDs
             workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
