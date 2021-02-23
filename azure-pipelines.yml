@@ -146,6 +146,7 @@ stages:
   - Build
   variables:
     ComponentsPath: components/sandbox/${{ parameters.SandboxClusterName }}
+    CrdsPath: $(ComponentsPath)/stratos-crds
     DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
   jobs:
   - deployment: Deploy
@@ -184,18 +185,25 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
+          - task: CopyFiles@2
+            input:
+              content:
+                - modules.kubeform.com_*.yaml
+              sourceFolder: kubeform/crds
+              targetFolder: stratos-core-bootstrap/$(CrdsPath)
+            displayName: Copy generated CRDs
           - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
             env:
-              CRDS: stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
+              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
           - script: |
               git pull
-              git add $(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
+              git add $(CrdsPath)/modules.kubeform.com_*.yaml
               git commit -m "[kubeform] Update Stratos CRDs"
               git push
             displayName: Push updates to Stratos CRDs
@@ -207,6 +215,7 @@ stages:
   - Build
   variables:
     ComponentsPath: components/staging/AKS-Test
+    CrdsPath: $(ComponentsPath)/stratos-crds
     DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
   jobs:
   - deployment: Deploy
@@ -220,12 +229,13 @@ stages:
           - checkout: stratos
             displayName: Checkout stratos
             persistCredentials: true
-          - script: git checkout feature/tn-installing-aks-test
+          - script: git checkout $(StratosBranch)
             displayName: Checkout stratos branch
             workingDirectory: stratos-core-bootstrap
           - script: |
               git config --global user.email "sedp-ci@shell.com"
               git config --global user.name "Azure Pipelines"
+              git config pull.ff only
             displayName: Set git properties
 
           # Update crd-conversion config
@@ -245,16 +255,25 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
-          - script: for crd in stratos-core-bootstrap/$(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+          - task: CopyFiles@2
+            input:
+              content:
+                - modules.kubeform.com_*.yaml
+              sourceFolder: kubeform/crds
+              targetFolder: stratos-core-bootstrap/$(CrdsPath)
+            displayName: Copy generated CRDs
+          - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
+            env:
+              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
           - script: |
               git pull
-              git add $(ComponentsPath)/stratos-crds/modules.kubeform.com_*.yaml
+              git add $(CrdsPath)/modules.kubeform.com_*.yaml
               git commit -m "[kubeform] Update Stratos CRDs"
               git push
             displayName: Push updates to Stratos CRDs
@@ -269,7 +288,8 @@ stages:
     DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
     NpdComponentsPath: components/npd/f4dpnpd
     PrdComponentsPath: components/prd/f4dpprd
-    StratosCrdsPaths: components/base/stratos-crds/modules.kubeform.com_*.yaml
+    BaseComponentsPath: components/base
+    CrdsPath: $(BaseComponentsPath)/stratos-crds
   jobs:
   - deployment: Deploy
     environment: PRD
@@ -282,12 +302,13 @@ stages:
           - checkout: stratos
             displayName: Checkout stratos
             persistCredentials: true
-          - script: git checkout master
+          - script: git checkout $(StratosBranch)
             displayName: Checkout stratos branch
             workingDirectory: stratos-core-bootstrap
           - script: |
               git config --global user.email "sedp-ci@shell.com"
               git config --global user.name "Azure Pipelines"
+              git config pull.ff only
             displayName: Set git properties
 
           # Update crd-conversion config
@@ -311,17 +332,26 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
-              sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
-          - script: for crd in stratos-core-bootstrap/$(StratosCrdsPaths); do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+          - task: CopyFiles@2
+            input:
+              content:
+                - modules.kubeform.com_*.yaml
+              sourceFolder: kubeform/crds
+              targetFolder: stratos-core-bootstrap/$(CrdsPath)
+            displayName: Copy generated CRDs to NPD
+          - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
+            env:
+              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
           - script: |
               git pull
-              git add $(StratosCrdsPaths)
+              git add $(CrdsPath)/modules.kubeform.com_*.yaml
               git commit -m "[kubeform] Update Stratos CRDs in NPD/PRD"
               git push
             displayName: Push updates to Stratos CRDs
