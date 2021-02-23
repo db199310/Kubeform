@@ -192,8 +192,8 @@ stages:
           # Update stratos-crds
           - task: CopyFiles@2
             inputs:
-              contents:
-                - modules.kubeform.com_*.yaml
+              contents: |
+                modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
             displayName: Copy generated CRDs
@@ -262,8 +262,8 @@ stages:
           # Update stratos-crds
           - task: CopyFiles@2
             inputs:
-              contents:
-                - modules.kubeform.com_*.yaml
+              contents: |
+                modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
             displayName: Copy generated CRDs
@@ -340,8 +340,8 @@ stages:
           # Update stratos-crds
           - task: CopyFiles@2
             inputs:
-              contents:
-                - modules.kubeform.com_*.yaml
+              contents: |
+                modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
             displayName: Copy generated CRDs to NPD
