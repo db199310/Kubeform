@@ -63,8 +63,11 @@ stages:
       workingDirectory: kfc
       displayName: Checkout kfc source branch
 
-    - script: echo $DCKPWD | docker login shellai.azurecr.io -u $DCKLOG --password-stdin
+    - script: echo $DOCKER_PASSWORD | docker login shellai.azurecr.io -u $DOCKER_LOGIN --password-stdin
       displayName: Login to ShellAI ACR
+      env:
+        DOCKER_LOGIN: $(DOCKER_LOGIN)
+        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
     - task: GoTool@0
       inputs:
         version: '1.14.6'
@@ -119,11 +122,11 @@ stages:
         git push -f origin HEAD:${BUILD_SOURCEBRANCH}
       displayName: Commit & push changes to kfc
       workingDirectory: kfc
-
-    # Build kfc container
     - script: make build
       displayName: Build kfc binaries
       workingDirectory: kfc
+
+    # Build kfc container
     - script: make container
       displayName: Build kfc containers
       workingDirectory: kfc
