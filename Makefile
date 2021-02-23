@@ -31,10 +31,11 @@ API_GROUPS_NONBASE   ?= $(filter-out base%, $(API_GROUPS))
 
 
 # This version-strategy uses git tags to set the version string
-git_branch       := $(shell git rev-parse --abbrev-ref HEAD)
-git_tag          := $(shell git describe --exact-match --abbrev=0 2>/dev/null || echo "")
-commit_hash      := $(shell git rev-parse --verify HEAD)
-commit_timestamp := $(shell date --date="@$$(git show -s --format=%ct)" --utc +%FT%T)
+git_branch        := $(shell git rev-parse --abbrev-ref HEAD)
+git_tag           := $(shell git describe --exact-match --abbrev=0 2>/dev/null || echo "")
+commit_hash       := $(shell git rev-parse --verify HEAD)
+commit_hash_short := $(shell git rev-parse --short HEAD)
+commit_timestamp  := $(shell date --date="@$$(git show -s --format=%ct)" --utc +%FT%T)
 
 VERSION          := $(shell git describe --tags --always --dirty)
 version_strategy := commit_hash
@@ -44,7 +45,7 @@ ifdef git_tag
 else
 	ifeq (,$(findstring $(git_branch),master HEAD))
 		ifneq (,$(patsubst release-%,,$(git_branch)))
-			VERSION := $(git_branch)
+			VERSION := $(subst /,-,$(git_branch))-$(commit_hash_short)
 			version_strategy := branch
 		endif
 	endif
