@@ -183,10 +183,10 @@ stages:
             workingDirectory: stratos-core-bootstrap
 
           # Update kubeform deployment
-          # - script: |
-          #     sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
-          #   displayName: Update deployment manifest
-          #   workingDirectory: stratos-core-bootstrap
+          - script: |
+              sed -i.bak -e 's/^\(.*tag: .*\):.*/\1:'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+            displayName: Update deployment manifest
+            workingDirectory: stratos-core-bootstrap
 
           # Update stratos-crds
           - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
