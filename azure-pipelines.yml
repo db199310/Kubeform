@@ -199,6 +199,7 @@ stages:
                 modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
+              overwrite: true
             displayName: Copy generated CRDs
           - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
@@ -269,6 +270,7 @@ stages:
                 modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
+              overwrite: true
             displayName: Copy generated CRDs
           - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
@@ -347,6 +349,7 @@ stages:
                 modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
               targetFolder: stratos-core-bootstrap/$(CrdsPath)
+              overwrite: true
             displayName: Copy generated CRDs to NPD
           - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
             displayName: Patch CRDs with conversion config
