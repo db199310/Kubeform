@@ -191,7 +191,7 @@ stages:
 
           # Update stratos-crds
           - task: CopyFiles@2
-            input:
+            inputs:
               content:
                 - modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
@@ -261,7 +261,7 @@ stages:
 
           # Update stratos-crds
           - task: CopyFiles@2
-            input:
+            inputs:
               content:
                 - modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
@@ -339,7 +339,7 @@ stages:
 
           # Update stratos-crds
           - task: CopyFiles@2
-            input:
+            inputs:
               content:
                 - modules.kubeform.com_*.yaml
               sourceFolder: kubeform/crds
