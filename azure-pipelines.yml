@@ -188,7 +188,7 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
@@ -259,7 +259,16 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+            displayName: Update deployment manifest
+            workingDirectory: stratos-core-bootstrap
+          - script: |
+              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+            displayName: Update deployment manifest
+            workingDirectory: stratos-core-bootstrap
+          - script: |
+              cat $(ComponentsPath)/kubeform/kubeform-hr.yaml
+              ls -l $(ComponentsPath)/kubeform/kubeform-hr.yaml.bak
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
@@ -337,8 +346,8 @@ stages:
 
           # Update kubeform deployment
           - script: |
-              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
-              sed -i.bak -e 's/^\(.*tag: \).*/\1'$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
+              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
             displayName: Update deployment manifest
             workingDirectory: stratos-core-bootstrap
 
