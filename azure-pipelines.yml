@@ -63,11 +63,18 @@ stages:
       workingDirectory: kfc
       displayName: Checkout kfc source branch
 
-    - script: echo $DOCKER_PASSWORD | docker login shellai.azurecr.io -u $DOCKER_LOGIN --password-stdin
-      displayName: Login to ShellAI ACR
+    - task: AzureKeyVault@1
+      inputs:
+        azureSubscription: AZ-AS-SUB-EX-P-SEQ00141-SEDP-MGMT-PRD
+        keyVaultName: f4dp-dp-mgmtprd-kv-001
+        secretsFilter: stratosprd-acr-kubeform-pipeline-password
+        runAsPreJob: false
+    - script: echo $DOCKER_PASSWORD | docker login stratosprd.azurecr.io -u $DOCKER_LOGIN --password-stdin
+      displayName: Login to ACR
       env:
-        DOCKER_LOGIN: $(DOCKER_LOGIN)
-        DOCKER_PASSWORD: $(DOCKER_PASSWORD)
+        DOCKER_LOGIN: kubeform-pipeline
+        DOCKER_PASSWORD: $(${{variables.stratosprd-acr-kubeform-pipeline-password}})
+
     - task: GoTool@0
       inputs:
         version: '1.14.6'
