@@ -20,15 +20,6 @@ package data
 
 var ModuleConfig = []Config{
 	{
-		"ThomasStorageAccount", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=feature%2Ftn-testing-crd-version-v1alpha2", "azurerm", "", "",
-	},
-	{
-		"SDPAzSqlv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1", "azurerm", "", "",
-	},
-	{
-		"SDPAzadfv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-datafactories?ref=v0.1.0", "azurerm", "", "",
-	},
-	{
 		"SDPAzsbv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=v0.2.1", "azurerm", "", "",
 	},
 	{
@@ -39,5 +30,14 @@ var ModuleConfig = []Config{
 	},
 	{
 		"StratosAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2", "azurerm", "", "",
+	},
+	{
+		"ThomasStorageAccount", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=feature%2Ftn-testing-crd-version-v1alpha2", "azurerm", "", "",
+	},
+	{
+		"SDPAzSqlv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1", "azurerm", "", "",
+	},
+	{
+		"SDPAzadfv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-datafactories?ref=v0.1.0", "azurerm", "", "",
 	},
 }
