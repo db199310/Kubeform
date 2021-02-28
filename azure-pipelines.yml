@@ -65,7 +65,7 @@ stages:
 
     - task: AzureKeyVault@1
       inputs:
-        azureSubscription: AZ-AS-SUB-EX-P-SEQ00141-SEDP-MGMT-PRD
+        azureSubscription: F4DP-mgmtprd
         keyVaultName: f4dp-dp-mgmtprd-kv-001
         secretsFilter: stratosprd-acr-kubeform-pipeline-password
         runAsPreJob: false
