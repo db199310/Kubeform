@@ -25,9 +25,8 @@ variables:
 - name: GOPRIVATE
   value: 'dev.azure.com/sede-ds-adp'
 - name: REGISTRY
-  value: shellai.azurecr.io/sedp/kubeform
+  value: stratosprd.azurecr.io/kubeform
 - group: gogit
-- group: shellai_acr
 - name: IS_MASTER_BRANCH
   # value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   value: $[eq(variables['Build.SourceBranch'], 'refs/heads/feature/tn-merging-upstream')] # XXX: Use master
