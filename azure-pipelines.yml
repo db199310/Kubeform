@@ -73,7 +73,7 @@ stages:
       displayName: Login to ACR
       env:
         DOCKER_LOGIN: kubeform-pipeline
-        DOCKER_PASSWORD: $(${{variables.stratosprd-acr-kubeform-pipeline-password}})
+        DOCKER_PASSWORD: $(stratosprd-acr-kubeform-pipeline-password)
 
     - task: GoTool@0
       inputs:
