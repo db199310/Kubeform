@@ -238,6 +238,26 @@ spec:
               format: int64
               type: integer
             output:
+              properties:
+                ID:
+                  description: The namespace ID.
+                  type: string
+                authorizationRules:
+                  description: Namespace authorization rules.
+                  type: string
+                name:
+                  description: The namespace name.
+                  type: string
+                queues:
+                  description: Map of queues created.
+                  type: string
+                resourceGroup:
+                  description: Resource group the Service Bus namespace was created
+                    in
+                  type: string
+                topics:
+                  description: Map of topics created
+                  type: string
               type: object
             phase:
               type: string

@@ -197,7 +197,26 @@ type SDPAzsbv1Topics struct {
 	SupportOrdering *bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
 }
 
-type SDPAzsbv1Output struct{}
+type SDPAzsbv1Output struct {
+	// Namespace authorization rules.
+	// +optional
+	AuthorizationRules string `json:"authorizationRules" tf:"authorization_rules"`
+	// The namespace ID.
+	// +optional
+	ID string `json:"ID" tf:"id"`
+	// The namespace name.
+	// +optional
+	Name string `json:"name" tf:"name"`
+	// Map of queues created.
+	// +optional
+	Queues string `json:"queues" tf:"queues"`
+	// Resource group the Service Bus namespace was created in
+	// +optional
+	ResourceGroup string `json:"resourceGroup" tf:"resource_group"`
+	// Map of topics created
+	// +optional
+	Topics string `json:"topics" tf:"topics"`
+}
 
 type SDPAzsbv1Status struct {
 	// Resource generation, which is updated on mutation by the API Server.
