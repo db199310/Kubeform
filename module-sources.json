@@ -36,9 +36,9 @@
   },
   {
     "name": "SDPAzsbv1",
-    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=feature/outputs",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-servicebus?ref=feature%2Foutputs",
     "provider": "azurerm",
-    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-servicebus/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=branch&versionDescriptor%5Bversion%5D=feature/outputs&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "url": "https://sede-ds-adp.visualstudio.com/4b55d100-8e50-46cc-ab7b-ac35eaf91bfe/_apis/git/repositories/10195113-da6d-4876-894a-57ced8da6475/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=0&versionDescriptor%5Bversion%5D=feature%2Foutputs&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
     "subDirectory": ""
   },
   {
