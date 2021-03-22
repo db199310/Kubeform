@@ -200,9 +200,7 @@ stages:
     parameters:
       componentsPath: components/prd/f4dpprd
       crdsPath: $(BaseComponentsPath)/stratos-crds
+      dependsOn: DeployNpd # Prevent conflict during intersecting git clone and git push
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: mgmtprd
       jobName: DeployPrd
-      jobs:
-      - deployment: DeployPrd
-        dependsOn: DeployNpd # Prevent conflict during intersecting git clone and git push
