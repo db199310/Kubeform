@@ -1,0 +1,87 @@
+parameters:
+- name: componentsPath
+  type: string
+- name: crdsPath
+  type: string
+- name: dockerTag
+  type: string
+- name: environment
+  type: string
+- name: jobName
+  type: string
+  default: Deploy
+  displayName: Name of the main Deploy job
+
+jobs:
+- deployment: ${{ parameters.jobName }}
+  environment: ${{ parameters.environment }}
+  variables:
+    ComponentsPath: ${{ parameters.componentsPath }}
+    CrdsPath: ${{ parameters.crdsPath }}
+    DockerTag: ${{ parameters.dockerTag }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+          displayName: Checkout kubeform
+        - checkout: stratos
+          displayName: Checkout stratos
+          persistCredentials: true
+        - script: git checkout $(StratosBranch)
+          displayName: Checkout stratos branch
+          workingDirectory: stratos-core-bootstrap
+        - script: |
+            git config --global user.email "sedp-ci@shell.com"
+            git config --global user.name "Azure Pipelines"
+            git config --global pull.ff only
+          displayName: Set git properties
+
+        # Update crd-conversion config
+        - script: npm install js-yaml
+          displayName: Install node packages
+          workingDirectory: kubeform/util
+        - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
+          displayName: Update schemas in ConfigMap
+          workingDirectory: kubeform
+        - script: |
+            git pull
+            git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
+            git commit -m "[kubeform] Update crd-conversion config in ${{ parameters.environment }}"
+            git push
+          displayName: Push updates to crd-conversion config
+          workingDirectory: stratos-core-bootstrap
+
+        # Update kubeform deployment
+        - script: |
+            sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+          displayName: Update deployment manifest
+          workingDirectory: stratos-core-bootstrap
+        - script: |
+            git pull
+            git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
+            git commit -m "[kubeform] Update KFC image in ${{ parameters.environment }}"
+            git push
+          displayName: Push updates to Stratos CRDs
+          workingDirectory: stratos-core-bootstrap
+
+        # Update stratos-crds
+        - task: CopyFiles@2
+          inputs:
+            contents: |
+              modules.kubeform.com_*.yaml
+            sourceFolder: kubeform/crds
+            targetFolder: stratos-core-bootstrap/$(CrdsPath)
+            overwrite: true
+          displayName: Copy generated CRDs
+        - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
+          displayName: Patch CRDs with conversion config
+          env:
+            CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
+        - script: |
+            git pull
+            git add $(CrdsPath)/modules.kubeform.com_*.yaml
+            git commit -m "[kubeform] Update Stratos CRDs in ${{ parameters.environment }}"
+            git push
+          displayName: Push updates to Stratos CRDs
+          workingDirectory: stratos-core-bootstrap

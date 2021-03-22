@@ -1,11 +1,8 @@
 parameters:
-- name: SandboxClusterName
-  displayName: Target Sandbox Kubernetes Cluster
-  type: string
-  default: DPPUBMGMTNPDaks
-  values:
-  - DPPUBMGMTNPDaks
-
+- name: UseSandbox
+  displayName: Deploy to sandbox? Choose if you experiment and break functionality.
+  type: boolean
+  default: false
 
 trigger:
   branches:
@@ -16,22 +13,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- name: GO111MODULE
-  value: on
-- name: CGO_ENABLED
-  value: '0'
-- name: GOROOT
-  value: '/opt/hostedtoolcache/go/1.14.6/x64'
-- name: GOPRIVATE
-  value: 'dev.azure.com/sede-ds-adp'
-- name: REGISTRY
-  value: stratosprd.azurecr.io/kubeform
-- group: gogit
-- name: IS_MASTER_BRANCH
-  # value: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/feature/tn-merging-upstream')] # XXX: Use master
-- name: StratosBranch
-  value: feature/tn-installing-aks-test # XXX: Use master
+  IS_MASTER_BRANCH: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  IS_PR_TO_MASTER: $[and(
+        eq(variables['Build.Reason'], 'PullRequest'),
+        endsWith(variables['Build.SourceBranch'], '/merge'),
+        endsWith(variables['System.PullRequest.TargetBranch'], '/master'))]
+  IS_FEATURE_BRANCH: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')]
+  StratosBranch: feature/tn-installing-aks-test # XXX: Use master
 
 
 resources:
@@ -48,6 +36,18 @@ resources:
 
 stages:
 - stage: Build
+  variables:
+  - name: GO111MODULE
+    value: on
+  - name: CGO_ENABLED
+    value: '0'
+  - name: GOROOT
+    value: '/opt/hostedtoolcache/go/1.14.6/x64'
+  - name: GOPRIVATE
+    value: 'dev.azure.com/sede-ds-adp'
+  - name: REGISTRY
+    value: stratosprd.azurecr.io/kubeform
+  - group: gogit
   jobs:
   - job: Build
     steps:
@@ -147,244 +147,62 @@ stages:
       displayName: Echo DOCKER_TAG
 
 - stage: DeploySandbox
-  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, false))'
+  condition: 'and(${{ parameters.UseSandbox }}, succeeded())'
   dependsOn:
   - Build
-  variables:
-    ComponentsPath: components/sandbox/${{ parameters.SandboxClusterName }}
-    CrdsPath: $(ComponentsPath)/stratos-crds
-    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
   jobs:
-  - deployment: Deploy
-    environment: sbx
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: self
-            displayName: Checkout kubeform
-          - checkout: stratos
-            displayName: Checkout stratos
-            persistCredentials: true
-          - script: git checkout $(StratosBranch)
-            displayName: Checkout stratos branch
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git config --global user.email "sedp-ci@shell.com"
-              git config --global user.name "Azure Pipelines"
-              git config --global pull.ff only
-            displayName: Set git properties
+  - template: deploy-template.yml
+    parameters:
+      componentsPath: components/sandbox/DPPUBMGMTNPDaks
+      crdsPath: $(ComponentsPath)/stratos-crds
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      environment: sbx
 
-          # Update crd-conversion config
-          - script: npm install js-yaml
-            displayName: Install node packages
-            workingDirectory: kubeform/util
-          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-            displayName: Update schemas in ConfigMap
-            workingDirectory: kubeform
-          - script: |
-              git pull
-              git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
-              git commit -m "[kubeform] Update crd-conversion config"
-              git push
-            displayName: Push updates to crd-conversion config
-            workingDirectory: stratos-core-bootstrap
+# - stage: DeployDevelopment
+#   condition: "and(eq(variables.IS_FEATURE_BRANCH, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
+#   dependsOn:
+#   - Build
+#   jobs:
+#   - template: deploy-template.yml
+#     parameters:
+#       componentsPath: components/dev/f4dpdev
+#       crdsPath: $(ComponentsPath)/stratos-crds
+#       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+#       environment: dev
 
-          # Update kubeform deployment
-          - script: |
-              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
-            displayName: Update deployment manifest
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git pull
-              git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
-              git commit -m "[kubeform] Update KFC image"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
-
-          # Update stratos-crds
-          - task: CopyFiles@2
-            inputs:
-              contents: |
-                modules.kubeform.com_*.yaml
-              sourceFolder: kubeform/crds
-              targetFolder: stratos-core-bootstrap/$(CrdsPath)
-              overwrite: true
-            displayName: Copy generated CRDs
-          - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
-            displayName: Patch CRDs with conversion config
-            env:
-              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
-          - script: |
-              git pull
-              git add $(CrdsPath)/modules.kubeform.com_*.yaml
-              git commit -m "[kubeform] Update Stratos CRDs"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
-
-- stage: DeployStaging
-  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
+- stage: DeployQat
+  condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
-  variables:
-    ComponentsPath: components/staging/AKS-Test
-    CrdsPath: $(ComponentsPath)/stratos-crds
-    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
   jobs:
-  - deployment: Deploy
-    environment: staging
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: self
-            displayName: Checkout kubeform
-          - checkout: stratos
-            displayName: Checkout stratos
-            persistCredentials: true
-          - script: git checkout $(StratosBranch)
-            displayName: Checkout stratos branch
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git config --global user.email "sedp-ci@shell.com"
-              git config --global user.name "Azure Pipelines"
-              git config --global pull.ff only
-            displayName: Set git properties
-
-          # Update crd-conversion config
-          - script: npm install js-yaml
-            displayName: Install node packages
-            workingDirectory: kubeform/util
-          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(ComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-            displayName: Update schemas in ConfigMap
-            workingDirectory: kubeform
-          - script: |
-              git pull
-              git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
-              git commit -m "[kubeform] Update crd-conversion config"
-              git push
-            displayName: Push updates to crd-conversion config
-            workingDirectory: stratos-core-bootstrap
-
-          # Update kubeform deployment
-          - script: |
-              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
-            displayName: Update deployment manifest
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git pull
-              git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
-              git commit -m "[kubeform] Update KFC image"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
-
-          # Update stratos-crds
-          - task: CopyFiles@2
-            inputs:
-              contents: |
-                modules.kubeform.com_*.yaml
-              sourceFolder: kubeform/crds
-              targetFolder: stratos-core-bootstrap/$(CrdsPath)
-              overwrite: true
-            displayName: Copy generated CRDs
-          - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
-            displayName: Patch CRDs with conversion config
-            env:
-              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
-          - script: |
-              git pull
-              git add $(CrdsPath)/modules.kubeform.com_*.yaml
-              git commit -m "[kubeform] Update Stratos CRDs"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
+  - template: deploy-template.yml
+    parameters:
+      componentsPath: components/staging/AKS-Test
+      crdsPath: $(ComponentsPath)/stratos-crds
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      environment: qat
 
 - stage: DeployProduction
-  condition: 'and(succeeded(), eq(variables.IS_MASTER_BRANCH, true))'
+  condition: "and(eq(variables.IS_MASTER_BRANCH, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
-  - DeployStaging
   variables:
-    DockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
-    NpdComponentsPath: components/npd/f4dpnpd
-    PrdComponentsPath: components/prd/f4dpprd
     BaseComponentsPath: components/base
-    CrdsPath: $(BaseComponentsPath)/stratos-crds
   jobs:
-  - deployment: Deploy
-    environment: PRD
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - checkout: self
-            displayName: Checkout kubeform
-          - checkout: stratos
-            displayName: Checkout stratos
-            persistCredentials: true
-          - script: git checkout $(StratosBranch)
-            displayName: Checkout stratos branch
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git config --global user.email "sedp-ci@shell.com"
-              git config --global user.name "Azure Pipelines"
-              git config --global pull.ff only
-            displayName: Set git properties
-
-          # Update crd-conversion config
-          - script: npm install js-yaml
-            displayName: Install node packages
-            workingDirectory: kubeform/util
-          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-            displayName: Update schemas in Npd ConfigMap
-            workingDirectory: kubeform
-          - script: node util/update-configmap-resource-schemas.js crds ../stratos-core-bootstrap/$(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-            displayName: Update schemas in Prd ConfigMap
-            workingDirectory: kubeform
-          - script: |
-              git pull
-              git add $(NpdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-              git add $(PrdComponentsPath)/crd-conversion/crd-conversion-cm.yaml
-              git commit -m "[kubeform] Update crd-conversion config in NPD/PRD"
-              git push
-            displayName: Push updates to crd-conversion config
-            workingDirectory: stratos-core-bootstrap
-
-          # Update kubeform deployment
-          - script: |
-              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
-              sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
-            displayName: Update deployment manifest
-            workingDirectory: stratos-core-bootstrap
-          - script: |
-              git pull
-              git add $(NpdComponentsPath)/kubeform/kubeform-hr.yaml
-              git add $(PrdComponentsPath)/kubeform/kubeform-hr.yaml
-              git commit -m "[kubeform] Update KFC image"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
-
-          # Update stratos-crds
-          - task: CopyFiles@2
-            inputs:
-              contents: |
-                modules.kubeform.com_*.yaml
-              sourceFolder: kubeform/crds
-              targetFolder: stratos-core-bootstrap/$(CrdsPath)
-              overwrite: true
-            displayName: Copy generated CRDs to NPD
-          - script: for crd in $CRDS; do sed -i.bak -e '/^  version:/d' -e '/^  group:/r kubeform/util/conversion-patch.yaml' $crd; done
-            displayName: Patch CRDs with conversion config
-            env:
-              CRDS: stratos-core-bootstrap/$(CrdsPath)/modules.kubeform.com_*.yaml
-          - script: |
-              git pull
-              git add $(CrdsPath)/modules.kubeform.com_*.yaml
-              git commit -m "[kubeform] Update Stratos CRDs in NPD/PRD"
-              git push
-            displayName: Push updates to Stratos CRDs
-            workingDirectory: stratos-core-bootstrap
+  - template: deploy-template.yml
+    parameters:
+      componentsPath: components/npd/f4dpnpd
+      crdsPath: $(BaseComponentsPath)/stratos-crds
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      environment: mgmtnpd
+      jobName: DeployNpd
+  - template: deploy-template.yml
+    parameters:
+      componentsPath: components/prd/f4dpprd
+      crdsPath: $(BaseComponentsPath)/stratos-crds
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      environment: mgmtprd
+      jobName: DeployPrd
+      jobs:
+      - deployment: DeployPrd
+        dependsOn: DeployNpd # Prevent conflict during intersecting git clone and git push
