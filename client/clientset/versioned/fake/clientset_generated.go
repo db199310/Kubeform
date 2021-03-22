@@ -85,12 +85,12 @@ func (c *Clientset) AzurermV1alpha1() azurermv1alpha1.AzurermV1alpha1Interface {
 	return &fakeazurermv1alpha1.FakeAzurermV1alpha1{Fake: &c.Fake}
 }
 
-// ModulesV1alpha1 retrieves the ModulesV1alpha1Client
-func (c *Clientset) ModulesV1alpha1() modulesv1alpha1.ModulesV1alpha1Interface {
-	return &fakemodulesv1alpha1.FakeModulesV1alpha1{Fake: &c.Fake}
-}
-
 // ModulesV1alpha2 retrieves the ModulesV1alpha2Client
 func (c *Clientset) ModulesV1alpha2() modulesv1alpha2.ModulesV1alpha2Interface {
 	return &fakemodulesv1alpha2.FakeModulesV1alpha2{Fake: &c.Fake}
+}
+
+// ModulesV1alpha1 retrieves the ModulesV1alpha1Client
+func (c *Clientset) ModulesV1alpha1() modulesv1alpha1.ModulesV1alpha1Interface {
+	return &fakemodulesv1alpha1.FakeModulesV1alpha1{Fake: &c.Fake}
 }
