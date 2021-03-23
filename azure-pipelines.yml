@@ -93,3 +93,20 @@ steps:
   - script: make push
     displayName: Push kfc containers
     workingDirectory: kfc
+  # archive working dir for debugging purposes 
+  - bash: mkdir -p $(Pipeline.Workspace)/logs
+    condition: always()
+  - task: ArchiveFiles@2
+    condition: always()
+    displayName: 'Zip workspace'
+    inputs:
+      rootFolderOrFile: "$(Pipeline.Workspace)/"
+      includeRootFolder: false
+      archiveType: "zip"
+      archiveFile: "$(Pipeline.Workspace)/logs/$(Build.BuildId)-workspace.zip"
+  - task: PublishPipelineArtifact@1
+    condition: always()
+    displayName: 'Publish logs'
+    inputs:
+      artifact: 'logs'
+      targetPath: $(Pipeline.Workspace)/logs
