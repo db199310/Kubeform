@@ -402,10 +402,10 @@ func GenerateModuleCRD(path, name string) string {
 
 		if outputsFileBytes, err := ioutil.ReadFile(filepath.Join(path, "output_types.go")); err == nil {
 			fmt.Println("Found output_types.go, will use that for output types. Module=", name, " path=", filepath.Join(path, "output_types.go"))
-			outputFileContents := regexp.MustCompile("^package .*$").
+			outputFileContents := regexp.MustCompile(`(?m)^package .*$`).
 				ReplaceAllLiteralString(
 					strings.Replace(string(outputsFileBytes), "ModuleNamePlaceholder", name, -1),
-					 "")
+					 "// Imported from output_types.go")
 			out = out + outputFileContents + "\n"
 		} else {
 			fmt.Println("Did not find output_types.go, will use basic auto-generated output types. Module=", name, " path=", path)
