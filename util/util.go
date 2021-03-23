@@ -31,6 +31,7 @@ import (
 	"strconv"
 	"strings"
 	"text/template"
+	"regexp"
 
 	"kubeform.dev/kubeform/data"
 
@@ -399,25 +400,33 @@ func GenerateModuleCRD(path, name string) string {
 			out = out + fmt.Sprintf("%#v\n\n", jen.Type().Id(name).Struct(objectStatements...))
 		}
 
-		var outputStatements jen.Statement
-		keys := []string{}
-		for k := range outputs {
-			keys = append(keys, k)
-		}
+		if outputsFileBytes, err := ioutil.ReadFile(filepath.Join(path, "output_types.go")); err != nil {
+			outputFileContents := regexp.MustCompile("^package .*$").
+				ReplaceAllLiteralString(
+					strings.Replace(string(outputsFileBytes), "ModuleNamePlaceholder", name, -1),
+					 "")
+			out = out + outputFileContents + "\n"
+		} else {
+			var outputStatements jen.Statement
+			keys := []string{}
+			for k := range outputs {
+				keys = append(keys, k)
+			}
 
-		sort.Strings(keys)
+			sort.Strings(keys)
 
-		for _, key := range keys {
-			varName := key
-			out := outputs[key]
-			tk := varName
-			jk := flect.Camelize(varName)
-			id := flect.Capitalize(jk)
-			outputStatements = append(outputStatements, jen.Comment(out.Description))
-			outputStatements = append(outputStatements, jen.Comment("// +optional"))
-			outputStatements = append(outputStatements, jen.Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
+			for _, key := range keys {
+				varName := key
+				out := outputs[key]
+				tk := varName
+				jk := flect.Camelize(varName)
+				id := flect.Capitalize(jk)
+				outputStatements = append(outputStatements, jen.Comment(out.Description))
+				outputStatements = append(outputStatements, jen.Comment("// +optional"))
+				outputStatements = append(outputStatements, jen.Id(id).String().Tag(map[string]string{"json": jk, "tf": tk}))
+			}
+			out = out + fmt.Sprintf("%#v\n", jen.Type().Id(name+"Output").Struct(outputStatements...))
 		}
-		out = out + fmt.Sprintf("%#v\n", jen.Type().Id(name+"Output").Struct(outputStatements...))
 
 		return out
 	}
