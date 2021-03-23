@@ -16042,6 +16042,50 @@ func schema_kubeform_apis_modules_v1alpha1_SDPAzsbv1Output(ref common.ReferenceC
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"authorizationRules": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Namespace authorization rules.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"ID": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The namespace ID.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The namespace name.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"queues": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map of queues created.",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"resourceGroup": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Resource group the Service Bus namespace was created in",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"topics": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Map of topics created",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
 			},
 		},
 	}
