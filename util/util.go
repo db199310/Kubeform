@@ -27,11 +27,11 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strconv"
 	"strings"
 	"text/template"
-	"regexp"
 
 	"kubeform.dev/kubeform/data"
 
@@ -405,7 +405,7 @@ func GenerateModuleCRD(path, name string) string {
 			outputFileContents := regexp.MustCompile(`(?m)^package .*$`).
 				ReplaceAllLiteralString(
 					strings.Replace(string(outputsFileBytes), "ModuleNamePlaceholder", name, -1),
-					 "// Imported from output_types.go")
+					"// Imported from output_types.go")
 			out = out + outputFileContents + "\n"
 		} else {
 			fmt.Println("Did not find output_types.go, will use basic auto-generated output types. Module=", name, " path=", path)

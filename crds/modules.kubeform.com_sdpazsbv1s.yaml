@@ -243,21 +243,187 @@ spec:
                   description: The namespace ID.
                   type: string
                 authorizationRules:
+                  additionalProperties:
+                    properties:
+                      ID:
+                        description: Authorization rule ID
+                        type: string
+                      listen:
+                        description: Can you listen to msgs using this auth rule.
+                        type: boolean
+                      manage:
+                        description: Can you manage namespace/queue/topic using this
+                          auth rule.
+                        type: boolean
+                      name:
+                        description: Authorization rule name.
+                        type: string
+                      primaryConnectionStringSecret:
+                        description: Name of secret stored in keyvault that contains
+                          primary connection string.
+                        type: string
+                      primaryKeySecret:
+                        description: Name of secret stored in keyvault that contains
+                          primary key.
+                        type: string
+                      secondaryConnectionStringSecret:
+                        description: Name of secret stored in keyvault that contains
+                          secondary connection string.
+                        type: string
+                      secondaryKeySecret:
+                        description: Name of secret stored in keyvault that contains
+                          secondary key.
+                        type: string
+                      send:
+                        description: Can you send msgs using this auth rule.
+                        type: boolean
+                    type: object
                   description: Namespace authorization rules.
-                  type: string
+                  type: object
                 name:
                   description: The namespace name.
                   type: string
                 queues:
                   description: Map of queues created.
-                  type: string
+                  properties:
+                    ID:
+                      description: Queue id
+                      type: string
+                    authorizationRules:
+                      properties:
+                        ID:
+                          description: Authorization rule ID
+                          type: string
+                        listen:
+                          description: Can you listen to msgs using this auth rule.
+                          type: boolean
+                        manage:
+                          description: Can you manage namespace/queue/topic using
+                            this auth rule.
+                          type: boolean
+                        name:
+                          description: Authorization rule name.
+                          type: string
+                        primaryConnectionStringSecret:
+                          description: Name of secret stored in keyvault that contains
+                            primary connection string.
+                          type: string
+                        primaryKeySecret:
+                          description: Name of secret stored in keyvault that contains
+                            primary key.
+                          type: string
+                        secondaryConnectionStringSecret:
+                          description: Name of secret stored in keyvault that contains
+                            secondary connection string.
+                          type: string
+                        secondaryKeySecret:
+                          description: Name of secret stored in keyvault that contains
+                            secondary key.
+                          type: string
+                        send:
+                          description: Can you send msgs using this auth rule.
+                          type: boolean
+                      type: object
+                    autoDeleteOnIdle:
+                      type: boolean
+                    deadLetteringOnMessageExpiration:
+                      type: string
+                    defaultMessageTtl:
+                      type: string
+                    duplicateDetectionHistoryTimeWindow:
+                      type: string
+                    enableBatchedOperations:
+                      type: boolean
+                    enablePartitioning:
+                      type: boolean
+                    forwardDeadLetteredMessagesTo:
+                      type: string
+                    forwardTo:
+                      type: string
+                    lockDuration:
+                      type: string
+                    maxDeliveryCount:
+                      description: A Number represents a JSON number literal.
+                      type: string
+                    maxSizeInMegabytes:
+                      description: A Number represents a JSON number literal.
+                      type: string
+                    name:
+                      description: Queue name
+                      type: string
+                    requiresDuplicateDetection:
+                      type: boolean
+                    requiresSession:
+                      type: boolean
+                  type: object
                 resourceGroup:
                   description: Resource group the Service Bus namespace was created
                     in
                   type: string
                 topics:
                   description: Map of topics created
-                  type: string
+                  properties:
+                    ID:
+                      description: Topic id
+                      type: string
+                    authorizationRules:
+                      properties:
+                        ID:
+                          description: Authorization rule ID
+                          type: string
+                        listen:
+                          description: Can you listen to msgs using this auth rule.
+                          type: boolean
+                        manage:
+                          description: Can you manage namespace/queue/topic using
+                            this auth rule.
+                          type: boolean
+                        name:
+                          description: Authorization rule name.
+                          type: string
+                        primaryConnectionStringSecret:
+                          description: Name of secret stored in keyvault that contains
+                            primary connection string.
+                          type: string
+                        primaryKeySecret:
+                          description: Name of secret stored in keyvault that contains
+                            primary key.
+                          type: string
+                        secondaryConnectionStringSecret:
+                          description: Name of secret stored in keyvault that contains
+                            secondary connection string.
+                          type: string
+                        secondaryKeySecret:
+                          description: Name of secret stored in keyvault that contains
+                            secondary key.
+                          type: string
+                        send:
+                          description: Can you send msgs using this auth rule.
+                          type: boolean
+                      type: object
+                    autoDeleteOnIdle:
+                      type: boolean
+                    defaultMessageTtl:
+                      type: string
+                    duplicateDetectionHistoryTimeWindow:
+                      type: string
+                    enableBatchedOperations:
+                      type: boolean
+                    enableExpress:
+                      type: boolean
+                    enablePartitioning:
+                      type: boolean
+                    maxSizeInMegabytes:
+                      description: A Number represents a JSON number literal.
+                      type: string
+                    name:
+                      description: Topic name
+                      type: string
+                    requiresDuplicateDetection:
+                      type: boolean
+                    supportOrdering:
+                      type: boolean
+                  type: object
               type: object
             phase:
               type: string
