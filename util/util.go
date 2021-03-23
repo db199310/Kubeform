@@ -400,7 +400,7 @@ func GenerateModuleCRD(path, name string) string {
 			out = out + fmt.Sprintf("%#v\n\n", jen.Type().Id(name).Struct(objectStatements...))
 		}
 
-		if outputsFileBytes, err := ioutil.ReadFile(filepath.Join(path, "output_types.go")); err != nil {
+		if outputsFileBytes, err := ioutil.ReadFile(filepath.Join(path, "output_types.go")); err == nil {
 			fmt.Println("Found output_types.go, will use that for output types. Module=", name, " path=", filepath.Join(path, "output_types.go"))
 			outputFileContents := regexp.MustCompile("^package .*$").
 				ReplaceAllLiteralString(
