@@ -9,6 +9,7 @@
   },
   "SDPAzAppv1": {
     "v1alpha1": {
+      "gitrev": "v0.3.0-1-abcdef",
       "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.3.0",
       "provider": "azurerm",
       "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-appservice/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.3.0&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
@@ -20,20 +21,6 @@
       "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2",
       "provider": "azurerm",
       "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.2&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
-      "subDirectory": ""
-    }
-  },
-  "ThomasStorageAccount": {
-    "v1alpha1": {
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=feature%2Ftn-testing-crd-version",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=branch&versionDescriptor%5Bversion%5D=feature%2Ftn-testing-crd-version&resolveLfs=true&%24format=zip&api-version=6.0&download=true",
-      "subDirectory": ""
-    },
-    "v1alpha2": {
-      "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=feature%2Ftn-testing-crd-version-v1alpha2",
-      "provider": "azurerm",
-      "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=branch&versionDescriptor%5Bversion%5D=feature%2Ftn-testing-crd-version-v1alpha2&resolveLfs=true&%24format=zip&api-version=6.0&download=true",
       "subDirectory": ""
     }
   },
