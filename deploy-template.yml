@@ -33,7 +33,7 @@ jobs:
         - checkout: stratos
           displayName: Checkout stratos
           persistCredentials: true
-        - script: git checkout $(StratosBranch)
+        - script: git checkout $(StratosManifestBranch)
           displayName: Checkout stratos branch
           workingDirectory: stratos-core-bootstrap
         - script: |

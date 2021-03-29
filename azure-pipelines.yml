@@ -19,7 +19,7 @@ variables:
         endsWith(variables['Build.SourceBranch'], '/merge'),
         endsWith(variables['System.PullRequest.TargetBranch'], '/master'))]
   IS_FEATURE_BRANCH: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/')]
-  StratosBranch: feature/tn-installing-aks-test # XXX: Use master
+  StratosManifestBranch: feature/tn-installing-aks-test # XXX: Use master
 
 
 resources:
