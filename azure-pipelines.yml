@@ -125,7 +125,7 @@ stages:
     - script: |
         git add -A
         git commit -m "[skip ci] Update Terraform modules"
-        git push -f origin HEAD:${BUILD_SOURCEBRANCH}
+        git push
       displayName: Commit & push changes to kfc
       workingDirectory: kfc
     - script: make build
