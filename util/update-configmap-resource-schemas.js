@@ -4,9 +4,9 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 const crds_path = process.argv[2];
-const crd_names_list = [
-  'modules.kubeform.com_thomasstorageaccounts.yaml'
-];
+const crd_names_list = fs.readdirSync(crds_path)
+                         .filter(fn => fn.startsWith('modules.kubeform.com_'))
+                         .filter(fn => fn.endsWith('.yaml'));
 
 const config_map_file = process.argv[3];
 var cm_obj = yaml.load(fs.readFileSync(config_map_file, { encoding: 'UTF-8' }));
@@ -25,7 +25,15 @@ crd_names_list.forEach((crd_file) => {
   // Build version-to-schema map
   crd_obj['spec']['versions'].forEach((version_obj) => {
     var version = version_obj['name'];
-    var schema = version_obj['schema']['openAPIV3Schema'];
+
+    var schema_root;
+    if ('schema' in version_obj) {
+      schema_root = version_obj['schema'];
+    } else {
+      schema_root = crd_obj['spec']['validation'];
+    }
+
+    var schema = schema_root['openAPIV3Schema'];
 
     crd_schemas[crd_name][version] = schema;
   });
