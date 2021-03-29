@@ -202,118 +202,118 @@ type SDPAzsbv1Topics struct {
 type SDPAzsbv1Output struct {
 	// Namespace authorization rules.
 	// +optional
-	AuthorizationRules *map[string]SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules,omitempty"`
+	AuthorizationRules *map[string]SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules"`
 	// The namespace ID.
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id"`
 	// The namespace name.
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name"`
 	// Map of queues created.
 	// +optional
-	Queues *SDPAzsbv1QueuesOutput `json:"queues,omitempty" tf:"queues,omitempty"`
+	Queues *SDPAzsbv1QueuesOutput `json:"queues,omitempty" tf:"queues"`
 	// Resource group the Service Bus namespace was created in
 	// +optional
-	ResourceGroup string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+	ResourceGroup string `json:"resourceGroup,omitempty" tf:"resource_group"`
 	// Map of topics created
 	// +optional
-	Topics *SDPAzsbv1TopicsOutput `json:"topics,omitempty" tf:"topics,omitempty"`
+	Topics *SDPAzsbv1TopicsOutput `json:"topics,omitempty" tf:"topics"`
 }
 
 type SDPAzsbv1AuthorizationRulesOutput struct {
 	// Authorization rule ID
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id"`
 	// Authorization rule name.
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name"`
 	// Can you listen to msgs using this auth rule.
 	// +optional
-	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+	Listen *bool `json:"listen,omitempty" tf:"listen"`
 	// Can you send msgs using this auth rule.
 	// +optional
-	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
+	Send *bool `json:"send,omitempty" tf:"send"`
 	// Can you manage namespace/queue/topic using this auth rule.
 	// +optional
-	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+	Manage *bool `json:"manage,omitempty" tf:"manage"`
 	// Name of secret stored in keyvault that contains primary key.
 	// +optional
-	PrimaryKeySecret string `json:"primaryKeySecret,omitempty" tf:"primary_key_secret,omitempty"`
+	PrimaryKeySecret string `json:"primaryKeySecret,omitempty" tf:"primary_key_secret"`
 	// Name of secret stored in keyvault that contains secondary key.
 	// +optional
-	SecondaryKeySecret string `json:"secondaryKeySecret,omitempty" tf:"secondary_key_secret,omitempty"`
+	SecondaryKeySecret string `json:"secondaryKeySecret,omitempty" tf:"secondary_key_secret"`
 	// Name of secret stored in keyvault that contains primary connection string.
 	// +optional
-	PrimaryConnectionStringSecret string `json:"primaryConnectionStringSecret,omitempty" tf:"primary_connection_string_secret,omitempty"`
+	PrimaryConnectionStringSecret string `json:"primaryConnectionStringSecret,omitempty" tf:"primary_connection_string_secret"`
 	// Name of secret stored in keyvault that contains secondary connection string.
 	// +optional
-	SecondaryConnectionStringSecret string `json:"secondaryConnectionStringSecret,omitempty" tf:"secondary_connection_string_secret,omitempty"`
+	SecondaryConnectionStringSecret string `json:"secondaryConnectionStringSecret,omitempty" tf:"secondary_connection_string_secret"`
 }
 
 type SDPAzsbv1TopicsOutput struct {
 	// Topic id
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id"`
 	// Topic name
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name"`
 	// +optional
-	AutoDeleteOnIdle *bool `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+	AutoDeleteOnIdle *bool `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle"`
 	// +optional
-	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
+	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl"`
 	// +optional
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
+	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations"`
 	// +optional
-	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
+	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express"`
 	// +optional
-	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning"`
 	// +optional
-	MaxSizeInMegabytes json.Number `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
+	MaxSizeInMegabytes json.Number `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes"`
 	// +optional
-	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
+	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection"`
 	// +optional
-	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
+	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window"`
 	// +optional
-	SupportOrdering *bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
+	SupportOrdering *bool `json:"supportOrdering,omitempty" tf:"support_ordering"`
 	// +optional
-	AuthorizationRules *SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules,omitempty"`
+	AuthorizationRules *SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules"`
 }
 
 type SDPAzsbv1QueuesOutput struct {
 	// Queue id
 	// +optional
-	ID string `json:"ID,omitempty" tf:"id,omitempty"`
+	ID string `json:"ID,omitempty" tf:"id"`
 	// Queue name
 	// +optional
-	Name string `json:"name,omitempty" tf:"name,omitempty"`
+	Name string `json:"name,omitempty" tf:"name"`
 	//+optional
-	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
+	LockDuration string `json:"lockDuration,omitempty" tf:"lock_duration"`
 	// +optional
-	MaxSizeInMegabytes json.Number `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
+	MaxSizeInMegabytes json.Number `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes"`
 	// +optional
-	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
+	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection"`
 	// +optional
-	RequiresSession *bool `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
+	RequiresSession *bool `json:"requiresSession,omitempty" tf:"requires_session"`
 	// +optional
-	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
+	DefaultMessageTtl string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl"`
 	// +optional
-	DeadLetteringOnMessageExpiration string `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
+	DeadLetteringOnMessageExpiration string `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration"`
 	// +optional
-	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
+	DuplicateDetectionHistoryTimeWindow string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window"`
 	// +optional
-	MaxDeliveryCount json.Number `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
+	MaxDeliveryCount json.Number `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count"`
 	// +optional
-	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
+	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations"`
 	// +optional
-	AutoDeleteOnIdle *bool `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+	AutoDeleteOnIdle *bool `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle"`
 	// +optional
-	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning"`
 	// +optional
-	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
+	ForwardTo string `json:"forwardTo,omitempty" tf:"forward_to"`
 	// +optional
-	ForwardDeadLetteredMessagesTo string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
+	ForwardDeadLetteredMessagesTo string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to"`
 	// +optional
-	AuthorizationRules *SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules,omitempty"`
+	AuthorizationRules *SDPAzsbv1AuthorizationRulesOutput `json:"authorizationRules,omitempty" tf:"authorization_rules"`
 }
 
 type SDPAzsbv1Status struct {
