@@ -59,8 +59,11 @@ stages:
       persistCredentials: true
 
     - script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
-      workingDirectory: kfc
+      displayName: Checkout kubeform source branch
+      workingDirectory: kubeform
+    - script: git checkout ${BUILD_SOURCEBRANCH/#refs\/heads\/}
       displayName: Checkout kfc source branch
+      workingDirectory: kfc
 
     - task: AzureKeyVault@1
       inputs:
@@ -108,7 +111,7 @@ stages:
         git status
         git add -A
         git commit -m "[skip ci] Update Terraform modules"
-        git push origin HEAD:${BUILD_SOURCEBRANCH/#refs\/heads\/}
+        git push
       displayName: Commit & push results to kubeform
       workingDirectory: kubeform
 
