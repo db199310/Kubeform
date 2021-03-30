@@ -26,13 +26,11 @@ import (
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
 	azurermv1alpha1 "kubeform.dev/kubeform/client/clientset/versioned/typed/azurerm/v1alpha1"
 	modulesv1alpha1 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha1"
-	modulesv1alpha2 "kubeform.dev/kubeform/client/clientset/versioned/typed/modules/v1alpha2"
 )
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterface
 	AzurermV1alpha1() azurermv1alpha1.AzurermV1alpha1Interface
-	ModulesV1alpha2() modulesv1alpha2.ModulesV1alpha2Interface
 	ModulesV1alpha1() modulesv1alpha1.ModulesV1alpha1Interface
 }
 
@@ -41,18 +39,12 @@ type Interface interface {
 type Clientset struct {
 	*discovery.DiscoveryClient
 	azurermV1alpha1 *azurermv1alpha1.AzurermV1alpha1Client
-	modulesV1alpha2 *modulesv1alpha2.ModulesV1alpha2Client
 	modulesV1alpha1 *modulesv1alpha1.ModulesV1alpha1Client
 }
 
 // AzurermV1alpha1 retrieves the AzurermV1alpha1Client
 func (c *Clientset) AzurermV1alpha1() azurermv1alpha1.AzurermV1alpha1Interface {
 	return c.azurermV1alpha1
-}
-
-// ModulesV1alpha2 retrieves the ModulesV1alpha2Client
-func (c *Clientset) ModulesV1alpha2() modulesv1alpha2.ModulesV1alpha2Interface {
-	return c.modulesV1alpha2
 }
 
 // ModulesV1alpha1 retrieves the ModulesV1alpha1Client
@@ -85,10 +77,6 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 	if err != nil {
 		return nil, err
 	}
-	cs.modulesV1alpha2, err = modulesv1alpha2.NewForConfig(&configShallowCopy)
-	if err != nil {
-		return nil, err
-	}
 	cs.modulesV1alpha1, err = modulesv1alpha1.NewForConfig(&configShallowCopy)
 	if err != nil {
 		return nil, err
@@ -106,7 +94,6 @@ func NewForConfig(c *rest.Config) (*Clientset, error) {
 func NewForConfigOrDie(c *rest.Config) *Clientset {
 	var cs Clientset
 	cs.azurermV1alpha1 = azurermv1alpha1.NewForConfigOrDie(c)
-	cs.modulesV1alpha2 = modulesv1alpha2.NewForConfigOrDie(c)
 	cs.modulesV1alpha1 = modulesv1alpha1.NewForConfigOrDie(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClientForConfigOrDie(c)
@@ -117,7 +104,6 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.azurermV1alpha1 = azurermv1alpha1.New(c)
-	cs.modulesV1alpha2 = modulesv1alpha2.New(c)
 	cs.modulesV1alpha1 = modulesv1alpha1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
