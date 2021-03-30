@@ -110,7 +110,7 @@ stages:
     - script: |
         git status
         git add -A
-        git commit -m "[skip ci] Update Terraform modules"
+        git commit -m "[skip ci] [kubeform] Update Terraform modules"
         git push
       displayName: Commit & push results to kubeform
       workingDirectory: kubeform
@@ -127,7 +127,7 @@ stages:
       workingDirectory: kfc
     - script: |
         git add -A
-        git commit -m "[skip ci] Update Terraform modules"
+        git commit -m "[skip ci] [kubeform] Update Terraform modules"
         git push
       displayName: Commit & push changes to kfc
       workingDirectory: kfc
