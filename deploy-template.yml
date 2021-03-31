@@ -17,8 +17,8 @@ parameters:
 
 jobs:
 - deployment: ${{ parameters.jobName }}
-  ${{ if ne(parameters.dependsOn, '') }}:
-    dependsOn: ${{ parameters.dependsOn }}
+  # $#{{ if ne(parameters.dependsOn, '') }}:
+  #   dependsOn: ${{ parameters.dependsOn }}
   environment: ${{ parameters.environment }}
   variables:
     ComponentsPath: ${{ parameters.componentsPath }}
