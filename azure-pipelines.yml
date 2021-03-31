@@ -183,7 +183,7 @@ stages:
       componentsPath: components/staging/AKS-Test
       crdsPath: components/staging/AKS-Test/stratos-crds
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
-      environment: qat
+      environment: dev # qat
 
 - stage: DeployProduction
   condition: "and(eq(variables.IS_MASTER_BRANCH, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
