@@ -32,7 +32,6 @@ type ModulesV1alpha1Interface interface {
 	SDPAzadfv1sGetter
 	SDPAzsbv1sGetter
 	StratosAzStgv1sGetter
-	ThomasStorageAccountsGetter
 }
 
 // ModulesV1alpha1Client is used to interact with features provided by the modules.kubeform.com group.
@@ -62,10 +61,6 @@ func (c *ModulesV1alpha1Client) SDPAzsbv1s(namespace string) SDPAzsbv1Interface 
 
 func (c *ModulesV1alpha1Client) StratosAzStgv1s(namespace string) StratosAzStgv1Interface {
 	return newStratosAzStgv1s(c, namespace)
-}
-
-func (c *ModulesV1alpha1Client) ThomasStorageAccounts(namespace string) ThomasStorageAccountInterface {
-	return newThomasStorageAccounts(c, namespace)
 }
 
 // NewForConfig creates a new ModulesV1alpha1Client for the given config.

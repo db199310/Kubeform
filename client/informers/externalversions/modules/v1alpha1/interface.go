@@ -36,8 +36,6 @@ type Interface interface {
 	SDPAzsbv1s() SDPAzsbv1Informer
 	// StratosAzStgv1s returns a StratosAzStgv1Informer.
 	StratosAzStgv1s() StratosAzStgv1Informer
-	// ThomasStorageAccounts returns a ThomasStorageAccountInformer.
-	ThomasStorageAccounts() ThomasStorageAccountInformer
 }
 
 type version struct {
@@ -79,9 +77,4 @@ func (v *version) SDPAzsbv1s() SDPAzsbv1Informer {
 // StratosAzStgv1s returns a StratosAzStgv1Informer.
 func (v *version) StratosAzStgv1s() StratosAzStgv1Informer {
 	return &stratosAzStgv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
-}
-
-// ThomasStorageAccounts returns a ThomasStorageAccountInformer.
-func (v *version) ThomasStorageAccounts() ThomasStorageAccountInformer {
-	return &thomasStorageAccountInformer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
