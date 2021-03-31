@@ -16,14 +16,14 @@ parameters:
   displayName: Name of the main Deploy job
 
 jobs:
-- deployment: ${{ parameters.jobName }}
+- deployment: Deploy #$#{{ parameters.jobName }}
   # $#{{ if ne(parameters.dependsOn, '') }}:
-  #   dependsOn: ${{ parameters.dependsOn }}
+  #   dependsOn: $#{{ parameters.dependsOn }}
   environment: ${{ parameters.environment }}
   variables:
-    ComponentsPath: ${{ parameters.componentsPath }}
-    CrdsPath: ${{ parameters.crdsPath }}
-    DockerTag: ${{ parameters.dockerTag }}
+    ComponentsPath: 'myparam$#{{ parameters.componentsPath }}'
+    CrdsPath: 'myparam$#{{ parameters.crdsPath }}'
+    DockerTag: 'myparm$#{{ parameters.dockerTag }}'
   strategy:
     runOnce:
       deploy:
@@ -52,7 +52,7 @@ jobs:
         - script: |
             git pull
             git add $(ComponentsPath)/crd-conversion/crd-conversion-cm.yml
-            git commit -m "[kubeform] Update crd-conversion config in ${{ parameters.environment }}"
+            git commit -m "[kubeform] Update crd-conversion config in $#{{ parameters.environment }}"
             git push
           displayName: Push updates to crd-conversion config
           workingDirectory: stratos-core-bootstrap
@@ -65,7 +65,7 @@ jobs:
         - script: |
             git pull
             git add $(ComponentsPath)/kubeform/kubeform-hr.yaml
-            git commit -m "[kubeform] Update KFC image in ${{ parameters.environment }}"
+            git commit -m "[kubeform] Update KFC image in $#{{ parameters.environment }}"
             git push
           displayName: Push updates to Stratos CRDs
           workingDirectory: stratos-core-bootstrap
@@ -86,7 +86,7 @@ jobs:
         - script: |
             git pull
             git add $(CrdsPath)/modules.kubeform.com_*.yaml
-            git commit -m "[kubeform] Update Stratos CRDs in ${{ parameters.environment }}"
+            git commit -m "[kubeform] Update Stratos CRDs in $#{{ parameters.environment }}"
             git push
           displayName: Push updates to Stratos CRDs
           workingDirectory: stratos-core-bootstrap
