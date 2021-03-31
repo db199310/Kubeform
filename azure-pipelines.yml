@@ -174,7 +174,7 @@ stages:
 #       environment: dev
 
 - stage: DeployQat
-  condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
+  # condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
   jobs:
