@@ -174,7 +174,7 @@ stages:
 #       environment: dev
 
 - stage: DeployQat
-  condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
+  # condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
   jobs:
@@ -182,8 +182,7 @@ stages:
     parameters:
       componentsPath: components/staging/AKS-Test
       crdsPath: components/staging/AKS-Test/stratos-crds
-      dockerTag: abc
-      # $#[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: qat
 
 - stage: DeployProduction
