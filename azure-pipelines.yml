@@ -180,9 +180,12 @@ stages:
   jobs:
   - template: deploy-template.yml
     parameters:
-      componentsPath: components/staging/AKS-Test
-      crdsPath: $(ComponentsPath)/stratos-crds
-      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      componentsPath: cmppath
+      # components/staging/AKS-Test
+      crdsPath: mycrdspath
+      # $#(ComponentsPath)/stratos-crds
+      dockerTag: myvalue
+      # $#[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: qat
 
 - stage: DeployProduction
@@ -203,7 +206,8 @@ stages:
     parameters:
       componentsPath: components/prd/f4dpprd
       crdsPath: $(BaseComponentsPath)/stratos-crds
-      dependsOn: DeployNpd # Prevent conflict during intersecting git clone and git push
+      # Prevent conflict during intersecting git clone and git push
+      dependsOn: DeployNpd
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: mgmtprd
       jobName: DeployPrd

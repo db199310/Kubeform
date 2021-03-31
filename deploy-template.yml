@@ -19,7 +19,8 @@ jobs:
 - deployment: ${{ parameters.jobName }}
   # $#{{ if ne(parameters.dependsOn, '') }}:
   #   dependsOn: $#{{ parameters.dependsOn }}
-  environment: ${{ parameters.environment }}
+  environment: myenv
+  # $#{{ parameters.environment }}
   variables:
     ComponentsPath: 'myparam$#{{ parameters.componentsPath }}'
     CrdsPath: 'myparam$#{{ parameters.crdsPath }}'
@@ -58,8 +59,7 @@ jobs:
           workingDirectory: stratos-core-bootstrap
 
         # Update kubeform deployment
-        - script: |
-            sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
+        - script: sed -i.bak -e 's/^\(.*tag:\).*/\1 '$(DockerTag)'/g' $(ComponentsPath)/kubeform/kubeform-hr.yaml
           displayName: Update deployment manifest
           workingDirectory: stratos-core-bootstrap
         - script: |
