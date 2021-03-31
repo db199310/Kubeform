@@ -174,7 +174,7 @@ stages:
 #       environment: dev
 
 - stage: DeployQat
-  # condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
+  condition: "and(eq(variables.IS_PR_TO_MASTER, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
   jobs:
@@ -201,8 +201,7 @@ stages:
     parameters:
       componentsPath: components/prd/f4dpprd
       crdsPath: components/base/stratos-crds
-      # Prevent conflict during intersecting git clone and git push
-      dependsOn: DeployNpd
+      dependsOn: DeployNpd # Prevent conflict during intersecting git clone and git push
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: mgmtprd
       jobName: DeployPrd
