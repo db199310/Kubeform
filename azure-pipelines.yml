@@ -182,7 +182,8 @@ stages:
     parameters:
       componentsPath: components/staging/AKS-Test
       crdsPath: components/staging/AKS-Test/stratos-crds
-      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      dockerTag: abc
+      # $#[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: qat
 
 - stage: DeployProduction
