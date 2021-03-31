@@ -157,7 +157,7 @@ stages:
   - template: deploy-template.yml
     parameters:
       componentsPath: components/sandbox/DPPUBMGMTNPDaks
-      crdsPath: $(ComponentsPath)/stratos-crds
+      crdsPath: components/sandbox/DPPUBMGMTNPDaks/stratos-crds
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: sbx
 
@@ -169,7 +169,7 @@ stages:
 #   - template: deploy-template.yml
 #     parameters:
 #       componentsPath: components/dev/f4dpdev
-#       crdsPath: $(ComponentsPath)/stratos-crds
+#       crdsPath: components/dev/f4dpdev/stratos-crds
 #       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
 #       environment: dev
 
@@ -180,32 +180,27 @@ stages:
   jobs:
   - template: deploy-template.yml
     parameters:
-      componentsPath: cmppath
-      # components/staging/AKS-Test
-      crdsPath: mycrdspath
-      # $#(ComponentsPath)/stratos-crds
-      dockerTag: myvalue
-      # $#[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
+      componentsPath: components/staging/AKS-Test
+      crdsPath: components/staging/AKS-Test/stratos-crds
+      dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: qat
 
 - stage: DeployProduction
   condition: "and(eq(variables.IS_MASTER_BRANCH, true), ${{ not(parameters.UseSandbox) }}, succeeded())"
   dependsOn:
   - Build
-  variables:
-    BaseComponentsPath: components/base
   jobs:
   - template: deploy-template.yml
     parameters:
       componentsPath: components/npd/f4dpnpd
-      crdsPath: $(BaseComponentsPath)/stratos-crds
+      crdsPath: components/base/stratos-crds
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
       environment: mgmtnpd
       jobName: DeployNpd
   - template: deploy-template.yml
     parameters:
       componentsPath: components/prd/f4dpprd
-      crdsPath: $(BaseComponentsPath)/stratos-crds
+      crdsPath: components/base/stratos-crds
       # Prevent conflict during intersecting git clone and git push
       dependsOn: DeployNpd
       dockerTag: $[ stageDependencies.Build.Build.outputs['setDockerTag.DOCKER_TAG'] ]
