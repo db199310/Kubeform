@@ -16,7 +16,7 @@ parameters:
   displayName: Name of the main Deploy job
 
 jobs:
-- deployment: Deploy #$#{{ parameters.jobName }}
+- deployment: ${{ parameters.jobName }}
   # $#{{ if ne(parameters.dependsOn, '') }}:
   #   dependsOn: $#{{ parameters.dependsOn }}
   environment: ${{ parameters.environment }}
