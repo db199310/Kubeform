@@ -10,7 +10,7 @@ trigger:
     - '*'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
   IS_MASTER_BRANCH: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]

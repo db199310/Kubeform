@@ -76,6 +76,9 @@ type SDPAzFnv1Spec struct {
 	// Additional tags for the App Service resources, in addition to the resource group tags.
 	FnAppAdditionalTags map[string]string `json:"fnAppAdditionalTags,omitempty" tf:"fn_app_additional_tags,omitempty"`
 	// +optional
+	// Hostname with the stratos.shell/stratos.shell.com suffix
+	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	// +optional
 	// Instance number
 	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
 	// +optional
@@ -95,7 +98,7 @@ type SDPAzFnv1Spec struct {
 	// placement
 	Placement string `json:"placement,omitempty" tf:"placement,omitempty"`
 	// +optional
-	// project stream name
+	// project name
 	Project string `json:"project,omitempty" tf:"project,omitempty"`
 	//  4 character project stream name/code
 	ProjectStream string `json:"projectStream" tf:"projectStream"`
@@ -119,7 +122,7 @@ type SDPAzFnv1Spec struct {
 	// +optional
 	// site config ip restrictions block parameters for fn app
 	SiteConfigIPRestrictions json.RawMessage `json:"siteConfigIPRestrictions,omitempty" tf:"site_config_ip_restrictions,omitempty"`
-	//  4 character project stream name/code
+	//  3 character workstream name/code
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
 

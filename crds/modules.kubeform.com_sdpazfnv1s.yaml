@@ -83,6 +83,9 @@ spec:
               description: Additional tags for the App Service resources, in addition
                 to the resource group tags.
               type: object
+            host:
+              description: Hostname with the stratos.shell/stratos.shell.com suffix
+              type: string
             instance:
               description: Instance number
               type: string
@@ -105,7 +108,7 @@ spec:
               description: placement
               type: string
             project:
-              description: project stream name
+              description: project name
               type: string
             projectStream:
               description: ' 4 character project stream name/code'
@@ -175,7 +178,7 @@ spec:
             source:
               type: string
             workStream:
-              description: ' 4 character project stream name/code'
+              description: ' 3 character workstream name/code'
               type: string
           required:
           - environment

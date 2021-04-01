@@ -82,6 +82,9 @@ type SDPAzAppv1Spec struct {
 	// Existing App Service plan resource Group
 	ExistingAspResourceGroupName string `json:"existingAspResourceGroupName,omitempty" tf:"existing_asp_resource_group_name,omitempty"`
 	// +optional
+	// Hostname with the stratos.shell/stratos.shell.com suffix
+	Host string `json:"host,omitempty" tf:"host,omitempty"`
+	// +optional
 	// Instance number
 	Instance string `json:"instance,omitempty" tf:"instance,omitempty"`
 	// +optional
@@ -140,7 +143,7 @@ type SDPAzAppv1Spec struct {
 	// +optional
 	// Windows Docker container image
 	WindowsFxVersion string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
-	//  4 character project stream name/code
+	//  3 character workstream name/code
 	WorkStream string `json:"workStream" tf:"workStream"`
 }
 
