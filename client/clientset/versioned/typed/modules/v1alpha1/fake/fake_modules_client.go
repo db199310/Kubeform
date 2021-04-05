@@ -48,6 +48,10 @@ func (c *FakeModulesV1alpha1) SDPAzappserviceplanv1s(namespace string) v1alpha1.
 	return &FakeSDPAzappserviceplanv1s{c, namespace}
 }
 
+func (c *FakeModulesV1alpha1) SDPAzcosmosdbv1s(namespace string) v1alpha1.SDPAzcosmosdbv1Interface {
+	return &FakeSDPAzcosmosdbv1s{c, namespace}
+}
+
 func (c *FakeModulesV1alpha1) SDPAzplatformeventsv1s(namespace string) v1alpha1.SDPAzplatformeventsv1Interface {
 	return &FakeSDPAzplatformeventsv1s{c, namespace}
 }

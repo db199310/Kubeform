@@ -58,6 +58,14 @@ type SDPAzappserviceplanv1ListerExpansion interface{}
 // SDPAzappserviceplanv1NamespaceLister.
 type SDPAzappserviceplanv1NamespaceListerExpansion interface{}
 
+// SDPAzcosmosdbv1ListerExpansion allows custom methods to be added to
+// SDPAzcosmosdbv1Lister.
+type SDPAzcosmosdbv1ListerExpansion interface{}
+
+// SDPAzcosmosdbv1NamespaceListerExpansion allows custom methods to be added to
+// SDPAzcosmosdbv1NamespaceLister.
+type SDPAzcosmosdbv1NamespaceListerExpansion interface{}
+
 // SDPAzplatformeventsv1ListerExpansion allows custom methods to be added to
 // SDPAzplatformeventsv1Lister.
 type SDPAzplatformeventsv1ListerExpansion interface{}

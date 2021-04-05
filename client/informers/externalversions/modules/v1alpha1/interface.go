@@ -34,6 +34,8 @@ type Interface interface {
 	SDPAzadfv1s() SDPAzadfv1Informer
 	// SDPAzappserviceplanv1s returns a SDPAzappserviceplanv1Informer.
 	SDPAzappserviceplanv1s() SDPAzappserviceplanv1Informer
+	// SDPAzcosmosdbv1s returns a SDPAzcosmosdbv1Informer.
+	SDPAzcosmosdbv1s() SDPAzcosmosdbv1Informer
 	// SDPAzplatformeventsv1s returns a SDPAzplatformeventsv1Informer.
 	SDPAzplatformeventsv1s() SDPAzplatformeventsv1Informer
 	// SDPAzsbv1s returns a SDPAzsbv1Informer.
@@ -76,6 +78,11 @@ func (v *version) SDPAzadfv1s() SDPAzadfv1Informer {
 // SDPAzappserviceplanv1s returns a SDPAzappserviceplanv1Informer.
 func (v *version) SDPAzappserviceplanv1s() SDPAzappserviceplanv1Informer {
 	return &sDPAzappserviceplanv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
+}
+
+// SDPAzcosmosdbv1s returns a SDPAzcosmosdbv1Informer.
+func (v *version) SDPAzcosmosdbv1s() SDPAzcosmosdbv1Informer {
+	return &sDPAzcosmosdbv1Informer{factory: v.factory, namespace: v.namespace, tweakListOptions: v.tweakListOptions}
 }
 
 // SDPAzplatformeventsv1s returns a SDPAzplatformeventsv1Informer.

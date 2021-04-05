@@ -28,6 +28,8 @@ type SDPAzadfv1Expansion interface{}
 
 type SDPAzappserviceplanv1Expansion interface{}
 
+type SDPAzcosmosdbv1Expansion interface{}
+
 type SDPAzplatformeventsv1Expansion interface{}
 
 type SDPAzsbv1Expansion interface{}

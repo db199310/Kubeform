@@ -72,6 +72,9 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&SDPAzappserviceplanv1{},
 		&SDPAzappserviceplanv1List{},
 
+		&SDPAzcosmosdbv1{},
+		&SDPAzcosmosdbv1List{},
+
 		&SDPAzplatformeventsv1{},
 		&SDPAzplatformeventsv1List{},
 

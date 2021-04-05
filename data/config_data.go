@@ -43,4 +43,7 @@ var ModuleConfig = []Config{
 	{
 		"SDPAzappserviceplanv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appserviceplan?ref=v0.1.0", "azurerm", "", "",
 	},
+	{
+		"SDPAzcosmosdbv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/stratos-tf-az-cosmos?ref=v0.2.0", "azurerm", "", "",
+	},
 }
