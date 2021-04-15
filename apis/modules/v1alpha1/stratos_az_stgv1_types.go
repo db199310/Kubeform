@@ -129,6 +129,12 @@ type StratosAzStgv1Shares struct {
 type StratosAzStgv1Output struct {
 	//
 	// +optional
+	PrimaryConnectionSecret string `json:"primaryConnectionSecret" tf:"primary_connection_secret"`
+	//
+	// +optional
+	SecondaryConnectionSecret string `json:"secondaryConnectionSecret" tf:"secondary_connection_secret"`
+	//
+	// +optional
 	StorageAccountName string `json:"storageAccountName" tf:"storage_account_name"`
 }
 

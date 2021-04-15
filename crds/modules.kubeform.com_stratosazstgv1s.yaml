@@ -169,6 +169,10 @@ spec:
               type: integer
             output:
               properties:
+                primaryConnectionSecret:
+                  type: string
+                secondaryConnectionSecret:
+                  type: string
                 storageAccountName:
                   type: string
               type: object

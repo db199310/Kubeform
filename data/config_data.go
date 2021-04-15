@@ -26,7 +26,7 @@ var ModuleConfig = []Config{
 		"SDPAzAppv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-appservice?ref=v0.4.0", "azurerm", "", "",
 	},
 	{
-		"StratosAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2", "azurerm", "", "",
+		"StratosAzStgv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=GBTestRET", "azurerm", "", "",
 	},
 	{
 		"SDPAzSqlv1", "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-sqldb?ref=v0.3.1", "azurerm", "", "",

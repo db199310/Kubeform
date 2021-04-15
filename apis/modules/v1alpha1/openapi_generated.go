@@ -16693,6 +16693,18 @@ func schema_kubeform_apis_modules_v1alpha1_StratosAzStgv1Output(ref common.Refer
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
+					"primaryConnectionSecret": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"secondaryConnectionSecret": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"storageAccountName": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
