@@ -29,3 +29,5 @@ _testmain.go
 
 /bin
 /.go
+/.vs/kubeform/v16
+/.vs

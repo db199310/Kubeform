@@ -51,7 +51,8 @@ func main() {
 	version := "v1alpha1"
 
 	providersMap := map[string]terraform.ResourceProvider{
-		"azurerm": azurerm.Provider(),
+		"azurerm":    azurerm.Provider(),
+		"databricks": databricks.Provider(),
 	}
 
 	for key, provider := range providersMap {
