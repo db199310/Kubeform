@@ -15,9 +15,9 @@
   },
   {
     "name": "StratosAzStgv1",
-    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=v0.2.2",
+    "source": "git::https://sede-ds-adp.visualstudio.com/Platform%20-%20General/_git/sedp-tf-az-storageaccount?ref=GBTestRET",
     "provider": "azurerm",
-    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=tag&versionDescriptor%5Bversion%5D=v0.2.2&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
+    "url": "https://dev.azure.com/sede-ds-adp/Platform%20-%20General/_apis/git/repositories/sedp-tf-az-storageaccount/items?path=%2F&versionDescriptor%5BversionOptions%5D=0&versionDescriptor%5BversionType%5D=commit&versionDescriptor%5Bversion%5D=3a5e85b4a54f795b7ec12c8fc98fb1d379353661&resolveLfs=true&%24format=zip&api-version=5.0&download=true",
     "subDirectory": ""
   },
   {
