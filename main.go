@@ -53,7 +53,7 @@ func main() {
 
 	providersMap := map[string]terraform.ResourceProvider{
 		"azurerm":    azurerm.Provider(),
-		"databricks": databricks.DatabricksProvider(),
+			"databricks": databricks.Provider(),
 	}
 
 	for key, provider := range providersMap {
@@ -79,6 +79,6 @@ func main() {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	https://registry.terraform.io/providers/databrickslabs/databricks/latest/docs
+
 
 }
